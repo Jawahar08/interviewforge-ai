@@ -1,16 +1,23 @@
-# InterviewForge AI
+## Features Implemented
 
-AI-powered interview preparation platform.
-
-Current Progress:
-- Spring Boot Setup
-- PostgreSQL Integration
-- User Registration API
-- Password Encryption
-- GitHub CI Foundation
-
-Next:
+### Authentication
+- User Registration
+- User Login
+- BCrypt Password Encryption
 - JWT Authentication
-- Login API
-- Resume Analysis
-- AI Interview Engine
+- Protected APIs
+
+### Interview Management
+- Create Interview
+- View All Interviews
+- View Interview By ID
+- Update Interview
+- Delete Interview
+
+### Tech Stack
+- Spring Boot 3
+- Spring Security
+- JWT
+- PostgreSQL
+- Hibernate/JPA
+- Swagger OpenAPI
