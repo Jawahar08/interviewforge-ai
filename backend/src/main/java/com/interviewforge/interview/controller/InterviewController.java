@@ -15,6 +15,8 @@ import com.interviewforge.interview.dto.CreateInterviewRequest;
 import com.interviewforge.interview.entity.Interview;
 import com.interviewforge.interview.service.InterviewService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/v1/interviews")
@@ -30,7 +32,7 @@ public class InterviewController {
 
     @PostMapping
     public Interview createInterview(
-            @RequestBody CreateInterviewRequest request) {
+            @Valid @RequestBody CreateInterviewRequest request) {
 
         return interviewService.createInterview(request);
     }
@@ -47,7 +49,7 @@ public Interview getInterviewById(
 @PutMapping("/{id}")
 public Interview updateInterview(
         @PathVariable Long id,
-        @RequestBody CreateInterviewRequest request) {
+        @Valid @RequestBody CreateInterviewRequest request) {
 
     return interviewService.updateInterview(id, request);
 }

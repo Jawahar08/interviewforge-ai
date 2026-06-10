@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.interviewforge.exception.InterviewNotFoundException;
 import com.interviewforge.interview.dto.CreateInterviewRequest;
 import com.interviewforge.interview.entity.Interview;
 import com.interviewforge.interview.repository.InterviewRepository;
@@ -36,17 +37,20 @@ public class InterviewService {
     }
     public Interview getInterviewById(Long id) {
 
-    return interviewRepository.findById(id)
-            .orElseThrow(() ->
-                    new RuntimeException("Interview not found"));
-}
-public Interview updateInterview(
-        Long id,
-        CreateInterviewRequest request) {
+        return interviewRepository.findById(id)
+                .orElseThrow(() ->
+        new InterviewNotFoundException(
+                "Interview not found"));
+    }
+
+    public Interview updateInterview(
+            Long id,
+            CreateInterviewRequest request) {
 
     Interview interview = interviewRepository.findById(id)
             .orElseThrow(() ->
-                    new RuntimeException("Interview not found"));
+        new InterviewNotFoundException(
+                "Interview not found"));
 
     interview.setTitle(request.getTitle());
     interview.setRole(request.getRole());
@@ -58,7 +62,8 @@ public void deleteInterview(Long id) {
 
     Interview interview = interviewRepository.findById(id)
             .orElseThrow(() ->
-                    new RuntimeException("Interview not found"));
+        new InterviewNotFoundException(
+                "Interview not found"));
 
     interviewRepository.delete(interview);
 }
