@@ -1,6 +1,7 @@
 package com.interviewforge.interview.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class InterviewService {
             InterviewRepository interviewRepository) {
         this.interviewRepository = interviewRepository;
     }
+    public List<Interview> getAllInterviews() {
+    return interviewRepository.findAll();
+}
 
     public Interview createInterview(
             CreateInterviewRequest request) {
