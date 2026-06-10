@@ -34,4 +34,32 @@ public class InterviewService {
 
         return interviewRepository.save(interview);
     }
+    public Interview getInterviewById(Long id) {
+
+    return interviewRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Interview not found"));
+}
+public Interview updateInterview(
+        Long id,
+        CreateInterviewRequest request) {
+
+    Interview interview = interviewRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Interview not found"));
+
+    interview.setTitle(request.getTitle());
+    interview.setRole(request.getRole());
+    interview.setDifficulty(request.getDifficulty());
+
+    return interviewRepository.save(interview);
+}
+public void deleteInterview(Long id) {
+
+    Interview interview = interviewRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Interview not found"));
+
+    interviewRepository.delete(interview);
+}
 }
