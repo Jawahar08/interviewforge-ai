@@ -11,7 +11,7 @@ import lombok.Setter;
 public class RegisterRequest {
 
     @NotBlank
-    private String fullName;
+    private String name;
 
     @Email
     private String email;

@@ -16,6 +16,7 @@ import com.interviewforge.interview.entity.Interview;
 import com.interviewforge.interview.service.InterviewService;
 
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 
 @RestController

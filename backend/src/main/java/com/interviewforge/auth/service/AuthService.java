@@ -27,7 +27,7 @@ public class AuthService {
         }
 
         User user = User.builder()
-                .fullName(request.getFullName())
+                .fullName(request.getName())
                 .email(request.getEmail())
                 .passwordHash(
                         passwordEncoder.encode(request.getPassword())
@@ -46,23 +46,36 @@ public class AuthService {
     }
     public AuthResponse login(LoginRequest request) {
 
+    System.out.println("STEP 1");
+
     User user = userRepository.findByEmail(request.getEmail())
             .orElseThrow(() -> new RuntimeException("User not found"));
 
-    if (!passwordEncoder.matches(
-            request.getPassword(),
-            user.getPasswordHash())) {
+    System.out.println("STEP 2");
 
-        throw new RuntimeException("Invalid credentials");
-    }
+    boolean match =
+        passwordEncoder.matches(
+                request.getPassword(),
+                user.getPasswordHash()
+        );
+
+System.out.println("PASSWORD MATCH = " + match);
+
+if (!match) {
+    throw new RuntimeException("Invalid credentials");
+}
+
+    System.out.println("STEP 3");
 
     String token = jwtService.generateToken(user.getEmail());
 
+    System.out.println("STEP 4");
+
     return AuthResponse.builder()
-        .email(user.getEmail())
-        .role(user.getRole())
-        .token(token)
-        .message("Login successful")
-        .build();
+            .email(user.getEmail())
+            .role(user.getRole())
+            .token(token)
+            .message("Login successful")
+            .build();
 }
 }
