@@ -52,4 +52,12 @@ public class QuestionService {
                 .orElseThrow(() ->
                         new RuntimeException("Question not found"));
     }
+    public void deleteQuestion(Long id) {
+
+    Question question = questionRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Question not found"));
+
+    questionRepository.delete(question);
+}
 }
