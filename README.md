@@ -2,6 +2,26 @@
 
 AI-powered interview preparation platform built with Spring Boot, PostgreSQL, JWT Authentication, and REST APIs.
 
+## Development Progress
+
+✅ Authentication Module
+
+✅ Interview Module
+
+✅ Question Module
+
+⬜ AI Question Generation
+
+⬜ Interview Session Engine
+
+⬜ Answer Evaluation
+
+⬜ Dashboard
+
+⬜ Frontend Integration
+
+⬜ Deployment
+
 ## Features
 
 ### Authentication Module
