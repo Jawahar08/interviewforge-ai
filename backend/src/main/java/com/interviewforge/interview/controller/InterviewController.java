@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/v1/interviews")
+@SecurityRequirement(name = "bearerAuth")
 public class InterviewController {
 
     private final InterviewService interviewService;
