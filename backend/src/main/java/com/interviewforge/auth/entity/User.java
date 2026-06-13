@@ -19,18 +19,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
 
 
-@Entity
+
 @Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+
+@JsonIgnoreProperties({
+    "hibernateLazyInitializer",
+    "handler"
+})
+@Entity
 public class User {
 
     @Id

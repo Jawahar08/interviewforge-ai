@@ -43,6 +43,10 @@ public class Interview {
     private LocalDateTime createdAt;
     @ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name = "user_id")
+@JsonIgnoreProperties({
+    "hibernateLazyInitializer",
+    "handler"
+})
 private User user;
 
 
