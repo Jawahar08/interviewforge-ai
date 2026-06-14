@@ -28,6 +28,7 @@ public class InterviewSessionService {
     }
 
     public InterviewSessionResponse startSession(Long interviewId) {
+        
 
         Interview interview = interviewRepository.findById(interviewId)
                 .orElseThrow(() ->
@@ -48,4 +49,34 @@ return new InterviewSessionResponse(
 
        
     }
+    public InterviewSessionResponse getSessionById(Long id) {
+
+    InterviewSession session = sessionRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Session not found"));
+
+    return new InterviewSessionResponse(
+            session.getId(),
+            session.getInterview().getId(),
+            session.getStatus().name()
+    );
+}
+
+public InterviewSessionResponse completeSession(Long id) {
+
+    InterviewSession session = sessionRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Session not found"));
+
+    session.setStatus(SessionStatus.COMPLETED);
+
+    InterviewSession updatedSession =
+            sessionRepository.save(session);
+
+    return new InterviewSessionResponse(
+            updatedSession.getId(),
+            updatedSession.getInterview().getId(),
+            updatedSession.getStatus().name()
+    );
+}
 }
