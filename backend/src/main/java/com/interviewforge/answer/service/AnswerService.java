@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.interviewforge.ai.gemini.GeminiService;
 import com.interviewforge.answer.dto.SubmitAnswerRequest;
 import com.interviewforge.answer.entity.Answer;
 import com.interviewforge.answer.repository.AnswerRepository;
@@ -12,22 +13,26 @@ import com.interviewforge.question.repository.QuestionRepository;
 import com.interviewforge.session.entity.InterviewSession;
 import com.interviewforge.session.repository.InterviewSessionRepository;
 
+
 @Service
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
     private final InterviewSessionRepository sessionRepository;
+    private final GeminiService geminiService;
 
     public AnswerService(
-            AnswerRepository answerRepository,
-            QuestionRepository questionRepository,
-            InterviewSessionRepository sessionRepository) {
+        AnswerRepository answerRepository,
+        QuestionRepository questionRepository,
+        InterviewSessionRepository sessionRepository,
+        GeminiService geminiService) {
 
-        this.answerRepository = answerRepository;
-        this.questionRepository = questionRepository;
-        this.sessionRepository = sessionRepository;
-    }
+    this.answerRepository = answerRepository;
+    this.questionRepository = questionRepository;
+    this.sessionRepository = sessionRepository;
+    this.geminiService = geminiService;
+}
 
     public Answer submitAnswer(
             SubmitAnswerRequest request) {
@@ -64,21 +69,12 @@ public class AnswerService {
             .orElseThrow(() ->
                     new RuntimeException("Answer not found"));
 
-    String userAnswer =
-            answer.getUserAnswer().toLowerCase();
+    String feedback = geminiService.evaluateAnswer(
+            answer.getQuestion().getQuestionText(),
+            answer.getUserAnswer());
 
-    if (userAnswer.contains("dependency")) {
-
-        answer.setScore(90.0);
-        answer.setFeedback(
-                "Good answer. Strong understanding demonstrated.");
-    }
-    else {
-
-        answer.setScore(50.0);
-        answer.setFeedback(
-                "Answer needs more technical depth.");
-    }
+    answer.setScore(85.0);
+    answer.setFeedback(feedback);
 
     return answerRepository.save(answer);
 }
