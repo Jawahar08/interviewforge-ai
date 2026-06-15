@@ -1,14 +1,14 @@
 # 🚀 InterviewForge AI
 
-An AI-Powered Interview Preparation Platform built with Spring Boot, PostgreSQL, JWT Authentication, and REST APIs.
+An AI-Powered Interview Preparation Platform built using Spring Boot, PostgreSQL, JWT Authentication, and Gemini AI.
 
-InterviewForge helps candidates practice interviews, manage interview sessions, answer technical questions, and receive AI-powered feedback.
+InterviewForge helps candidates prepare for technical interviews through AI-generated questions, interview session management, answer evaluation, performance tracking, and personalized feedback.
 
 ---
 
 ## 📌 Project Status
 
-### Current Progress: Day 14
+### Current Progress: Day 16
 
 ✅ Authentication Module
 
@@ -16,15 +16,19 @@ InterviewForge helps candidates practice interviews, manage interview sessions, 
 
 ✅ Question Management
 
-✅ AI Question Generation (Mock Version)
+✅ AI Question Generation (Mock)
 
 ✅ Interview Session Management
+
+✅ Interview Results Module
 
 ✅ Dashboard Analytics
 
 ✅ Answer Submission Module
 
-🚧 AI Evaluation Engine
+✅ Gemini Evaluation Layer
+
+🚧 Real Gemini API Integration
 
 🚧 Resume Analysis
 
@@ -38,20 +42,24 @@ InterviewForge helps candidates practice interviews, manage interview sessions, 
 
 ## Backend
 
-- Java 21
-- Spring Boot 3
-- Spring Security
-- Spring Data JPA
-- Hibernate
-- PostgreSQL
-- JWT Authentication
-- Lombok
-- Maven
+* Java 21
+* Spring Boot 3
+* Spring Security
+* Spring Data JPA
+* Hibernate
+* PostgreSQL
+* JWT Authentication
+* Lombok
+* Maven
+
+## AI
+
+* Google Gemini API (Integration Ready)
 
 ## API Documentation
 
-- Swagger UI
-- OpenAPI 3
+* Swagger UI
+* OpenAPI 3
 
 ---
 
@@ -61,53 +69,17 @@ InterviewForge helps candidates practice interviews, manage interview sessions, 
 backend
 │
 ├── auth
-│   ├── controller
-│   ├── dto
-│   ├── entity
-│   ├── repository
-│   └── service
-│
 ├── interview
-│   ├── controller
-│   ├── entity
-│   ├── repository
-│   └── service
-│
 ├── question
-│   ├── controller
-│   ├── dto
-│   ├── entity
-│   ├── repository
-│   └── service
-│
-├── ai
-│   ├── controller
-│   ├── dto
-│   └── service
-│
 ├── session
-│   ├── controller
-│   ├── dto
-│   ├── entity
-│   ├── repository
-│   └── service
-│
-├── dashboard
-│   ├── controller
-│   ├── dto
-│   └── service
-│
 ├── answer
-│   ├── controller
-│   ├── dto
-│   ├── entity
-│   ├── repository
-│   └── service
-│
-└── security
-    ├── JwtService
-    ├── JwtAuthenticationFilter
-    └── SecurityConfig
+├── result
+├── dashboard
+├── ai
+│   └── gemini
+├── security
+├── config
+└── exception
 ```
 
 ---
@@ -116,204 +88,177 @@ backend
 
 ## 🔐 Authentication
 
-### Register User
+* User Registration
+* User Login
+* JWT Token Generation
+* Route Protection
 
-POST
+Endpoints:
 
-```http
-/api/v1/auth/register
-```
+POST /api/v1/auth/register
 
-### Login User
-
-POST
-
-```http
-/api/v1/auth/login
-```
+POST /api/v1/auth/login
 
 ---
 
 ## 📋 Interview Management
 
-### Create Interview
+* Create Interview
+* View Interviews
+* Update Interview
+* Delete Interview
+* User Ownership Support
 
-POST
+Endpoints:
 
-```http
-/api/v1/interviews
-```
+POST /api/v1/interviews
 
-### Get All Interviews
+GET /api/v1/interviews
 
-GET
+GET /api/v1/interviews/{id}
 
-```http
-/api/v1/interviews
-```
+PUT /api/v1/interviews/{id}
 
-### Get Interview By ID
-
-GET
-
-```http
-/api/v1/interviews/{id}
-```
-
-### Update Interview
-
-PUT
-
-```http
-/api/v1/interviews/{id}
-```
-
-### Delete Interview
-
-DELETE
-
-```http
-/api/v1/interviews/{id}
-```
+DELETE /api/v1/interviews/{id}
 
 ---
 
 ## ❓ Question Management
 
-### Create Question
+* Create Questions
+* Retrieve Questions
+* Delete Questions
+* Interview Mapping
 
-POST
+Endpoints:
 
-```http
-/api/v1/questions
-```
+POST /api/v1/questions
 
-### Get Questions
+GET /api/v1/questions
 
-GET
+GET /api/v1/questions/{id}
 
-```http
-/api/v1/questions
-```
-
-### Get Question By ID
-
-GET
-
-```http
-/api/v1/questions/{id}
-```
-
-### Delete Question
-
-DELETE
-
-```http
-/api/v1/questions/{id}
-```
+DELETE /api/v1/questions/{id}
 
 ---
 
 ## 🤖 AI Question Generator
 
-### Generate Questions
+Endpoint:
 
-POST
+POST /api/v1/ai/generate
 
-```http
-/api/v1/ai/generate
-```
+Current Status:
 
-Generates interview questions based on the selected interview.
-
-(Currently Mock Data)
+* Mock Implementation Complete
+* Ready for Gemini Integration
 
 ---
 
 ## 🎯 Interview Sessions
 
-### Start Session
+Features:
 
-POST
+* Start Session
+* Retrieve Session
+* Complete Session
+* Status Tracking
 
-```http
-/api/v1/sessions/start
-```
+Endpoints:
 
-### Get Session
+POST /api/v1/sessions/start
 
-GET
+GET /api/v1/sessions/{id}
 
-```http
-/api/v1/sessions/{id}
-```
-
-### Complete Session
-
-PATCH
-
-```http
-/api/v1/sessions/{id}/complete
-```
+PATCH /api/v1/sessions/{id}/complete
 
 ---
 
-## 📝 Answer Submission
+## 📝 Answer Management
 
-### Submit Answer
+Features:
 
-POST
+* Submit Candidate Answers
+* Store Responses
+* Session Mapping
+* Question Mapping
 
-```http
-/api/v1/answers
-```
+Endpoint:
 
-Stores candidate answers for evaluation.
+POST /api/v1/answers
+
+---
+
+## 🧠 AI Answer Evaluation
+
+Features:
+
+* Evaluate Submitted Answers
+* Generate Scores
+* Generate Feedback
+* Gemini Service Integration
+
+Endpoint:
+
+POST /api/v1/answers/evaluate
+
+Current Status:
+
+* Mock Evaluation Working
+* Gemini Service Layer Implemented
+* Real API Calls Coming Next
 
 ---
 
 ## 📊 Dashboard Analytics
 
-### Dashboard Statistics
+Endpoint:
 
-GET
+GET /api/v1/dashboard
 
-```http
-/api/v1/dashboard
+Metrics:
+
+* Total Interviews
+* Total Questions
+* Total Sessions
+* Completed Sessions
+* Average Score
+
+---
+
+## 🗄️ Database Tables
+
+Current Entities:
+
+* User
+* Interview
+* Question
+* InterviewSession
+* InterviewResult
+* Answer
+
+---
+
+## 🔒 Security
+
+Implemented:
+
+* JWT Authentication
+* Password Encryption (BCrypt)
+* Protected APIs
+* Role-Based Foundation
+
+Environment Variables:
+
+```properties
+DB_PASSWORD=${DB_PASSWORD}
+JWT_SECRET=${JWT_SECRET}
+GEMINI_API_KEY=${GEMINI_API_KEY}
 ```
 
-Returns:
-
-- Total Interviews
-- Total Questions
-- Total Sessions
-- Completed Sessions
-- Average Score
-
 ---
 
-# 🗄️ Database Tables
-
-Current Tables:
-
-- users
-- interviews
-- questions
-- interview_sessions
-- interview_results
-- answers
-
----
-
-# 📸 API Testing
-
-All APIs are tested using:
-
-- Swagger UI
-- PostgreSQL
-- Spring Boot REST Endpoints
-
-Swagger:
+## 📖 Swagger Documentation
 
 ```text
 http://localhost:8080/swagger-ui/index.html
@@ -321,27 +266,27 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-# 🚀 Running the Project
+## 🚀 Running the Project
 
-## Clone Repository
+Clone Repository
 
 ```bash
 git clone https://github.com/Jawahar08/interviewforge-ai.git
 ```
 
-## Navigate
+Navigate
 
 ```bash
 cd interviewforge-ai/backend
 ```
 
-## Run
+Run
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-or on Windows
+Windows
 
 ```bash
 mvnw.cmd spring-boot:run
@@ -349,33 +294,34 @@ mvnw.cmd spring-boot:run
 
 ---
 
-# 🎯 Upcoming Features
+# 📈 Development Progress
 
-## Phase 2
-
-- AI Answer Evaluation
-- OpenAI Integration
-- Resume Parsing
-- Performance Reports
-- Session Recovery
-- User Dashboard UI
-- React Frontend
+| Phase                   | Status |
+| ----------------------- | ------ |
+| Authentication          | ✅      |
+| Interview Module        | ✅      |
+| Question Module         | ✅      |
+| AI Question Generator   | ✅      |
+| Session Management      | ✅      |
+| Result Management       | ✅      |
+| Dashboard Analytics     | ✅      |
+| Answer Management       | ✅      |
+| Gemini Evaluation Layer | ✅      |
+| Real Gemini API Calls   | 🚧     |
+| Resume Analysis         | 🚧     |
+| Frontend Development    | 🚧     |
+| Deployment              | 🚧     |
 
 ---
 
-# 📈 Development Progress
+# 🎯 Next Milestone
 
-| Day | Module |
-|------|----------|
-| 1-3 | Project Setup |
-| 4-5 | Authentication |
-| 6-7 | Interview CRUD |
-| 8 | Question CRUD |
-| 9 | AI Question Generator |
-| 10-11 | Interview Sessions |
-| 12-13 | Dashboard Analytics |
-| 14 | Answer Submission |
-| Next | AI Evaluation Engine |
+### Day 17
+
+* Real Gemini API Calls
+* AI-Based Answer Evaluation
+* Dynamic Scoring
+* Detailed Feedback Generation
 
 ---
 
@@ -385,4 +331,4 @@ Jawahar Bharathi
 
 Full Stack Developer
 
-Building InterviewForge AI to help candidates practice smarter interviews with AI-driven feedback.
+Building InterviewForge AI to help candidates prepare smarter interviews with AI-powered evaluation and feedback.
