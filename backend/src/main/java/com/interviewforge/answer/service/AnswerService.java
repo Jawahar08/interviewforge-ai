@@ -58,4 +58,28 @@ public class AnswerService {
 
         return answerRepository.save(answer);
     }
+    public Answer evaluateAnswer(Long answerId) {
+
+    Answer answer = answerRepository.findById(answerId)
+            .orElseThrow(() ->
+                    new RuntimeException("Answer not found"));
+
+    String userAnswer =
+            answer.getUserAnswer().toLowerCase();
+
+    if (userAnswer.contains("dependency")) {
+
+        answer.setScore(90.0);
+        answer.setFeedback(
+                "Good answer. Strong understanding demonstrated.");
+    }
+    else {
+
+        answer.setScore(50.0);
+        answer.setFeedback(
+                "Answer needs more technical depth.");
+    }
+
+    return answerRepository.save(answer);
+}
 }

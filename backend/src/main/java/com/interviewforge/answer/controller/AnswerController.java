@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.answer.dto.EvaluateAnswerRequest;
 import com.interviewforge.answer.dto.SubmitAnswerRequest;
 import com.interviewforge.answer.entity.Answer;
 import com.interviewforge.answer.service.AnswerService;
@@ -27,4 +28,11 @@ public class AnswerController {
 
         return answerService.submitAnswer(request);
     }
+    @PostMapping("/evaluate")
+public Answer evaluateAnswer(
+        @RequestBody EvaluateAnswerRequest request) {
+
+    return answerService.evaluateAnswer(
+            request.getAnswerId());
+}
 }
