@@ -69,10 +69,10 @@ public class AnswerService {
             .orElseThrow(() ->
                     new RuntimeException("Answer not found"));
 
-    String feedback = geminiService.evaluateAnswer(
-            answer.getQuestion().getQuestionText(),
-            answer.getUserAnswer());
-
+   String feedback = geminiService.evaluateAnswer(
+        answer.getQuestion().getQuestionText(),
+        answer.getQuestion().getAnswer(),
+        answer.getUserAnswer());
     answer.setScore(85.0);
     answer.setFeedback(feedback);
 

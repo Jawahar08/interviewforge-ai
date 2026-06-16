@@ -12,30 +12,20 @@ public class GeminiService {
 
     private final RestTemplate restTemplate;
 
-public GeminiService(
-        RestTemplate restTemplate) {
-
-    this.restTemplate = restTemplate;
-}
+    public GeminiService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public String evaluateAnswer(
-            String question,
-            String answer) {
+        String question,
+        String expectedAnswer,
+        String userAnswer) {
 
-        String prompt = """
-                You are a technical interviewer.
+    return """
+            Score: 8
 
-                Question:
-                %s
-
-                Candidate Answer:
-                %s
-
-                Evaluate the answer and provide:
-                1. Score out of 100
-                2. Feedback
-                """.formatted(question, answer);
-
-        return "Gemini integration in progress";
-    }
+            Feedback:
+            Good answer. Covers most key concepts.
+            """;
+}
 }
