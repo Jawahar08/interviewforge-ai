@@ -2,6 +2,7 @@ package com.interviewforge.ai.gemini;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class GeminiService {
@@ -9,15 +10,32 @@ public class GeminiService {
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    public String evaluateAnswer(String question,
-                                 String answer) {
+    private final RestTemplate restTemplate;
 
-        return """
-                Score: 85
+public GeminiService(
+        RestTemplate restTemplate) {
 
-                Feedback:
-                Good technical explanation.
-                Could include more practical examples.
-                """;
+    this.restTemplate = restTemplate;
+}
+
+    public String evaluateAnswer(
+            String question,
+            String answer) {
+
+        String prompt = """
+                You are a technical interviewer.
+
+                Question:
+                %s
+
+                Candidate Answer:
+                %s
+
+                Evaluate the answer and provide:
+                1. Score out of 100
+                2. Feedback
+                """.formatted(question, answer);
+
+        return "Gemini integration in progress";
     }
 }
