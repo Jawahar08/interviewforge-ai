@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.interviewforge.resume.dto.ResumeAnalysisResponse;
+import com.interviewforge.resume.dto.ResumeTextResponse;
 import com.interviewforge.resume.dto.ResumeUploadResponse;
 import com.interviewforge.resume.service.ResumeAnalysisService;
+
 
 @RestController
 @RequestMapping("/api/v1/resume")
@@ -42,5 +44,21 @@ public ResumeUploadResponse uploadResume(
             file.getSize(),
             "Resume uploaded successfully"
     );
+}
+@PostMapping(
+        value = "/extract",
+        consumes = "multipart/form-data"
+)
+public ResumeTextResponse extractResumeText(
+        @RequestParam("file")
+        MultipartFile file) {
+
+    String text =
+            resumeAnalysisService
+                    .extractTextFromPdf(file);
+
+    return new ResumeTextResponse(
+            file.getOriginalFilename(),
+            text);
 }
 }
