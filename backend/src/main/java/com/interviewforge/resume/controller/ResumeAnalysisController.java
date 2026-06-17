@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.interviewforge.resume.dto.ResumeAiAnalysisResponse;
 import com.interviewforge.resume.dto.ResumeAnalysisResponse;
 import com.interviewforge.resume.dto.ResumeTextResponse;
 import com.interviewforge.resume.dto.ResumeUploadResponse;
@@ -60,5 +61,19 @@ public ResumeTextResponse extractResumeText(
     return new ResumeTextResponse(
             file.getOriginalFilename(),
             text);
+}
+@PostMapping(
+        value = "/analyze-pdf",
+        consumes = "multipart/form-data"
+)
+public ResumeAiAnalysisResponse analyzePdfResume(
+        @RequestParam("file")
+        MultipartFile file) {
+
+    String text =
+            resumeAnalysisService.extractTextFromPdf(file);
+
+    return resumeAnalysisService
+            .analyzeResumeText(text);
 }
 }
