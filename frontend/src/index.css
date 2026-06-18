@@ -178,6 +178,25 @@ h1, h2, h3, h4, h5, h6 {
   animation: fadeIn 0.6s ease-out forwards;
 }
 
+@keyframes pulseRecord {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.pulse-btn {
+  animation: pulseRecord 1.5s infinite;
+}
+
+.hover-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: scale(1.05);
+}
+
+:root {
+  --danger: #ef4444;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
