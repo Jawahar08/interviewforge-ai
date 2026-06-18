@@ -1,549 +1,137 @@
 # 🚀 InterviewForge AI
-
-An AI-Powered Interview Preparation Platform built using Spring Boot, PostgreSQL, JWT Authentication, Resume Analysis, and AI-driven Interview Evaluation.
-
-InterviewForge helps candidates prepare for technical interviews through interview simulations, answer evaluations, performance tracking, resume analysis, role recommendations, and personalized feedback.
+> **An enterprise-grade, multi-service AI Interview Preparation Platform.**
+> InterviewForge accelerates hiring and candidate preparation through hyper-realistic AI simulations, real-time speech-to-text evaluation, and deep PDF resume analysis.
 
 ---
 
-# 📌 Project Status
+## 🏗 The 4 Pillars Architecture
 
-### Current Progress: Day 27
+Unlike typical monolithic applications, InterviewForge AI is designed using a modern microservice-style ecosystem. 
 
-✅ Authentication Module
-
-✅ Interview Management
-
-✅ Question Management
-
-✅ AI Question Generation
-
-✅ Interview Session Management
-
-✅ Interview Results Module
-
-✅ Dashboard Analytics
-
-✅ Answer Submission Module
-
-✅ Answer Evaluation Module
-
-✅ Gemini Integration Infrastructure
-
-✅ Performance Reporting Module
-
-✅ Resume Analysis Module
-
-✅ Resume Upload Module
-
-✅ PDF Resume Text Extraction
-
-✅ AI-Style Resume Analysis
-
-✅ User Profile Module
-
-✅ Role Recommendation Engine
-
-✅ Interview History Module
-
-✅ Advanced Statistics Module
-
-🚧 API Documentation Cleanup
-
-🚧 Dockerization
-
-🚧 Production Deployment
-
----
-
-# 🏗️ Tech Stack
-
-## Backend
-
-- Java 21+
-- Spring Boot 3
-- Spring Security
-- Spring Data JPA
-- Hibernate
-- PostgreSQL
-- JWT Authentication
-- Lombok
-- Maven
-
-## AI Layer
-
-- Gemini Integration Ready
-- Mock AI Evaluation Engine
-- Resume Analysis Engine
-- Role Recommendation Engine
-
-## Documentation
-
-- Swagger UI
-- OpenAPI 3
-
----
-
-# 📂 Project Structure
-
-```text
-backend
-│
-├── auth
-├── interview
-├── question
-├── session
-├── answer
-├── result
-├── dashboard
-├── ai
-│   └── gemini
-├── resume
-├── profile
-├── recommendation
-├── history
-├── statistics
-├── report
-├── security
-├── config
-└── exception
+```mermaid
+graph TD
+    A[Chrome Extension] -->|Launch from Job Board| B(Candidate Frontend)
+    B -->|WebSocket/REST| C{Java Spring Boot Backend}
+    D[Recruiter Admin Panel] -->|Analytics & Scorecards| C
+    
+    C -->|JWT Auth & Data| E[(PostgreSQL)]
+    C -->|Prompt Injection| F[Google Gemini AI]
+    C -->|PDF Parsing| G[Resume Analysis Engine]
 ```
 
----
+### 1. 🖥️ Candidate Interface (`/frontend`)
+The main portal for job seekers. Designed with a stunning, immersive dark-mode glassmorphic aesthetic to put candidates at ease while feeling futuristic.
+- **Voice-Native:** Speak answers out loud using native Web Speech API recognition.
+- **Webcam Feed:** A live, integrated video feed simulates the pressure of a real interview.
+- **Dynamic AI Personas:** The AI adapts its tone and technical depth based on the candidate's answers.
 
-# ✨ Features Implemented
+### 2. 🛡️ Core Backend Engine (`/backend`)
+A rock-solid, highly-scalable Java 21 Spring Boot application serving as the brain.
+- **Security First:** Full Spring Security implementation with Stateless JWT Authentication and BCrypt.
+- **AI Orchestration:** Abstracts the complexities of talking to Google Gemini, handling prompt generation, retry logic, and JSON parsing of scorecards.
+- **Document Processing:** Integrates Apache PDFBox to deeply analyze uploaded resumes, extract semantic skills, and find career gaps.
 
-## 🔐 Authentication
+### 3. 📊 Recruiter Dashboard (`/admin-panel`)
+A separate, high-contrast Enterprise React application optimized for HR professionals.
+- **Pipeline Analytics:** Track hundreds of candidate scores, pass/fail rates, and time-to-hire metrics.
+- **Session Review:** Recruiters can view full transcripts, AI-generated weaknesses/strengths, and candidate recordings.
 
-### Features
-
-- User Registration
-- User Login
-- JWT Token Generation
-- Protected Endpoints
-
-### Endpoints
-
-```http
-POST /api/v1/auth/register
-POST /api/v1/auth/login
-```
-
----
-
-## 📋 Interview Management
-
-### Features
-
-- Create Interview
-- Get Interview
-- Update Interview
-- Delete Interview
-
-### Endpoints
-
-```http
-POST /api/v1/interviews
-GET /api/v1/interviews
-GET /api/v1/interviews/{id}
-PUT /api/v1/interviews/{id}
-DELETE /api/v1/interviews/{id}
-```
+### 4. 🌐 Browser Extension (`/extension`)
+A lightweight Manifest V3 Chrome Extension bridging the gap between discovery and practice.
+- **Contextual Practice:** Highlight a job description on LinkedIn, right-click, and select "Start Mock Interview". The extension passes the context directly to the AI to generate job-specific technical questions.
 
 ---
 
-## ❓ Question Management
+## ✨ Comprehensive Feature Matrix
 
-### Features
+<details>
+<summary><b>Click to expand: Core Modules & Status</b></summary>
 
-- Create Questions
-- Retrieve Questions
-- Delete Questions
-- Interview Association
+| Module | Core Functionality | Status |
+|---|---|:---:|
+| **Authentication** | JWT Generation, Registration, Login, Protected Routes | ✅ |
+| **Session Engine** | Start/Stop interviews, state tracking, duration metrics | ✅ |
+| **Voice & Video** | Browser `getUserMedia` integration, Speech-to-text | ✅ |
+| **Generative AI** | Google Gemini connection, dynamic prompt crafting | ✅ |
+| **Evaluation System** | Real-time answer scoring, weakness detection | ✅ |
+| **Resume Parser** | PDF text extraction, skill mapping, gap detection | ✅ |
+| **Extension** | Context Menu injection, local storage state passing | ✅ |
+| **Admin Analytics** | Score aggregations, tabular candidate views | ✅ |
 
-### Endpoints
-
-```http
-POST /api/v1/questions
-GET /api/v1/questions
-GET /api/v1/questions/{id}
-DELETE /api/v1/questions/{id}
-```
-
----
-
-## 🤖 AI Question Generation
-
-### Features
-
-- Generate Interview Questions
-- AI Integration Layer Ready
-
-### Endpoint
-
-```http
-POST /api/v1/ai/generate
-```
+</details>
 
 ---
 
-## 🎯 Interview Sessions
+## 📡 Core API Reference
 
-### Features
+The backend exposes a highly structured, RESTful API. Below is a subset of the critical endpoints.
 
-- Start Session
-- Complete Session
-- Track Session Status
+### Authentication & Profiles
+* `POST /api/v1/auth/register` — Create a new candidate/recruiter account.
+* `POST /api/v1/auth/login` — Exchange credentials for a JWT token.
+* `GET /api/v1/profile` — Fetch protected user data and career goals.
 
-### Endpoints
+### AI & Interview Sessions
+* `POST /api/v1/sessions/start` — Initialize a new tracked interview session.
+* `POST /api/v1/ai/generate` — Ask Gemini to generate the next question based on transcript history.
+* `POST /api/v1/answers/evaluate` — Submit a spoken/typed answer for AI grading and feedback.
 
-```http
-POST /api/v1/sessions/start
-GET /api/v1/sessions/{id}
-PATCH /api/v1/sessions/{id}/complete
-```
-
----
-
-## 📝 Answer Management
-
-### Features
-
-- Submit Answers
-- Store Responses
-- Question Mapping
-
-### Endpoint
-
-```http
-POST /api/v1/answers
-```
+### Resume & Context
+* `POST /api/v1/resume/upload` — Upload a PDF file securely.
+* `POST /api/v1/resume/analyze-pdf` — Extract text and run deep AI analysis for skill matching.
 
 ---
 
-## 🧠 Answer Evaluation
-
-### Features
-
-- Evaluate Answers
-- Generate Score
-- Generate Feedback
-- Gemini Service Layer Ready
-
-### Endpoint
-
-```http
-POST /api/v1/answers/evaluate
-```
-
----
-
-## 📊 Dashboard Analytics
-
-### Features
-
-- Total Interviews
-- Total Questions
-- Total Sessions
-- Average Score
-
-### Endpoint
-
-```http
-GET /api/v1/dashboard
-```
-
----
-
-## 📈 Performance Reports
-
-### Features
-
-- Overall Interview Score
-- Strengths
-- Weaknesses
-- Recommendations
-
-### Endpoint
-
-```http
-GET /api/v1/reports
-```
-
----
-
-## 📄 Resume Analysis
-
-### Features
-
-- Resume Text Analysis
-- Strength Detection
-- Skill Gap Detection
-- Career Recommendations
-
-### Endpoint
-
-```http
-POST /api/v1/resume/analyze
-```
-
----
-
-## 📤 Resume Upload
-
-### Features
-
-- PDF Upload Support
-- Resume File Validation
-
-### Endpoint
-
-```http
-POST /api/v1/resume/upload
-```
-
----
-
-## 📚 PDF Resume Extraction
-
-### Features
-
-- PDF Parsing
-- Resume Text Extraction
-- Apache PDFBox Integration
-
-### Endpoint
-
-```http
-POST /api/v1/resume/extract
-```
-
----
-
-## 🤖 AI Resume Analysis
-
-### Features
-
-- Dynamic Resume Evaluation
-- Skill Identification
-- Missing Skill Detection
-- Personalized Recommendations
-
-### Endpoint
-
-```http
-POST /api/v1/resume/analyze-pdf
-```
-
----
-
-## 👤 User Profile
-
-### Features
-
-- User Profile Information
-- Career Goal Tracking
-
-### Endpoint
-
-```http
-GET /api/v1/profile
-```
-
----
-
-## 💼 Role Recommendation Engine
-
-### Features
-
-- Resume-Based Role Suggestions
-- Skill-Based Matching
-
-### Endpoint
-
-```http
-POST /api/v1/recommendations
-```
-
-### Example Roles
-
-- Backend Developer
-- Frontend Developer
-- Full Stack Developer
-- AI/ML Engineer
-
----
-
-## 📜 Interview History
-
-### Features
-
-- Previous Sessions
-- Status Tracking
-- Historical Scores
-
-### Endpoint
-
-```http
-GET /api/v1/history
-```
-
----
-
-## 📊 Advanced Statistics
-
-### Features
-
-- Total Sessions
-- Completed Sessions
-- Average Score
-- Success Rate
-
-### Endpoint
-
-```http
-GET /api/v1/statistics
-```
-
----
-
-# 🗄️ Database Entities
-
-Current Tables
-
-- User
-- Interview
-- Question
-- InterviewSession
-- InterviewResult
-- Answer
-
----
-
-# 🔒 Security
-
-Implemented:
-
-- JWT Authentication
-- BCrypt Password Encoding
-- Protected APIs
-- Custom JWT Filter
-
-Environment Variables:
-
-```properties
-DB_PASSWORD=${DB_PASSWORD}
-JWT_SECRET=${JWT_SECRET}
-GEMINI_API_KEY=${GEMINI_API_KEY:test-key}
-```
-
----
-
-# 📖 Swagger Documentation
-
-```text
-http://localhost:8080/swagger-ui/index.html
-```
-
----
-
-# 🚀 Running The Project
-
-Clone Repository
-
+## 🚀 Local Quickstart Guide
+
+Want to run the entire cluster locally? Follow these steps:
+
+### 1. Database & Environment
+1. Ensure PostgreSQL is running locally on port `5432`.
+2. Set your environment variables in your terminal:
+   ```bash
+   export DB_PASSWORD=your_postgres_password
+   export JWT_SECRET=your_super_secret_jwt_key
+   export GEMINI_API_KEY=your_google_ai_studio_key
+   ```
+
+### 2. Boot the Backend (Port 8080)
 ```bash
-git clone https://github.com/Jawahar08/interviewforge-ai.git
-```
-
-Navigate
-
-```bash
-cd interviewforge-ai/backend
-```
-
-Run
-
-```bash
+cd backend
+mvn clean install
 mvn spring-boot:run
 ```
+*(Swagger UI is generated at `http://localhost:8080/swagger-ui/index.html`)*
 
-Build
-
+### 3. Launch the Candidate App (Port 5173)
 ```bash
-mvn clean install
+cd frontend
+npm install
+npm run dev
 ```
 
----
+### 4. Launch the Recruiter Admin (Port 5174)
+```bash
+cd admin-panel
+npm install
+npm run dev
+```
 
-# 📈 Development Progress
-
-| Module | Status |
-|----------|----------|
-| Authentication | ✅ |
-| Interview Management | ✅ |
-| Question Management | ✅ |
-| AI Question Generation | ✅ |
-| Session Management | ✅ |
-| Results Module | ✅ |
-| Dashboard Analytics | ✅ |
-| Answer Submission | ✅ |
-| Answer Evaluation | ✅ |
-| Performance Reports | ✅ |
-| Resume Analysis | ✅ |
-| Resume Upload | ✅ |
-| PDF Text Extraction | ✅ |
-| AI Resume Analysis | ✅ |
-| User Profile | ✅ |
-| Role Recommendation Engine | ✅ |
-| Interview History | ✅ |
-| Advanced Statistics | ✅ |
-| API Documentation Cleanup | 🚧 |
-| Dockerization | 🚧 |
-| Deployment | 🚧 |
+### 5. Install the Extension
+1. Open Chrome and navigate to `chrome://extensions/`.
+2. Toggle **Developer mode** ON.
+3. Click **Load unpacked** and select the `/extension` directory.
 
 ---
 
-# 🎯 Next Milestones
-
-### Day 28
-
-- API Cleanup
-- Standard Response Wrapper
-- Exception Handling Improvements
-- Swagger Documentation Enhancement
-
-### Day 29
-
-- Dockerization
-- Docker Compose
-- PostgreSQL Container
-
-### Day 30
-
-- Deployment Preparation
-- Production Configuration
-- Environment Management
+## 🔐 Security Standards
+* **Data Encryption:** All sensitive endpoints require `Bearer` token authorization.
+* **Password Hashing:** Implemented `BCryptPasswordEncoder` with a high work factor.
+* **CORS:** Cross-Origin Resource Sharing is strictly configured to only allow traffic from the local frontend/admin ports during development.
 
 ---
 
-# 👨‍💻 Author
-
-### Jawahar Bharathi
-
-Full Stack Developer | AI & Software Engineering Enthusiast
-
-Building InterviewForge AI to help students prepare for interviews through intelligent evaluation, resume analysis, and personalized career guidance.
-
----
-
-## ⭐ Current Backend Completion
-
-### ~97% Complete
-
-Remaining:
-
-- API Cleanup
-- Dockerization
-- Deployment
-
-InterviewForge has evolved from a simple interview practice system into a complete AI-powered interview preparation and career guidance platform.
+<div align="center">
+  <i>"Accelerate hire. Unlock human potential. Build the future of teams."</i><br>
+  <b>Built by Jawahar Bharathi</b>
+</div>
