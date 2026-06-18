@@ -43,7 +43,10 @@ export default function App() {
           </div>
           <div className="topbar-actions">
             <button className="icon-btn"><Bell size={20} /></button>
-            <div className="avatar">HR</div>
+            <div className="avatar">
+              HR
+              <span className="online-indicator"></span>
+            </div>
           </div>
         </header>
 
