@@ -11,14 +11,20 @@ import com.interviewforge.auth.dto.RegisterRequest;
 import com.interviewforge.auth.service.AuthService;
 import com.interviewforge.common.dto.ApiResponse;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
 
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+ @Tag(
+    name = "Authentication",
+    description = "User registration and login APIs"
+)
+
 public class AuthController {
+   
 
     private final AuthService authService;
 
@@ -41,4 +47,6 @@ public class AuthController {
             "User logged in successfully"
     );
 }
+
+
 }

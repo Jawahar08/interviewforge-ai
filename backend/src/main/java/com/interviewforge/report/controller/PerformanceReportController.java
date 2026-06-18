@@ -8,6 +8,12 @@ import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.report.dto.PerformanceReportResponse;
 import com.interviewforge.report.service.PerformanceReportService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(
+    name = "Reports",
+    description = "Interview performance reporting APIs"
+)
 @RestController
 @RequestMapping("/api/v1/reports")
 public class PerformanceReportController {

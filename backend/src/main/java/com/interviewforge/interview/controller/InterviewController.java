@@ -16,10 +16,14 @@ import com.interviewforge.interview.dto.CreateInterviewRequest;
 import com.interviewforge.interview.entity.Interview;
 import com.interviewforge.interview.service.InterviewService;
 
-import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
-
+@Tag(
+    name = "Interview Management",
+    description = "Interview CRUD operations"
+)
 @RestController
 @RequestMapping("/api/v1/interviews")
 @SecurityRequirement(name = "bearerAuth")

@@ -8,6 +8,12 @@ import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.statistics.dto.StatisticsResponse;
 import com.interviewforge.statistics.service.StatisticsService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(
+    name = "Statistics",
+    description = "Interview performance statistics"
+)
 @RestController
 @RequestMapping("/api/v1/statistics")
 public class StatisticsController {

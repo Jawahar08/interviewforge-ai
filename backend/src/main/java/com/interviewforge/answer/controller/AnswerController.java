@@ -11,6 +11,12 @@ import com.interviewforge.answer.entity.Answer;
 import com.interviewforge.answer.service.AnswerService;
 import com.interviewforge.common.dto.ApiResponse;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(
+    name = "Answer Management",
+    description = "Answer submission and evaluation APIs"
+)
 @RestController
 @RequestMapping("/api/v1/answers")
 public class AnswerController {

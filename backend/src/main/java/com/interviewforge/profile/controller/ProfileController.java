@@ -8,6 +8,12 @@ import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.profile.dto.UserProfileResponse;
 import com.interviewforge.profile.service.ProfileService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(
+    name = "User Profile",
+    description = "User profile management APIs"
+)
 @RestController
 @RequestMapping("/api/v1/profile")
 public class ProfileController {

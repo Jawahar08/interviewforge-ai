@@ -14,7 +14,12 @@ import com.interviewforge.resume.dto.ResumeTextResponse;
 import com.interviewforge.resume.dto.ResumeUploadResponse;
 import com.interviewforge.resume.service.ResumeAnalysisService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(
+    name = "Resume Analysis",
+    description = "Resume upload and AI analysis APIs"
+)
 @RestController
 @RequestMapping("/api/v1/resume")
 public class ResumeAnalysisController {
