@@ -50,7 +50,16 @@ export default function App() {
         <div className="content-wrapper">
           <div className="page-header">
             <h1>Candidate Pipeline</h1>
-            <button className="btn-primary">Export Report</button>
+            <button className="btn-primary" onClick={() => {
+              const csvContent = "data:text/csv;charset=utf-8,Name,Role,Score,Status\n" + mockCandidates.map(c => `${c.name},${c.role},${c.score},${c.status}`).join("\n");
+              const encodedUri = encodeURI(csvContent);
+              const link = document.createElement("a");
+              link.setAttribute("href", encodedUri);
+              link.setAttribute("download", "candidates_report.csv");
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}>Export Report</button>
           </div>
 
           {/* Stats Cards */}
