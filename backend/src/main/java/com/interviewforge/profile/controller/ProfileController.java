@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.profile.dto.UserProfileResponse;
 import com.interviewforge.profile.service.ProfileService;
 
@@ -20,8 +21,12 @@ public class ProfileController {
     }
 
     @GetMapping
-    public UserProfileResponse getProfile() {
+public ApiResponse<UserProfileResponse> getProfile() {
 
-        return profileService.getProfile();
-    }
+    return new ApiResponse<>(
+            true,
+            "Profile fetched successfully",
+            profileService.getProfile()
+    );
+}
 }

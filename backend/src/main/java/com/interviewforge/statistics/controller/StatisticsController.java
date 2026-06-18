@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.statistics.dto.StatisticsResponse;
 import com.interviewforge.statistics.service.StatisticsService;
 
@@ -20,8 +21,12 @@ public class StatisticsController {
     }
 
     @GetMapping
-    public StatisticsResponse getStatistics() {
+public ApiResponse<StatisticsResponse> getStatistics() {
 
-        return statisticsService.getStatistics();
-    }
+    return new ApiResponse<>(
+            true,
+            "Statistics fetched successfully",
+            statisticsService.getStatistics()
+    );
+}
 }
