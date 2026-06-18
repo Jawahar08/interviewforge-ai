@@ -1,62 +1,30 @@
 version: '3.8'
 
 services:
-  db:
+  postgres:
     image: postgres:15-alpine
     container_name: interviewforge-db
     environment:
-      POSTGRES_DB: interviewforge
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Pandian@008
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: interviewforge
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - interviewforge-network
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
 
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: interviewforge-backend
-    ports:
-      - "8080:8080"
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: interviewforge-pgadmin
     environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=interviewforge
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=Pandian@008
-      - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - SPRING_PROFILES_ACTIVE=postgres
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - interviewforge-network
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: interviewforge-frontend
+      PGADMIN_DEFAULT_EMAIL: admin@interviewforge.ai
+      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "5173:5173"
-    environment:
-      - NODE_ENV=development
+      - "5050:80"
     depends_on:
-      - backend
-    networks:
-      - interviewforge-network
+      - postgres
+    restart: unless-stopped
 
 volumes:
-  pgdata:
-
-networks:
-  interviewforge-network:
+  postgres-data:
