@@ -27,6 +27,11 @@ node_modules/
 out/
 build/
 
+<<<<<<< HEAD
 # Local portable JDK
 .jdk/
 backend/.jdk/
+=======
+.env
+application-local.properties
+>>>>>>> acc0bf1 (chore: add docker compose configuration)
