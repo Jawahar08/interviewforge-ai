@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>InterviewForge Options</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #0f111a; color: white; }
+    input { width: 300px; padding: 8px; margin-top: 8px; background: #1a1d2d; color: white; border: 1px solid #7e57c2; border-radius: 4px;}
+    button { margin-top: 16px; padding: 8px 16px; background: #7e57c2; color: white; border: none; cursor: pointer; border-radius: 4px;}
+  </style>
+</head>
+<body>
+  <h2>⚙️ Extension Settings</h2>
+  <label for="apiUrl">Backend API URL:</label><br>
+  <input type="text" id="apiUrl" value="http://localhost:8080/api/v1">
+  <br>
+  <button id="saveBtn">Save Configuration</button>
+  <div id="status" style="margin-top: 10px; color: #4caf50;"></div>
+  <script src="options.js"></script>
+</body>
+</html>
