@@ -1,6 +1,5 @@
 package com.interviewforge.auth.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +9,7 @@ import com.interviewforge.auth.dto.AuthResponse;
 import com.interviewforge.auth.dto.LoginRequest;
 import com.interviewforge.auth.dto.RegisterRequest;
 import com.interviewforge.auth.service.AuthService;
+import com.interviewforge.common.dto.ApiResponse;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,19 +23,22 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(
+    public ApiResponse<AuthResponse> register(
             @Valid @RequestBody RegisterRequest request
     ) {
 
-        return ResponseEntity.ok(
-                authService.register(request)
+        return ApiResponse.success(
+                authService.register(request),
+                "User registered successfully"
         );
     }
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(
+    public ApiResponse<AuthResponse> login(
         @RequestBody LoginRequest request) {
 
-    return ResponseEntity.ok(
-            authService.login(request));
+    return ApiResponse.success(
+            authService.login(request),
+            "User logged in successfully"
+    );
 }
 }

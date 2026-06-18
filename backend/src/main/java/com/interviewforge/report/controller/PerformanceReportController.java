@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.report.dto.PerformanceReportResponse;
 import com.interviewforge.report.service.PerformanceReportService;
 
@@ -20,8 +21,11 @@ public class PerformanceReportController {
     }
 
     @GetMapping
-    public PerformanceReportResponse getReport() {
+    public ApiResponse<PerformanceReportResponse> getReport() {
 
-        return reportService.generateReport();
+        return ApiResponse.success(
+                reportService.generateReport(),
+                "Performance report generated successfully"
+        );
     }
 }

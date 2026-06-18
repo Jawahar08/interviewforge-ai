@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.history.dto.InterviewHistoryResponse;
 import com.interviewforge.history.service.InterviewHistoryService;
 
@@ -22,8 +23,11 @@ public class InterviewHistoryController {
     }
 
     @GetMapping
-    public List<InterviewHistoryResponse> getHistory() {
+    public ApiResponse<List<InterviewHistoryResponse>> getHistory() {
 
-        return historyService.getHistory();
+        return ApiResponse.success(
+                historyService.getHistory(),
+                "Interview history retrieved successfully"
+        );
     }
 }

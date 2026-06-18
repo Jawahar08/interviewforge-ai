@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.interview.dto.CreateInterviewRequest;
 import com.interviewforge.interview.entity.Interview;
 import com.interviewforge.interview.service.InterviewService;
@@ -33,35 +34,54 @@ public class InterviewController {
     
 
     @PostMapping
-    public Interview createInterview(
+    public ApiResponse<Interview> createInterview(
             @Valid @RequestBody CreateInterviewRequest request) {
 
-        return interviewService.createInterview(request);
+        return ApiResponse.success(
+                interviewService.createInterview(request),
+                "Interview created successfully"
+        );
     }
+
     @GetMapping
-public List<Interview> getAllInterviews() {
-    return interviewService.getAllInterviews();
-}
-@GetMapping("/{id}")
-public Interview getInterviewById(
-        @PathVariable Long id) {
+    public ApiResponse<List<Interview>> getAllInterviews() {
+        return ApiResponse.success(
+                interviewService.getAllInterviews(),
+                "Interviews retrieved successfully"
+        );
+    }
 
-    return interviewService.getInterviewById(id);
-}
-@PutMapping("/{id}")
-public Interview updateInterview(
-        @PathVariable Long id,
-        @Valid @RequestBody CreateInterviewRequest request) {
+    @GetMapping("/{id}")
+    public ApiResponse<Interview> getInterviewById(
+            @PathVariable Long id) {
 
-    return interviewService.updateInterview(id, request);
-}
-@DeleteMapping("/{id}")
-public String deleteInterview(
-        @PathVariable Long id) {
+        return ApiResponse.success(
+                interviewService.getInterviewById(id),
+                "Interview retrieved successfully"
+        );
+    }
 
-    interviewService.deleteInterview(id);
+    @PutMapping("/{id}")
+    public ApiResponse<Interview> updateInterview(
+            @PathVariable Long id,
+            @Valid @RequestBody CreateInterviewRequest request) {
 
-    return "Interview deleted successfully";
-}
+        return ApiResponse.success(
+                interviewService.updateInterview(id, request),
+                "Interview updated successfully"
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse<Void> deleteInterview(
+            @PathVariable Long id) {
+
+        interviewService.deleteInterview(id);
+
+        return ApiResponse.success(
+                null,
+                "Interview deleted successfully"
+        );
+    }
     
 }

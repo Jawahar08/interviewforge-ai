@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.interviewforge.ai.dto.GenerateQuestionRequest;
 import com.interviewforge.ai.service.AIQuestionService;
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.question.entity.Question;
 
 @RestController
@@ -24,10 +25,12 @@ public class AIQuestionController {
     }
 
     @PostMapping("/generate")
-    public List<Question> generateQuestions(
+    public ApiResponse<List<Question>> generateQuestions(
             @RequestBody GenerateQuestionRequest request) {
 
-        return aiQuestionService.generateQuestions(
-                request.getInterviewId());
+        return ApiResponse.success(
+                aiQuestionService.generateQuestions(request.getInterviewId()),
+                "AI questions generated successfully"
+        );
     }
 }

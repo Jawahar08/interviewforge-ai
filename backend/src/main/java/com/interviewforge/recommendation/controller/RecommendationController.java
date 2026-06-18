@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.recommendation.dto.RoleRecommendationResponse;
 import com.interviewforge.recommendation.service.RecommendationService;
 
@@ -22,10 +23,12 @@ public class RecommendationController {
     }
 
     @PostMapping
-    public RoleRecommendationResponse recommendRoles(
+    public ApiResponse<RoleRecommendationResponse> recommendRoles(
             @RequestBody String resumeText) {
 
-        return recommendationService
-                .recommendRoles(resumeText);
+        return ApiResponse.success(
+                recommendationService.recommendRoles(resumeText),
+                "Role recommendations generated successfully"
+        );
     }
 }

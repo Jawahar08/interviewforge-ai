@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.resume.dto.ResumeAiAnalysisResponse;
 import com.interviewforge.resume.dto.ResumeAnalysisResponse;
 import com.interviewforge.resume.dto.ResumeTextResponse;
@@ -27,53 +28,60 @@ public class ResumeAnalysisController {
     }
 
     @PostMapping("/analyze")
-    public ResumeAnalysisResponse analyzeResume(
+    public ApiResponse<ResumeAnalysisResponse> analyzeResume(
             @RequestBody String resumeText) {
 
-        return resumeAnalysisService.analyzeResume(
-                resumeText);
+        return ApiResponse.success(
+                resumeAnalysisService.analyzeResume(resumeText),
+                "Resume text analyzed successfully"
+        );
     }
+
     @PostMapping(
-        value = "/upload",
-        consumes = "multipart/form-data"
-)
-public ResumeUploadResponse uploadResume(
-        @RequestParam("file") MultipartFile file) {
+            value = "/upload",
+            consumes = "multipart/form-data"
+    )
+    public ApiResponse<ResumeUploadResponse> uploadResume(
+            @RequestParam("file") MultipartFile file) {
 
-    return new ResumeUploadResponse(
-            file.getOriginalFilename(),
-            file.getSize(),
-            "Resume uploaded successfully"
-    );
-}
-@PostMapping(
-        value = "/extract",
-        consumes = "multipart/form-data"
-)
-public ResumeTextResponse extractResumeText(
-        @RequestParam("file")
-        MultipartFile file) {
+        ResumeUploadResponse response = new ResumeUploadResponse(
+                file.getOriginalFilename(),
+                file.getSize(),
+                "Resume uploaded successfully"
+        );
 
-    String text =
-            resumeAnalysisService
-                    .extractTextFromPdf(file);
+        return ApiResponse.success(response, "Resume uploaded successfully");
+    }
 
-    return new ResumeTextResponse(
-            file.getOriginalFilename(),
-            text);
-}
-@PostMapping(
-        value = "/analyze-pdf",
-        consumes = "multipart/form-data"
-)
-public ResumeAiAnalysisResponse analyzePdfResume(
-        @RequestParam("file")
-        MultipartFile file) {
+    @PostMapping(
+            value = "/extract",
+            consumes = "multipart/form-data"
+    )
+    public ApiResponse<ResumeTextResponse> extractResumeText(
+            @RequestParam("file") MultipartFile file) {
 
-    String text =
-            resumeAnalysisService.extractTextFromPdf(file);
+        String text = resumeAnalysisService.extractTextFromPdf(file);
 
-    return resumeAnalysisService
-            .analyzeResumeText(text);
-}
+        ResumeTextResponse response = new ResumeTextResponse(
+                file.getOriginalFilename(),
+                text
+        );
+
+        return ApiResponse.success(response, "Resume text extracted successfully");
+    }
+
+    @PostMapping(
+            value = "/analyze-pdf",
+            consumes = "multipart/form-data"
+    )
+    public ApiResponse<ResumeAiAnalysisResponse> analyzePdfResume(
+            @RequestParam("file") MultipartFile file) {
+
+        String text = resumeAnalysisService.extractTextFromPdf(file);
+
+        return ApiResponse.success(
+                resumeAnalysisService.analyzeResumeText(text),
+                "PDF Resume analyzed successfully by AI"
+        );
+    }
 }

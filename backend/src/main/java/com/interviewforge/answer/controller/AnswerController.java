@@ -9,6 +9,7 @@ import com.interviewforge.answer.dto.EvaluateAnswerRequest;
 import com.interviewforge.answer.dto.SubmitAnswerRequest;
 import com.interviewforge.answer.entity.Answer;
 import com.interviewforge.answer.service.AnswerService;
+import com.interviewforge.common.dto.ApiResponse;
 
 @RestController
 @RequestMapping("/api/v1/answers")
@@ -23,16 +24,22 @@ public class AnswerController {
     }
 
     @PostMapping
-    public Answer submitAnswer(
+    public ApiResponse<Answer> submitAnswer(
             @RequestBody SubmitAnswerRequest request) {
 
-        return answerService.submitAnswer(request);
+        return ApiResponse.success(
+                answerService.submitAnswer(request),
+                "Answer submitted successfully"
+        );
     }
-    @PostMapping("/evaluate")
-public Answer evaluateAnswer(
-        @RequestBody EvaluateAnswerRequest request) {
 
-    return answerService.evaluateAnswer(
-            request.getAnswerId());
-}
+    @PostMapping("/evaluate")
+    public ApiResponse<Answer> evaluateAnswer(
+            @RequestBody EvaluateAnswerRequest request) {
+
+        return ApiResponse.success(
+                answerService.evaluateAnswer(request.getAnswerId()),
+                "Answer evaluated successfully"
+        );
+    }
 }

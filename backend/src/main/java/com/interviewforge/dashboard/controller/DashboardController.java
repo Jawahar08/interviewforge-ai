@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.dashboard.dto.DashboardResponse;
 import com.interviewforge.dashboard.service.DashboardService;
 
@@ -20,8 +21,11 @@ public class DashboardController {
     }
 
     @GetMapping
-    public DashboardResponse getDashboard() {
+    public ApiResponse<DashboardResponse> getDashboard() {
 
-        return dashboardService.getDashboard();
+        return ApiResponse.success(
+                dashboardService.getDashboard(),
+                "Dashboard data retrieved successfully"
+        );
     }
 }

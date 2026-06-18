@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.session.dto.InterviewSessionResponse;
 import com.interviewforge.session.dto.StartSessionRequest;
 import com.interviewforge.session.service.InterviewSessionService;
@@ -26,23 +27,32 @@ public class InterviewSessionController {
     }
 
     @PostMapping("/start")
-    public InterviewSessionResponse startSession(
+    public ApiResponse<InterviewSessionResponse> startSession(
             @RequestBody StartSessionRequest request) {
 
-        return sessionService.startSession(
-                request.getInterviewId());
+        return ApiResponse.success(
+                sessionService.startSession(request.getInterviewId()),
+                "Interview session started successfully"
+        );
     }
+
     @GetMapping("/{id}")
-public InterviewSessionResponse getSession(
-        @PathVariable Long id) {
+    public ApiResponse<InterviewSessionResponse> getSession(
+            @PathVariable Long id) {
 
-    return sessionService.getSessionById(id);
-}
+        return ApiResponse.success(
+                sessionService.getSessionById(id),
+                "Interview session retrieved successfully"
+        );
+    }
 
-@PatchMapping("/{id}/complete")
-public InterviewSessionResponse completeSession(
-        @PathVariable Long id) {
+    @PatchMapping("/{id}/complete")
+    public ApiResponse<InterviewSessionResponse> completeSession(
+            @PathVariable Long id) {
 
-    return sessionService.completeSession(id);
-}
+        return ApiResponse.success(
+                sessionService.completeSession(id),
+                "Interview session completed successfully"
+        );
+    }
 }
