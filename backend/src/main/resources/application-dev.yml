@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/interviewforge
+    username: postgres
+    password: ${DB_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  secret: ${JWT_SECRET:development_secret_key_that_is_at_least_32_chars_long}
+  expiration: 86400000 # 24 hours
+
+gemini:
+  api-key: ${GEMINI_API_KEY:mock-dev-key}
