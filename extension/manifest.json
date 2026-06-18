@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "InterviewForge Integration",
+  "version": "1.0.0",
+  "description": "Start mock interviews directly from job boards.",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "InterviewForge AI"
+  }
+}

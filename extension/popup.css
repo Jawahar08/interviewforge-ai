@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&family=Inter:wght@400;500&display=swap');
+
+body {
+  width: 320px;
+  margin: 0;
+  padding: 16px;
+  background-color: #0f111a;
+  color: #f8f8f2;
+  font-family: 'Inter', sans-serif;
+  background-image: radial-gradient(circle at 15% 50%, rgba(126, 87, 194, 0.2), transparent 40%);
+}
+
+.glass-panel {
+  background: rgba(26, 29, 45, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7e57c2, #00bcd4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+h2 {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+}
+
+.status-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,0,0,0.3);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.indicator.online {
+  background-color: #4caf50;
+  box-shadow: 0 0 8px #4caf50;
+}
+
+.tip {
+  font-size: 0.85rem;
+  color: #a9b1d6;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, #7e57c2, #00bcd4);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(126, 87, 194, 0.4);
+}
