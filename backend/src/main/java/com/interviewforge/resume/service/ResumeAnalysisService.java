@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.pdfbox.Loader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +30,7 @@ public class ResumeAnalysisService {
     try {
 
         PDDocument document =
-                PDDocument.load(file.getBytes());
+                Loader.loadPDF(file.getBytes());
 
         PDFTextStripper stripper =
                 new PDFTextStripper();
