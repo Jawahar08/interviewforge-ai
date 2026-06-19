@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+
+  frontend:
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+
+  admin-panel:
+    ports:
+      - "5174:5174"
+    environment:
+      - NODE_ENV=development
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=interviewforge
+    ports:
+      - "5432:5432"
