@@ -1,4 +1,6 @@
 # 🚀 InterviewForge AI
+![Frontend CI](https://github.com/Jawahar08/interviewforge-ai/actions/workflows/frontend-ci.yml/badge.svg)
+![Backend CI](https://github.com/Jawahar08/interviewforge-ai/actions/workflows/backend-ci.yml/badge.svg)
 > **An enterprise-grade, multi-service AI Interview Preparation Platform.**
 > InterviewForge accelerates hiring and candidate preparation through hyper-realistic AI simulations, real-time speech-to-text evaluation, and deep PDF resume analysis.
 
