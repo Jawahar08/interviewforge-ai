@@ -11,3 +11,8 @@ start-admin:
 
 start-all:
 	docker-compose up --build
+
+clean:
+	cd backend && mvn clean
+	cd frontend && rm -rf node_modules dist
+	cd admin-panel && rm -rf node_modules dist
