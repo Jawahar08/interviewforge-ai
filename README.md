@@ -141,5 +141,5 @@ make clean
 
 <div align="center">
   <i>"Accelerate hire. Unlock human potential. Build the future of teams."</i><br>
-  <b>Built by Jawahar Bharathi</b>
+  <b>Made with ❤️ by Jawahar Bharathi</b>
 </div>
