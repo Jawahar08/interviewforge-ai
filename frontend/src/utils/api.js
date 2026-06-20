@@ -47,7 +47,7 @@ export const InterviewService = {
   uploadResume: async (file) => {
     const formData = new FormData();
     formData.append('file', file);
-    return apiClient.post('/resume/analyze', formData, {
+    return apiClient.post('/resume/analyze-pdf', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -59,14 +59,14 @@ export const InterviewService = {
   },
 
   generateQuestion: async (sessionId) => {
-    return apiClient.post(`/ai/questions/generate?sessionId=${sessionId}`);
+    return apiClient.post(`/ai/generate`, { interviewId: sessionId });
   },
 
   submitAnswer: async (sessionId, questionId, text) => {
     return apiClient.post(`/answers`, {
       sessionId,
       questionId,
-      text
+      userAnswer: text
     });
   },
 
