@@ -28,8 +28,11 @@ public class AIQuestionService {
     public List<Question> generateQuestions(Long interviewId) {
 
     Interview interview = interviewRepository.findById(interviewId)
-            .orElseThrow(() ->
-                    new RuntimeException("Interview not found"));
+            .orElseGet(() -> {
+                Interview i = new Interview();
+                i.setTitle("Mock Interview");
+                return interviewRepository.save(i);
+            });
 
     Question q1 = Question.builder()
             .questionText("What is Dependency Injection?")
