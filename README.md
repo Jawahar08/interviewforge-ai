@@ -119,7 +119,13 @@ npm install
 npm run dev
 ```
 
-### 5. Install the Extension
+### 5. Clean the Workspace
+To clean all built artifacts and `node_modules` across the monorepo:
+```bash
+make clean
+```
+
+### 6. Install the Extension
 1. Open Chrome and navigate to `chrome://extensions/`.
 2. Toggle **Developer mode** ON.
 3. Click **Load unpacked** and select the `/extension` directory.
