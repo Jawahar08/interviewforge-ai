@@ -112,13 +112,25 @@ function App() {
   const generateNextQuestion = async (sessionId) => {
     try {
       const res = await InterviewService.generateQuestion(sessionId);
-      if (res.success) {
-        setChat(prev => [...prev, { role: 'ai', text: res.data.questionText }]);
-        setActiveSession(prev => ({ ...prev, currentQuestionId: res.data.id }));
+      if (res.success && res.data && res.data.length > 0) {
+        // AI Question Service returns an array of questions, grab the first one
+        const question = res.data[Math.floor(Math.random() * res.data.length)];
+        setChat(prev => [...prev, { role: 'ai', text: question.questionText }]);
+        setActiveSession(prev => ({ ...prev, currentQuestionId: question.id }));
+      } else {
+        // Fallback if data is empty
+        setChat(prev => [...prev, { role: 'ai', text: 'Can you elaborate more on your role in that project?' }]);
       }
     } catch (err) {
       console.error(err);
-      setChat(prev => [...prev, { role: 'ai', text: 'Tell me about a challenging project you worked on.' }]);
+      const fallbacks = [
+        "What is the most difficult bug you've had to fix?",
+        "How do you handle disagreements with a team member?",
+        "Tell me about a time you had to learn a new technology quickly.",
+        "What are your thoughts on Test Driven Development?"
+      ];
+      const randomFallback = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+      setChat(prev => [...prev, { role: 'ai', text: randomFallback }]);
     }
   };
 
