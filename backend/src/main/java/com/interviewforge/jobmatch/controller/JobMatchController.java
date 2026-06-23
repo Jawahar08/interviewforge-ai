@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.interviewforge.jobmatch.dto.JobMatchRequest;
+import com.interviewforge.jobmatch.dto.JobMatchResponse;
 import com.interviewforge.jobmatch.service.JobMatchService;
+
+
 
 @RestController
 @RequestMapping("/api/v1/job-match")
@@ -21,12 +24,12 @@ public class JobMatchController {
     }
 
     @PostMapping
-    public String analyzeMatch(
-            @RequestBody JobMatchRequest request) {
+public JobMatchResponse analyzeMatch(
+        @RequestBody JobMatchRequest request)
+        throws Exception {
 
-        return jobMatchService.analyzeMatch(
-                request.getResumeText(),
-                request.getJobDescription()
-        );
-    }
+    return jobMatchService.analyzeMatch(
+            request.getResumeText(),
+            request.getJobDescription());
+}
 }
