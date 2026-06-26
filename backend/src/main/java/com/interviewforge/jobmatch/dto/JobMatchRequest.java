@@ -1,11 +1,13 @@
 package com.interviewforge.jobmatch.dto;
 
-import lombok.Data;
+import jakarta.validation.constraints.NotBlank;
 
-@Data
-public class JobMatchRequest {
+public record JobMatchRequest(
 
-    private String resumeText;
+    @NotBlank(message = "Resume text cannot be empty")
+    String resumeText,
 
-    private String jobDescription;
-}
+    @NotBlank(message = "Job description cannot be empty")
+    String jobDescription
+
+) {}

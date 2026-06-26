@@ -10,6 +10,9 @@ import com.interviewforge.jobmatch.dto.JobMatchResponse;
 import com.interviewforge.jobmatch.service.JobMatchService;
 
 
+import jakarta.validation.Valid;
+
+
 
 @RestController
 @RequestMapping("/api/v1/job-match")
@@ -25,11 +28,11 @@ public class JobMatchController {
 
     @PostMapping
 public JobMatchResponse analyzeMatch(
-        @RequestBody JobMatchRequest request)
+        @Valid @RequestBody JobMatchRequest request)
         throws Exception {
 
     return jobMatchService.analyzeMatch(
-            request.getResumeText(),
-            request.getJobDescription());
+            request.resumeText(),
+            request.jobDescription());
 }
 }
