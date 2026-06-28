@@ -18,8 +18,8 @@ public class GeminiService {
     
     
 
-    @Value("${gemini.api.key}")
-    private String apiKey;
+   @Value("${gemini.api.key}")
+private String apiKey;
      @PostConstruct
     public void verifyKey() {
         System.out.println("Loaded Gemini Key: " + apiKey.substring(0, 10) + "...");
@@ -35,21 +35,27 @@ public class GeminiService {
     public String generateContent(String prompt) {
 
         String url =
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key="
-    + apiKey;
+"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="
++ apiKey;
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+headers.setContentType(MediaType.APPLICATION_JSON);
+
 
         Map<String, Object> requestBody = Map.of(
-                "contents",
-                List.of(
-                        Map.of(
-                                "parts",
-                                List.of(
-                                        Map.of(
-                                                "text",
-                                                prompt)))));
+    "contents",
+    List.of(
+        Map.of(
+            "parts",
+            List.of(
+                Map.of(
+                    "text",
+                    prompt
+                )
+            )
+        )
+    )
+);
 
         HttpEntity<Map<String, Object>> request =
                 new HttpEntity<>(requestBody, headers);
@@ -68,33 +74,34 @@ public class GeminiService {
             if (candidates == null || candidates.isEmpty()) {
                 return "No response from Gemini.";
             }
-
             Map<?, ?> candidate =
-                    (Map<?, ?>) candidates.get(0);
+        (Map<?, ?>) candidates.get(0);
 
-            Map<?, ?> content =
-                    (Map<?, ?>) candidate.get("content");
+Map<?, ?> content =
+        (Map<?, ?>) candidate.get("content");
 
-            List<?> parts =
-                    (List<?>) content.get("parts");
+List<?> parts =
+        (List<?>) content.get("parts");
 
-            Map<?, ?> firstPart =
-                    (Map<?, ?>) parts.get(0);
+Map<?, ?> firstPart =
+        (Map<?, ?>) parts.get(0);
 
-            return (String) firstPart.get("text");
+return (String) firstPart.get("text");
+        }
 
-        } catch (HttpClientErrorException e) {
+            catch (HttpClientErrorException e) {
 
     System.out.println("STATUS CODE: " + e.getStatusCode());
     System.out.println("RESPONSE BODY: " + e.getResponseBodyAsString());
 
-    return e.getResponseBodyAsString();
+    throw new RuntimeException(e.getResponseBodyAsString());
 
-} catch (Exception e) {
+}
+catch (Exception e) {
 
     e.printStackTrace();
 
-    return "Gemini API Error: " + e.getMessage();
+    throw new RuntimeException(e.getMessage());
 }
     }
 

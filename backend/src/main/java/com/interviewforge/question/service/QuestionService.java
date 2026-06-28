@@ -52,6 +52,26 @@ public class QuestionService {
                 .orElseThrow(() ->
                         new RuntimeException("Question not found"));
     }
+    public Question updateQuestion(
+        Long id,
+        CreateQuestionRequest request) {
+
+    Question question = questionRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Question not found"));
+
+    Interview interview = interviewRepository.findById(request.getInterviewId())
+            .orElseThrow(() ->
+                    new RuntimeException("Interview not found"));
+
+    question.setQuestionText(request.getQuestionText());
+    question.setAnswer(request.getAnswer());
+    question.setCategory(request.getCategory());
+    question.setDifficulty(request.getDifficulty());
+    question.setInterview(interview);
+
+    return questionRepository.save(question);
+}
     public void deleteQuestion(Long id) {
 
     Question question = questionRepository.findById(id)

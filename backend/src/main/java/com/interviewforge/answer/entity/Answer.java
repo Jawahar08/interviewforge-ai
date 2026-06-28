@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import com.interviewforge.question.entity.Question;
 import com.interviewforge.session.entity.InterviewSession;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,11 +40,12 @@ public class Answer {
     @JoinColumn(name = "session_id")
     private InterviewSession session;
 
-    private String userAnswer;
+    @Column(columnDefinition = "TEXT")
+private String userAnswer;
 
-    private Double score;
+private Double score;
 
-    private String feedback;
-
+@Column(columnDefinition = "TEXT")
+private String feedback;
     private LocalDateTime submittedAt;
 }

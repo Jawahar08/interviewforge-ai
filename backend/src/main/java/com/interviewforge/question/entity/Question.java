@@ -1,10 +1,25 @@
 package com.interviewforge.question.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
 import com.interviewforge.interview.entity.Interview;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 
 @Entity
 @Table(name = "questions")
@@ -21,15 +36,17 @@ public class Question {
 
     private String questionText;
 
-    @Column(columnDefinition = "TEXT")
-    private String answer;
+   @Lob
+@Column(columnDefinition = "TEXT")
+private String answer;
 
     private String category;
 
     private String difficulty;
 
+    private LocalDateTime createdAt;
+
     @ManyToOne
-@JoinColumn(name = "interview_id")
-@JsonIgnoreProperties({"user", "questions"})
-private Interview interview;
+    @JoinColumn(name = "interview_id", nullable = false)
+    private Interview interview;
 }
