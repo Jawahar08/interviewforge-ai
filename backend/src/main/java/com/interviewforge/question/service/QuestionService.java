@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.interviewforge.common.exception.InterviewNotFoundException;
+import com.interviewforge.common.exception.QuestionNotFoundException;
 import com.interviewforge.interview.entity.Interview;
 import com.interviewforge.interview.repository.InterviewRepository;
 import com.interviewforge.question.dto.CreateQuestionRequest;
 import com.interviewforge.question.entity.Question;
 import com.interviewforge.question.repository.QuestionRepository;
+
 
 @Service
 public class QuestionService {
@@ -47,22 +50,17 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-    public Question getQuestionById(Long id) {
-        return questionRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Question not found"));
-    }
     public Question updateQuestion(
         Long id,
         CreateQuestionRequest request) {
 
     Question question = questionRepository.findById(id)
             .orElseThrow(() ->
-                    new RuntimeException("Question not found"));
+                    new QuestionNotFoundException(id));
 
     Interview interview = interviewRepository.findById(request.getInterviewId())
             .orElseThrow(() ->
-                    new RuntimeException("Interview not found"));
+                    new InterviewNotFoundException(request.getInterviewId()));
 
     question.setQuestionText(request.getQuestionText());
     question.setAnswer(request.getAnswer());
@@ -79,5 +77,10 @@ public class QuestionService {
                     new RuntimeException("Question not found"));
 
     questionRepository.delete(question);
+}
+public Question getQuestionById(Long id) {
+    return questionRepository.findById(id)
+            .orElseThrow(() ->
+                    new QuestionNotFoundException(id));
 }
 }

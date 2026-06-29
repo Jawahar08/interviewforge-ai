@@ -8,6 +8,7 @@ import com.interviewforge.auth.dto.LoginRequest;
 import com.interviewforge.auth.dto.RegisterRequest;
 import com.interviewforge.auth.entity.User;
 import com.interviewforge.auth.repository.UserRepository;
+import com.interviewforge.common.exception.UserNotFoundByEmailException;
 import com.interviewforge.security.JwtService;
 
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,7 @@ public class AuthService {
     System.out.println("STEP 1");
 
     User user = userRepository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new RuntimeException("User not found"));
+            .orElseThrow(() -> new UserNotFoundByEmailException(request.getEmail()));
 
     System.out.println("STEP 2");
 

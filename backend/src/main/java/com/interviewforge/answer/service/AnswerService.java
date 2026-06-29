@@ -8,6 +8,7 @@ import com.interviewforge.ai.gemini.GeminiService;
 import com.interviewforge.answer.dto.SubmitAnswerRequest;
 import com.interviewforge.answer.entity.Answer;
 import com.interviewforge.answer.repository.AnswerRepository;
+import com.interviewforge.common.exception.AnswerNotFoundException;
 import com.interviewforge.question.entity.Question;
 import com.interviewforge.question.repository.QuestionRepository;
 import com.interviewforge.session.entity.InterviewSession;
@@ -63,19 +64,22 @@ public class AnswerService {
 
         return answerRepository.save(answer);
     }
-    public Answer evaluateAnswer(Long answerId) {
+public Answer evaluateAnswer(Long answerId) {
 
     Answer answer = answerRepository.findById(answerId)
             .orElseThrow(() ->
-                    new RuntimeException("Answer not found"));
+                    new AnswerNotFoundException(answerId));
 
-   String feedback = geminiService.evaluateAnswer(
-        answer.getQuestion().getQuestionText(),
-        answer.getQuestion().getAnswer(),
-        answer.getUserAnswer());
+    String feedback = geminiService.evaluateAnswer(
+            answer.getQuestion().getQuestionText(),
+            answer.getQuestion().getAnswer(),
+            answer.getUserAnswer());
+
     answer.setScore(85.0);
     answer.setFeedback(feedback);
 
     return answerRepository.save(answer);
 }
+
+
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.interviewforge.common.exception.SessionNotFoundException;
 import com.interviewforge.interview.entity.Interview;
 import com.interviewforge.interview.repository.InterviewRepository;
 import com.interviewforge.session.dto.InterviewSessionResponse;
@@ -53,7 +54,7 @@ return new InterviewSessionResponse(
 
     InterviewSession session = sessionRepository.findById(id)
             .orElseThrow(() ->
-                    new RuntimeException("Session not found"));
+                    new SessionNotFoundException(id));
 
     return new InterviewSessionResponse(
             session.getId(),
@@ -66,7 +67,7 @@ public InterviewSessionResponse completeSession(Long id) {
 
     InterviewSession session = sessionRepository.findById(id)
             .orElseThrow(() ->
-                    new RuntimeException("Session not found"));
+                    new SessionNotFoundException(id));
 
     session.setStatus(SessionStatus.COMPLETED);
 

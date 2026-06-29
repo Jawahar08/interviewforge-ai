@@ -6,15 +6,12 @@ import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.interviewforge.auth.entity.User;
 import com.interviewforge.auth.repository.UserRepository;
-import com.interviewforge.exception.InterviewNotFoundException;
+import com.interviewforge.common.exception.InterviewNotFoundException;
 import com.interviewforge.interview.dto.CreateInterviewRequest;
 import com.interviewforge.interview.entity.Interview;
 import com.interviewforge.interview.repository.InterviewRepository;
-import com.interviewforge.auth.entity.User;
-
-
-
 
 
 
@@ -79,11 +76,11 @@ User user = userRepository.findByEmail(email)
     User user = userRepository.findByEmail(email)
             .orElseThrow(() ->
                     new RuntimeException("User not found"));
+        
 
     Interview interview = interviewRepository.findById(id)
-            .orElseThrow(() ->
-                    new InterviewNotFoundException(
-                            "Interview not found"));
+        .orElseThrow(() ->
+                new InterviewNotFoundException(id));
 
     if (!interview.getUser().getId().equals(user.getId())) {
         throw new RuntimeException("Access denied");
@@ -107,8 +104,7 @@ User user = userRepository.findByEmail(email)
 
     Interview interview = interviewRepository.findById(id)
             .orElseThrow(() ->
-        new InterviewNotFoundException(
-                "Interview not found"));
+        new InterviewNotFoundException(id));
 
     if (!interview.getUser().getId().equals(user.getId())) {
     throw new RuntimeException("Access denied");
@@ -133,8 +129,7 @@ public void deleteInterview(Long id) {
 
     Interview interview = interviewRepository.findById(id)
             .orElseThrow(() ->
-                    new InterviewNotFoundException(
-                            "Interview not found"));
+                    new InterviewNotFoundException(id));
 
     if (!interview.getUser().getId().equals(user.getId())) {
         throw new RuntimeException("Access denied");
