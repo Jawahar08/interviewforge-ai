@@ -5,34 +5,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.interviewforge.jobmatch.dto.JobMatchRequest;
+import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.jobmatch.dto.JobMatchResponse;
 import com.interviewforge.jobmatch.service.JobMatchService;
 
-
-import jakarta.validation.Valid;
-
-
-
 @RestController
-@RequestMapping("/api/v1/job-match")
+@RequestMapping("/api/v1/jobmatch")
 public class JobMatchController {
 
     private final JobMatchService jobMatchService;
 
-    public JobMatchController(
-            JobMatchService jobMatchService) {
-
+    public JobMatchController(JobMatchService jobMatchService) {
         this.jobMatchService = jobMatchService;
     }
 
     @PostMapping
-public JobMatchResponse analyzeMatch(
-        @Valid @RequestBody JobMatchRequest request)
-        throws Exception {
+    public ApiResponse<JobMatchResponse> generateCareerRecommendation(
+            @RequestBody String resumeText) {
 
-    return jobMatchService.analyzeMatch(
-            request.resumeText(),
-            request.jobDescription());
-}
+        return ApiResponse.success(
+                jobMatchService.generateCareerRecommendation(resumeText),
+                "Career recommendation generated successfully"
+        );
+    }
 }
