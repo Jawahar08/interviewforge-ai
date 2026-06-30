@@ -1,17 +1,25 @@
 package com.interviewforge.resume.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class ResumeAnalysisResponse {
 
+    private Integer atsScore;
+
+    private String summary;
+
     private String strengths;
 
-    private String skillGaps;
+    private String weaknesses;
 
-    private String recommendation;
+    private String missingSkills;
+
+    private String suggestions;
 }

@@ -12,7 +12,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import jakarta.annotation.PostConstruct;
-
 @Service
 public class GeminiService {
     
@@ -135,4 +134,39 @@ catch (Exception e) {
 
         return generateContent(prompt);
     }
+    public String analyzeResume(String resumeText) {
+
+    String prompt = """
+You are an expert ATS Resume Analyzer.
+
+Analyze the following resume.
+
+Return ONLY in this exact format.
+
+ATS Score: <0-100>
+
+Summary:
+<summary>
+
+Strengths:
+<strengths>
+
+Weaknesses:
+<weaknesses>
+
+Missing Skills:
+<missing skills>
+
+Suggestions:
+<improvements>
+
+Resume:
+
+%s
+"""
+.formatted(resumeText);
+
+    return generateContent(prompt);
+}
+    
 }
