@@ -14,6 +14,12 @@ public interface InterviewResultRepository
     Optional<InterviewResult> findBySession(InterviewSession session);
 
     @Query("SELECT AVG(r.score) FROM InterviewResult r")
-    Double getAverageScore();
+Double getAverageScore();
+
+@Query("SELECT MAX(r.score) FROM InterviewResult r")
+Double getHighestScore();
+
+@Query("SELECT MIN(r.score) FROM InterviewResult r")
+Double getLowestScore();
 
 }

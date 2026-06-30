@@ -2,20 +2,28 @@ package com.interviewforge.dashboard.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class DashboardResponse {
 
     private Long totalInterviews;
+
     private Long totalQuestions;
-    private Long totalSessions;
-    private Long completedSessions;
-    private Double averageScore;
+
+    private Long totalAnswers;
+
+    private Double averageInterviewScore;
+
+    private Double highestScore;
+
+    private Double lowestScore;
+
+    private Integer resumeAtsScore;
+
+    private String aiInsight;
 }

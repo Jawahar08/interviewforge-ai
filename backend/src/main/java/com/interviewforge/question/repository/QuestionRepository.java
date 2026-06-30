@@ -11,5 +11,6 @@ import com.interviewforge.question.entity.Question;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> findByInterviewId(Long interviewId);
+    long count();
 
 }

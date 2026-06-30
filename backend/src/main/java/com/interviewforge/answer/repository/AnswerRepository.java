@@ -10,4 +10,5 @@ import com.interviewforge.session.entity.InterviewSession;
 public interface AnswerRepository
         extends JpaRepository<Answer, Long> {
                 List<Answer> findBySession(InterviewSession session);
+                long count();
 }
