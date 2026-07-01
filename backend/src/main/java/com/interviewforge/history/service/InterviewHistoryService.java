@@ -1,7 +1,6 @@
 package com.interviewforge.history.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -12,27 +11,36 @@ import com.interviewforge.result.repository.InterviewResultRepository;
 @Service
 public class InterviewHistoryService {
 
-    private final InterviewResultRepository resultRepository;
+    private final InterviewResultRepository repository;
 
     public InterviewHistoryService(
-            InterviewResultRepository resultRepository) {
+            InterviewResultRepository repository) {
 
-        this.resultRepository = resultRepository;
+        this.repository = repository;
     }
 
     public List<InterviewHistoryResponse> getHistory() {
 
-        List<InterviewResult> results =
-                resultRepository.findAll();
-
-        return results.stream()
-                .map(result ->
-                        new InterviewHistoryResponse(
-                                result.getSession().getId(),
-                                result.getSession()
-                                        .getStatus()
-                                        .name(),
-                                result.getScore()))
-                .collect(Collectors.toList());
+        return repository.findAllByOrderByIdDesc()
+                .stream()
+                .map(this::convert)
+                .toList();
     }
+
+    private InterviewHistoryResponse convert(
+        InterviewResult result) {
+
+    return InterviewHistoryResponse.builder()
+            .id(result.getId())
+            .company(result.getSession()
+                    .getInterview()
+                    .getTitle())
+            .role(result.getSession()
+                    .getInterview()
+                    .getRole())
+            .score(result.getScore())
+            .feedback(result.getFeedback())
+            .createdAt(result.getCreatedAt().toString())
+            .build();
+}
 }

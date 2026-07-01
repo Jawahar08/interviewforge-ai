@@ -1,5 +1,6 @@
 package com.interviewforge.result.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,8 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import com.interviewforge.result.entity.InterviewResult;
 import com.interviewforge.session.entity.InterviewSession;
 
+
+
 public interface InterviewResultRepository
         extends JpaRepository<InterviewResult, Long> {
+                List<InterviewResult> findAllByOrderByIdDesc();
 
     Optional<InterviewResult> findBySession(InterviewSession session);
 

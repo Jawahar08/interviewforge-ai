@@ -10,23 +10,29 @@ import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.history.dto.InterviewHistoryResponse;
 import com.interviewforge.history.service.InterviewHistoryService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1/history")
+@Tag(
+        name = "Interview History",
+        description = "Interview history APIs"
+)
 public class InterviewHistoryController {
 
-    private final InterviewHistoryService historyService;
+    private final InterviewHistoryService service;
 
     public InterviewHistoryController(
-            InterviewHistoryService historyService) {
+            InterviewHistoryService service) {
 
-        this.historyService = historyService;
+        this.service = service;
     }
 
     @GetMapping
     public ApiResponse<List<InterviewHistoryResponse>> getHistory() {
 
         return ApiResponse.success(
-                historyService.getHistory(),
+                service.getHistory(),
                 "Interview history retrieved successfully"
         );
     }
