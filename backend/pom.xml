@@ -68,6 +68,11 @@
     <version>1.18.38</version>
     <scope>provided</scope>
 </dependency>
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <optional>true</optional>
+</dependency>
 
     <dependency>
         <groupId>io.jsonwebtoken</groupId>
@@ -118,6 +123,16 @@
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.apache.pdfbox</groupId>
+    <artifactId>pdfbox</artifactId>
+    <version>3.0.2</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>5.2.5</version>
 </dependency>
 
 </dependencies>

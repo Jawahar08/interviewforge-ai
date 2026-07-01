@@ -1,5 +1,7 @@
 package com.interviewforge.resume.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,13 +15,17 @@ public class ResumeAnalysisResponse {
 
     private Integer atsScore;
 
-    private String summary;
+    private List<String> strengths;
 
-    private String strengths;
+    private List<String> weaknesses;
 
-    private String weaknesses;
+    private List<String> missingSkills;
 
-    private String missingSkills;
+    private List<String> improvements;
 
-    private String suggestions;
+    private List<String> suggestedProjects;
+
+    private List<String> interviewQuestions;
+
+    private List<String> learningResources;
 }
