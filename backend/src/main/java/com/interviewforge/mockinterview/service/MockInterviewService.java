@@ -9,6 +9,7 @@ import com.interviewforge.ai.gemini.GeminiService;
 import com.interviewforge.mockinterview.dto.AnswerRequest;
 import com.interviewforge.mockinterview.dto.InterviewFeedbackResponse;
 import com.interviewforge.mockinterview.dto.InterviewQuestionResponse;
+import com.interviewforge.mockinterview.dto.InterviewReportResponse;
 import com.interviewforge.mockinterview.dto.StartInterviewRequest;
 import com.interviewforge.mockinterview.entity.MockInterviewSession;
 import com.interviewforge.mockinterview.repository.MockInterviewSessionRepository;
@@ -145,6 +146,60 @@ Total Questions:
     repository.save(session);
 
     return result;
+}
+public InterviewReportResponse generateFinalReport(
+        String sessionId) throws Exception {
+
+    MockInterviewSession session =
+            repository.findById(UUID.fromString(sessionId))
+                    .orElseThrow();
+
+    String prompt = """
+You are an expert technical interviewer.
+
+Analyze the complete interview.
+
+Return ONLY valid JSON.
+
+{
+  "overallScore":0,
+  "performance":"",
+  "recommendation":"",
+  "strengths":[],
+  "weaknesses":[],
+  "improvementPlan":[],
+  "learningResources":[]
+}
+
+Role:
+%s
+
+Answers:
+%s
+
+Scores:
+%s
+"""
+.formatted(
+        session.getRole(),
+        session.getAnswers(),
+        session.getScores());
+
+    String response = geminiService.generateContent(prompt);
+
+    response = response
+            .replace("```json", "")
+            .replace("```", "")
+            .trim();
+
+    int first = response.indexOf("{");
+    int last = response.lastIndexOf("}");
+
+    response = response.substring(first, last + 1);
+
+    return objectMapper.readValue(
+            response,
+            InterviewReportResponse.class);
 }
 
 }
