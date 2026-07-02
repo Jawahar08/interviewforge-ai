@@ -55,9 +55,11 @@ Return only the question.
 session.setId(UUID.randomUUID());
 session.setRole(request.getRole());
 session.setDifficulty(request.getDifficulty());
-session.setTotalQuestions(request.getNumberOfQuestions());
+session.setTotalQuestions(
+        request.getNumberOfQuestions());
 session.setCurrentQuestionIndex(1);
 session.setCurrentQuestion(question);
+session.getQuestions().add(question);
 session.setCompleted(false);
 session.setOverallScore(0);
 session.setStartedAt(java.time.LocalDateTime.now());
@@ -76,9 +78,25 @@ public InterviewFeedbackResponse submitAnswer(
         AnswerRequest request) throws Exception {
 
     MockInterviewSession session =
-            repository.findById(java.util.UUID.fromString(sessionId))
-                    .orElseThrow();
+        repository.findById(UUID.fromString(sessionId))
+                .orElseThrow();
 
+StringBuilder history = new StringBuilder();
+
+for (int i = 0; i < session.getAnswers().size(); i++) {
+
+    history.append("Question ")
+           .append(i + 1)
+           .append(":\n")
+           .append(session.getQuestions().get(i))
+           .append("\n\n");
+
+    history.append("Answer ")
+           .append(i + 1)
+           .append(":\n")
+           .append(session.getAnswers().get(i))
+           .append("\n\n");
+}
     String prompt = """
 You are an expert technical interviewer.
 
@@ -93,23 +111,36 @@ Return ONLY valid JSON.
   "completed":false
 }
 
-Question:
-%s
+Interview History:
 
-Candidate Answer:
 %s
 
 Current Question:
+
+%s
+
+Candidate Answer:
+
+%s
+
+Current Question Number:
+
 %d
 
 Total Questions:
+
 %d
 """
 .formatted(
-        session.getCurrentQuestion(),
-        request.getAnswer(),
-        session.getCurrentQuestionIndex(),
-        session.getTotalQuestions());
+    history.toString(),
+    session.getCurrentQuestion(),
+    request.getAnswer(),
+    session.getCurrentQuestionIndex(),
+    session.getTotalQuestions());
+
+    System.out.println("========== PROMPT ==========");
+System.out.println(prompt);
+System.out.println("============================");
 
     String response =
             geminiService.generateContent(prompt);
@@ -130,9 +161,16 @@ Total Questions:
                     InterviewFeedbackResponse.class);
 
     session.getAnswers().add(request.getAnswer());
+
+
     session.getScores().add(result.getScore());
 
     session.setCurrentQuestion(result.getNextQuestion());
+    if (result.getNextQuestion() != null &&
+    !result.getNextQuestion().isBlank()) {
+
+    session.getQuestions().add(result.getNextQuestion());
+}
 
     session.setCurrentQuestionIndex(
             session.getCurrentQuestionIndex() + 1);

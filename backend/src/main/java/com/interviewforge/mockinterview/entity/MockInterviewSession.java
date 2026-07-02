@@ -39,10 +39,18 @@ public class MockInterviewSession {
     private Integer currentQuestionIndex;
 
     private Integer overallScore;
-
+    
     @Lob
     @Column(columnDefinition = "TEXT")
     private String currentQuestion;
+    @ElementCollection(fetch = FetchType.EAGER)
+@CollectionTable(
+        name = "mock_interview_questions",
+        joinColumns = @JoinColumn(name = "session_id")
+)
+@Column(name = "question", columnDefinition = "TEXT")
+@Builder.Default
+private List<String> questions = new ArrayList<>();
 
     private Boolean completed;
 
