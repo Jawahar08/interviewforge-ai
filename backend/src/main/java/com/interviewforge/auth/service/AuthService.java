@@ -16,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-    private final JwtService jwtService;
 
+    private final JwtService jwtService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -36,47 +36,48 @@ public class AuthService {
                 .role("USER")
                 .build();
 
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
-        return AuthResponse.builder()
-            .email(user.getEmail())
-            .role(user.getRole())
-            .message("User registered successfully")
-            .token(null)
-            .build();
-    }
-    public AuthResponse login(LoginRequest request) {
-
-    System.out.println("STEP 1");
-
-    User user = userRepository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new UserNotFoundByEmailException(request.getEmail()));
-
-    System.out.println("STEP 2");
-
-    boolean match =
-        passwordEncoder.matches(
-                request.getPassword(),
-                user.getPasswordHash()
+        String token = jwtService.generateToken(
+                savedUser.getEmail()
         );
 
-System.out.println("PASSWORD MATCH = " + match);
+        return AuthResponse.builder()
+                .email(savedUser.getEmail())
+                .role(savedUser.getRole())
+                .token(token)
+                .message("User registered successfully")
+                .build();
+    }
 
-if (!match) {
-    throw new RuntimeException("Invalid credentials");
-}
+    public AuthResponse login(LoginRequest request) {
 
-    System.out.println("STEP 3");
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(
+                        () -> new UserNotFoundByEmailException(
+                                request.getEmail()
+                        )
+                );
 
-    String token = jwtService.generateToken(user.getEmail());
+        boolean passwordMatches =
+                passwordEncoder.matches(
+                        request.getPassword(),
+                        user.getPasswordHash()
+                );
 
-    System.out.println("STEP 4");
+        if (!passwordMatches) {
+            throw new RuntimeException("Invalid credentials");
+        }
 
-    return AuthResponse.builder()
-            .email(user.getEmail())
-            .role(user.getRole())
-            .token(token)
-            .message("Login successful")
-            .build();
-}
+        String token = jwtService.generateToken(
+                user.getEmail()
+        );
+
+        return AuthResponse.builder()
+                .email(user.getEmail())
+                .role(user.getRole())
+                .token(token)
+                .message("Login successful")
+                .build();
+    }
 }
