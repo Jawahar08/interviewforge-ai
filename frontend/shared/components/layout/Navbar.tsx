@@ -5,6 +5,7 @@ import { BrainCircuit, Menu } from "lucide-react";
 
 import { Container } from "./Container";
 import { GradientButton } from "../common/GradientButton";
+import { ROUTES } from "@/shared/constants/routes";
 
 const navItems = [
   { label: "Features", href: "#features" },
@@ -13,12 +14,12 @@ const navItems = [
   { label: "Mock Interview", href: "#mock-interview" },
 ];
 
-export function Navbar() {
+export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#050816]/70 backdrop-blur-xl">
       <Container className="flex h-18 items-center justify-between">
         <Link
-          href="/"
+          href={ROUTES.HOME}
           className="flex items-center gap-3"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-blue-600 shadow-lg shadow-violet-500/20">
@@ -50,15 +51,17 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 sm:flex">
           <Link
-            href="/login"
+            href={ROUTES.LOGIN}
             className="px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
           >
             Sign In
           </Link>
 
-          <GradientButton className="px-4 py-2 text-sm">
-            Get Started
-          </GradientButton>
+          <Link href={ROUTES.REGISTER}>
+            <GradientButton className="px-4 py-2 text-sm">
+              Get Started
+            </GradientButton>
+          </Link>
         </div>
 
         <button
