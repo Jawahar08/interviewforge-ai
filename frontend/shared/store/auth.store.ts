@@ -3,12 +3,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface AuthUser {
+export interface AuthUser {
   email: string;
   role: string;
 }
 
-interface AuthState {
+export interface AuthState {
   user: AuthUser | null;
   token: string | null;
   isAuthenticated: boolean;
