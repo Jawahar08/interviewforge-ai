@@ -1,255 +1,173 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import {
   ArrowLeft,
   BrainCircuit,
   Clock3,
-  Loader2,
   MessageSquareText,
   ShieldCheck,
   Sparkles,
   Target,
 } from "lucide-react";
 
-import { useInterviewStore } from "@/features/interview/store/interview.store";
-
-const roleLabels: Record<string, string> = {
-  FULL_STACK_DEVELOPER: "Full Stack Developer",
-  BACKEND_DEVELOPER: "Backend Developer",
-  FRONTEND_DEVELOPER: "Frontend Developer",
-  JAVA_DEVELOPER: "Java Developer",
-  SOFTWARE_ENGINEER: "Software Engineer",
-  DEVOPS_ENGINEER: "DevOps Engineer",
-};
-
-const typeLabels: Record<string, string> = {
-  TECHNICAL: "Technical",
-  BEHAVIORAL: "Behavioral",
-  MIXED: "Mixed",
-};
-
-const difficultyLabels: Record<string, string> = {
-  EASY: "Easy",
-  MEDIUM: "Medium",
-  HARD: "Hard",
+type SessionConfig = {
+  role?: string;
+  interviewType?: string;
+  difficulty?: string;
+  duration?: number;
 };
 
 export default function InterviewSessionPage() {
-  const params = useParams<{
-    sessionId: string;
-  }>();
-
+  const params = useParams<{ sessionId: string }>();
   const router = useRouter();
 
-  const [hasHydrated, setHasHydrated] =
-    useState(false);
+  const sessionId = params.sessionId;
 
-  const interviewConfig = useInterviewStore(
-    (state) => state.interviewConfig
-  );
+  let config: SessionConfig = {};
 
-  useEffect(() => {
-    setHasHydrated(true);
-  }, []);
+  if (typeof window !== "undefined") {
+    try {
+      const storedConfig = sessionStorage.getItem(
+        `interview-session-${sessionId}`
+      );
 
-  if (!hasHydrated) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-[#050816]">
-        <div className="flex items-center gap-3 text-sm text-slate-400">
-          <Loader2 className="h-5 w-5 animate-spin text-violet-400" />
-          Loading interview session...
-        </div>
-      </main>
-    );
+      if (storedConfig) {
+        config = JSON.parse(storedConfig) as SessionConfig;
+      }
+    } catch {
+      config = {};
+    }
   }
 
-  if (
-    !interviewConfig ||
-    interviewConfig.sessionId !== params.sessionId
-  ) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-[#050816] px-4">
-        <div className="w-full max-w-lg rounded-3xl border border-white/[0.07] bg-white/[0.025] p-8 text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-violet-500/20 bg-violet-500/10">
-            <BrainCircuit className="h-7 w-7 text-violet-300" />
-          </div>
+  const role = config.role ?? "Full Stack Developer";
+  const interviewType = config.interviewType ?? "Technical";
+  const difficulty = config.difficulty ?? "Medium";
+  const duration = config.duration ?? 30;
 
-          <h1 className="mt-5 text-2xl font-bold text-white">
-            Session not available
-          </h1>
+  const startLiveInterview = () => {
+    router.push(`/interview/session/${sessionId}/live`);
+  };
 
-          <p className="mt-3 text-sm leading-6 text-slate-400">
-            This interview configuration could not be
-            found. Create a new session to continue.
-          </p>
-
-          <button
-            type="button"
-            onClick={() => router.push("/interview")}
-            className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 px-5 py-3 text-sm font-semibold text-white"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to setup
-          </button>
-        </div>
-      </main>
-    );
-  }
-
-  const {
-    role,
-    type,
-    difficulty,
-    duration,
-  } = interviewConfig;
+  const sessionDetails = [
+    {
+      label: "Target Role",
+      value: role,
+      icon: Target,
+    },
+    {
+      label: "Interview Type",
+      value: interviewType,
+      icon: MessageSquareText,
+    },
+    {
+      label: "Difficulty",
+      value: difficulty,
+      icon: BrainCircuit,
+    },
+    {
+      label: "Duration",
+      value: `${duration} minutes`,
+      icon: Clock3,
+    },
+  ];
 
   return (
-    <main className="min-h-screen bg-[#050816] text-white">
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-violet-600/10 blur-[130px]" />
-
-        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-blue-600/10 blur-[130px]" />
-      </div>
-
-      <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-6 lg:px-8">
-        <header className="flex items-center justify-between">
-          <button
-            type="button"
-            onClick={() => router.push("/interview")}
-            className="inline-flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-2.5 text-sm text-slate-400 transition-colors hover:bg-white/[0.05] hover:text-white"
+    <main className="min-h-screen bg-[#050816] px-6 py-8 text-white">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex items-center justify-between">
+          <Link
+            href="/interview"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-400 transition hover:border-violet-500/30 hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             Exit session
-          </button>
+          </Link>
 
-          <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-300">
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-xs font-medium text-emerald-400">
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
             Session ready
           </div>
-        </header>
+        </div>
 
-        <section className="flex flex-1 items-center justify-center py-12">
-          <div className="w-full">
-            <div className="mx-auto max-w-3xl text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/20 bg-violet-500/10 shadow-[0_0_40px_rgba(139,92,246,0.12)]">
-                <BrainCircuit className="h-8 w-8 text-violet-300" />
-              </div>
+        <section className="mx-auto mt-16 max-w-4xl text-center">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/20 bg-violet-500/10 shadow-2xl shadow-violet-500/10">
+            <BrainCircuit className="h-8 w-8 text-violet-300" />
+          </div>
 
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-3 py-1.5 text-xs text-slate-400">
-                <Sparkles className="h-3.5 w-3.5 text-violet-300" />
-                InterviewForge AI
-              </div>
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-slate-400">
+            <Sparkles className="h-4 w-4 text-violet-400" />
+            InterviewForge AI
+          </div>
 
-              <h1 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-                Your interview is
-                <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-                  {" "}
-                  ready to begin
-                </span>
-              </h1>
+          <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
+            Your interview is{" "}
+            <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
+              ready to begin
+            </span>
+          </h1>
 
-              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
-                Review your configuration before
-                entering the live interview experience.
-              </p>
-            </div>
+          <p className="mt-5 text-base text-slate-400">
+            Review your configuration before entering the live interview
+            experience.
+          </p>
+        </section>
 
-            <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <SessionDetailCard
-                icon={Target}
-                label="Target role"
-                value={
-                  roleLabels[role] ?? role
-                }
-              />
+        <section className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {sessionDetails.map((item) => {
+            const Icon = item.icon;
 
-              <SessionDetailCard
-                icon={MessageSquareText}
-                label="Interview type"
-                value={
-                  typeLabels[type] ?? type
-                }
-              />
-
-              <SessionDetailCard
-                icon={BrainCircuit}
-                label="Difficulty"
-                value={
-                  difficultyLabels[difficulty] ??
-                  difficulty
-                }
-              />
-
-              <SessionDetailCard
-                icon={Clock3}
-                label="Duration"
-                value={`${duration} minutes`}
-              />
-            </div>
-
-            <div className="mx-auto mt-8 max-w-4xl rounded-3xl border border-white/[0.07] bg-white/[0.025] p-6 sm:p-8">
-              <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
-                <div>
-                  <div className="flex items-center gap-2 text-sm font-semibold text-white">
-                    <ShieldCheck className="h-5 w-5 text-violet-300" />
-                    Before you begin
-                  </div>
-
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
-                    The live AI question engine will be
-                    connected in the backend integration
-                    phase. Your session configuration and
-                    routing flow are now ready.
-                  </p>
+            return (
+              <article
+                key={item.label}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-violet-500/20 bg-violet-500/10">
+                  <Icon className="h-5 w-5 text-violet-300" />
                 </div>
 
-                <button
-                  type="button"
-                  disabled
-                  className="inline-flex min-h-12 cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 px-6 py-3 text-sm font-semibold text-white opacity-60"
-                >
-                  <BrainCircuit className="h-4 w-4" />
-                  Begin AI Interview
-                </button>
-              </div>
-            </div>
+                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
+                  {item.label}
+                </p>
 
-            <p className="mt-5 text-center text-xs text-slate-600">
-              Session ID: {params.sessionId}
-            </p>
-          </div>
+                <p className="mt-2 text-sm font-semibold text-slate-100">
+                  {item.value}
+                </p>
+              </article>
+            );
+          })}
         </section>
+
+        <section className="mx-auto mt-8 flex max-w-4xl flex-col gap-6 rounded-3xl border border-white/10 bg-white/[0.03] p-7 md:flex-row md:items-center md:justify-between">
+          <div className="flex gap-4">
+            <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-violet-300" />
+
+            <div>
+              <h2 className="font-semibold text-white">Before you begin</h2>
+
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
+                Your live AI interview workspace is ready. Questions, answer
+                capture, progress tracking, and evaluation will run inside the
+                live session.
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={startLiveInterview}
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-violet-500/20 transition hover:scale-[1.02]"
+          >
+            <BrainCircuit className="h-5 w-5" />
+            Begin AI Interview
+          </button>
+        </section>
+
+        <p className="mt-6 text-center text-xs text-slate-600">
+          Session ID: {sessionId}
+        </p>
       </div>
     </main>
-  );
-}
-
-interface SessionDetailCardProps {
-  icon: React.ElementType;
-  label: string;
-  value: string;
-}
-
-function SessionDetailCard({
-  icon: Icon,
-  label,
-  value,
-}: SessionDetailCardProps) {
-  return (
-    <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4">
-      <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-violet-500/20 bg-violet-500/10">
-        <Icon className="h-4 w-4 text-violet-300" />
-      </div>
-
-      <p className="mt-4 text-xs font-medium uppercase tracking-[0.14em] text-slate-600">
-        {label}
-      </p>
-
-      <p className="mt-1.5 text-sm font-semibold leading-5 text-slate-200">
-        {value}
-      </p>
-    </div>
   );
 }
