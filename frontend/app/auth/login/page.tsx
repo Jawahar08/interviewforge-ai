@@ -19,6 +19,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 
+import axios from "axios";
+
+import { useRouter } from "next/navigation";
+
+import { authApi } from "@/features/auth/api/auth.api";
+import { useAuthStore } from "@/shared/store/auth.store";
+
 import {
   loginSchema,
   type LoginFormData,
@@ -26,6 +33,11 @@ import {
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+const setAuth = useAuthStore((state) => state.setAuth);
+
+const [serverError, setServerError] = useState<string | null>(null);
 
 const {
   register,
@@ -39,12 +51,47 @@ const {
   },
 });
 
-const onSubmit = async (data: LoginFormData) => {
-  console.log("Validated login data:", data);
+const onSubmit = async (values: LoginFormData) => {
+  try {
+    setServerError(null);
 
-  await new Promise((resolve) => {
-    setTimeout(resolve, 1000);
-  });
+    const response = await authApi.login({
+      email: values.email.trim().toLowerCase(),
+      password: values.password,
+    });
+
+    if (!response.token) {
+      throw new Error("Authentication token was not returned");
+    }
+
+    setAuth(
+      {
+        email: response.email,
+        role: response.role,
+      },
+      response.token
+    );
+
+    router.push("/dashboard");
+  } catch (error: unknown) {
+    console.error("Login failed:", error);
+
+    if (axios.isAxiosError(error)) {
+      const message =
+        error.response?.data?.message ??
+        "Unable to sign in. Please check your credentials.";
+
+      setServerError(message);
+      return;
+    }
+
+    if (error instanceof Error) {
+      setServerError(error.message);
+      return;
+    }
+
+    setServerError("Unable to sign in. Please try again.");
+  }
 };
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
@@ -247,6 +294,14 @@ const onSubmit = async (data: LoginFormData) => {
   disabled={isSubmitting}
   className="group h-12 w-full bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 text-white shadow-lg shadow-violet-500/20 transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
 >
+  {serverError && (
+  <div
+    role="alert"
+    className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300"
+  >
+    {serverError}
+  </div>
+)}
   {isSubmitting ? (
     <>
       <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />

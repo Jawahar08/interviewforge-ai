@@ -10,50 +10,20 @@ import {
   UserRound,
 } from "lucide-react";
 
-interface StoredUser {
-  email?: string;
-  role?: string;
-  name?: string;
-  fullName?: string;
-}
-
-function getStoredUser(): StoredUser | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  const possibleKeys = [
-    "user",
-    "auth-user",
-    "authUser",
-  ];
-
-  for (const key of possibleKeys) {
-    const value = localStorage.getItem(key);
-
-    if (!value) {
-      continue;
-    }
-
-    try {
-      return JSON.parse(value) as StoredUser;
-    } catch {
-      // Ignore malformed storage values.
-    }
-  }
-
-  return null;
-}
+import { useAuthStore } from "@/shared/store/auth.store";
 
 export function UserMenu() {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState<StoredUser | null>(null);
+  const [hasHydrated, setHasHydrated] = useState(false);
+
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
 
   useEffect(() => {
-    setUser(getStoredUser());
+    setHasHydrated(true);
   }, []);
 
   useEffect(() => {
@@ -69,31 +39,32 @@ export function UserMenu() {
     document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener(
+        "mousedown",
+        handleOutsideClick
+      );
     };
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("auth-token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("auth-user");
-    localStorage.removeItem("authUser");
-
+    logout();
     setOpen(false);
 
     router.replace("/auth/login");
     router.refresh();
   };
 
-  const displayName =
-    user?.name ||
-    user?.fullName ||
-    user?.email?.split("@")[0] ||
-    "InterviewForge User";
+  const displayName = hasHydrated
+    ? user?.email?.split("@")[0] || "InterviewForge User"
+    : "InterviewForge User";
 
-  const email = user?.email || "Signed in";
+  const email = hasHydrated
+    ? user?.email || "Signed in"
+    : "Signed in";
+
+  const role = hasHydrated
+    ? user?.role || "USER"
+    : "USER";
 
   const initials = displayName
     .split(" ")
@@ -114,11 +85,11 @@ export function UserMenu() {
         </div>
 
         <div className="hidden min-w-0 text-left sm:block">
-          <p className="max-w-36 truncate text-sm font-medium text-white">
+          <p className="max-w-40 truncate text-sm font-medium text-white">
             {displayName}
           </p>
 
-          <p className="max-w-36 truncate text-xs text-slate-500">
+          <p className="max-w-40 truncate text-xs text-slate-500">
             {email}
           </p>
         </div>
@@ -140,6 +111,10 @@ export function UserMenu() {
             <p className="mt-1 truncate text-xs text-slate-500">
               {email}
             </p>
+
+            <span className="mt-2 inline-flex rounded-full border border-violet-400/15 bg-violet-500/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-violet-300">
+              {role}
+            </span>
           </div>
 
           <div className="py-2">
