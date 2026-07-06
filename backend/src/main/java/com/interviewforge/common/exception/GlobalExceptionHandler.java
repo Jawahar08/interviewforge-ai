@@ -1,39 +1,50 @@
 package com.interviewforge.common.exception;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationException(
-            MethodArgumentNotValidException ex) {
-
-        Map<String, Object> errors = new HashMap<>();
-
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-                errors.put(error.getField(), error.getDefaultMessage()));
-
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleEmailAlreadyExists(
+            EmailAlreadyExistsException ex
+    ) {
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(errors);
+                .status(HttpStatus.CONFLICT)
+                .body(Map.of(
+                        "success", false,
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(UserNotFoundByEmailException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNotFound(
+            UserNotFoundByEmailException ex
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Map.of(
+                        "success", false,
+                        "message", ex.getMessage()
+                ));
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, String>> handleException(Exception ex) {
-
-        Map<String, String> error = new HashMap<>();
-        error.put("message", ex.getMessage());
+    public ResponseEntity<Map<String, Object>> handleException(
+            Exception ex
+    ) {
+        ex.printStackTrace();
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(error);
+                .body(Map.of(
+                        "success", false,
+                        "message", "An unexpected server error occurred"
+                ));
     }
 }

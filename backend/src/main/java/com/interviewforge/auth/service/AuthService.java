@@ -8,6 +8,8 @@ import com.interviewforge.auth.dto.LoginRequest;
 import com.interviewforge.auth.dto.RegisterRequest;
 import com.interviewforge.auth.entity.User;
 import com.interviewforge.auth.repository.UserRepository;
+import com.interviewforge.common.exception.EmailAlreadyExistsException;
+import com.interviewforge.common.exception.InvalidCredentialsException;
 import com.interviewforge.common.exception.UserNotFoundByEmailException;
 import com.interviewforge.security.JwtService;
 
@@ -23,9 +25,9 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request) {
 
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
-        }
+       if (userRepository.existsByEmail(request.getEmail())) {
+    throw new EmailAlreadyExistsException(request.getEmail());
+}
 
         User user = User.builder()
                 .fullName(request.getName())
@@ -66,7 +68,7 @@ public class AuthService {
                 );
 
         if (!passwordMatches) {
-            throw new RuntimeException("Invalid credentials");
+           throw new InvalidCredentialsException();
         }
 
         String token = jwtService.generateToken(
