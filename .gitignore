@@ -35,3 +35,5 @@ backend/.jdk/
 .env
 application-local.properties
 >>>>>>> acc0bf1 (chore: add docker compose configuration)
+
+backend/effective-pom.xml
