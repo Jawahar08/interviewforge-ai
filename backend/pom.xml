@@ -68,11 +68,7 @@
     <version>1.18.46</version>
     <scope>provided</scope>
 </dependency>
-<dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <optional>true</optional>
-</dependency>
+
 
     <dependency>
         <groupId>io.jsonwebtoken</groupId>
@@ -124,11 +120,7 @@
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
 </dependency>
-<dependency>
-    <groupId>org.apache.pdfbox</groupId>
-    <artifactId>pdfbox</artifactId>
-    <version>3.0.2</version>
-</dependency>
+
 <dependency>
     <groupId>org.apache.poi</groupId>
     <artifactId>poi-ooxml</artifactId>
@@ -140,12 +132,18 @@
     <plugins>
 
         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+
+        <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.15.0</version>
+
             <configuration>
-                <source>21</source>
-                <target>21</target>
+                <release>23</release>
+
                 <annotationProcessorPaths>
                     <path>
                         <groupId>org.projectlombok</groupId>
@@ -154,11 +152,6 @@
                     </path>
                 </annotationProcessorPaths>
             </configuration>
-        </plugin>
-
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
         </plugin>
 
     </plugins>

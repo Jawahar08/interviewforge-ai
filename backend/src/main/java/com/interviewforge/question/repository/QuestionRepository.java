@@ -3,14 +3,17 @@ package com.interviewforge.question.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.interviewforge.question.entity.Question;
 
-@Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface QuestionRepository
+        extends JpaRepository<Question, Long> {
 
-    List<Question> findByInterviewId(Long interviewId);
-    long count();
+    List<Question> findByInterviewIdOrderByIdAsc(
+            Long interviewId
+    );
 
+    long countByInterviewId(
+            Long interviewId
+    );
 }
