@@ -2,48 +2,51 @@ import { apiClient } from "@/lib/api/client";
 
 import type {
   ApiResponse,
-  CreateInterviewRequest,
-  CreateInterviewResponse,
-  InterviewSession,
+  InterviewDifficulty,
+  InterviewRole,
 } from "@/features/interview/types/interview.types";
 
+export interface CreateBackendInterviewRequest {
+  title: string;
+  role: InterviewRole;
+  difficulty: InterviewDifficulty;
+}
+
+export interface BackendInterview {
+  id: number;
+  title: string;
+  role: string;
+  difficulty: string;
+  createdAt: string;
+}
+
 export const interviewApi = {
-  createSession: async (
-    request: CreateInterviewRequest
-  ): Promise<CreateInterviewResponse> => {
-    const response =
-      await apiClient.post<
-        ApiResponse<CreateInterviewResponse>
-      >(
-        "/interviews",
-        request
-      );
+  createInterview: async (
+    request: CreateBackendInterviewRequest
+  ): Promise<BackendInterview> => {
+    const response = await apiClient.post<
+      ApiResponse<BackendInterview>
+    >("/interviews", request);
 
     return response.data.data;
   },
 
-  getSessionById: async (
-    sessionId: string
-  ): Promise<InterviewSession> => {
-    const response =
-      await apiClient.get<
-        ApiResponse<InterviewSession>
-      >(
-        `/interviews/${sessionId}`
-      );
+  getInterviewById: async (
+    interviewId: number
+  ): Promise<BackendInterview> => {
+    const response = await apiClient.get<
+      ApiResponse<BackendInterview>
+    >(`/interviews/${interviewId}`);
 
     return response.data.data;
   },
 
-  getMySessions: async (): Promise<
-    InterviewSession[]
+  getMyInterviews: async (): Promise<
+    BackendInterview[]
   > => {
-    const response =
-      await apiClient.get<
-        ApiResponse<InterviewSession[]>
-      >(
-        "/interviews"
-      );
+    const response = await apiClient.get<
+      ApiResponse<BackendInterview[]>
+    >("/interviews");
 
     return response.data.data;
   },

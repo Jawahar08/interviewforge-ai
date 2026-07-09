@@ -7,12 +7,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(
+            JwtAuthenticationFilter jwtAuthenticationFilter
+    ) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(
@@ -23,20 +32,34 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(
                 corsConfigurationSource()
             ))
+
             .csrf(csrf -> csrf.disable())
+
             .sessionManagement(session ->
                 session.sessionCreationPolicy(
                     SessionCreationPolicy.STATELESS
                 )
             )
+
             .authorizeHttpRequests(auth ->
                 auth
                     .requestMatchers(
                         "/api/v1/auth/**",
                         "/swagger-ui/**",
+                        "/swagger-ui.html",
                         "/v3/api-docs/**"
                     ).permitAll()
+
+                    .requestMatchers(
+                        "/api/v1/sessions/**"
+                    ).authenticated()
+
                     .anyRequest().authenticated()
+            )
+
+            .addFilterBefore(
+                jwtAuthenticationFilter,
+                UsernamePasswordAuthenticationFilter.class
             );
 
         return http.build();
@@ -49,7 +72,9 @@ public class SecurityConfig {
                 new CorsConfiguration();
 
         configuration.setAllowedOrigins(
-            List.of("http://localhost:3000")
+            List.of(
+                "http://localhost:3000"
+            )
         );
 
         configuration.setAllowedMethods(
@@ -64,7 +89,19 @@ public class SecurityConfig {
         );
 
         configuration.setAllowedHeaders(
-            List.of("*")
+            List.of(
+                "Authorization",
+                "Content-Type",
+                "Accept",
+                "Origin",
+                "X-Requested-With"
+            )
+        );
+
+        configuration.setExposedHeaders(
+            List.of(
+                "Authorization"
+            )
         );
 
         configuration.setAllowCredentials(true);

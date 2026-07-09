@@ -19,7 +19,8 @@ import { DifficultySelector } from "@/features/interview/components/DifficultySe
 import { DurationSelector } from "@/features/interview/components/DurationSelector";
 
 import { useInterviewStore } from "@/features/interview/store/interview.store";
-
+import { interviewApi } from "@/features/interview/api/interview.api";
+import { sessionApi } from "@/features/interview/api/interview-session.api";
 import type {
   InterviewDifficulty,
   InterviewDuration,
@@ -92,35 +93,58 @@ export function InterviewSetupForm() {
   const duration = watch("duration");
 
   const onSubmit = async (
-    values: InterviewSetupFormValues
-  ) => {
-    try {
-      setSubmissionError(null);
+  values: InterviewSetupFormValues
+) => {
+  try {
+    setSubmissionError(null);
 
-      const sessionId = crypto.randomUUID();
-
-      setInterviewConfig({
-        sessionId,
+    const interview =
+      await interviewApi.createInterview({
+        title: `${values.role} ${values.type} Interview`,
         role: values.role,
-        type: values.type,
         difficulty: values.difficulty,
-        duration: values.duration,
       });
 
-      router.push(
-        `/interview/session/${sessionId}`
-      );
-    } catch (error) {
-      console.error(
-        "Failed to prepare interview:",
-        error
+    const session =
+      await sessionApi.startSession(
+        interview.id
       );
 
-      setSubmissionError(
-        "Unable to prepare the interview session. Please try again."
-      );
-    }
-  };
+    const sessionId =
+      String(session.id);
+
+    setInterviewConfig({
+      sessionId,
+      role: values.role,
+      type: values.type,
+      difficulty: values.difficulty,
+      duration: values.duration,
+    });
+
+    sessionStorage.setItem(
+      `interview-session-${sessionId}`,
+      JSON.stringify({
+        role: values.role,
+        interviewType: values.type,
+        difficulty: values.difficulty,
+        duration: values.duration,
+      })
+    );
+
+    router.push(
+      `/interview/session/${sessionId}`
+    );
+  } catch (error) {
+    console.error(
+      "Failed to prepare interview:",
+      error
+    );
+
+    setSubmissionError(
+      "Unable to prepare the interview session. Please try again."
+    );
+  }
+};
 
   return (
     <form

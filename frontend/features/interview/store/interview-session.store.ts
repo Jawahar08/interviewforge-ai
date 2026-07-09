@@ -3,229 +3,121 @@
 import { create } from "zustand";
 
 import type {
-  InterviewQuestion,
-  InterviewSessionConfig,
-  InterviewSessionState,
-} from "../types/interview-session.types";
+  SessionQuestion,
+  SessionQuestionsResponse,
+} from "@/features/interview/types/session-question.types";
+
+interface InterviewSessionState {
+  sessionId: string | null;
+  interviewId: number | string | null;
+  status: string | null;
+
+  questions: SessionQuestion[];
+  currentQuestionIndex: number;
+
+  isLoading: boolean;
+  error: string | null;
+
+  setSessionQuestions: (
+    response: SessionQuestionsResponse
+  ) => void;
+
+  setLoading: (loading: boolean) => void;
+
+  setError: (error: string | null) => void;
+
+  nextQuestion: () => void;
+
+  previousQuestion: () => void;
+
+  goToQuestion: (index: number) => void;
+
+  resetSession: () => void;
+}
+
+const initialState = {
+  sessionId: null,
+  interviewId: null,
+  status: null,
+
+  questions: [],
+  currentQuestionIndex: 0,
+
+  isLoading: false,
+  error: null,
+};
 
 export const useInterviewSessionStore =
-  create<InterviewSessionState>((set, get) => ({
-    session: null,
+  create<InterviewSessionState>((set) => ({
+    ...initialState,
 
-    currentAnswer: "",
-
-    isSubmittingAnswer: false,
-
-    initializeSession: (
-      config: InterviewSessionConfig
-    ) => {
+    setSessionQuestions: (response) =>
       set({
-        session: {
-          sessionId: config.sessionId,
+        sessionId: response.sessionId,
+        interviewId: response.interviewId,
+        status: response.status,
+        questions: response.questions,
+        currentQuestionIndex: 0,
+        isLoading: false,
+        error: null,
+      }),
 
-          status: "READY",
-
-          targetRole: config.targetRole,
-          interviewType: config.interviewType,
-          difficulty: config.difficulty,
-          durationMinutes: config.durationMinutes,
-
-          currentQuestionIndex: 0,
-
-          questions: [],
-
-          startedAt: null,
-          completedAt: null,
-        },
-
-        currentAnswer: "",
-
-        isSubmittingAnswer: false,
-      });
-    },
-
-    startInterview: () => {
-      const { session } = get();
-
-      if (!session) {
-        return;
-      }
-
+    setLoading: (loading) =>
       set({
-        session: {
-          ...session,
+        isLoading: loading,
+      }),
 
-          status: "IN_PROGRESS",
-
-          startedAt:
-            session.startedAt ??
-            new Date().toISOString(),
-        },
-      });
-    },
-
-    setQuestions: (
-      questions: InterviewQuestion[]
-    ) => {
-      const { session } = get();
-
-      if (!session) {
-        return;
-      }
-
+    setError: (error) =>
       set({
-        session: {
-          ...session,
-          questions,
-        },
-      });
-    },
+        error,
+        isLoading: false,
+      }),
 
-    setCurrentAnswer: (
-      answer: string
-    ) => {
+    nextQuestion: () =>
+      set((state) => {
+        const lastIndex =
+          state.questions.length - 1;
+
+        if (
+          state.currentQuestionIndex >= lastIndex
+        ) {
+          return state;
+        }
+
+        return {
+          currentQuestionIndex:
+            state.currentQuestionIndex + 1,
+        };
+      }),
+
+    previousQuestion: () =>
+      set((state) => {
+        if (state.currentQuestionIndex <= 0) {
+          return state;
+        }
+
+        return {
+          currentQuestionIndex:
+            state.currentQuestionIndex - 1,
+        };
+      }),
+
+    goToQuestion: (index) =>
+      set((state) => {
+        if (
+          index < 0 ||
+          index >= state.questions.length
+        ) {
+          return state;
+        }
+
+        return {
+          currentQuestionIndex: index,
+        };
+      }),
+
+    resetSession: () =>
       set({
-        currentAnswer: answer,
-      });
-    },
-
-    submitCurrentAnswer: () => {
-      const {
-        session,
-        currentAnswer,
-      } = get();
-
-      if (!session) {
-        return;
-      }
-
-      const trimmedAnswer =
-        currentAnswer.trim();
-
-      if (!trimmedAnswer) {
-        return;
-      }
-
-      const currentQuestion =
-        session.questions[
-          session.currentQuestionIndex
-        ];
-
-      if (!currentQuestion) {
-        return;
-      }
-
-      set({
-        isSubmittingAnswer: true,
-      });
-
-      const updatedQuestions =
-        session.questions.map(
-          (question, index) => {
-            if (
-              index !==
-              session.currentQuestionIndex
-            ) {
-              return question;
-            }
-
-            return {
-              ...question,
-
-              answer: trimmedAnswer,
-
-              answeredAt:
-                new Date().toISOString(),
-            };
-          }
-        );
-
-      set({
-        session: {
-          ...session,
-
-          questions: updatedQuestions,
-        },
-
-        currentAnswer: "",
-
-        isSubmittingAnswer: false,
-      });
-    },
-
-    goToNextQuestion: () => {
-      const { session } = get();
-
-      if (!session) {
-        return;
-      }
-
-      const nextIndex =
-        session.currentQuestionIndex + 1;
-
-      if (
-        nextIndex >=
-        session.questions.length
-      ) {
-        return;
-      }
-
-      set({
-        session: {
-          ...session,
-
-          currentQuestionIndex: nextIndex,
-        },
-
-        currentAnswer: "",
-      });
-    },
-
-    completeInterview: () => {
-      const { session } = get();
-
-      if (!session) {
-        return;
-      }
-
-      set({
-        session: {
-          ...session,
-
-          status: "COMPLETED",
-
-          completedAt:
-            new Date().toISOString(),
-        },
-      });
-    },
-
-    abandonInterview: () => {
-      const { session } = get();
-
-      if (!session) {
-        return;
-      }
-
-      set({
-        session: {
-          ...session,
-
-          status: "ABANDONED",
-
-          completedAt:
-            new Date().toISOString(),
-        },
-      });
-    },
-
-    resetSession: () => {
-      set({
-        session: null,
-
-        currentAnswer: "",
-
-        isSubmittingAnswer: false,
-      });
-    },
+        ...initialState,
+      }),
   }));

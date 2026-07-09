@@ -9,139 +9,373 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import jakarta.annotation.PostConstruct;
+
 @Service
 public class GeminiService {
-    
-    
 
-   @Value("${gemini.api.key}")
-private String apiKey;
-     @PostConstruct
-    public void verifyKey() {
-        System.out.println("Loaded Gemini Key: " + apiKey.substring(0, 10) + "...");
-    }
-    
+    @Value("${gemini.api.key}")
+    private String apiKey;
 
     private final RestTemplate restTemplate;
 
-    public GeminiService(RestTemplate restTemplate) {
+    public GeminiService(
+            RestTemplate restTemplate
+    ) {
         this.restTemplate = restTemplate;
     }
 
-    public String generateContent(String prompt) {
+    @PostConstruct
+    public void verifyConfiguration() {
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new IllegalStateException(
+                    "Gemini API key is not configured"
+            );
+        }
+
+        System.out.println(
+                "Gemini API key configuration detected"
+        );
+    }
+
+    public String generateContent(
+            String prompt
+    ) {
+        if (prompt == null || prompt.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Gemini prompt cannot be empty"
+            );
+        }
 
         String url =
-"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="
-+ apiKey;
+                "https://generativelanguage.googleapis.com/"
+                + "v1beta/models/"
+                + "gemini-2.5-flash:"
+                + "generateContent?key="
+                + apiKey;
 
-        HttpHeaders headers = new HttpHeaders();
-headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpHeaders headers =
+                new HttpHeaders();
 
+        headers.setContentType(
+                MediaType.APPLICATION_JSON
+        );
 
-        Map<String, Object> requestBody = Map.of(
-    "contents",
-    List.of(
-        Map.of(
-            "parts",
-            List.of(
+        Map<String, Object> generationConfig =
                 Map.of(
-                    "text",
-                    prompt
-                )
-            )
-        )
-    )
-);
+                        "temperature", 0.2,
+                        "maxOutputTokens", 1024
+                );
+
+        Map<String, Object> requestBody =
+                Map.of(
+                        "contents",
+                        List.of(
+                                Map.of(
+                                        "role", "user",
+                                        "parts",
+                                        List.of(
+                                                Map.of(
+                                                        "text",
+                                                        prompt
+                                                )
+                                        )
+                                )
+                        ),
+                        "generationConfig",
+                        generationConfig
+                );
 
         HttpEntity<Map<String, Object>> request =
-                new HttpEntity<>(requestBody, headers);
+                new HttpEntity<>(
+                        requestBody,
+                        headers
+                );
 
         try {
-
             Map<?, ?> response =
                     restTemplate.postForObject(
                             url,
                             request,
-                            Map.class);
+                            Map.class
+                    );
 
-            List<?> candidates =
-                    (List<?>) response.get("candidates");
+            return extractText(response);
 
-            if (candidates == null || candidates.isEmpty()) {
-                return "No response from Gemini.";
-            }
-            Map<?, ?> candidate =
-        (Map<?, ?>) candidates.get(0);
+        } catch (HttpClientErrorException e) {
 
-Map<?, ?> content =
-        (Map<?, ?>) candidate.get("content");
+            System.err.println(
+                    "Gemini client error status: "
+                            + e.getStatusCode()
+            );
 
-List<?> parts =
-        (List<?>) content.get("parts");
+            System.err.println(
+                    "Gemini client error body: "
+                            + e.getResponseBodyAsString()
+            );
 
-Map<?, ?> firstPart =
-        (Map<?, ?>) parts.get(0);
+            throw new RuntimeException(
+                    buildGeminiErrorMessage(
+                            e.getStatusCode().value(),
+                            e.getResponseBodyAsString()
+                    ),
+                    e
+            );
 
-return (String) firstPart.get("text");
+        } catch (HttpServerErrorException e) {
+
+            System.err.println(
+                    "Gemini server error status: "
+                            + e.getStatusCode()
+            );
+
+            System.err.println(
+                    "Gemini server error body: "
+                            + e.getResponseBodyAsString()
+            );
+
+            throw new RuntimeException(
+                    "Gemini service is temporarily unavailable. "
+                            + "Status: "
+                            + e.getStatusCode().value(),
+                    e
+            );
+
+        } catch (RuntimeException e) {
+
+            System.err.println(
+                    "Gemini processing error: "
+                            + e.getMessage()
+            );
+
+            throw e;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            throw new RuntimeException(
+                    "Unexpected Gemini integration failure",
+                    e
+            );
+        }
+    }
+
+    private String extractText(
+            Map<?, ?> response
+    ) {
+        if (response == null) {
+            throw new RuntimeException(
+                    "Gemini returned an empty response"
+            );
         }
 
-            catch (HttpClientErrorException e) {
+        Object candidatesObject =
+                response.get("candidates");
 
-    System.out.println("STATUS CODE: " + e.getStatusCode());
-    System.out.println("RESPONSE BODY: " + e.getResponseBodyAsString());
+        if (!(candidatesObject instanceof List<?> candidates)
+                || candidates.isEmpty()) {
 
-    throw new RuntimeException(e.getResponseBodyAsString());
+            Object promptFeedback =
+                    response.get("promptFeedback");
 
-}
-catch (Exception e) {
+            throw new RuntimeException(
+                    "Gemini returned no candidates. "
+                            + "Prompt feedback: "
+                            + String.valueOf(promptFeedback)
+            );
+        }
 
-    e.printStackTrace();
+        Object firstCandidateObject =
+                candidates.get(0);
 
-    throw new RuntimeException(e.getMessage());
-}
+        if (!(firstCandidateObject
+                instanceof Map<?, ?> candidate)) {
+            throw new RuntimeException(
+                    "Gemini candidate format is invalid"
+            );
+        }
+
+        Object contentObject =
+                candidate.get("content");
+
+        if (!(contentObject
+                instanceof Map<?, ?> content)) {
+
+            Object finishReason =
+                    candidate.get("finishReason");
+
+            throw new RuntimeException(
+                    "Gemini response has no content. "
+                            + "Finish reason: "
+                            + String.valueOf(finishReason)
+            );
+        }
+
+        Object partsObject =
+                content.get("parts");
+
+        if (!(partsObject instanceof List<?> parts)
+                || parts.isEmpty()) {
+            throw new RuntimeException(
+                    "Gemini response contains no parts"
+            );
+        }
+
+        StringBuilder result =
+                new StringBuilder();
+
+        for (Object partObject : parts) {
+            if (partObject
+                    instanceof Map<?, ?> part) {
+
+                Object textObject =
+                        part.get("text");
+
+                if (textObject instanceof String text
+                        && !text.isBlank()) {
+
+                    if (!result.isEmpty()) {
+                        result.append("\n");
+                    }
+
+                    result.append(text.trim());
+                }
+            }
+        }
+
+        if (result.isEmpty()) {
+            throw new RuntimeException(
+                    "Gemini response contains no text"
+            );
+        }
+
+        return result.toString();
+    }
+
+    private String buildGeminiErrorMessage(
+            int statusCode,
+            String responseBody
+    ) {
+        if (statusCode == 429) {
+            return "Gemini API quota or rate limit exceeded";
+        }
+
+        if (statusCode == 403) {
+            return "Gemini API request forbidden. "
+                    + "Check API key permissions and API access";
+        }
+
+        if (statusCode == 401) {
+            return "Gemini API authentication failed";
+        }
+
+        if (statusCode == 400) {
+            return "Gemini rejected the request: "
+                    + responseBody;
+        }
+
+        if (statusCode == 404) {
+            return "Gemini model or endpoint was not found";
+        }
+
+        return "Gemini API request failed with status "
+                + statusCode
+                + ": "
+                + responseBody;
     }
 
     public String evaluateAnswer(
             String question,
             String expectedAnswer,
-            String userAnswer) {
+            String userAnswer
+    ) {
+        if (question == null
+                || question.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Question text is required "
+                            + "for evaluation"
+            );
+        }
+
+        if (userAnswer == null
+                || userAnswer.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Candidate answer is required "
+                            + "for evaluation"
+            );
+        }
+
+        String safeExpectedAnswer =
+                expectedAnswer == null
+                        || expectedAnswer.isBlank()
+                        ? "No reference answer is available. "
+                        + "Evaluate using technical correctness, "
+                        + "relevance, clarity, and completeness."
+                        : expectedAnswer;
 
         String prompt = """
-                Evaluate this interview answer.
+You are a strict technical interview evaluator.
 
-                Question:
-                %s
+Evaluate the candidate answer objectively.
 
-                Expected Answer:
-                %s
+QUESTION:
+%s
 
-                User Answer:
-                %s
+REFERENCE ANSWER:
+%s
 
-                Return:
-                1. Score out of 10
-                2. Strengths
-                3. Weaknesses
-                4. Suggestions
-                """
+CANDIDATE ANSWER:
+%s
+
+Evaluation criteria:
+- Technical correctness
+- Relevance to the question
+- Completeness
+- Clarity
+- Practical understanding
+
+Return ONLY in this exact format:
+
+Score: <number from 0 to 10>/10
+Strengths: <concise strengths>
+Weaknesses: <concise weaknesses>
+Suggestions: <specific improvement suggestions>
+
+Rules:
+- Do not include markdown.
+- Do not include JSON.
+- Do not add extra headings.
+- Always provide a numeric score.
+"""
                 .formatted(
                         question,
-                        expectedAnswer,
-                        userAnswer);
+                        safeExpectedAnswer,
+                        userAnswer
+                );
 
         return generateContent(prompt);
     }
-    public String analyzeResume(String resumeText) {
 
-    String prompt = """
-You are an expert ATS Resume Analyzer.
+    public String analyzeResume(
+            String resumeText
+    ) {
+        if (resumeText == null
+                || resumeText.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Resume text cannot be empty"
+            );
+        }
+
+        String prompt = """
+You are an expert ATS resume analyzer.
 
 Analyze the following resume.
 
-Return ONLY in this exact format.
+Return ONLY in this exact format:
 
 ATS Score: <0-100>
 
@@ -164,9 +398,8 @@ Resume:
 
 %s
 """
-.formatted(resumeText);
+                .formatted(resumeText);
 
-    return generateContent(prompt);
-}
-    
+        return generateContent(prompt);
+    }
 }
