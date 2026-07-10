@@ -958,3 +958,5 @@ Java backend engineering, secure APIs, AI integration, and scalable SaaS.
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a1a,25:ff6b6b,50:7b2ff7,75:00d2ff,100:0a0a1a&height=120&section=footer&text=Practice%20·%20Analyze%20·%20Improve%20·%20Get%20Hired&fontSize=16&fontColor=ccd6f6&fontAlignY=75" width="100%" />
 
 </div>
+
+#GH
