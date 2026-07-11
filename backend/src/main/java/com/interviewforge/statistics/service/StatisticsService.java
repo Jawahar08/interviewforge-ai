@@ -38,8 +38,9 @@ public class StatisticsService {
 
         double averageScore =
                 results.stream()
-                        .mapToDouble(
-                                InterviewResult::getScore)
+        .map(InterviewResult::getOverallScore)
+        .filter(java.util.Objects::nonNull)
+        .mapToDouble(Double::doubleValue)
                         .average()
                         .orElse(0.0);
 

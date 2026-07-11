@@ -38,8 +38,8 @@ public class InterviewHistoryService {
             .role(result.getSession()
                     .getInterview()
                     .getRole())
-            .score(result.getScore())
-            .feedback(result.getFeedback())
+            .score(result.getOverallScore())
+            .feedback(result.getRecommendation())
             .createdAt(result.getCreatedAt().toString())
             .build();
 }

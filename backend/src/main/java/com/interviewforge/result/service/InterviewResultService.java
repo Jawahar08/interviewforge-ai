@@ -25,25 +25,29 @@ public class InterviewResultService {
     }
 
     public InterviewResult createResult(
-            CreateResultRequest request) {
+        CreateResultRequest request) {
 
-        InterviewSession session =
-                sessionRepository.findById(
-                        request.getSessionId())
-                        .orElseThrow(() ->
-                                new RuntimeException(
-                                        "Session not found"));
+    InterviewSession session =
+            sessionRepository.findById(
+                    request.getSessionId())
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "Session not found"));
 
-        InterviewResult result =
-                InterviewResult.builder()
-                        .session(session)
-                        .score(request.getScore())
-                        .feedback(request.getFeedback())
-                        .strengths(request.getStrengths())
-                        .weaknesses(request.getWeaknesses())
-                        .createdAt(LocalDateTime.now())
-                        .build();
+    InterviewResult result =
+            InterviewResult.builder()
+                    .session(session)
+                    .overallScore(request.getScore())
+                    .technicalScore(request.getScore())
+                    .communicationScore(request.getScore())
+                    .confidenceScore(request.getScore())
+                    .strengths(request.getStrengths())
+                    .weaknesses(request.getWeaknesses())
+                    .recommendation(request.getFeedback())
+                    .summary(request.getFeedback())
+                    .createdAt(LocalDateTime.now())
+                    .build();
 
-        return resultRepository.save(result);
-    }
+    return resultRepository.save(result);
+}
 }

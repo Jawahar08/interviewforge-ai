@@ -402,4 +402,47 @@ Resume:
 
         return generateContent(prompt);
     }
+    public String generateInterviewSummary(
+        double overallScore,
+        String evaluations
+) {
+
+    String prompt = """
+You are an expert senior engineering interviewer.
+
+The candidate has completed an interview.
+
+Overall score:
+
+%.2f
+
+Individual AI evaluations:
+
+%s
+
+Generate ONLY this format.
+
+Strengths:
+...
+
+Weaknesses:
+...
+
+Recommendation:
+...
+
+Summary:
+...
+
+Keep it concise.
+
+Maximum 120 words.
+"""
+.formatted(
+        overallScore,
+        evaluations
+);
+
+    return generateContent(prompt);
+}
 }

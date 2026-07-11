@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.interviewforge.session.entity.InterviewSession;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,13 +35,25 @@ public class InterviewResult {
     @JoinColumn(name = "session_id")
     private InterviewSession session;
 
-    private Double score;
+    private Double overallScore;
 
-    private String feedback;
+    private Double technicalScore;
 
+    private Double communicationScore;
+
+    private Double confidenceScore;
+
+    @Column(length = 2000)
     private String strengths;
 
+    @Column(length = 2000)
     private String weaknesses;
+
+    @Column(length = 2000)
+    private String recommendation;
+
+    @Column(length = 4000)
+    private String summary;
 
     private LocalDateTime createdAt;
 }

@@ -2,9 +2,11 @@ package com.interviewforge.result.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.interviewforge.ai.gemini.GeminiService;
 import com.interviewforge.answer.entity.Answer;
 import com.interviewforge.answer.repository.AnswerRepository;
 import com.interviewforge.result.dto.ResultResponse;
@@ -13,6 +15,8 @@ import com.interviewforge.result.repository.InterviewResultRepository;
 import com.interviewforge.session.entity.InterviewSession;
 import com.interviewforge.session.repository.InterviewSessionRepository;
 
+import java.util.List;
+import java.util.Objects;
 @Service
 public class ResultService {
 
@@ -22,59 +26,147 @@ public class ResultService {
 
     private final InterviewResultRepository resultRepository;
 
+    private final GeminiService geminiService;
+
     public ResultService(
-            InterviewSessionRepository sessionRepository,
-            AnswerRepository answerRepository,
-            InterviewResultRepository resultRepository) {
+        InterviewSessionRepository sessionRepository,
+        AnswerRepository answerRepository,
+        InterviewResultRepository resultRepository,
+        GeminiService geminiService
+) {
 
-        this.sessionRepository = sessionRepository;
-        this.answerRepository = answerRepository;
-        this.resultRepository = resultRepository;
+    this.sessionRepository = sessionRepository;
+    this.answerRepository = answerRepository;
+    this.resultRepository = resultRepository;
+    this.geminiService = geminiService;
+}
+
+    public ResultResponse generateResult(
+        Long sessionId
+) {
+
+    InterviewSession session =
+            sessionRepository.findById(sessionId)
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "Interview session not found"
+                            )
+                    );
+
+    List<Answer> answers =
+            answerRepository.findBySession(session);
+
+    if (answers.isEmpty()) {
+        throw new RuntimeException(
+                "No answers found for this interview session."
+        );
     }
 
-    public ResultResponse generateResult(Long sessionId) {
+    double technicalScore =
+            answers.stream()
+                    .map(Answer::getScore)
+                    .filter(Objects::nonNull)
+                    .mapToDouble(Double::doubleValue)
+                    .average()
+                    .orElse(0.0);
 
-        InterviewSession session =
-                sessionRepository.findById(sessionId)
-                        .orElseThrow(() ->
-                                new RuntimeException("Session not found"));
+    double communicationScore =
+            Math.min(
+                    100,
+                    technicalScore * 0.90 + 8
+            );
 
-        List<Answer> answers =
-                answerRepository.findBySession(session);
+    double confidenceScore =
+            Math.min(
+                    100,
+                    technicalScore * 0.95 + 5
+            );
 
-        double total = answers.stream()
-                .mapToDouble(answer ->
-                        answer.getScore() == null ? 0 : answer.getScore())
-                .sum();
+    double overallScore =
+            (
+                    technicalScore
+                    + communicationScore
+                    + confidenceScore
+            ) / 3.0;
 
-        double overall =
-                answers.isEmpty()
-                        ? 0
-                        : total / answers.size();
+    String evaluations =
+            answers.stream()
+                    .map(Answer::getFeedback)
+                    .filter(Objects::nonNull)
+                    .collect(
+                            Collectors.joining(
+                                    "\n\n----------------\n\n"
+                            )
+                    );
 
-        InterviewResult result =
-                InterviewResult.builder()
-                        .session(session)
-                        .score(overall)
-                        .feedback("Interview completed successfully.")
-                        .strengths("Good Java fundamentals and Spring Boot knowledge.")
-                        .weaknesses("Improve Docker and Kubernetes.")
-                        .createdAt(LocalDateTime.now())
-                        .build();
+    String aiSummary =
+            geminiService.generateInterviewSummary(
+                    overallScore,
+                    evaluations
+            );
 
-        resultRepository.save(result);
+    String strengths =
+            extractSection(
+                    aiSummary,
+                    "Strengths",
+                    "Weaknesses"
+            );
 
-        return ResultResponse.builder()
-                .overallScore(overall)
-                .technicalScore(overall)
-                .communicationScore(80.0)
-                .confidenceScore(85.0)
-                .strengths(result.getStrengths())
-                .weaknesses(result.getWeaknesses())
-                .recommendation(
-                        "Ready for interviews. Improve cloud technologies.")
-                .build();
-    }
+    String weaknesses =
+            extractSection(
+                    aiSummary,
+                    "Weaknesses",
+                    "Recommendation"
+            );
+
+    String recommendation =
+            extractSection(
+                    aiSummary,
+                    "Recommendation",
+                    "Summary"
+            );
+
+    String summary =
+            extractSection(
+                    aiSummary,
+                    "Summary",
+                    null
+            );
+
+    InterviewResult result =
+            InterviewResult.builder()
+                    .session(session)
+                    .overallScore(overallScore)
+                    .technicalScore(technicalScore)
+                    .communicationScore(
+                            communicationScore
+                    )
+                    .confidenceScore(
+                            confidenceScore
+                    )
+                    .strengths(strengths)
+                    .weaknesses(weaknesses)
+                    .recommendation(
+                            recommendation
+                    )
+                    .summary(summary)
+                    .build();
+
+    resultRepository.save(result);
+
+    return ResultResponse.builder()
+        .overallScore(overallScore)
+        .technicalScore(technicalScore)
+        .communicationScore(communicationScore)
+        .confidenceScore(confidenceScore)
+        .strengths(strengths)
+        .weaknesses(weaknesses)
+        .recommendation(recommendation)
+        .summary(summary)
+        .build();
+}
+            
+
 
     public ResultResponse getResult(Long sessionId) {
 
@@ -89,14 +181,56 @@ public class ResultService {
                                 new RuntimeException("Result not found"));
 
         return ResultResponse.builder()
-                .overallScore(result.getScore())
-                .technicalScore(result.getScore())
-                .communicationScore(80.0)
-                .confidenceScore(85.0)
-                .strengths(result.getStrengths())
-                .weaknesses(result.getWeaknesses())
-                .recommendation(result.getFeedback())
-                .build();
+        .overallScore(result.getOverallScore())
+        .technicalScore(result.getTechnicalScore())
+        .communicationScore(result.getCommunicationScore())
+        .confidenceScore(result.getConfidenceScore())
+        .strengths(result.getStrengths())
+        .weaknesses(result.getWeaknesses())
+        .recommendation(result.getRecommendation())
+        .summary(result.getSummary())
+        .build();
     }
+    private String extractSection(
+        String text,
+        String start,
+        String end
+) {
+
+    if (text == null || text.isBlank()) {
+        return "";
+    }
+
+    String startToken = start + ":";
+
+    int startIndex = text.indexOf(startToken);
+
+    if (startIndex < 0) {
+        return "";
+    }
+
+    startIndex += startToken.length();
+
+    int endIndex;
+
+    if (end == null) {
+
+        endIndex = text.length();
+
+    } else {
+
+        String endToken = end + ":";
+
+        endIndex = text.indexOf(endToken, startIndex);
+
+        if (endIndex < 0) {
+            endIndex = text.length();
+        }
+    }
+
+    return text
+            .substring(startIndex, endIndex)
+            .trim();
+}
 
 }
