@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   AlertCircle,
@@ -17,7 +17,7 @@ import {
   Send,
   Sparkles,
 } from "lucide-react";
-
+import { useInterviewTimer } from "@/features/interview/hooks/use-interview-timer";
 import { useSessionQuestions } from
   "@/features/interview/hooks/use-session-questions";
 import { answerApi } from
@@ -34,7 +34,8 @@ export default function LiveInterviewPage() {
 
   const sessionId = params.sessionId;
 
-  const [answer, setAnswer] = useState("");
+ const [answer, setAnswer] = useState("");
+
 const [
   isSubmittingAnswer,
   setIsSubmittingAnswer,
@@ -49,27 +50,35 @@ const [
   evaluation,
   setEvaluation,
 ] = useState<AnswerResponse | null>(null);
-  const {
-    questions,
-    currentQuestion,
-    currentQuestionIndex,
 
-    isLoading,
-    error,
+const {
+  questions,
+  currentQuestion,
+  currentQuestionIndex,
+  isLoading,
+  error,
+  hasPrevious,
+  isLastQuestion,
+  nextQuestion,
+  previousQuestion,
+  goToQuestion,
+  retry,
+} = useSessionQuestions(sessionId || null);
 
-    hasPrevious,
-    isLastQuestion,
+const timer = useInterviewTimer(30);
 
-    nextQuestion,
-    previousQuestion,
-    goToQuestion,
+const minutes = String(timer.minutes).padStart(2, "0");
+const seconds = String(timer.seconds).padStart(2, "0");
 
-    retry,
-  } = useSessionQuestions(
-  sessionId || null
-);
+const timerColor =
+  timer.minutes <= 1
+    ? "text-red-400"
+    : timer.minutes <= 5
+    ? "text-yellow-400"
+    : "text-emerald-400";
 
   const progress = useMemo(() => {
+    
     if (questions.length === 0) {
       return 0;
     }
@@ -147,6 +156,13 @@ const [
     setIsSubmittingAnswer(false);
   }
 };
+useEffect(() => {
+    if (!timer.isExpired) return;
+
+    if (!evaluation) return;
+
+    void handleContinueAfterEvaluation();
+}, [timer.isExpired, evaluation]);
 const handleContinueAfterEvaluation =
   async () => {
     if (!evaluation) {
@@ -346,15 +362,17 @@ const handleContinueAfterEvaluation =
           </button>
 
           <div className="flex items-center gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-xs font-medium text-emerald-400">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-              Interview live
-            </div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs">
 
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-slate-400">
-              <Clock3 className="h-4 w-4 text-violet-400" />
-              Live session
-            </div>
+    <Clock3 className={`h-4 w-4 ${timerColor}`} />
+
+    <span className={timerColor}>
+        {minutes}:{seconds}
+    </span>
+
+</div>
+
+           
           </div>
         </div>
       </header>
@@ -436,14 +454,50 @@ const handleContinueAfterEvaluation =
   value={answer}
   disabled={
     isSubmittingAnswer ||
-    evaluation !== null
-  }
+    evaluation !== null ||
+    timer.isExpired
+}
               onChange={(event) =>
                 setAnswer(event.target.value)
               }
               placeholder="Type your interview answer here..."
               className="mt-6 min-h-64 w-full resize-none rounded-2xl border border-white/10 bg-[#080b18] p-5 text-sm leading-7 text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-violet-500/50"
             />
+            {isSubmittingAnswer && (
+<div className="mt-4 rounded-xl border border-violet-500/20 bg-violet-500/10 p-4 text-center">
+
+    <LoaderCircle className="mx-auto h-6 w-6 animate-spin text-violet-300" />
+
+    <p className="mt-2 text-sm text-slate-300">
+        AI is evaluating your answer...
+    </p>
+
+</div>
+)}
+            <div className="mt-3 flex gap-2">
+
+    <span className="rounded-lg bg-white/5 px-3 py-1 text-xs">
+        Words:
+        {answer.trim().split(/\s+/).filter(Boolean).length}
+    </span>
+
+    <span
+        className={`rounded-lg px-3 py-1 text-xs ${
+            answer.length > 250
+                ? "bg-emerald-500/20 text-emerald-300"
+                : answer.length > 100
+                ? "bg-yellow-500/20 text-yellow-300"
+                : "bg-red-500/20 text-red-300"
+        }`}
+    >
+        {answer.length > 250
+            ? "Detailed"
+            : answer.length > 100
+            ? "Average"
+            : "Too Short"}
+    </span>
+
+</div>
             {submissionError && (
   <div
     role="alert"
@@ -511,7 +565,7 @@ const handleContinueAfterEvaluation =
             <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-3">
                 <span className="text-xs text-slate-600">
-                  {answer.length} characters
+                  {answer.trim().split(/\s+/).filter(Boolean).length} words • {answer.length} characters
                 </span>
 
                 {hasPrevious && (
@@ -561,9 +615,10 @@ const handleContinueAfterEvaluation =
       void submitAnswer();
     }}
     disabled={
-      !answer.trim() ||
-      isSubmittingAnswer
-    }
+    !answer.trim() ||
+    isSubmittingAnswer ||
+    timer.isExpired
+}
     className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40"
   >
     {isSubmittingAnswer ? (
@@ -615,7 +670,7 @@ const handleContinueAfterEvaluation =
                     <button
                       key={questionItem.id}
                       type="button"
-                      disabled={!canNavigate}
+                      disabled={!canNavigate || evaluation !== null}
                       onClick={() =>
                         handleQuestionSelection(index)
                       }
