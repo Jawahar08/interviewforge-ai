@@ -9,21 +9,19 @@ import org.springframework.data.jpa.repository.Query;
 import com.interviewforge.result.entity.InterviewResult;
 import com.interviewforge.session.entity.InterviewSession;
 
-
-
 public interface InterviewResultRepository
         extends JpaRepository<InterviewResult, Long> {
-                List<InterviewResult> findAllByOrderByIdDesc();
+
+    List<InterviewResult> findAllByOrderByIdDesc();
 
     Optional<InterviewResult> findBySession(InterviewSession session);
 
-    @Query("SELECT AVG(r.score) FROM InterviewResult r")
-Double getAverageScore();
+    @Query("SELECT AVG(r.overallScore) FROM InterviewResult r")
+    Double getAverageScore();
 
-@Query("SELECT MAX(r.score) FROM InterviewResult r")
+    @Query("SELECT MAX(r.overallScore) FROM InterviewResult r")
 Double getHighestScore();
 
-@Query("SELECT MIN(r.score) FROM InterviewResult r")
+@Query("SELECT MIN(r.overallScore) FROM InterviewResult r")
 Double getLowestScore();
-
 }

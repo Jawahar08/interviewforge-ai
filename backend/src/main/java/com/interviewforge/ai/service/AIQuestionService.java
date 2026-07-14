@@ -82,6 +82,7 @@ response = response
 System.out.println("Gemini Response:");
 System.out.println(response);
 
+
 if (!response.startsWith("[")) {
     throw new RuntimeException("Invalid Gemini response:\n" + response);
 }
@@ -109,5 +110,7 @@ try {
             throw new RuntimeException(
                     "Failed to parse Gemini response: " + e.getMessage());
         }
+        
     }
+    
 }

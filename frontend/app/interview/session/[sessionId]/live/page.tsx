@@ -18,6 +18,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useInterviewTimer } from "@/features/interview/hooks/use-interview-timer";
+import { useInterviewStore } from "@/features/interview/store/interview.store";
 import { useSessionQuestions } from
   "@/features/interview/hooks/use-session-questions";
 import { answerApi } from
@@ -64,16 +65,26 @@ const {
   goToQuestion,
   retry,
 } = useSessionQuestions(sessionId || null);
+const interviewConfig = useInterviewStore(
+  (state) => state.interviewConfig
+);
 
-const timer = useInterviewTimer(30);
+const interviewDuration =
+  interviewConfig?.duration ?? 30;
+
+const timer = useInterviewTimer(interviewDuration);
 
 const minutes = String(timer.minutes).padStart(2, "0");
 const seconds = String(timer.seconds).padStart(2, "0");
 
+const percentageRemaining =
+  timer.remainingSeconds /
+  (interviewDuration * 60);
+
 const timerColor =
-  timer.minutes <= 1
+  percentageRemaining <= 0.10
     ? "text-red-400"
-    : timer.minutes <= 5
+    : percentageRemaining <= 0.25
     ? "text-yellow-400"
     : "text-emerald-400";
 
