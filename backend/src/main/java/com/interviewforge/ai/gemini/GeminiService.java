@@ -67,7 +67,7 @@ public class GeminiService {
         Map<String, Object> generationConfig =
                 Map.of(
                         "temperature", 0.2,
-                        "maxOutputTokens", 1024
+                        "maxOutputTokens", 4096
                 );
 
         Map<String, Object> requestBody =

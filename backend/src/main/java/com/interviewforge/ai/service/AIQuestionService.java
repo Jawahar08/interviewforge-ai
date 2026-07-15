@@ -46,8 +46,6 @@ interviewRepository.findAll().forEach(System.out::println);
                         new RuntimeException("Interview not found"));
 
         String prompt = """
-You are an expert technical interviewer.
-
 Generate exactly %d interview questions.
 
 Role:
@@ -58,14 +56,15 @@ Difficulty:
 
 Return ONLY valid JSON.
 
-[
-  {
-    "questionText":"",
-    "answer":"",
-    "category":"",
-    "difficulty":""
-  }
-]
+Rules:
+- No markdown
+- No code blocks
+- No explanations
+- No text before or after JSON
+- questionText max 100 characters
+- answer max 150 characters
+- category max 30 characters
+- difficulty max 20 characters
 """
 .formatted(
                 numberOfQuestions,
@@ -79,9 +78,10 @@ response = response
         .replace("```", "")
         .trim();
 
-System.out.println("Gemini Response:");
+System.out.println("========== GEMINI RESPONSE ==========");
 System.out.println(response);
-
+System.out.println("Length: " + response.length());
+System.out.println("====================================");
 
 if (!response.startsWith("[")) {
     throw new RuntimeException("Invalid Gemini response:\n" + response);
@@ -92,7 +92,11 @@ try {
                     .replace("```json", "")
                     .replace("```", "")
                     .trim();
-
+                    if (!response.trim().endsWith("]")) {
+    throw new RuntimeException(
+        "Gemini returned incomplete JSON:\n" + response
+    );
+}
             List<Question> questions = Arrays.asList(
                     objectMapper.readValue(
                             response,
