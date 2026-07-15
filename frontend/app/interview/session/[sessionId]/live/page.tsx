@@ -26,7 +26,7 @@ import { answerApi } from
 
 import type { AnswerResponse } from
   "@/features/interview/types/answer.types";
-
+import { resultApi } from "@/features/result/api/result.api";
 import { sessionApi } from
   "@/features/interview/api/interview-session.api";
 export default function LiveInterviewPage() {
@@ -147,13 +147,26 @@ const timerColor =
     setEvaluation(null);
 
     const evaluatedAnswer =
-      await answerApi.submitAndEvaluate({
-        questionId: numericQuestionId,
-        sessionId: numericSessionId,
-        userAnswer: trimmedAnswer,
-      });
+  await answerApi.submitAndEvaluate({
+    questionId: numericQuestionId,
+    sessionId: numericSessionId,
+    userAnswer: trimmedAnswer,
+  });
 
-    setEvaluation(evaluatedAnswer);
+setEvaluation(evaluatedAnswer);
+
+if (isLastQuestion) {
+
+  await resultApi.generateResult(
+    String(numericSessionId)
+  );
+
+  router.push(
+    `/interview/session/${numericSessionId}/result`
+  );
+
+  return;
+}
   } catch (error) {
     console.error(
       "Failed to submit and evaluate answer:",
