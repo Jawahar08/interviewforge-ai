@@ -7,6 +7,12 @@ export type InterviewSessionStatus =
 export type InterviewDifficulty = "Easy" | "Medium" | "Hard";
 
 export type InterviewType =
+  | "TECHNICAL"
+  | "BEHAVIORAL"
+  | "CASE_STUDY"
+  | "STRESS_ETHICS"
+  | "SYSTEM_PROCESS"
+  | "MIXED"
   | "Technical"
   | "Behavioral"
   | "Mixed";

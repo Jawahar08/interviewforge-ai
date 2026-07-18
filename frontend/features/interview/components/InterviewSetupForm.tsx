@@ -29,17 +29,13 @@ import type {
 } from "@/features/interview/types/interview.types";
 
 const interviewSetupSchema = z.object({
-  role: z.enum([
-    "FULL_STACK_DEVELOPER",
-    "BACKEND_DEVELOPER",
-    "FRONTEND_DEVELOPER",
-    "JAVA_DEVELOPER",
-    "SOFTWARE_ENGINEER",
-    "DEVOPS_ENGINEER",
-  ]),
+  role: z.string().min(2, "Role must be at least 2 characters"),
   type: z.enum([
     "TECHNICAL",
     "BEHAVIORAL",
+    "CASE_STUDY",
+    "STRESS_ETHICS",
+    "SYSTEM_PROCESS",
     "MIXED",
   ]),
   difficulty: z.enum([

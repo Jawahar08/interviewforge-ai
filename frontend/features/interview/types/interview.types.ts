@@ -1,14 +1,11 @@
-export type InterviewRole =
-  | "FULL_STACK_DEVELOPER"
-  | "BACKEND_DEVELOPER"
-  | "FRONTEND_DEVELOPER"
-  | "JAVA_DEVELOPER"
-  | "SOFTWARE_ENGINEER"
-  | "DEVOPS_ENGINEER";
+export type InterviewRole = string;
 
 export type InterviewType =
   | "TECHNICAL"
   | "BEHAVIORAL"
+  | "CASE_STUDY"
+  | "STRESS_ETHICS"
+  | "SYSTEM_PROCESS"
   | "MIXED";
 
 export type InterviewDifficulty =

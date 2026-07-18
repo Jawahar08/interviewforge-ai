@@ -45,10 +45,29 @@ interviewRepository.findAll().forEach(System.out::println);
                 .orElseThrow(() ->
                         new RuntimeException("Interview not found"));
 
+        String title = interview.getTitle() != null ? interview.getTitle() : "";
+        String focus = "General / Domain-Specific";
+        if (title.contains("TECHNICAL")) {
+            focus = "Technical / Domain-Specific (Testing core knowledge, tools, concepts, and technical problem-solving)";
+        } else if (title.contains("BEHAVIORAL")) {
+            focus = "Behavioral & Situational (Testing soft skills, past experiences, teamwork, and behavioral response)";
+        } else if (title.contains("CASE_STUDY")) {
+            focus = "Case Study & Analysis (Testing scenario-based analysis, diagnosing client/business issues, and structured problem-solving)";
+        } else if (title.contains("STRESS_ETHICS")) {
+            focus = "Stress & Ethical Scenario (Testing handling high pressure, ethical dilemmas, client conflicts, and resilience)";
+        } else if (title.contains("SYSTEM_PROCESS")) {
+            focus = "System & Process Design (Testing designing systems, processes, organizational frameworks, or structural workflows)";
+        } else if (title.contains("MIXED")) {
+            focus = "Mixed / Comprehensive (A balanced combination of technical domain knowledge, behavioral, and situational questions)";
+        }
+
         String prompt = """
 Generate exactly %d interview questions.
 
 Role:
+%s
+
+Interview Type/Focus:
 %s
 
 Difficulty:
@@ -69,6 +88,7 @@ Rules:
 .formatted(
                 numberOfQuestions,
                 interview.getRole(),
+                focus,
                 interview.getDifficulty());
 
         String response = geminiService.generateContent(prompt);

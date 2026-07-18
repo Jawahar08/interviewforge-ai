@@ -1,18 +1,14 @@
 import { z } from "zod";
 
 export const interviewSchema = z.object({
-  role: z.enum([
-    "FULL_STACK_DEVELOPER",
-    "BACKEND_DEVELOPER",
-    "FRONTEND_DEVELOPER",
-    "JAVA_DEVELOPER",
-    "SOFTWARE_ENGINEER",
-    "DEVOPS_ENGINEER",
-  ]),
+  role: z.string().min(2, "Role must be at least 2 characters"),
 
   interviewType: z.enum([
     "TECHNICAL",
     "BEHAVIORAL",
+    "CASE_STUDY",
+    "STRESS_ETHICS",
+    "SYSTEM_PROCESS",
     "MIXED",
   ]),
 

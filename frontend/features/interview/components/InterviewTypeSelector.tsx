@@ -4,6 +4,9 @@ import {
   BrainCircuit,
   MessagesSquare,
   Sparkles,
+  Search,
+  AlertTriangle,
+  Workflow,
   type LucideIcon,
 } from "lucide-react";
 
@@ -27,21 +30,42 @@ const interviewTypeOptions: InterviewTypeOption[] = [
     value: "TECHNICAL",
     label: "Technical",
     description:
-      "Role-specific concepts, coding, architecture, and problem solving.",
+      "Role-specific concepts, technical methods, core tools, and problem solving.",
     icon: BrainCircuit,
   },
   {
     value: "BEHAVIORAL",
     label: "Behavioral",
     description:
-      "Communication, teamwork, ownership, conflict, and leadership.",
+      "Communication, teamwork, adaptability, conflict, and core leadership.",
     icon: MessagesSquare,
+  },
+  {
+    value: "CASE_STUDY",
+    label: "Case Study & Analysis",
+    description:
+      "Hypothetical business cases, diagnostics, or design scenarios to analyze.",
+    icon: Search,
+  },
+  {
+    value: "STRESS_ETHICS",
+    label: "Stress & Ethical Scenario",
+    description:
+      "High-pressure escalation handling, conflict resolution, and ethical dilemmas.",
+    icon: AlertTriangle,
+  },
+  {
+    value: "SYSTEM_PROCESS",
+    label: "System & Process Design",
+    description:
+      "Designing complex systems, workflows, or organizational structures.",
+    icon: Workflow,
   },
   {
     value: "MIXED",
     label: "Mixed",
     description:
-      "A balanced session combining technical and behavioral questions.",
+      "A balanced, comprehensive session combining multiple question styles.",
     icon: Sparkles,
   },
 ];
