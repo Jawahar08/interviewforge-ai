@@ -95,71 +95,72 @@ public class GeminiService {
                         headers
                 );
 
-        try {
-            Map<?, ?> response =
-                    restTemplate.postForObject(
-                            url,
-                            request,
-                            Map.class
+        int maxRetries = 3;
+        long backoffMs = 1000;
+        Exception lastException = null;
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+                Map<?, ?> response =
+                        restTemplate.postForObject(
+                                url,
+                                request,
+                                Map.class
+                        );
+
+                return extractText(response);
+
+            } catch (HttpClientErrorException e) {
+                if (e.getStatusCode().value() == 429) {
+                    System.err.println("Gemini 429 Rate Limit Exceeded. Attempt " + attempt + " of " + maxRetries + ". Retrying...");
+                    lastException = e;
+                } else {
+                    throw new RuntimeException(
+                            buildGeminiErrorMessage(
+                                    e.getStatusCode().value(),
+                                    e.getResponseBodyAsString()
+                            ),
+                            e
                     );
+                }
+            } catch (HttpServerErrorException e) {
+                System.err.println("Gemini 5xx Server Error. Attempt " + attempt + " of " + maxRetries + ". Retrying...");
+                lastException = e;
+            } catch (Exception e) {
+                System.err.println("Unexpected Gemini error. Attempt " + attempt + " of " + maxRetries + ". Retrying...");
+                lastException = e;
+            }
 
-            return extractText(response);
+            if (attempt < maxRetries) {
+                try {
+                    Thread.sleep(backoffMs);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException("Gemini retry interrupted", ie);
+                }
+                backoffMs *= 2;
+            }
+        }
 
-        } catch (HttpClientErrorException e) {
-
-            System.err.println(
-                    "Gemini client error status: "
-                            + e.getStatusCode()
-            );
-
-            System.err.println(
-                    "Gemini client error body: "
-                            + e.getResponseBodyAsString()
-            );
-
+        if (lastException instanceof HttpClientErrorException hcee) {
             throw new RuntimeException(
                     buildGeminiErrorMessage(
-                            e.getStatusCode().value(),
-                            e.getResponseBodyAsString()
+                            hcee.getStatusCode().value(),
+                            hcee.getResponseBodyAsString()
                     ),
-                    e
+                    hcee
             );
-
-        } catch (HttpServerErrorException e) {
-
-            System.err.println(
-                    "Gemini server error status: "
-                            + e.getStatusCode()
-            );
-
-            System.err.println(
-                    "Gemini server error body: "
-                            + e.getResponseBodyAsString()
-            );
-
+        } else if (lastException instanceof HttpServerErrorException hsee) {
             throw new RuntimeException(
                     "Gemini service is temporarily unavailable. "
                             + "Status: "
-                            + e.getStatusCode().value(),
-                    e
+                            + hsee.getStatusCode().value(),
+                    hsee
             );
-
-        } catch (RuntimeException e) {
-
-            System.err.println(
-                    "Gemini processing error: "
-                            + e.getMessage()
-            );
-
-            throw e;
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
+        } else {
             throw new RuntimeException(
-                    "Unexpected Gemini integration failure",
-                    e
+                    "Unexpected Gemini integration failure after retries",
+                    lastException
             );
         }
     }

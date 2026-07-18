@@ -1,5 +1,7 @@
 package com.interviewforge.result.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,4 +30,6 @@ public class ResultResponse {
     private String recommendation;
 
     private String summary;
+
+    private List<QuestionReviewDto> questions;
 }

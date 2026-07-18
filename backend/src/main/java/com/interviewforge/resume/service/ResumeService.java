@@ -1,80 +1,266 @@
 package com.interviewforge.resume.service;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interviewforge.ai.gemini.GeminiService;
+import com.interviewforge.auth.entity.User;
+import com.interviewforge.auth.repository.UserRepository;
 import com.interviewforge.resume.dto.ResumeAnalysisResponse;
+import com.interviewforge.resume.entity.Resume;
+import com.interviewforge.resume.repository.ResumeRepository;
+import com.interviewforge.resume.util.FileValidator;
+
 @Service
 public class ResumeService {
-    private final ObjectMapper objectMapper;
+
+    private final ResumeRepository resumeRepository;
+    private final UserRepository userRepository;
     private final PdfExtractorService pdfExtractorService;
+    private final DocxExtractorService docxExtractorService;
     private final GeminiService geminiService;
+    private final ObjectMapper objectMapper;
 
     public ResumeService(
-        GeminiService geminiService,
-        PdfExtractorService pdfExtractorService,
-        ObjectMapper objectMapper) {
+            ResumeRepository resumeRepository,
+            UserRepository userRepository,
+            PdfExtractorService pdfExtractorService,
+            DocxExtractorService docxExtractorService,
+            GeminiService geminiService,
+            ObjectMapper objectMapper) {
+        this.resumeRepository = resumeRepository;
+        this.userRepository = userRepository;
+        this.pdfExtractorService = pdfExtractorService;
+        this.docxExtractorService = docxExtractorService;
+        this.geminiService = geminiService;
+        this.objectMapper = objectMapper;
+    }
 
-    this.geminiService = geminiService;
-    this.pdfExtractorService = pdfExtractorService;
-    this.objectMapper = objectMapper;
-}
+    private User getCurrentUser() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Authenticated user not found"));
+    }
 
-    public ResumeAnalysisResponse analyze(
-            MultipartFile file) throws Exception {
+    @Transactional
+    public ResumeAnalysisResponse analyze(MultipartFile file) throws Exception {
+        // 1. Secure file validation
+        FileValidator.validate(file);
 
-        String resumeText = pdfExtractorService.extract(file);
+        User user = getCurrentUser();
+        String filename = file.getOriginalFilename();
 
-System.out.println("===== RESUME TEXT =====");
-System.out.println(resumeText);
-System.out.println("=======================");
+        // 2. Create and save Resume record in PROCESSING status
+        Resume resume = Resume.builder()
+                .filename(filename)
+                .status("PROCESSING")
+                .user(user)
+                .createdAt(LocalDateTime.now())
+                .build();
+        resume = resumeRepository.save(resume);
 
+        // 3. Text extraction and AI processing
+        try {
+            String resumeText;
+            if (filename.toLowerCase().endsWith(".docx")) {
+                resumeText = docxExtractorService.extract(file);
+            } else {
+                resumeText = pdfExtractorService.extract(file);
+            }
+
+            resume.setRawText(resumeText);
+            
+            // Analyze with Gemini
+            ResumeAnalysisResponse analysisResponse = runGeminiAnalysis(resumeText);
+            
+            // 4. Update Resume entity with completed details
+            resume.setAtsScore(analysisResponse.getAtsScore());
+            resume.setStrengths(analysisResponse.getStrengths());
+            resume.setWeaknesses(analysisResponse.getWeaknesses());
+            resume.setMissingSkills(analysisResponse.getMissingSkills());
+            resume.setImprovements(analysisResponse.getImprovements());
+            resume.setSuggestedProjects(analysisResponse.getSuggestedProjects());
+            resume.setInterviewQuestions(analysisResponse.getInterviewQuestions());
+            resume.setLearningResources(analysisResponse.getLearningResources());
+            resume.setStatus("COMPLETED");
+            resumeRepository.save(resume);
+
+            return analysisResponse;
+        } catch (Exception e) {
+            System.err.println("Resume analysis failed for file: " + filename + ". Error: " + e.getMessage());
+            resume.setStatus("FAILED");
+            resume.setErrorMessage(e.getMessage());
+            resumeRepository.save(resume);
+            throw e;
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<Resume> listResumes() {
+        User user = getCurrentUser();
+        return resumeRepository.findByUserOrderByCreatedAtDesc(user);
+    }
+
+    @Transactional(readOnly = true)
+    public Resume getResume(Long id) {
+        User user = getCurrentUser();
+        return resumeRepository.findByIdAndUser(id, user)
+                .orElseThrow(() -> new RuntimeException("Resume not found or unauthorized"));
+    }
+
+    @Transactional
+    public void deleteResume(Long id) {
+        User user = getCurrentUser();
+        Resume resume = resumeRepository.findByIdAndUser(id, user)
+                .orElseThrow(() -> new RuntimeException("Resume not found or unauthorized"));
+        resumeRepository.delete(resume);
+    }
+
+    @Transactional
+    public ResumeAnalysisResponse retry(Long id) throws Exception {
+        User user = getCurrentUser();
+        Resume resume = resumeRepository.findByIdAndUser(id, user)
+                .orElseThrow(() -> new RuntimeException("Resume not found or unauthorized"));
+
+        resume.setStatus("PROCESSING");
+        resume.setErrorMessage(null);
+        resume = resumeRepository.save(resume);
+
+        try {
+            String resumeText = resume.getRawText();
+            if (resumeText == null || resumeText.isBlank()) {
+                throw new RuntimeException("Cannot retry: Raw text not found. Please upload the file again.");
+            }
+
+            // Analyze with Gemini
+            ResumeAnalysisResponse analysisResponse = runGeminiAnalysis(resumeText);
+            
+            // Update details
+            resume.setAtsScore(analysisResponse.getAtsScore());
+            resume.setStrengths(analysisResponse.getStrengths());
+            resume.setWeaknesses(analysisResponse.getWeaknesses());
+            resume.setMissingSkills(analysisResponse.getMissingSkills());
+            resume.setImprovements(analysisResponse.getImprovements());
+            resume.setSuggestedProjects(analysisResponse.getSuggestedProjects());
+            resume.setInterviewQuestions(analysisResponse.getInterviewQuestions());
+            resume.setLearningResources(analysisResponse.getLearningResources());
+            resume.setStatus("COMPLETED");
+            resumeRepository.save(resume);
+
+            return analysisResponse;
+        } catch (Exception e) {
+            System.err.println("Resume retry analysis failed. Error: " + e.getMessage());
+            resume.setStatus("FAILED");
+            resume.setErrorMessage(e.getMessage());
+            resumeRepository.save(resume);
+            throw e;
+        }
+    }
+
+    private ResumeAnalysisResponse runGeminiAnalysis(String resumeText) throws Exception {
         String prompt = """
-You are an expert ATS Resume Reviewer.
+                You are an expert ATS Resume Reviewer.
+                
+                Analyze the resume text and perform:
+                - ATS-oriented scoring (0-100)
+                - Skill extraction & missing-skills detection
+                - Strengths & weakness analysis
+                - Specific improvement suggestions
+                - Suggested projects
+                - Potential interview questions based on the resume
+                - Learning resources
+                
+                Return ONLY valid JSON in this exact structure:
+                {
+                  "atsScore": 85,
+                  "strengths": ["list of strengths"],
+                  "weaknesses": ["list of weaknesses"],
+                  "missingSkills": ["list of missing skills"],
+                  "improvements": ["list of improvement suggestions"],
+                  "suggestedProjects": ["list of suggested projects"],
+                  "interviewQuestions": ["list of interview questions"],
+                  "learningResources": ["list of learning resources"]
+                }
+                
+                Resume text:
+                %s
+                """.formatted(resumeText);
 
-Analyze the resume.
+        String response = geminiService.generateContent(prompt);
+        return parseResumeResponseWithFallback(response);
+    }
 
-Return ONLY valid JSON.
+    private ResumeAnalysisResponse parseResumeResponseWithFallback(String response) {
+        try {
+            String cleaned = response.replace("```json", "").replace("```", "").trim();
+            int first = cleaned.indexOf("{");
+            int last = cleaned.lastIndexOf("}");
+            if (first >= 0 && last > first) {
+                cleaned = cleaned.substring(first, last + 1);
+            }
+            return objectMapper.readValue(cleaned, ResumeAnalysisResponse.class);
+        } catch (Exception e) {
+            System.err.println("JSON parsing failed, attempting fallback regex parser: " + e.getMessage());
+            return ResumeAnalysisResponse.builder()
+                .atsScore(extractInt(response, "atsScore", 60))
+                .strengths(extractList(response, "strengths"))
+                .weaknesses(extractList(response, "weaknesses"))
+                .missingSkills(extractList(response, "missingSkills"))
+                .improvements(extractList(response, "improvements"))
+                .suggestedProjects(extractList(response, "suggestedProjects"))
+                .interviewQuestions(extractList(response, "interviewQuestions"))
+                .learningResources(extractList(response, "learningResources"))
+                .build();
+        }
+    }
 
-{
-  "atsScore":0,
-  "strengths":[],
-  "weaknesses":[],
-  "missingSkills":[],
-  "improvements":[],
-  "suggestedProjects":[],
-  "interviewQuestions":[],
-  "learningResources":[]
-}
+    private Integer extractInt(String text, String key, Integer defaultVal) {
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\"" + key + "\"\\s*:\\s*(\\d+)");
+        java.util.regex.Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            try {
+                return Integer.parseInt(matcher.group(1));
+            } catch (NumberFormatException e) {
+                return defaultVal;
+            }
+        }
+        return defaultVal;
+    }
 
-Resume:
-
-%s
-""".formatted(resumeText);
-
-        String response =
-                geminiService.generateContent(prompt);
-                System.out.println("========== GEMINI RESPONSE ==========");
-System.out.println(response);
-System.out.println("=====================================");
-
-        System.out.println(response);
-
-        response = response
-        .replace("```json", "")
-        .replace("```", "")
-        .trim();
-
-int first = response.indexOf("{");
-int last = response.lastIndexOf("}");
-
-response = response.substring(first, last + 1);
-
-return objectMapper.readValue(
-        response,
-        ResumeAnalysisResponse.class
-);
+    private List<String> extractList(String text, String key) {
+        List<String> list = new ArrayList<>();
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\"" + key + "\"\\s*:\\s*\\[([^\\]]*)\\]");
+        java.util.regex.Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            String elements = matcher.group(1);
+            java.util.regex.Pattern elementPattern = java.util.regex.Pattern.compile("\"([^\"]*)\"");
+            java.util.regex.Matcher elementMatcher = elementPattern.matcher(elements);
+            while (elementMatcher.find()) {
+                list.add(elementMatcher.group(1));
+            }
+        }
+        if (list.isEmpty()) {
+            java.util.regex.Pattern markdownPattern = java.util.regex.Pattern.compile("(?i)" + key + ":?\\s*\\n((?:\\s*[-*•]\\s*.*\\n?)+)");
+            java.util.regex.Matcher markdownMatcher = markdownPattern.matcher(text);
+            if (markdownMatcher.find()) {
+                String bulletBlock = markdownMatcher.group(1);
+                for (String line : bulletBlock.split("\\n")) {
+                    String trimmed = line.replaceAll("^\\s*[-*•]\\s*", "").trim();
+                    if (!trimmed.isEmpty()) {
+                        list.add(trimmed);
+                    }
+                }
+            }
+        }
+        return list;
     }
 }

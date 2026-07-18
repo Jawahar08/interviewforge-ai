@@ -1,6 +1,11 @@
 package com.interviewforge.resume.controller;
 
+import java.util.List;
+
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.interviewforge.common.dto.ApiResponse;
 import com.interviewforge.resume.dto.ResumeAnalysisResponse;
+import com.interviewforge.resume.entity.Resume;
 import com.interviewforge.resume.service.ResumeService;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -26,32 +32,60 @@ public class ResumeController {
 
     private final ResumeService resumeService;
 
-    public ResumeController(
-            ResumeService resumeService) {
-
+    public ResumeController(ResumeService resumeService) {
         this.resumeService = resumeService;
     }
 
     @PostMapping(
-    value="/analyze",
-    consumes = MediaType.MULTIPART_FORM_DATA_VALUE
-)
-public ApiResponse<ResumeAnalysisResponse> analyze(
+        value = "/analyze",
+        consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public ApiResponse<ResumeAnalysisResponse> analyze(
+            @Parameter(
+                    description = "Resume PDF or DOCX",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_PDF_VALUE,
+                            schema = @Schema(type = "string", format = "binary")
+                    )
+            )
+            @RequestParam("file") MultipartFile file) throws Exception {
 
-        @Parameter(
-                description = "Resume PDF",
-                content = @Content(
-                        mediaType = MediaType.APPLICATION_PDF_VALUE,
-                        schema = @Schema(type = "string", format = "binary")
-                )
-        )
-        @RequestParam("file") MultipartFile file)
+        return ApiResponse.success(
+                resumeService.analyze(file),
+                "Resume analyzed and saved successfully"
+        );
+    }
 
-        throws Exception {
+    @GetMapping
+    public ApiResponse<List<Resume>> listResumes() {
+        return ApiResponse.success(
+                resumeService.listResumes(),
+                "User resumes retrieved successfully"
+        );
+    }
 
-    return ApiResponse.success(
-            resumeService.analyze(file),
-            "Resume analyzed successfully"
-    );
-}
+    @GetMapping("/{id}")
+    public ApiResponse<Resume> getResume(@PathVariable Long id) {
+        return ApiResponse.success(
+                resumeService.getResume(id),
+                "Resume details retrieved successfully"
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse<Void> deleteResume(@PathVariable Long id) {
+        resumeService.deleteResume(id);
+        return ApiResponse.success(
+                null,
+                "Resume deleted successfully"
+        );
+    }
+
+    @PostMapping("/{id}/retry")
+    public ApiResponse<ResumeAnalysisResponse> retry(@PathVariable Long id) throws Exception {
+        return ApiResponse.success(
+                resumeService.retry(id),
+                "Resume analysis retry completed successfully"
+        );
+    }
 }
