@@ -23,7 +23,7 @@ export function UserMenu() {
   const logout = useAuthStore((state) => state.logout);
 
   useEffect(() => {
-    setHasHydrated(true);
+    setTimeout(() => setHasHydrated(true), 0);
   }, []);
 
   useEffect(() => {

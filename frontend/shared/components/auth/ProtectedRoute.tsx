@@ -32,7 +32,7 @@ export function ProtectedRoute({
       });
 
     if (useAuthStore.persist.hasHydrated()) {
-      setHasHydrated(true);
+      setTimeout(() => setHasHydrated(true), 0);
     }
 
     return unsubscribe;

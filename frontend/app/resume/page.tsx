@@ -74,7 +74,7 @@ export default function ResumePage() {
         await fetchResumeDetails(resumes[0].id);
       }
     } catch (err: unknown) {
-      const axiosMessage = (err as any)?.response?.data?.message;
+      const axiosMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
       toast.error(axiosMessage || "Failed to analyze resume. Check file or API key.");
     }
   };
@@ -113,7 +113,7 @@ export default function ResumePage() {
       toast.info("Retrying analysis...");
       await retryResume(id);
       toast.success("Resume analyzed successfully!");
-    } catch (err: unknown) {
+    } catch {
       toast.error("Failed to retry analysis.");
     }
   };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   AlertCircle,
@@ -180,15 +180,7 @@ if (isLastQuestion) {
     setIsSubmittingAnswer(false);
   }
 };
-useEffect(() => {
-    if (!timer.isExpired) return;
-
-    if (!evaluation) return;
-
-    void handleContinueAfterEvaluation();
-}, [timer.isExpired, evaluation]);
-const handleContinueAfterEvaluation =
-  async () => {
+const handleContinueAfterEvaluation = useCallback(async () => {
     if (!evaluation) {
       return;
     }
@@ -202,16 +194,10 @@ const handleContinueAfterEvaluation =
       return;
     }
 
-    const numericSessionId =
-      Number(sessionId);
+    const numericSessionId = Number(sessionId);
 
-    if (
-      !Number.isInteger(numericSessionId) ||
-      numericSessionId <= 0
-    ) {
-      setSubmissionError(
-        "Invalid interview session ID."
-      );
+    if (!Number.isInteger(numericSessionId) || numericSessionId <= 0) {
+      setSubmissionError("Invalid interview session ID.");
       return;
     }
 
@@ -219,16 +205,11 @@ const handleContinueAfterEvaluation =
       setIsSubmittingAnswer(true);
       setSubmissionError(null);
 
-      await sessionApi.completeSession(
-        numericSessionId
-      );
+      await sessionApi.completeSession(numericSessionId);
 
       router.push("/dashboard");
     } catch (error) {
-      console.error(
-        "Failed to complete interview session:",
-        error
-      );
+      console.error("Failed to complete interview session:", error);
 
       setSubmissionError(
         "Your answer was evaluated, but the interview could not be completed."
@@ -236,7 +217,17 @@ const handleContinueAfterEvaluation =
     } finally {
       setIsSubmittingAnswer(false);
     }
-  };
+  }, [evaluation, isLastQuestion, nextQuestion, sessionId, router]);
+
+  useEffect(() => {
+    if (!timer.isExpired) return;
+
+    if (!evaluation) return;
+
+    setTimeout(() => {
+      void handleContinueAfterEvaluation();
+    }, 0);
+  }, [timer.isExpired, evaluation, handleContinueAfterEvaluation]);
   const handlePreviousQuestion = () => {
   if (
     !hasPrevious ||

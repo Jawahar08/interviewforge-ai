@@ -53,7 +53,7 @@ export function useResume() {
     } catch (err: unknown) {
       console.error(err);
       const message = err instanceof Error ? err.message : "";
-      const axiosMessage = (err as any)?.response?.data?.message;
+      const axiosMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
       setError(axiosMessage || message || "Failed to analyze resume.");
       throw err;
     } finally {
