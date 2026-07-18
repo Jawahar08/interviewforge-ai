@@ -74,6 +74,64 @@ public class GeminiService {
                 
                 return getMockQuestionsJson(role, type);
             }
+
+            if (prompt.contains("Target Role:") && (prompt.contains("weeks") || prompt.contains("projects") || prompt.contains("WeekPlan"))) {
+                return """
+                {
+                  "title": "Personalized Learning Roadmap",
+                  "overallScore": 75,
+                  "estimatedDuration": "6 Weeks",
+                  "weeks": [
+                    {
+                      "week": 1,
+                      "topic": "Foundations & Core Principles",
+                      "tasks": [
+                        "Review primary concepts and theories relevant to the role.",
+                        "Study standards, best practices, and guidelines.",
+                        "Set up local development/working environment."
+                      ]
+                    },
+                    {
+                      "week": 2,
+                      "topic": "Core Implementation & Frameworks",
+                      "tasks": [
+                        "Hands-on exercises with key tools and software.",
+                        "Implement basic workflows and resolve common scenarios.",
+                        "Review case studies of typical implementations."
+                      ]
+                    },
+                    {
+                      "week": 3,
+                      "topic": "Advanced Scenarios & Integration",
+                      "tasks": [
+                        "Study security guidelines and performance optimization.",
+                        "Implement end-to-end integration and data flows.",
+                        "Conduct peer reviews and self-audits."
+                      ]
+                    }
+                  ],
+                  "projects": [
+                    {
+                      "title": "Capstone Implementation Project",
+                      "description": "A comprehensive real-world simulator project integrating all learned concepts and technologies.",
+                      "keyTechnologies": ["Core Frameworks", "Validation Tools", "Monitoring Suites"]
+                    }
+                  ],
+                  "resources": [
+                    {
+                      "name": "Official Domain Documentation",
+                      "type": "Documentation",
+                      "url": "https://example.com/docs"
+                    },
+                    {
+                      "name": "Recommended Study Guide",
+                      "type": "Guide",
+                      "url": "https://example.com/guide"
+                    }
+                  ]
+                }
+                """;
+            }
             
             if (prompt.contains("technical interview evaluator") || prompt.contains("CANDIDATE ANSWER:")) {
                 return """
