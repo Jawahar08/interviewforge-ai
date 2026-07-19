@@ -116,7 +116,11 @@ response = response
 int first = response.indexOf("{");
 int last = response.lastIndexOf("}");
 
-response = response.substring(first, last + 1);
+if (first >= 0 && last > first) {
+    response = response.substring(first, last + 1);
+} else {
+    throw new RuntimeException("Failed to extract valid JSON learning roadmap from response. Raw response: " + response);
+}
 
 return objectMapper.readValue(
         response,

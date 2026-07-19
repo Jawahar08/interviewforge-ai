@@ -51,31 +51,48 @@ public class GeminiService {
         }
 
         if ("mock-dev-key".equals(apiKey) || apiKey == null || apiKey.isBlank() || apiKey.contains("mock")) {
-            if (prompt.contains("Generate exactly") || prompt.contains("valid JSON") || prompt.contains("questionText")) {
-                String role = "Software Engineer";
-                if (prompt.contains("Role:")) {
-                    String[] parts = prompt.split("Role:");
-                    if (parts.length > 1) {
-                        String afterRole = parts[1].trim();
-                        int nextNewline = afterRole.indexOf("\n");
-                        role = nextNewline != -1 ? afterRole.substring(0, nextNewline).trim() : afterRole;
-                    }
+            if (prompt.contains("ATS Resume Reviewer") || prompt.contains("ATS-oriented scoring") || prompt.contains("atsScore")) {
+                return """
+                {
+                  "atsScore": 85,
+                  "strengths": [
+                    "Strong foundation in modern software engineering principles and object-oriented design.",
+                    "Extensive experience developing scalable full-stack web applications.",
+                    "Solid proficiency in Java, Spring Boot, React, and Cloud technologies."
+                  ],
+                  "weaknesses": [
+                    "Limited exposure to enterprise-level Kubernetes orchestration in production environments.",
+                    "Could benefit from more visible metrics showing business impact of previous projects."
+                  ],
+                  "missingSkills": [
+                    "Docker / Containerization",
+                    "Kubernetes",
+                    "CI/CD Pipelines",
+                    "System Design"
+                  ],
+                  "improvements": [
+                    "Include clear metrics for each project (e.g., 'reduced API latency by 35%').",
+                    "Add a dedicated Skills section grouped by category.",
+                    "Incorporate cloud certs or containerization skills explicitly in your technical summary."
+                  ],
+                  "suggestedProjects": [
+                    "Microservices E-commerce System: Build a Spring Boot backend with RabbitMQ and deploy on Kubernetes.",
+                    "Serverless Analytics Pipeline: Build a real-time event consumer using AWS Lambda and DynamoDB."
+                  ],
+                  "interviewQuestions": [
+                    "Explain the difference between optimistic and pessimistic locking in JPA.",
+                    "How would you optimize a slow-performing database query in Spring Boot?",
+                    "Can you describe your experience with RESTful API versioning and lifecycle management?"
+                  ],
+                  "learningResources": [
+                    "Spring Security Course - https://example.com/spring",
+                    "System Design Primer - https://github.com/donnemartin/system-design-primer"
+                  ]
                 }
-                
-                String type = "Technical";
-                if (prompt.contains("Interview Type/Focus:")) {
-                    String[] parts = prompt.split("Interview Type/Focus:");
-                    if (parts.length > 1) {
-                        String afterType = parts[1].trim();
-                        int nextNewline = afterType.indexOf("\n");
-                        type = nextNewline != -1 ? afterType.substring(0, nextNewline).trim() : afterType;
-                    }
-                }
-                
-                return getMockQuestionsJson(role, type);
+                """;
             }
 
-            if (prompt.contains("Target Role:") && (prompt.contains("weeks") || prompt.contains("projects") || prompt.contains("WeekPlan"))) {
+            if (prompt.contains("personalized learning roadmap") || prompt.contains("estimatedDuration") || (prompt.contains("Target Role:") && (prompt.contains("weeks") || prompt.contains("projects") || prompt.contains("WeekPlan")))) {
                 return """
                 {
                   "title": "Personalized Learning Roadmap",
@@ -131,6 +148,30 @@ public class GeminiService {
                   ]
                 }
                 """;
+            }
+
+            if (prompt.contains("Generate exactly") || prompt.contains("questionText")) {
+                String role = "Software Engineer";
+                if (prompt.contains("Role:")) {
+                    String[] parts = prompt.split("Role:");
+                    if (parts.length > 1) {
+                        String afterRole = parts[1].trim();
+                        int nextNewline = afterRole.indexOf("\n");
+                        role = nextNewline != -1 ? afterRole.substring(0, nextNewline).trim() : afterRole;
+                    }
+                }
+                
+                String type = "Technical";
+                if (prompt.contains("Interview Type/Focus:")) {
+                    String[] parts = prompt.split("Interview Type/Focus:");
+                    if (parts.length > 1) {
+                        String afterType = parts[1].trim();
+                        int nextNewline = afterType.indexOf("\n");
+                        type = nextNewline != -1 ? afterType.substring(0, nextNewline).trim() : afterType;
+                    }
+                }
+                
+                return getMockQuestionsJson(role, type);
             }
             
             if (prompt.contains("technical interview evaluator") || prompt.contains("CANDIDATE ANSWER:")) {

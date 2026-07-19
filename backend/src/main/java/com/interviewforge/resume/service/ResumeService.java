@@ -77,6 +77,9 @@ public class ResumeService {
                 resumeText = pdfExtractorService.extract(file);
             }
 
+            if (resumeText != null) {
+                resumeText = resumeText.replace("\u0000", "");
+            }
             resume.setRawText(resumeText);
             
             // Analyze with Gemini
