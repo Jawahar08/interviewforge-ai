@@ -56,6 +56,10 @@ public class User {
     private String passwordHash;
 
     private String role;
+
+    @Column(name = "target_role")
+    private String targetRole;
+
     @JsonIgnore
 @OneToMany(mappedBy = "user")
 private List<Interview> interviews;

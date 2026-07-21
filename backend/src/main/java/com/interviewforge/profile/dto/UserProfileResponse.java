@@ -1,14 +1,16 @@
 package com.interviewforge.profile.dto;
 
+import java.util.UUID;
+
 public class UserProfileResponse {
 
-    private Long userId;
+    private UUID userId;
     private String name;
     private String email;
     private String targetRole;
 
     public UserProfileResponse(
-            Long userId,
+            UUID userId,
             String name,
             String email,
             String targetRole) {
@@ -19,7 +21,7 @@ public class UserProfileResponse {
         this.targetRole = targetRole;
     }
 
-    public Long getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
