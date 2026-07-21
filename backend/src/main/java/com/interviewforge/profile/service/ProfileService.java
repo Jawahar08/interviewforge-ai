@@ -1,5 +1,7 @@
 package com.interviewforge.profile.service;
 
+import java.util.List;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,8 +11,12 @@ import com.interviewforge.auth.entity.User;
 import com.interviewforge.auth.repository.UserRepository;
 import com.interviewforge.common.exception.InvalidCredentialsException;
 import com.interviewforge.common.exception.UserNotFoundByEmailException;
+import com.interviewforge.interview.entity.Interview;
+import com.interviewforge.interview.repository.InterviewRepository;
 import com.interviewforge.profile.dto.ProfileUpdateRequest;
 import com.interviewforge.profile.dto.UserProfileResponse;
+import com.interviewforge.resume.entity.Resume;
+import com.interviewforge.resume.repository.ResumeRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +26,8 @@ public class ProfileService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final InterviewRepository interviewRepository;
+    private final ResumeRepository resumeRepository;
 
     @Transactional(readOnly = true)
     public UserProfileResponse getProfile() {
@@ -51,6 +59,20 @@ public class ProfileService {
 
         User savedUser = userRepository.save(user);
         return toResponse(savedUser);
+    }
+
+    @Transactional
+    public void clearInterviews() {
+        User user = getCurrentUser();
+        List<Interview> interviews = interviewRepository.findByUser(user);
+        interviewRepository.deleteAll(interviews);
+    }
+
+    @Transactional
+    public void clearResumes() {
+        User user = getCurrentUser();
+        List<Resume> resumes = resumeRepository.findByUserOrderByCreatedAtDesc(user);
+        resumeRepository.deleteAll(resumes);
     }
 
     private User getCurrentUser() {

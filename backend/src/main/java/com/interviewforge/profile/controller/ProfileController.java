@@ -1,5 +1,6 @@
 package com.interviewforge.profile.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +49,26 @@ public class ProfileController {
                 true,
                 "Profile updated successfully",
                 profileService.updateProfile(request)
+        );
+    }
+
+    @DeleteMapping("/interviews")
+    public ApiResponse<Void> clearInterviews() {
+        profileService.clearInterviews();
+        return new ApiResponse<>(
+                true,
+                "All interviews cleared successfully",
+                null
+        );
+    }
+
+    @DeleteMapping("/resumes")
+    public ApiResponse<Void> clearResumes() {
+        profileService.clearResumes();
+        return new ApiResponse<>(
+                true,
+                "All resumes cleared successfully",
+                null
         );
     }
 }
