@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 100" width="900" height="100">
+  <defs>
+    <linearGradient id="ftbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="100%" style="stop-color:#0d0f25"/>
+    </linearGradient>
+    <linearGradient id="ftwave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7b2ff7;stop-opacity:0.4">
+        <animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#ff6b6b;#7b2ff7" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#00d2ff;stop-opacity:0.3">
+        <animate attributeName="stop-color" values="#00d2ff;#64ffda;#ffd93d;#00d2ff" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#64ffda;stop-opacity:0.4">
+        <animate attributeName="stop-color" values="#64ffda;#ff6b6b;#7b2ff7;#64ffda" dur="8s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+  </defs>
+
+  <style>
+    @keyframes textPulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+    .ft-text { animation: textPulse 3s ease-in-out infinite; }
+    @keyframes particle { 0%,100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+    .fp { animation: particle 4s ease-in-out infinite; }
+  </style>
+
+  <rect width="900" height="100" fill="url(#ftbg)" rx="0 0 12 12"/>
+
+  <!-- Wave 1 -->
+  <path fill="url(#ftwave)" opacity="0.2">
+    <animate attributeName="d" values="M0,30 Q150,10 300,25 T600,15 T900,30 L900,100 L0,100 Z;M0,20 Q150,35 300,15 T600,30 T900,20 L900,100 L0,100 Z;M0,30 Q150,10 300,25 T600,15 T900,30 L900,100 L0,100 Z" dur="7s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Wave 2 -->
+  <path fill="url(#ftwave)" opacity="0.12">
+    <animate attributeName="d" values="M0,40 Q200,25 400,35 T700,28 T900,40 L900,100 L0,100 Z;M0,30 Q200,45 400,28 T700,38 T900,30 L900,100 L0,100 Z;M0,40 Q200,25 400,35 T700,28 T900,40 L900,100 L0,100 Z" dur="9s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Particles -->
+  <circle class="fp" cx="100" cy="40" r="1" fill="#00d2ff" style="animation-delay: 0s"/>
+  <circle class="fp" cx="250" cy="30" r="1" fill="#7b2ff7" style="animation-delay: 0.5s"/>
+  <circle class="fp" cx="400" cy="45" r="1" fill="#64ffda" style="animation-delay: 1s"/>
+  <circle class="fp" cx="550" cy="35" r="1" fill="#ffd93d" style="animation-delay: 1.5s"/>
+  <circle class="fp" cx="700" cy="42" r="1" fill="#ff6b6b" style="animation-delay: 2s"/>
+  <circle class="fp" cx="820" cy="38" r="1" fill="#00d2ff" style="animation-delay: 2.5s"/>
+
+  <!-- Footer text -->
+  <text x="450" y="70" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#ccd6f6" class="ft-text" letter-spacing="4" font-weight="500">
+    Practice · Analyze · Improve · Get Hired 🚀
+  </text>
+
+  <text x="450" y="90" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" letter-spacing="2" opacity="0.6">
+    Built with ⚡ by Jawahar Bharathi
+  </text>
+</svg>

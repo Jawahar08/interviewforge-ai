@@ -6,15 +6,13 @@
 
 <div align="center">
 
-<!-- ─────────── ANIMATED WAVE HEADER ─────────── -->
+<!-- ─────────── ANIMATED HERO BANNER (Custom SVG with aurora, particles, terminal) ─────────── -->
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a1a,8:0d0f25,18:1a0533,30:4c1d95,42:7b2ff7,55:00d2ff,68:7b2ff7,80:4c1d95,92:1a0533,100:0a0a1a&height=300&section=header&text=⚡%20InterviewForge%20AI&fontSize=62&fontColor=ffffff&animation=twinkling&fontAlignY=28&desc=Next-Gen%20AI%20Interview%20Simulation%20%E2%80%A2%20Resume%20Intelligence%20%E2%80%A2%20Career%20Roadmap%20Engine%20%E2%80%A2%20Company%20Prep&descSize=14&descAlignY=52&descAlign=50" width="100%" />
+<a href="#-quick-start">
+  <img src=".github/assets/hero-animated.svg" alt="InterviewForge AI — Next-Gen AI Interview Simulation Platform" width="100%" />
+</a>
 
-<!-- ─────────── ANIMATED TYPING TERMINAL ─────────── -->
-
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=26&duration=2200&pause=600&color=00D2FF&center=true&vCenter=true&multiline=true&repeat=true&random=false&width=820&height=120&lines=%24+interviewforge+--engine+gemini+--mode+company-prep;Generating+Google+interview+questions...+%E2%9C%93;%24+resume+analyze+--ats-score+--roadmap+--premium;Score%3A+94%2F100+%7C+You're+ready+to+get+hired+%F0%9F%9A%80" alt="Terminal" /></a>
-
-<br /><br />
+<br />
 
 <!-- ─────────── SHIELD.IO BADGES ─────────── -->
 
@@ -30,27 +28,19 @@
 
 <br />
 
-<!-- ─────────── TECH STACK ICONS ─────────── -->
+<!-- ─────────── ANIMATED STATS CARDS (Custom SVG with neon glow) ─────────── -->
 
-<img src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,java,spring,postgres,maven,docker,github&perline=10" alt="Tech Stack" />
-
-<br /><br />
-
-<!-- ─────────── ANIMATED STATS COUNTERS ─────────── -->
-
-<table>
-<tr>
-<td align="center"><h1>30+</h1><sub>Career Roles</sub></td>
-<td align="center"><h1>6</h1><sub>Interview Types</sub></td>
-<td align="center"><h1>12</h1><sub>Target Companies</sub></td>
-<td align="center"><h1>24</h1><sub>Backend Domains</sub></td>
-<td align="center"><h1>∞</h1><sub>AI Questions</sub></td>
-</tr>
-</table>
+<img src=".github/assets/stats-animated.svg" alt="Platform Stats" width="100%" />
 
 <br />
 
 > **InterviewForge AI** is a production-grade, full-stack platform that simulates realistic AI-powered interviews across **30+ career domains**, evaluates answers with multi-dimensional scoring, provides ATS resume intelligence, generates personalized career roadmaps, and offers **company-targeted premium prep for FAANG & top-tier companies** — all driven by **Google Gemini 2.5 Flash**.
+
+<br />
+
+<!-- ─────────── ANIMATED FEATURES STRIP (Custom SVG with floating cards + pipeline) ─────────── -->
+
+<img src=".github/assets/features-animated.svg" alt="Feature Overview" width="100%" />
 
 <br />
 
@@ -70,8 +60,8 @@
 
 <br />
 
-<!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:7b2ff7,50:00d2ff,75:7b2ff7,100:0a0a1a&height=2" width="100%" />
+<!-- ═══════════════════════════ ANIMATED GRADIENT DIVIDER ═══════════════════════════ -->
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -124,7 +114,7 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:ff6b6b,50:ffd93d,75:ff6b6b,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -278,7 +268,7 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:ffd93d,50:ff6b6b,75:ffd93d,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -345,7 +335,7 @@ flowchart LR
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:00d2ff,50:64ffda,75:00d2ff,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -548,7 +538,7 @@ erDiagram
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:7b2ff7,50:ff6b6b,75:7b2ff7,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -775,7 +765,7 @@ flowchart TD
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:64ffda,50:00d2ff,75:64ffda,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -820,7 +810,7 @@ flowchart LR
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:7b2ff7,50:ffd93d,75:7b2ff7,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -828,34 +818,10 @@ flowchart LR
 
 <div align="center">
 
-```
-    ┌──────────────────────────────────────────────────────────────────────┐
-    │                      INTERVIEWFORGE AI STACK                         │
-    │                                                                      │
-    │  ┌──────────────┐  ┌──────────────┐  ┌────────────────────────┐    │
-    │  │   FRONTEND   │  │   BACKEND    │  │      INTELLIGENCE      │    │
-    │  │              │  │              │  │                        │    │
-    │  │  Next.js 16  │  │ Spring Boot 3│  │  Google Gemini 2.5     │    │
-    │  │  React 19    │  │ Java 23      │  │  Flash API             │    │
-    │  │  TypeScript 5│  │ Hibernate    │  │                        │    │
-    │  │  Tailwind CSS│  │ Spring Sec   │  │  Apache PDFBox         │    │
-    │  │  Zustand     │  │ JWT (JJWT)   │  │  (Resume Parsing)     │    │
-    │  │  Axios       │  │ BCrypt       │  │                        │    │
-    │  │  Radix UI    │  │ Swagger/OAS  │  │                        │    │
-    │  │  Lucide Icons│  │ Maven        │  │                        │    │
-    │  │  Sonner Toast│  │ Flyway       │  │                        │    │
-    │  └──────┬───────┘  └──────┬───────┘  └───────────┬────────────┘    │
-    │         │                 │                       │                  │
-    │         └────────┬────────┴───────────────────────┘                  │
-    │                  │                                                    │
-    │           ┌──────┴───────┐    ┌──────────────┐                      │
-    │           │  PostgreSQL  │    │ GitHub Actions│                      │
-    │           │  Database    │    │ CI/CD         │                      │
-    │           └──────────────┘    └──────────────┘                      │
-    └──────────────────────────────────────────────────────────────────────┘
-```
+<img src=".github/assets/techstack-animated.svg" alt="Tech Stack" width="100%" />
 
 </div>
+
 
 <details open>
 <summary><b>🖥️ Frontend</b></summary>
@@ -913,7 +879,7 @@ flowchart LR
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:ff6b6b,50:ffd93d,75:ff6b6b,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -1037,7 +1003,7 @@ backend/src/main/java/com/interviewforge/
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:00d2ff,50:7b2ff7,75:00d2ff,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -1150,7 +1116,7 @@ Base URL: `http://localhost:8080/api/v1` &nbsp;·&nbsp; Swagger: `http://localho
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:ffd93d,50:ff6b6b,75:ffd93d,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -1213,7 +1179,7 @@ cd backend && mvn clean compile       # Backend compile check
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:64ffda,50:00d2ff,75:64ffda,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -1375,7 +1341,7 @@ MIT — see [LICENSE](LICENSE) for details.
 <br />
 
 <!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a1a,25:7b2ff7,50:00d2ff,75:7b2ff7,100:0a0a1a&height=2" width="100%" />
+<img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
 
@@ -1407,7 +1373,8 @@ Java backend engineering, secure APIs, AI integration, and scalable SaaS.
 
 <br /><br />
 
-<!-- ─────────── ANIMATED FOOTER WAVE ─────────── -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a1a,8:0d0f25,18:1a0533,30:4c1d95,42:ff6b6b,55:7b2ff7,68:00d2ff,80:4c1d95,92:1a0533,100:0a0a1a&height=160&section=footer&text=Practice%20·%20Analyze%20·%20Improve%20·%20Get%20Hired%20🚀&fontSize=20&fontColor=ccd6f6&fontAlignY=72&animation=twinkling" width="100%" />
+<!-- ─────────── ANIMATED FOOTER (Custom SVG with waves + particles) ─────────── -->
+<img src=".github/assets/footer-animated.svg" alt="Practice · Analyze · Improve · Get Hired" width="100%" />
 
 </div>
+
