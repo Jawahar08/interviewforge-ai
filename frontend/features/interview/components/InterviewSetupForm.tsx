@@ -25,6 +25,7 @@ import { useInterviewStore } from "@/features/interview/store/interview.store";
 import { interviewApi } from "@/features/interview/api/interview.api";
 import { sessionApi } from "@/features/interview/api/interview-session.api";
 import { useAuthStore } from "@/shared/store/auth.store";
+import { useAppStore } from "@/shared/store/app.store";
 import { apiClient } from "@/lib/api/client";
 import { Button } from "@/shared/components/ui/button";
 import type {
@@ -87,6 +88,10 @@ export function InterviewSetupForm() {
     useState<string | null>(null);
   const [upgrading, setUpgrading] = useState(false);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+
+  const currency = useAppStore((state) => state.currency);
+  const getCurrencyInfo = useAppStore((state) => state.getCurrencyInfo);
+  const currencyInfo = getCurrencyInfo();
 
   const setInterviewConfig = useInterviewStore(
     (state) => state.setInterviewConfig
@@ -408,7 +413,10 @@ export function InterviewSetupForm() {
               <div className="rounded-2xl border border-violet-500/20 bg-violet-500/[0.03] p-4 text-left space-y-3">
                 <h4 className="text-sm font-semibold text-white flex justify-between">
                   <span>Pro Membership</span>
-                  <span className="text-violet-400">$19/mo</span>
+                  <span className="text-violet-400">
+                    {currencyInfo.symbol}
+                    {currencyInfo.price.toLocaleString()}/mo
+                  </span>
                 </h4>
                 <ul className="text-xs text-slate-300 space-y-2 list-disc list-inside">
                   <li>Google, Meta, Amazon custom questions</li>
