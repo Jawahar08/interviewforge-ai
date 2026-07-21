@@ -2,6 +2,7 @@ package com.interviewforge.profile.controller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,6 +70,15 @@ public class ProfileController {
                 true,
                 "All resumes cleared successfully",
                 null
+        );
+    }
+
+    @PostMapping("/upgrade")
+    public ApiResponse<UserProfileResponse> upgradeToPremium() {
+        return new ApiResponse<>(
+                true,
+                "Account upgraded to Premium successfully",
+                profileService.upgradeToPremium()
         );
     }
 }

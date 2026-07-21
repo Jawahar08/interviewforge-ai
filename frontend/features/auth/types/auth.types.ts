@@ -12,6 +12,7 @@ export interface LoginRequest {
 export interface AuthResponse {
   email: string;
   role: string;
+  isPremium?: boolean;
   token: string;
   message: string | null;
 }

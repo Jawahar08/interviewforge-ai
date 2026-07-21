@@ -8,17 +8,20 @@ public class UserProfileResponse {
     private String name;
     private String email;
     private String targetRole;
+    private Boolean isPremium;
 
     public UserProfileResponse(
             UUID userId,
             String name,
             String email,
-            String targetRole) {
+            String targetRole,
+            Boolean isPremium) {
 
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.targetRole = targetRole;
+        this.isPremium = isPremium;
     }
 
     public UUID getUserId() {
@@ -35,5 +38,9 @@ public class UserProfileResponse {
 
     public String getTargetRole() {
         return targetRole;
+    }
+
+    public Boolean getIsPremium() {
+        return isPremium;
     }
 }

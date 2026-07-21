@@ -40,6 +40,8 @@ public class Interview {
 
     private String difficulty;
 
+    private String company;
+
     private LocalDateTime createdAt;
     @ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name = "user_id")

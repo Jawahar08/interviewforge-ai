@@ -56,10 +56,18 @@ User user = userRepository.findByEmail(email)
         .orElseThrow(() ->
                 new RuntimeException("User not found"));
 
+        String company = request.getCompany();
+        if (company != null && !company.trim().isEmpty()) {
+            if (user.getIsPremium() == null || !user.getIsPremium()) {
+                throw new RuntimeException("Company-based mock interview prep is a Premium feature. Please upgrade your account to unlock this feature.");
+            }
+        }
+
         Interview interview = Interview.builder()
         .title(request.getTitle())
         .role(request.getRole())
         .difficulty(request.getDifficulty())
+        .company(company)
         .createdAt(LocalDateTime.now())
         .user(user)
         .build();
@@ -110,9 +118,17 @@ User user = userRepository.findByEmail(email)
     throw new RuntimeException("Access denied");
 }
 
+    String company = request.getCompany();
+    if (company != null && !company.trim().isEmpty()) {
+        if (user.getIsPremium() == null || !user.getIsPremium()) {
+            throw new RuntimeException("Company-based mock interview prep is a Premium feature. Please upgrade your account to unlock this feature.");
+        }
+    }
+
     interview.setTitle(request.getTitle());
     interview.setRole(request.getRole());
     interview.setDifficulty(request.getDifficulty());
+    interview.setCompany(company);
 
     return interviewRepository.save(interview);
 }

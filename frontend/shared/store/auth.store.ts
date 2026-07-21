@@ -6,6 +6,7 @@ import { persist } from "zustand/middleware";
 export interface AuthUser {
   email: string;
   role: string;
+  isPremium?: boolean;
 }
 
 export interface AuthState {

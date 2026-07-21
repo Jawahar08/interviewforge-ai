@@ -60,8 +60,15 @@ public class User {
     @Column(name = "target_role")
     private String targetRole;
 
+    @Column(name = "is_premium")
+    @Builder.Default
+    private Boolean isPremium = false;
+
     @JsonIgnore
 @OneToMany(mappedBy = "user")
 private List<Interview> interviews;
 
+    public Boolean getIsPremium() {
+        return isPremium != null && isPremium;
+    }
 }

@@ -47,6 +47,7 @@ public class AuthService {
         return AuthResponse.builder()
                 .email(savedUser.getEmail())
                 .role(savedUser.getRole())
+                .isPremium(savedUser.getIsPremium())
                 .token(token)
                 .message("User registered successfully")
                 .build();
@@ -78,6 +79,7 @@ public class AuthService {
         return AuthResponse.builder()
                 .email(user.getEmail())
                 .role(user.getRole())
+                .isPremium(user.getIsPremium())
                 .token(token)
                 .message("Login successful")
                 .build();

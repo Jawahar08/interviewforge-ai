@@ -68,6 +68,7 @@ const onSubmit = async (values: LoginFormData) => {
       {
         email: response.email,
         role: response.role,
+        isPremium: response.isPremium,
       },
       response.token
     );

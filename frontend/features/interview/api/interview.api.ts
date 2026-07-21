@@ -10,6 +10,7 @@ export interface CreateBackendInterviewRequest {
   title: string;
   role: InterviewRole;
   difficulty: InterviewDifficulty;
+  company?: string;
 }
 
 export interface BackendInterview {

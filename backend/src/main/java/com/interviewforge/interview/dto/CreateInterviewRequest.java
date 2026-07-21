@@ -16,4 +16,6 @@ public class CreateInterviewRequest {
 
     @NotBlank(message = "Difficulty is required")
     private String difficulty;
+
+    private String company;
 }

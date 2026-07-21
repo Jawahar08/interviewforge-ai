@@ -75,6 +75,14 @@ public class ProfileService {
         resumeRepository.deleteAll(resumes);
     }
 
+    @Transactional
+    public UserProfileResponse upgradeToPremium() {
+        User user = getCurrentUser();
+        user.setIsPremium(true);
+        User savedUser = userRepository.save(user);
+        return toResponse(savedUser);
+    }
+
     private User getCurrentUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByEmail(email)
@@ -86,7 +94,8 @@ public class ProfileService {
                 user.getId(),
                 user.getFullName(),
                 user.getEmail(),
-                user.getTargetRole()
+                user.getTargetRole(),
+                user.getIsPremium()
         );
     }
 }

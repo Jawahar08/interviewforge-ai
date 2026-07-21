@@ -61,9 +61,14 @@ interviewRepository.findAll().forEach(System.out::println);
             focus = "Mixed / Comprehensive (A balanced combination of technical domain knowledge, behavioral, and situational questions)";
         }
 
+        String companyFocus = "";
+        if (interview.getCompany() != null && !interview.getCompany().trim().isEmpty()) {
+            companyFocus = "\nTarget Company:\n" + interview.getCompany() + " (Specifically tailored to this company's hiring bar, technical standards, cultural values, and typical loop style)\n";
+        }
+
         String prompt = """
 Generate exactly %d interview questions.
-
+%s
 Role:
 %s
 
@@ -87,6 +92,7 @@ Rules:
 """
 .formatted(
                 numberOfQuestions,
+                companyFocus,
                 interview.getRole(),
                 focus,
                 interview.getDifficulty());
