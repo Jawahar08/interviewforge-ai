@@ -15,6 +15,7 @@ import {
   Target,
   TrendingUp,
   RefreshCw,
+  UserCheck,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -54,19 +55,25 @@ export default function DashboardPage() {
 
   const quickActions = [
     {
-      title: "Start Mock Interview",
+      title: "HR Resume Round",
+      description: "Practice HR questions derived from your resume.",
+      href: "/resume?tab=hr-round",
+      icon: UserCheck,
+    },
+    {
+      title: "Start Technical Mock",
       description: "Practice with adaptive AI-generated questions.",
       href: "/interview",
       icon: Play,
     },
     {
-      title: "Analyze Resume",
+      title: "Analyze Resume AI",
       description: "Discover strengths, gaps, and interview risks.",
       href: "/resume",
       icon: FileSearch,
     },
     {
-      title: "View Roadmap",
+      title: "View Career Roadmap",
       description: "Follow your personalized preparation plan.",
       href: "/roadmap",
       icon: Target,

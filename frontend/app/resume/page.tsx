@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { useResume } from "@/features/resume/hooks/use-resume";
 import { HrRoundSection } from "@/features/resume/components/HrRoundSection";
 import {
@@ -36,8 +37,16 @@ export default function ResumePage() {
     retryResume,
   } = useResume();
 
+  const searchParams = useSearchParams();
   const [dragActive, setDragActive] = useState(false);
   const [activeTab, setActiveTab] = useState<"overview" | "projects" | "practice" | "hr-round">("overview");
+
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam === "hr-round") {
+      setActiveTab("hr-round");
+    }
+  }, [searchParams]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch resume list on mount
