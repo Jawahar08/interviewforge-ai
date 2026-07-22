@@ -255,7 +255,7 @@ export default function ResumePage() {
                         <div className="flex items-center gap-2 text-xs">
                           {item.status === "COMPLETED" && (
                             <span className="inline-flex items-center text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded text-[10px]">
-                              ATS {item.atsScore}%
+                              ATS {item.atsScore ?? (item as any).atsScore ?? 0}%
                             </span>
                           )}
                           {item.status === "PROCESSING" && (
@@ -334,37 +334,44 @@ export default function ResumePage() {
                 <div className="flex items-center gap-4">
                   <div className="relative w-20 h-20">
                     {/* SVG Circle indicator */}
-                    <svg className="w-full h-full transform -rotate-90">
-                      <circle
-                        cx="40"
-                        cy="40"
-                        r="32"
-                        className="stroke-zinc-800 fill-transparent"
-                        strokeWidth="5"
-                      />
-                      <circle
-                        cx="40"
-                        cy="40"
-                        r="32"
-                        className={`fill-transparent transition-all duration-1000 ${getScoreColor(
-                          activeResume.atsScore || 0
-                        )}`}
-                        strokeWidth="6"
-                        strokeDasharray={2 * Math.PI * 32}
-                        strokeDashoffset={
-                          2 * Math.PI * 32 * (1 - (activeResume.atsScore || 0) / 100)
-                        }
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-lg font-extrabold text-white">
-                        {activeResume.atsScore}%
-                      </span>
-                      <span className="text-[9px] uppercase tracking-wider text-zinc-400">
-                        ATS
-                      </span>
-                    </div>
+                    {(() => {
+                      const scoreVal = activeResume.atsScore ?? (activeResume as any).atsScore ?? 0;
+                      return (
+                        <>
+                          <svg className="w-full h-full transform -rotate-90">
+                            <circle
+                              cx="40"
+                              cy="40"
+                              r="32"
+                              className="stroke-zinc-800 fill-transparent"
+                              strokeWidth="5"
+                            />
+                            <circle
+                              cx="40"
+                              cy="40"
+                              r="32"
+                              className={`fill-transparent transition-all duration-1000 ${getScoreColor(
+                                scoreVal
+                              )}`}
+                              strokeWidth="6"
+                              strokeDasharray={2 * Math.PI * 32}
+                              strokeDashoffset={
+                                2 * Math.PI * 32 * (1 - scoreVal / 100)
+                              }
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span className="text-lg font-extrabold text-white">
+                              {scoreVal}%
+                            </span>
+                            <span className="text-[9px] uppercase tracking-wider text-zinc-400">
+                              ATS
+                            </span>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                   <div>
                     <div className="text-xs font-semibold text-zinc-300">ATS Assessment</div>

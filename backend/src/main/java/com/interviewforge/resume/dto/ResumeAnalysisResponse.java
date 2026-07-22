@@ -7,12 +7,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResumeAnalysisResponse {
 
+    @JsonProperty("atsScore")
     private Integer atsScore;
 
     private List<String> strengths;

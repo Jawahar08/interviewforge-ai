@@ -52,6 +52,8 @@ public class Resume {
     @Column(columnDefinition = "TEXT")
     private String errorMessage;
 
+    @com.fasterxml.jackson.annotation.JsonProperty("atsScore")
+    @Column(name = "ats_score")
     private Integer atsScore;
 
     @JsonIgnore
