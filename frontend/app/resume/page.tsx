@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useResume } from "@/features/resume/hooks/use-resume";
+import { HrRoundSection } from "@/features/resume/components/HrRoundSection";
 import {
   UploadCloud,
   FileText,
@@ -16,6 +17,7 @@ import {
   ArrowRight,
   Shield,
   Clock,
+  UserCheck,
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import { motion } from "framer-motion";
@@ -35,7 +37,7 @@ export default function ResumePage() {
   } = useResume();
 
   const [dragActive, setDragActive] = useState(false);
-  const [activeTab, setActiveTab] = useState<"overview" | "projects" | "practice">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "projects" | "practice" | "hr-round">("overview");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch resume list on mount
@@ -362,10 +364,10 @@ export default function ResumePage() {
               </div>
 
               {/* Navigation Tabs */}
-              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-900/60 border border-zinc-900 max-w-sm">
+              <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-zinc-900/60 border border-zinc-900 w-full sm:w-auto">
                 <button
                   onClick={() => setActiveTab("overview")}
-                  className={`flex-1 py-2 px-3 text-xs font-semibold rounded-lg transition-all ${
+                  className={`py-2 px-3.5 text-xs font-semibold rounded-lg transition-all ${
                     activeTab === "overview"
                       ? "bg-zinc-800 text-white shadow-sm border border-zinc-700/50"
                       : "text-zinc-400 hover:text-zinc-200"
@@ -375,7 +377,7 @@ export default function ResumePage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("projects")}
-                  className={`flex-1 py-2 px-3 text-xs font-semibold rounded-lg transition-all ${
+                  className={`py-2 px-3.5 text-xs font-semibold rounded-lg transition-all ${
                     activeTab === "projects"
                       ? "bg-zinc-800 text-white shadow-sm border border-zinc-700/50"
                       : "text-zinc-400 hover:text-zinc-200"
@@ -385,7 +387,7 @@ export default function ResumePage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("practice")}
-                  className={`flex-1 py-2 px-3 text-xs font-semibold rounded-lg transition-all ${
+                  className={`py-2 px-3.5 text-xs font-semibold rounded-lg transition-all ${
                     activeTab === "practice"
                       ? "bg-zinc-800 text-white shadow-sm border border-zinc-700/50"
                       : "text-zinc-400 hover:text-zinc-200"
@@ -393,10 +395,32 @@ export default function ResumePage() {
                 >
                   Practice Prep
                 </button>
+                <button
+                  onClick={() => setActiveTab("hr-round")}
+                  className={`relative py-2 px-3.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5 ${
+                    activeTab === "hr-round"
+                      ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-500/20 border border-violet-400/30"
+                      : "text-violet-300 hover:text-white hover:bg-violet-950/30"
+                  }`}
+                >
+                  <UserCheck className="w-3.5 h-3.5" />
+                  <span>HR Round Simulator</span>
+                  <span className="rounded bg-violet-400/20 border border-violet-400/30 px-1 py-0.2 text-[9px] font-bold text-violet-200">
+                    AI Persona
+                  </span>
+                </button>
               </div>
 
               {/* Tab Contents */}
               <div className="min-h-[300px]">
+                {activeTab === "hr-round" && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <HrRoundSection resumeId={activeResume.id} />
+                  </motion.div>
+                )}
                 {activeTab === "overview" && (
                   <motion.div
                     initial={{ opacity: 0 }}

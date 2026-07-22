@@ -48,4 +48,19 @@ export const resumeApi = {
     );
     return response.data.data;
   },
+
+  getHrQuestions: async (id: number) => {
+    const response = await apiClient.get<ApiResponse<import("../types/resume.types").HrQuestion[]>>(
+      `/resume/${id}/hr-questions`
+    );
+    return response.data.data;
+  },
+
+  evaluateHrAnswer: async (id: number, request: import("../types/resume.types").HrEvaluationRequest) => {
+    const response = await apiClient.post<ApiResponse<import("../types/resume.types").HrEvaluationResponse>>(
+      `/resume/${id}/hr-evaluate`,
+      request
+    );
+    return response.data.data;
+  },
 };

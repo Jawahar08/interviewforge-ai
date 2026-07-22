@@ -51,6 +51,14 @@ public class GeminiService {
         }
 
         if ("mock-dev-key".equals(apiKey) || apiKey == null || apiKey.isBlank() || apiKey.contains("mock")) {
+            if (prompt.contains("Senior HR Manager") || prompt.contains("generate 5 targeted HR questions")) {
+                return getMockHrQuestionsJson();
+            }
+
+            if (prompt.contains("STAR (Situation, Task, Action, Result)") || prompt.contains("HR Manager evaluating")) {
+                return getMockHrEvaluationJson();
+            }
+
             if (prompt.contains("ATS Resume Reviewer") || prompt.contains("ATS-oriented scoring") || prompt.contains("atsScore")) {
                 return """
                 {
@@ -654,5 +662,126 @@ Maximum 120 words.
           }
         ]
         """.formatted(cleanRole, cleanRole, cleanRole);
+    }
+
+    public String generateHrQuestionsFromResume(String resumeText) {
+        if (resumeText == null || resumeText.isBlank()) {
+            throw new IllegalArgumentException("Resume text cannot be empty for HR question generation");
+        }
+
+        String prompt = """
+                You are a Senior HR Manager and Talent Acquisition Lead conducting an HR Round interview.
+
+                Analyze the candidate's resume below. Behave like an HR interviewer and generate 5 targeted HR questions derived DIRECTLY from their actual experience, projects, employment history, and potential career transition points listed on their resume.
+
+                Return ONLY valid JSON array with exact structure:
+                [
+                  {
+                    "id": "hr-1",
+                    "question": "<Specific HR question referencing candidate's actual projects or experience from resume>",
+                    "category": "<e.g. Behavioral & Conflict / Resume Project Deep-Dive / Career Goals>",
+                    "whyHrAsksThis": "<Clear explanation of what HR is looking for in this question>",
+                    "resumeContext": "<Direct quote or summary of resume section that triggered this question>",
+                    "sampleAnswer": "<High quality STAR method response tailored to candidate's background>"
+                  }
+                ]
+
+                Resume Text:
+                %s
+                """.formatted(resumeText);
+
+        return generateContent(prompt);
+    }
+
+    public String evaluateHrAnswer(String question, String resumeContext, String candidateAnswer) {
+        if (question == null || question.isBlank()) {
+            throw new IllegalArgumentException("Question cannot be empty");
+        }
+        if (candidateAnswer == null || candidateAnswer.isBlank()) {
+            throw new IllegalArgumentException("Candidate answer cannot be empty");
+        }
+
+        String prompt = """
+                You are a Senior HR Manager evaluating a candidate's HR interview response.
+
+                QUESTION ASKED:
+                %s
+
+                RESUME CONTEXT:
+                %s
+
+                CANDIDATE ANSWER:
+                %s
+
+                Evaluate the candidate's answer based on:
+                1. STAR (Situation, Task, Action, Result) format clarity & score (0-100)
+                2. Tone, transparency, & confidence
+                3. Alignment & consistency with their resume
+                4. HR Verdict ("Strong HR Pass", "Acceptable Pass", "Needs Refinement", or "Major Concerns")
+
+                Return ONLY valid JSON in this exact structure:
+                {
+                  "starScore": 85,
+                  "starBreakdown": "<Feedback on candidate's Situation, Task, Action, Result structure>",
+                  "toneAndConfidence": "<Feedback on tone, clarity, and professionalism>",
+                  "resumeConsistency": "<Feedback on how well answer aligns with resume details>",
+                  "verdict": "Strong HR Pass",
+                  "keyStrengths": ["Strength 1", "Strength 2"],
+                  "improvements": ["Improvement suggestion 1", "Improvement suggestion 2"]
+                }
+                """.formatted(question, resumeContext == null ? "N/A" : resumeContext, candidateAnswer);
+
+        return generateContent(prompt);
+    }
+
+    private String getMockHrQuestionsJson() {
+        return """
+        [
+          {
+            "id": "hr-q1",
+            "question": "I noticed in your resume that you built scalable full-stack web applications using Spring Boot and React. Can you walk me through your personal role, how you handled team conflicts during deployment, and why you are looking for your next challenge?",
+            "category": "Resume Project & Transition",
+            "whyHrAsksThis": "Evaluates project ownership, cross-functional collaboration, and motivation for job change.",
+            "resumeContext": "Experience building scalable full-stack applications with Spring Boot & React.",
+            "sampleAnswer": "Situation: At my previous project, we were developing a full-stack Spring Boot portal under a tight deadline.\\nTask: As the backend developer, I was responsible for API design while coordinating with frontend team members who disagreed on schema specs.\\nAction: I facilitated a specs alignment meeting, documented OpenAPI endpoints early, and implemented mock responses so frontend development wasn't blocked.\\nResult: We launched on time with zero endpoint breaking changes."
+          },
+          {
+            "id": "hr-q2",
+            "question": "Can you describe a situation where a technical project fell behind schedule or faced unexpected bugs, and how you communicated with non-technical stakeholders?",
+            "category": "Behavioral & Stakeholder Comms",
+            "whyHrAsksThis": "Assesses transparency, adaptability under pressure, and communication with business managers.",
+            "resumeContext": "Software Development Experience & Deliverables.",
+            "sampleAnswer": "Situation: During a major release, a database locking bottleneck caused API timeouts.\\nTask: I needed to resolve the latency while keeping the product manager updated.\\nAction: I communicated the root cause clearly without overwhelming technical jargon, provided an estimated 2-hour fix window, and implemented query indexing.\\nResult: Resolved within 90 minutes and earned praise for transparent communication."
+          },
+          {
+            "id": "hr-q3",
+            "question": "Looking at your target career goals, where do you see your technical leadership evolving in the next 2 to 3 years?",
+            "category": "Career Aspirations & Growth",
+            "whyHrAsksThis": "Tests long-term vision, self-awareness, and culture fit with company growth.",
+            "resumeContext": "Target Role & Professional Career Goals.",
+            "sampleAnswer": "Over the next 2-3 years, I aim to deepen my expertise in system design and microservices architecture while mentoring junior engineers and driving engineering best practices."
+          }
+        ]
+        """;
+    }
+
+    private String getMockHrEvaluationJson() {
+        return """
+        {
+          "starScore": 88,
+          "starBreakdown": "Strong Situation & Action structure. Clearly articulated personal contributions and project context.",
+          "toneAndConfidence": "Professional, transparent, and highly confident.",
+          "resumeConsistency": "Directly aligns with software engineering experience listed on resume.",
+          "verdict": "Strong HR Pass",
+          "keyStrengths": [
+            "Clear STAR story structure",
+            "High ownership mindset",
+            "Great non-technical communication"
+          ],
+          "improvements": [
+            "Include more concrete numerical metrics in the Result section (e.g. 'reduced latency by 30%')."
+          ]
+        }
+        """;
     }
 }

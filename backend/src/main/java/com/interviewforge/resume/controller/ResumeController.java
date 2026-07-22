@@ -88,4 +88,22 @@ public class ResumeController {
                 "Resume analysis retry completed successfully"
         );
     }
+
+    @GetMapping("/{id}/hr-questions")
+    public ApiResponse<List<com.interviewforge.resume.dto.HrQuestionDto>> getHrQuestions(@PathVariable Long id) {
+        return ApiResponse.success(
+                resumeService.getHrQuestions(id),
+                "HR resume questions generated successfully"
+        );
+    }
+
+    @PostMapping("/{id}/hr-evaluate")
+    public ApiResponse<com.interviewforge.resume.dto.HrEvaluationResponse> evaluateHrAnswer(
+            @PathVariable Long id,
+            @org.springframework.web.bind.annotation.RequestBody com.interviewforge.resume.dto.HrEvaluationRequest request) {
+        return ApiResponse.success(
+                resumeService.evaluateHrAnswer(id, request),
+                "HR response evaluated successfully"
+        );
+    }
 }

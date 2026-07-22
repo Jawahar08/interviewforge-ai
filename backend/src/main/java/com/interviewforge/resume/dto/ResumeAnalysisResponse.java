@@ -28,4 +28,6 @@ public class ResumeAnalysisResponse {
     private List<String> interviewQuestions;
 
     private List<String> learningResources;
+
+    private List<HrQuestionDto> hrQuestions;
 }

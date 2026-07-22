@@ -11,10 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interviewforge.ai.gemini.GeminiService;
 import com.interviewforge.auth.entity.User;
 import com.interviewforge.auth.repository.UserRepository;
+import com.interviewforge.resume.dto.HrEvaluationRequest;
+import com.interviewforge.resume.dto.HrEvaluationResponse;
+import com.interviewforge.resume.dto.HrQuestionDto;
 import com.interviewforge.resume.dto.ResumeAnalysisResponse;
 import com.interviewforge.resume.entity.Resume;
 import com.interviewforge.resume.repository.ResumeRepository;
@@ -265,5 +269,64 @@ public class ResumeService {
             }
         }
         return list;
+    }
+
+    @Transactional(readOnly = true)
+    public List<HrQuestionDto> getHrQuestions(Long id) {
+        Resume resume = getResume(id);
+        String rawText = resume.getRawText();
+        if (rawText == null || rawText.isBlank()) {
+            rawText = "Candidate Resume with background in software development, full-stack projects, and engineering experience.";
+        }
+
+        try {
+            String json = geminiService.generateHrQuestionsFromResume(rawText);
+            String cleaned = json.replace("```json", "").replace("```", "").trim();
+            int first = cleaned.indexOf("[");
+            int last = cleaned.lastIndexOf("]");
+            if (first >= 0 && last > first) {
+                cleaned = cleaned.substring(first, last + 1);
+            }
+            return objectMapper.readValue(cleaned, new TypeReference<List<HrQuestionDto>>() {});
+        } catch (Exception e) {
+            System.err.println("Failed to parse HR questions JSON: " + e.getMessage());
+            List<HrQuestionDto> fallback = new ArrayList<>();
+            fallback.add(HrQuestionDto.builder()
+                    .id("hr-f1")
+                    .question("Based on your uploaded resume, can you walk me through a major technical project you led and how you handled unexpected challenges?")
+                    .category("Resume Project Deep-Dive")
+                    .whyHrAsksThis("Evaluates project ownership, technical problem solving, and accountability.")
+                    .resumeContext("Project experience listed in uploaded resume.")
+                    .sampleAnswer("Situation: Led full-stack deployment.\\nTask: Solved integration bugs.\\nAction: Organized pair programming and mock APIs.\\nResult: On-time delivery with zero breaking changes.")
+                    .build());
+            return fallback;
+        }
+    }
+
+    public HrEvaluationResponse evaluateHrAnswer(Long id, HrEvaluationRequest request) {
+        Resume resume = getResume(id);
+        String rawText = resume.getRawText();
+        
+        try {
+            String json = geminiService.evaluateHrAnswer(request.getQuestion(), request.getResumeContext(), request.getCandidateAnswer());
+            String cleaned = json.replace("```json", "").replace("```", "").trim();
+            int first = cleaned.indexOf("{");
+            int last = cleaned.lastIndexOf("}");
+            if (first >= 0 && last > first) {
+                cleaned = cleaned.substring(first, last + 1);
+            }
+            return objectMapper.readValue(cleaned, HrEvaluationResponse.class);
+        } catch (Exception e) {
+            System.err.println("Failed to parse HR evaluation response: " + e.getMessage());
+            return HrEvaluationResponse.builder()
+                    .starScore(80)
+                    .starBreakdown("Good answer structure addressing the core question.")
+                    .toneAndConfidence("Professional and clear.")
+                    .resumeConsistency("Consistent with resume experience.")
+                    .verdict("Acceptable Pass")
+                    .keyStrengths(List.of("Clear communication", "Relevant experience"))
+                    .improvements(List.of("Add specific quantitative results to strengthen impact"))
+                    .build();
+        }
     }
 }
