@@ -54,6 +54,13 @@ export default function ResumePage() {
     fetchResumes();
   }, [fetchResumes]);
 
+  // Auto-select latest resume if none is active
+  useEffect(() => {
+    if (resumes.length > 0 && !activeResume) {
+      fetchResumeDetails(resumes[0].id);
+    }
+  }, [resumes, activeResume, fetchResumeDetails]);
+
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
