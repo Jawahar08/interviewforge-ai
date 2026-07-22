@@ -40,17 +40,21 @@ export function HrRoundSection({ resumeId }: HrRoundSectionProps) {
 
   useEffect(() => {
     async function loadHrQuestions() {
+      if (!resumeId || resumeId <= 0) {
+        setLoadingQuestions(false);
+        return;
+      }
+
       try {
         setLoadingQuestions(true);
         const data = await resumeApi.getHrQuestions(resumeId);
-        setQuestions(data);
-        if (data.length > 0) {
+        if (Array.isArray(data) && data.length > 0) {
+          setQuestions(data);
           setSelectedQuestion(data[0]);
           setExpandedId(data[0].id);
         }
       } catch (err) {
         console.error("Failed to load HR questions:", err);
-        toast.error("Failed to load HR questions for this resume.");
       } finally {
         setLoadingQuestions(false);
       }

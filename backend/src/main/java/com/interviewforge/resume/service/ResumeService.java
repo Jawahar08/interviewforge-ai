@@ -273,13 +273,17 @@ public class ResumeService {
 
     @Transactional(readOnly = true)
     public List<HrQuestionDto> getHrQuestions(Long id) {
-        Resume resume = getResume(id);
-        String rawText = resume.getRawText();
-        if (rawText == null || rawText.isBlank()) {
-            rawText = "Candidate Resume with background in software development, full-stack projects, and engineering experience.";
+        if (id == null || id <= 0) {
+            return getFallbackHrQuestions();
         }
 
         try {
+            Resume resume = getResume(id);
+            String rawText = resume.getRawText();
+            if (rawText == null || rawText.isBlank()) {
+                rawText = "Candidate Resume with background in software development, full-stack projects, and engineering experience.";
+            }
+
             String json = geminiService.generateHrQuestionsFromResume(rawText);
             String cleaned = json.replace("```json", "").replace("```", "").trim();
             int first = cleaned.indexOf("[");
@@ -287,25 +291,61 @@ public class ResumeService {
             if (first >= 0 && last > first) {
                 cleaned = cleaned.substring(first, last + 1);
             }
-            return objectMapper.readValue(cleaned, new TypeReference<List<HrQuestionDto>>() {});
+            List<HrQuestionDto> questions = objectMapper.readValue(cleaned, new TypeReference<List<HrQuestionDto>>() {});
+            if (questions != null && !questions.isEmpty()) {
+                return questions;
+            }
         } catch (Exception e) {
-            System.err.println("Failed to parse HR questions JSON: " + e.getMessage());
-            List<HrQuestionDto> fallback = new ArrayList<>();
-            fallback.add(HrQuestionDto.builder()
-                    .id("hr-f1")
-                    .question("Based on your uploaded resume, can you walk me through a major technical project you led and how you handled unexpected challenges?")
-                    .category("Resume Project Deep-Dive")
-                    .whyHrAsksThis("Evaluates project ownership, technical problem solving, and accountability.")
-                    .resumeContext("Project experience listed in uploaded resume.")
-                    .sampleAnswer("Situation: Led full-stack deployment.\\nTask: Solved integration bugs.\\nAction: Organized pair programming and mock APIs.\\nResult: On-time delivery with zero breaking changes.")
-                    .build());
-            return fallback;
+            System.err.println("Failed to fetch or generate HR questions for ID " + id + ": " + e.getMessage());
         }
+
+        return getFallbackHrQuestions();
+    }
+
+    private List<HrQuestionDto> getFallbackHrQuestions() {
+        List<HrQuestionDto> fallback = new ArrayList<>();
+        fallback.add(HrQuestionDto.builder()
+                .id("hr-f1")
+                .question("Based on your uploaded resume, can you walk me through a major technical project you led and how you handled unexpected challenges?")
+                .category("Resume Project Deep-Dive")
+                .whyHrAsksThis("Evaluates project ownership, technical problem solving, and accountability.")
+                .resumeContext("Software Engineering & Project Deliverables.")
+                .sampleAnswer("Situation: Led full-stack feature development under a tight deadline.\\nTask: Resolved backend latency bottlenecks while aligning with frontend requirements.\\nAction: Facilitated API design syncs, implemented database indexing, and wrote mock responses.\\nResult: Delivered on-time with improved endpoint latency.")
+                .build());
+
+        fallback.add(HrQuestionDto.builder()
+                .id("hr-f2")
+                .question("Can you describe a scenario where you faced differing opinions with a team member or product manager, and how you reached alignment?")
+                .category("Behavioral & Collaboration")
+                .whyHrAsksThis("Assesses emotional intelligence, active listening, and constructive conflict resolution.")
+                .resumeContext("Cross-functional Team Collaboration.")
+                .sampleAnswer("Situation: Disagreed on database schema specifications during a high-traffic release.\\nTask: Reach consensus without delaying sprint commitments.\\nAction: Used empirical benchmark data to evaluate tradeoffs and agreed on a staged migration.\\nResult: Launched on time with zero breaking production changes.")
+                .build());
+
+        fallback.add(HrQuestionDto.builder()
+                .id("hr-f3")
+                .question("Looking at your background and target career trajectory, what key engineering leadership skills do you aim to master over the next 2 years?")
+                .category("Career Goals & Growth")
+                .whyHrAsksThis("Tests self-awareness, long-term commitment, and professional growth alignment.")
+                .resumeContext("Target Career Role & Professional Experience.")
+                .sampleAnswer("I aim to deepen my architectural expertise in cloud system design while mentoring junior developers and driving automated testing standards across the organization.")
+                .build());
+
+        return fallback;
     }
 
     public HrEvaluationResponse evaluateHrAnswer(Long id, HrEvaluationRequest request) {
-        Resume resume = getResume(id);
-        String rawText = resume.getRawText();
+        String rawText = "Candidate Resume Experience";
+        if (id != null && id > 0) {
+            try {
+                Resume resume = getResume(id);
+                if (resume.getRawText() != null && !resume.getRawText().isBlank()) {
+                    rawText = resume.getRawText();
+                }
+            } catch (Exception e) {
+                System.err.println("Resume lookup warning: " + e.getMessage());
+            }
+        }
         
         try {
             String json = geminiService.evaluateHrAnswer(request.getQuestion(), request.getResumeContext(), request.getCandidateAnswer());
@@ -319,13 +359,13 @@ public class ResumeService {
         } catch (Exception e) {
             System.err.println("Failed to parse HR evaluation response: " + e.getMessage());
             return HrEvaluationResponse.builder()
-                    .starScore(80)
-                    .starBreakdown("Good answer structure addressing the core question.")
-                    .toneAndConfidence("Professional and clear.")
-                    .resumeConsistency("Consistent with resume experience.")
-                    .verdict("Acceptable Pass")
-                    .keyStrengths(List.of("Clear communication", "Relevant experience"))
-                    .improvements(List.of("Add specific quantitative results to strengthen impact"))
+                    .starScore(85)
+                    .starBreakdown("Solid Situation, Task, Action, and Result structure addressing the HR question.")
+                    .toneAndConfidence("Professional, clear, and articulate.")
+                    .resumeConsistency("Directly aligns with software engineering experience.")
+                    .verdict("Strong HR Pass")
+                    .keyStrengths(List.of("Clear STAR narrative", "High ownership mindset", "Effective communication"))
+                    .improvements(List.of("Include more quantitative metrics in the Result section to maximize impact"))
                     .build();
         }
     }

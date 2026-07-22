@@ -23,7 +23,7 @@ import {
 import { toast, Toaster } from "sonner";
 import { motion } from "framer-motion";
 
-export default function ResumePage() {
+function ResumePageContent() {
   const {
     resumes,
     activeResume,
@@ -618,5 +618,20 @@ export default function ResumePage() {
 
       </div>
     </main>
+  );
+}
+
+export default function ResumePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-black flex flex-col items-center justify-center text-zinc-400 gap-3">
+          <RefreshCw className="w-8 h-8 animate-spin text-violet-400" />
+          <span className="text-xs font-mono text-zinc-500">Loading Resume Intelligence...</span>
+        </div>
+      }
+    >
+      <ResumePageContent />
+    </Suspense>
   );
 }
