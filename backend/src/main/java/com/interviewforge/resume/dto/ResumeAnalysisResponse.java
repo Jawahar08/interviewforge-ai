@@ -18,6 +18,18 @@ public class ResumeAnalysisResponse {
     @JsonProperty("atsScore")
     private Integer atsScore;
 
+    private Integer keywordMatchScore;
+    private Integer impactMetricsScore;
+    private Integer formattingScore;
+    private Integer sectionCompletenessScore;
+    private Integer experienceRelevanceScore;
+
+    private List<String> hardSkills;
+    private List<String> softSkills;
+    private List<String> criticalFixes;
+    private String recruiterVerdict;
+    private String readabilityIndex;
+
     private List<String> strengths;
 
     private List<String> weaknesses;

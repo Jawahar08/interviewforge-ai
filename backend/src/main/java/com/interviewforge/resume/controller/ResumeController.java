@@ -72,6 +72,14 @@ public class ResumeController {
         );
     }
 
+    @GetMapping("/{id}/analysis")
+    public ApiResponse<ResumeAnalysisResponse> getResumeAnalysis(@PathVariable Long id) {
+        return ApiResponse.success(
+                resumeService.getResumeAnalysis(id),
+                "Resume analysis details retrieved successfully"
+        );
+    }
+
     @DeleteMapping("/{id}")
     public ApiResponse<Void> deleteResume(@PathVariable Long id) {
         resumeService.deleteResume(id);

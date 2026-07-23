@@ -9,6 +9,16 @@ export interface ResumeListItem {
 
 export interface ResumeAnalysisResponse {
   atsScore: number;
+  keywordMatchScore?: number;
+  impactMetricsScore?: number;
+  formattingScore?: number;
+  sectionCompletenessScore?: number;
+  experienceRelevanceScore?: number;
+  hardSkills?: string[];
+  softSkills?: string[];
+  criticalFixes?: string[];
+  recruiterVerdict?: string;
+  readabilityIndex?: string;
   strengths: string[];
   weaknesses: string[];
   missingSkills: string[];

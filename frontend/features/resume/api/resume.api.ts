@@ -32,10 +32,21 @@ export const resumeApi = {
   },
 
   get: async (id: number): Promise<ResumeListItem & ResumeAnalysisResponse> => {
-    const response = await apiClient.get<ApiResponse<ResumeListItem & ResumeAnalysisResponse>>(
-      `/resume/${id}`
-    );
-    return response.data.data;
+    try {
+      const [itemRes, analysisRes] = await Promise.all([
+        apiClient.get<ApiResponse<ResumeListItem>>(`/resume/${id}`),
+        apiClient.get<ApiResponse<ResumeAnalysisResponse>>(`/resume/${id}/analysis`).catch(() => null),
+      ]);
+      return {
+        ...itemRes.data.data,
+        ...(analysisRes?.data?.data || {}),
+      } as ResumeListItem & ResumeAnalysisResponse;
+    } catch {
+      const response = await apiClient.get<ApiResponse<ResumeListItem & ResumeAnalysisResponse>>(
+        `/resume/${id}`
+      );
+      return response.data.data;
+    }
   },
 
   delete: async (id: number): Promise<void> => {
