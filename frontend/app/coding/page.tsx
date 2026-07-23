@@ -419,6 +419,8 @@ export default function CodingArenaPage() {
               <div className="lg:col-span-7">
                 <CodeSandbox
                   initialCode={activeProblem.starterTemplates.javascript}
+                  testCases={activeProblem.testCases}
+                  onSolved={() => handleMarkSolved(activeProblem.id)}
                 />
               </div>
             </div>

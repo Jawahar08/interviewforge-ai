@@ -1,11 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Code2, Play, Sparkles, Terminal, CheckCircle2, AlertCircle, RefreshCw, Zap, ShieldCheck } from "lucide-react";
+import { Code2, Play, Sparkles, Terminal, CheckCircle2, XCircle, AlertCircle, RefreshCw, Zap } from "lucide-react";
+
+export interface TestCase {
+  input: string;
+  expectedOutput: string;
+}
 
 interface Props {
   initialCode?: string;
   initialLanguage?: string;
+  testCases?: TestCase[];
+  onSolved?: () => void;
   onCodeChange?: (code: string, language: string) => void;
 }
 
@@ -24,7 +31,7 @@ function twoSum(nums, target) {
 }
 
 // Test execution
-console.log("Result:", twoSum([2, 7, 11, 15], 9));
+console.log(twoSum([2, 7, 11, 15], 9));
 `,
   python: `# Implement your solution in Python
 def twoSum(nums, target):
@@ -37,8 +44,7 @@ def twoSum(nums, target):
     return []
 
 # Test execution
-print("123")
-print("Result:", twoSum([2, 7, 11, 15], 9))
+print(twoSum([2, 7, 11, 15], 9))
 `,
   java: `// Implement your solution in Java
 import java.util.*;
@@ -81,16 +87,34 @@ vector<int> twoSum(vector<int>& nums, int target) {
 int main() {
     vector<int> nums = {2, 7, 11, 15};
     vector<int> res = twoSum(nums, 9);
-    cout << "Result: [" << res[0] << ", " << res[1] << "]" << endl;
+    cout << "[" << res[0] << ", " << res[1] << "]" << endl;
     return 0;
 }
 `,
 };
 
-function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtimeMs: number; memoryMb: number; isPassed: boolean } {
+function compareOutputs(actual: string, expected: string): boolean {
+  if (!actual || !expected) return false;
+
+  const normalize = (str: string) =>
+    str.toLowerCase().replace(/[\s\n\r"']/g, "").replace(/\[/g, "").replace(/\]/g, "");
+
+  const normActual = normalize(actual);
+  const normExpected = normalize(expected);
+
+  if (normActual === normExpected || normActual.includes(normExpected)) {
+    return true;
+  }
+
+  const expectedClean = expected.trim().replace(/^"|"$/g, "");
+  const actualLines = actual.split("\n").map((l) => l.trim());
+
+  return actualLines.some((line) => normalize(line) === normExpected || line.includes(expectedClean));
+}
+
+function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtimeMs: number; memoryMb: number } {
   const startTime = performance.now();
   const outputLogs: string[] = [];
-  let isPassed = true;
 
   if (lang === "javascript") {
     const originalLog = console.log;
@@ -103,7 +127,6 @@ function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtim
       };
       console.error = (...args: any[]) => {
         outputLogs.push("[Error] " + args.join(" "));
-        isPassed = false;
       };
 
       const run = new Function(codeStr);
@@ -116,14 +139,12 @@ function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtim
         logs: outputLogs.length > 0 ? outputLogs.join("\n") : "Program executed with 0 console output.",
         runtimeMs,
         memoryMb,
-        isPassed,
       };
     } catch (err: any) {
       return {
         logs: `Runtime Error (JavaScript):\n${err.message}`,
         runtimeMs: 0,
         memoryMb: 0,
-        isPassed: false,
       };
     } finally {
       console.log = originalLog;
@@ -133,7 +154,6 @@ function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtim
 
   if (lang === "python") {
     try {
-      // Parse print(...) statements line by line
       const lines = codeStr.split("\n");
       const printRegex = /print\s*\((.*)\)/;
 
@@ -145,11 +165,9 @@ function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtim
         if (match) {
           const rawArg = match[1].trim();
 
-          // Simple string literal check
           if ((rawArg.startsWith('"') && rawArg.endsWith('"')) || (rawArg.startsWith("'") && rawArg.endsWith("'"))) {
             outputLogs.push(rawArg.slice(1, -1));
           } else if (rawArg.includes(",") && !rawArg.startsWith("[") && !rawArg.startsWith("{")) {
-            // Multiple comma-separated print arguments
             const parts = rawArg.split(",").map((p) => p.trim());
             const evaluatedParts = parts.map((part) => {
               if ((part.startsWith('"') && part.endsWith('"')) || (part.startsWith("'") && part.endsWith("'"))) {
@@ -164,7 +182,6 @@ function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtim
             });
             outputLogs.push(evaluatedParts.join(" "));
           } else {
-            // Expression evaluation
             try {
               const jsExpr = rawArg
                 .replace(/\bTrue\b/g, "true")
@@ -186,14 +203,12 @@ function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtim
         logs: outputLogs.length > 0 ? outputLogs.join("\n") : "Python code executed with 0 stdout output.",
         runtimeMs,
         memoryMb,
-        isPassed: !codeStr.includes("SyntaxError"),
       };
     } catch (err: any) {
       return {
         logs: `Python Execution Error:\n${err.message}`,
         runtimeMs: 0,
         memoryMb: 0,
-        isPassed: false,
       };
     }
   }
@@ -228,14 +243,12 @@ function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtim
         logs: outputLogs.length > 0 ? outputLogs.join("\n") : "Java program compiled and executed.",
         runtimeMs,
         memoryMb,
-        isPassed: true,
       };
     } catch (err: any) {
       return {
         logs: `Java Compiler Error:\n${err.message}`,
         runtimeMs: 0,
         memoryMb: 0,
-        isPassed: false,
       };
     }
   }
@@ -270,26 +283,36 @@ function evaluateUserCode(codeStr: string, lang: string): { logs: string; runtim
         logs: outputLogs.length > 0 ? outputLogs.join("\n") : "C++ program compiled and executed.",
         runtimeMs,
         memoryMb,
-        isPassed: true,
       };
     } catch (err: any) {
       return {
         logs: `C++ Compilation Error:\n${err.message}`,
         runtimeMs: 0,
         memoryMb: 0,
-        isPassed: false,
       };
     }
   }
 
-  return { logs: "Execution finished.", runtimeMs: 10, memoryMb: 12, isPassed: true };
+  return { logs: "Execution finished.", runtimeMs: 10, memoryMb: 12 };
 }
 
-export function CodeSandbox({ initialCode, initialLanguage = "javascript", onCodeChange }: Props) {
+export function CodeSandbox({
+  initialCode,
+  initialLanguage = "javascript",
+  testCases,
+  onSolved,
+  onCodeChange,
+}: Props) {
   const [language, setLanguage] = useState(initialLanguage);
   const [code, setCode] = useState(initialCode || STARTER_TEMPLATES[initialLanguage] || STARTER_TEMPLATES.javascript);
   const [output, setOutput] = useState<string>("");
-  const [executionMetrics, setExecutionMetrics] = useState<{ runtimeMs: number; memoryMb: number; isPassed: boolean } | null>(null);
+  const [executionMetrics, setExecutionMetrics] = useState<{
+    runtimeMs: number;
+    memoryMb: number;
+    isPassed: boolean;
+    expected?: string;
+    actual?: string;
+  } | null>(null);
   const [isExecuting, setIsExecuting] = useState(false);
   const [aiAnalysis, setAiAnalysis] = useState<{
     timeComplexity: string;
@@ -324,11 +347,33 @@ export function CodeSandbox({ initialCode, initialLanguage = "javascript", onCod
 
     setTimeout(() => {
       const res = evaluateUserCode(code, language);
-      setOutput(res.logs);
+      const primaryTestCase = testCases && testCases.length > 0 ? testCases[0] : null;
+
+      let isPassed = false;
+      let displayLogs = res.logs;
+
+      if (primaryTestCase) {
+        isPassed = compareOutputs(res.logs, primaryTestCase.expectedOutput);
+
+        if (isPassed) {
+          displayLogs = `✓ ACCEPTED - Output matches expected test case!\n\nInput: ${primaryTestCase.input}\nOutput: ${res.logs}\nExpected: ${primaryTestCase.expectedOutput}`;
+          if (onSolved) {
+            onSolved();
+          }
+        } else {
+          displayLogs = `✗ WRONG ANSWER - Output does not match expected result.\n\nInput: ${primaryTestCase.input}\nOutput: ${res.logs}\nExpected: ${primaryTestCase.expectedOutput}`;
+        }
+      } else {
+        isPassed = !res.logs.includes("Error");
+      }
+
+      setOutput(displayLogs);
       setExecutionMetrics({
         runtimeMs: res.runtimeMs,
         memoryMb: res.memoryMb,
-        isPassed: res.isPassed,
+        isPassed,
+        expected: primaryTestCase?.expectedOutput,
+        actual: res.logs,
       });
       setIsExecuting(false);
     }, 350);
@@ -443,16 +488,25 @@ export function CodeSandbox({ initialCode, initialLanguage = "javascript", onCod
           </div>
 
           <div className="flex-grow min-h-[280px] p-4 rounded-xl bg-black border border-zinc-800/90 flex flex-col justify-between font-mono text-xs">
-            <div className="text-emerald-400 overflow-y-auto whitespace-pre-wrap leading-relaxed max-h-[220px]">
+            <div className={`overflow-y-auto whitespace-pre-wrap leading-relaxed max-h-[220px] ${executionMetrics?.isPassed ? "text-emerald-400" : executionMetrics?.isPassed === false ? "text-rose-400" : "text-emerald-400"}`}>
               {output || <span className="text-zinc-600 italic">Click &quot;Run Code&quot; to test your implementation...</span>}
             </div>
 
             {/* Performance Stats Badge */}
             {executionMetrics && (
               <div className="mt-3 pt-2.5 border-t border-zinc-900 flex items-center justify-between text-[11px]">
-                <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>{executionMetrics.isPassed ? "ACCEPTED" : "FINISHED"}</span>
+                <div className={`flex items-center gap-1.5 font-bold ${executionMetrics.isPassed ? "text-emerald-400" : "text-rose-400"}`}>
+                  {executionMetrics.isPassed ? (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>ACCEPTED</span>
+                    </>
+                  ) : (
+                    <>
+                      <XCircle className="w-3.5 h-3.5 text-rose-400" />
+                      <span>WRONG ANSWER</span>
+                    </>
+                  )}
                 </div>
                 <div className="flex items-center gap-3 text-[10px] text-zinc-400">
                   <span className="flex items-center gap-1">
