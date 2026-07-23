@@ -17,77 +17,36 @@ interface Props {
 }
 
 const STARTER_TEMPLATES: Record<string, string> = {
-  javascript: `// Implement your solution in JavaScript
-function twoSum(nums, target) {
-  const map = new Map();
-  for (let i = 0; i < nums.length; i++) {
-    const diff = target - nums[i];
-    if (map.has(diff)) {
-      return [map.get(diff), i];
-    }
-    map.set(nums[i], i);
-  }
-  return [];
+  javascript: `/**
+ * @param {any} input
+ * @return {any}
+ */
+function solve(input) {
+  // Write your solution here
+  
 }
-
-// Test execution
-console.log(twoSum([2, 7, 11, 15], 9));
 `,
-  python: `# Implement your solution in Python
-def twoSum(nums, target):
-    seen = {}
-    for i, num in enumerate(nums):
-        diff = target - num
-        if diff in seen:
-            return [seen[diff], i]
-        seen[num] = i
-    return []
-
-# Test execution
-print(twoSum([2, 7, 11, 15], 9))
+  python: `def solve(input):
+    # Write your solution here
+    pass
 `,
-  java: `// Implement your solution in Java
-import java.util.*;
+  java: `import java.util.*;
 
 public class Solution {
-    public static int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int diff = target - nums[i];
-            if (map.containsKey(diff)) {
-                return new int[] { map.get(diff), i };
-            }
-            map.put(nums[i], i);
-        }
-        return new int[]{};
-    }
-
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(twoSum(new int[]{2, 7, 11, 15}, 9)));
+        // Write your solution here
+        
     }
 }
 `,
-  cpp: `// Implement your solution in C++
-#include <iostream>
+  cpp: `#include <iostream>
 #include <vector>
-#include <unordered_map>
 
 using namespace std;
 
-vector<int> twoSum(vector<int>& nums, int target) {
-    unordered_map<int, int> mp;
-    for (int i = 0; i < nums.size(); i++) {
-        int diff = target - nums[i];
-        if (mp.count(diff)) return {mp[diff], i};
-        mp[nums[i]] = i;
-    }
-    return {};
-}
-
 int main() {
-    vector<int> nums = {2, 7, 11, 15};
-    vector<int> res = twoSum(nums, 9);
-    cout << "[" << res[0] << ", " << res[1] << "]" << endl;
+    // Write your solution here
+    
     return 0;
 }
 `,
@@ -457,12 +416,13 @@ export function CodeSandbox({
         <div className="lg:col-span-7 space-y-1">
           <div className="text-[10px] uppercase font-mono text-zinc-500 flex items-center justify-between">
             <span>Source Editor ({language.toUpperCase()})</span>
-            <span className="text-zinc-600">UTF-8 • Auto-Save</span>
+            <span className="text-zinc-600">UTF-8 • Practice Mode</span>
           </div>
           <textarea
             value={code}
             onChange={(e) => handleCodeEdit(e.target.value)}
             spellCheck={false}
+            placeholder="// Write your solution here..."
             className="w-full h-[280px] p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-zinc-100 font-mono text-xs leading-relaxed focus:outline-none focus:border-violet-500/80 resize-none shadow-inner"
           />
         </div>
