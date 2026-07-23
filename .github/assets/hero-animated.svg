@@ -53,10 +53,6 @@
   <circle cx="700" cy="70" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="70;30;70" dur="4.5s" repeatCount="indefinite"/></circle>
   <circle cx="900" cy="55" r="2.5" fill="url(#particle)"><animate attributeName="cy" values="55;15;55" dur="6s" repeatCount="indefinite"/></circle>
   <circle cx="1100" cy="45" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="45;5;45" dur="3s" repeatCount="indefinite"/></circle>
-  <circle cx="150" cy="350" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="350;310;350" dur="5s" repeatCount="indefinite"/></circle>
-  <circle cx="400" cy="370" r="2" fill="url(#particle)"><animate attributeName="cy" values="370;330;370" dur="4s" repeatCount="indefinite"/></circle>
-  <circle cx="800" cy="360" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="360;320;360" dur="3.5s" repeatCount="indefinite"/></circle>
-  <circle cx="1050" cy="340" r="2" fill="url(#particle)"><animate attributeName="cy" values="340;300;340" dur="4.5s" repeatCount="indefinite"/></circle>
 
   <!-- Grid lines (subtle) -->
   <g stroke="#1e293b" stroke-width="0.5" opacity="0.3">
@@ -64,18 +60,18 @@
     <line x1="200" y1="0" x2="200" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/><line x1="800" y1="0" x2="800" y2="400"/><line x1="1000" y1="0" x2="1000" y2="400"/>
   </g>
 
-  <!-- Logo/Icon -->
-  <g transform="translate(600, 105)" filter="url(#glow)">
-    <text text-anchor="middle" font-size="52" font-family="'Segoe UI Emoji', 'Apple Color Emoji', sans-serif" fill="#fff">⚡</text>
+  <!-- Lightning Symbol -->
+  <g transform="translate(585, 80)" filter="url(#glow)">
+    <polygon points="15,0 0,22 13,22 8,40 28,15 15,15" fill="#ffd93d"/>
   </g>
 
   <!-- Main Title -->
-  <text x="600" y="190" text-anchor="middle" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="50" font-weight="900" fill="url(#aurora)" filter="url(#glow)" letter-spacing="-1.5">
+  <text x="600" y="180" text-anchor="middle" font-family="sans-serif" font-size="50" font-weight="900" fill="url(#aurora)" filter="url(#glow)" letter-spacing="-1.5">
     InterviewForge AI
   </text>
 
   <!-- Subtitle -->
-  <text x="600" y="230" text-anchor="middle" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="16" fill="#94a3b8" font-weight="500" letter-spacing="3">
+  <text x="600" y="220" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#94a3b8" font-weight="bold" letter-spacing="3">
     NEXT-GEN AI INTERVIEW SIMULATION PLATFORM
   </text>
 
@@ -83,40 +79,39 @@
   <g transform="translate(600, 275)">
     <!-- AI Interviews -->
     <rect x="-520" y="-14" width="130" height="28" rx="14" fill="#7b2ff7" opacity="0.2" stroke="#7b2ff7" stroke-width="1"/>
-    <text x="-455" y="5" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#a78bfa" font-weight="600">🎙️ AI Interviews</text>
+    <text x="-455" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#a78bfa" font-weight="bold">AI Interviews</text>
 
     <!-- ATS Resume -->
     <rect x="-370" y="-14" width="120" height="28" rx="14" fill="#00d2ff" opacity="0.2" stroke="#00d2ff" stroke-width="1"/>
-    <text x="-310" y="5" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#67e8f9" font-weight="600">📄 ATS Resume</text>
+    <text x="-310" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#67e8f9" font-weight="bold">ATS Resume</text>
 
     <!-- Voice AI -->
     <rect x="-230" y="-14" width="105" height="28" rx="14" fill="#ff6b6b" opacity="0.2" stroke="#ff6b6b" stroke-width="1"/>
-    <text x="-178" y="5" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#fca5a5" font-weight="600">🎤 Voice AI</text>
+    <text x="-178" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#fca5a5" font-weight="bold">Voice AI</text>
 
     <!-- 500+ LeetCode -->
     <rect x="-105" y="-14" width="130" height="28" rx="14" fill="#ffd93d" opacity="0.2" stroke="#ffd93d" stroke-width="1"/>
-    <text x="-40" y="5" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#fde68a" font-weight="600">💻 500+ LeetCode</text>
+    <text x="-40" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#fde68a" font-weight="bold">500+ LeetCode</text>
 
     <!-- System Design -->
     <rect x="45" y="-14" width="140" height="28" rx="14" fill="#64ffda" opacity="0.2" stroke="#64ffda" stroke-width="1"/>
-    <text x="115" y="5" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#6ee7b7" font-weight="600">🏗️ System Design</text>
+    <text x="115" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#6ee7b7" font-weight="bold">System Design</text>
 
     <!-- Career Roadmap -->
     <rect x="205" y="-14" width="140" height="28" rx="14" fill="#7b2ff7" opacity="0.2" stroke="#7b2ff7" stroke-width="1"/>
-    <text x="275" y="5" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#a78bfa" font-weight="600">🗺️ Career Roadmap</text>
+    <text x="275" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#a78bfa" font-weight="bold">Career Roadmap</text>
 
     <!-- FAANG Prep -->
     <rect x="365" y="-14" width="130" height="28" rx="14" fill="#ff6b6b" opacity="0.2" stroke="#ff6b6b" stroke-width="1"/>
-    <text x="430" y="5" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#fca5a5" font-weight="600">💎 FAANG Prep</text>
+    <text x="430" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#fca5a5" font-weight="bold">FAANG Prep</text>
   </g>
 
   <!-- Terminal prompt animation -->
   <g transform="translate(600, 340)">
     <rect x="-250" y="-14" width="500" height="32" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
-    <text x="-235" y="6" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#64ffda">$</text>
-    <text x="-220" y="6" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#94a3b8">
+    <text x="-235" y="6" font-family="monospace" font-size="13" fill="#64ffda">$</text>
+    <text x="-220" y="6" font-family="monospace" font-size="13" fill="#94a3b8">
       npx interviewforge start --ai gemini --mode pro
-      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
     </text>
   </g>
 </svg>
