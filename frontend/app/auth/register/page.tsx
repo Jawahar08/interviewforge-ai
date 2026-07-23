@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authApi } from "@/features/auth/api/auth.api";
+import axios from "axios";
 
 import {
   registerSchema,
@@ -36,6 +37,8 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
 const setAuth = useAuthStore((state) => state.setAuth);
+
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const {
     register,
@@ -51,32 +54,50 @@ const setAuth = useAuthStore((state) => state.setAuth);
     },
   });
 
-const onSubmit = async (values: RegisterFormData) => {
-  try {
+  const onSubmit = async (values: RegisterFormData) => {
+    try {
+      setServerError(null);
+
       const response = await authApi.register({
         name: values.name,
         email: values.email,
         password: values.password,
       });
 
-    if (!response.token) {
-      throw new Error("Authentication token was not returned");
+      if (!response.token) {
+        throw new Error("Authentication token was not returned");
+      }
+
+      setAuth(
+        {
+          email: response.email,
+          role: response.role,
+          isPremium: response.isPremium,
+        },
+        response.token
+      );
+
+      router.push("/dashboard");
+    } catch (error: unknown) {
+      console.error("Registration failed:", error);
+
+      if (axios.isAxiosError(error)) {
+        const message =
+          error.response?.data?.message ??
+          "Unable to create account. Please check your details.";
+
+        setServerError(message);
+        return;
+      }
+
+      if (error instanceof Error) {
+        setServerError(error.message);
+        return;
+      }
+
+      setServerError("Unable to create account. Please try again.");
     }
-
-    setAuth(
-      {
-        email: response.email,
-        role: response.role,
-        isPremium: response.isPremium,
-      },
-      response.token
-    );
-
-    router.push("/dashboard");
-  } catch (error) {
-    console.error("Registration failed:", error);
-  }
-};
+  };
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
@@ -346,6 +367,15 @@ const onSubmit = async (values: RegisterFormData) => {
                   </p>
                 )}
               </div>
+
+              {serverError && (
+                <div
+                  role="alert"
+                  className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300"
+                >
+                  {serverError}
+                </div>
+              )}
 
               {/* Submit */}
               <Button

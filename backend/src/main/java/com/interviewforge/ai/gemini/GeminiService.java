@@ -59,7 +59,7 @@ public class GeminiService {
                 return getMockHrEvaluationJson();
             }
 
-            if (prompt.contains("ATS Resume Reviewer") || prompt.contains("ATS-oriented scoring") || prompt.contains("atsScore")) {
+            if (prompt.contains("ATS Resume Reviewer") || prompt.contains("Senior Technical Recruiter") || prompt.contains("ATS-oriented scoring") || prompt.contains("atsScore")) {
                 return """
                 {
                   "atsScore": 85,

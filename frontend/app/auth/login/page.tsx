@@ -289,32 +289,33 @@ const onSubmit = async (values: LoginFormData) => {
   )}
 </div>
 
+              {serverError && (
+                <div
+                  role="alert"
+                  className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300"
+                >
+                  {serverError}
+                </div>
+              )}
+
               {/* Submit */}
               <Button
-  type="submit"
-  disabled={isSubmitting}
-  className="group h-12 w-full bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 text-white shadow-lg shadow-violet-500/20 transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
->
-  {serverError && (
-  <div
-    role="alert"
-    className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300"
-  >
-    {serverError}
-  </div>
-)}
-  {isSubmitting ? (
-    <>
-      <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-      Signing In...
-    </>
-  ) : (
-    <>
-      Sign In
-      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-    </>
-  )}
-</Button>
+                type="submit"
+                disabled={isSubmitting}
+                className="group h-12 w-full bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 text-white shadow-lg shadow-violet-500/20 transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isSubmitting ? (
+                  <>
+                    <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+                    Signing In...
+                  </>
+                ) : (
+                  <>
+                    Sign In
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
+              </Button>
             </form>
 
             <div className="my-8 flex items-center gap-4">
