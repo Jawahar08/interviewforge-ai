@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { CODING_PROBLEMS, type CodingProblem } from "@/features/coding/data/problems.data";
+import { useState, useMemo } from "react";
+import { CODING_PROBLEMS, PROBLEM_CATEGORIES, type CodingProblem } from "@/features/coding/data/problems.data";
 import { CodeSandbox } from "@/features/interview/components/CodeSandbox";
 import { SystemDesignCanvas } from "@/features/interview/components/SystemDesignCanvas";
 import {
@@ -10,34 +10,46 @@ import {
   Search,
   CheckCircle2,
   Trophy,
-  Zap,
   ArrowRight,
   ChevronLeft,
-  Terminal,
-  Play,
+  ChevronRight,
   HelpCircle,
-  ShieldCheck,
   BookOpen,
   Network,
+  Filter,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import Link from "next/link";
+
+const ITEMS_PER_PAGE = 25;
 
 export default function CodingArenaPage() {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("ALL");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeProblem, setActiveProblem] = useState<CodingProblem | null>(null);
   const [activeTab, setActiveTab] = useState<"description" | "hints" | "system-design">("description");
   const [solvedProblemIds, setSolvedProblemIds] = useState<string[]>(["two-sum"]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   // Filter problems
-  const filteredProblems = CODING_PROBLEMS.filter((p) => {
-    const matchesDiff = selectedDifficulty === "ALL" || p.difficulty === selectedDifficulty;
-    const matchesSearch =
-      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.category.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesDiff && matchesSearch;
-  });
+  const filteredProblems = useMemo(() => {
+    return CODING_PROBLEMS.filter((p) => {
+      const matchesDiff = selectedDifficulty === "ALL" || p.difficulty === selectedDifficulty;
+      const matchesCat = selectedCategory === "All" || p.category === selectedCategory;
+      const matchesSearch =
+        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.id.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesDiff && matchesCat && matchesSearch;
+    });
+  }, [selectedDifficulty, selectedCategory, searchQuery]);
+
+  // Paginated problems slice
+  const totalPages = Math.ceil(filteredProblems.length / ITEMS_PER_PAGE) || 1;
+  const paginatedProblems = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredProblems.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredProblems, currentPage]);
 
   const handleMarkSolved = (id: string) => {
     if (!solvedProblemIds.includes(id)) {
@@ -70,26 +82,26 @@ export default function CodingArenaPage() {
               className="inline-flex items-center gap-2 rounded-xl border border-violet-500/30 bg-violet-500/10 px-4 py-2 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/20"
             >
               <ChevronLeft className="h-4 w-4" />
-              All Problems List
+              All Problems List ({CODING_PROBLEMS.length})
             </button>
           )}
         </div>
 
         {!activeProblem ? (
           /* ================= PROBLEM DIRECTORY VIEW ================= */
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* Header Banner */}
             <div className="p-8 rounded-3xl bg-gradient-to-r from-violet-950/60 via-zinc-900/90 to-indigo-950/60 border border-violet-500/20 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 mb-3">
                   <Sparkles className="h-3.5 w-3.5" />
-                  LeetCode & FAANG Coding Arena
+                  LeetCode 500+ & FAANG Coding Arena
                 </div>
                 <h1 className="text-3xl font-extrabold text-white sm:text-4xl">
-                  AI-Powered Coding Challenges
+                  AI-Powered 500+ Coding Challenges
                 </h1>
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-400">
-                  Master Data Structures, Algorithms, and System Design with real-time AI code audits and $O(N)$ complexity evaluation.
+                  Practice 500 top LeetCode Data Structures, Algorithms, and System Design problems with real-time AI code audits and complexity analysis.
                 </p>
               </div>
 
@@ -101,7 +113,7 @@ export default function CodingArenaPage() {
                 <div>
                   <div className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider">Solved Challenges</div>
                   <div className="text-xl font-extrabold text-white">
-                    {solvedProblemIds.length} <span className="text-xs text-zinc-500 font-normal">/ {CODING_PROBLEMS.length}</span>
+                    {solvedProblemIds.length} <span className="text-xs text-zinc-500 font-normal">/ {CODING_PROBLEMS.length} Available</span>
                   </div>
                   <div className="text-[10px] text-emerald-400 font-mono mt-0.5">Top 15% Candidate Performance</div>
                 </div>
@@ -109,32 +121,63 @@ export default function CodingArenaPage() {
             </div>
 
             {/* Filter & Search Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800">
-              {/* Search Bar */}
-              <div className="relative w-full sm:w-80">
-                <Search className="absolute left-3.5 top-2.5 h-4 w-4 text-zinc-500" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search problem or category..."
-                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-violet-500"
-                />
+            <div className="p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800 space-y-4">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                {/* Search Bar */}
+                <div className="relative w-full sm:w-80">
+                  <Search className="absolute left-3.5 top-2.5 h-4 w-4 text-zinc-500" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    placeholder="Search 500+ LeetCode problems..."
+                    className="w-full pl-10 pr-4 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-violet-500"
+                  />
+                </div>
+
+                {/* Difficulty Filter Tabs */}
+                <div className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-950 border border-zinc-800 w-full sm:w-auto overflow-x-auto">
+                  {["ALL", "EASY", "MEDIUM", "HARD"].map((diff) => (
+                    <button
+                      key={diff}
+                      onClick={() => {
+                        setSelectedDifficulty(diff);
+                        setCurrentPage(1);
+                      }}
+                      className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                        selectedDifficulty === diff
+                          ? "bg-violet-600 text-white shadow-sm"
+                          : "text-zinc-400 hover:text-white"
+                      }`}
+                    >
+                      {diff}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Difficulty Tabs */}
-              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-950 border border-zinc-800 w-full sm:w-auto overflow-x-auto">
-                {["ALL", "EASY", "MEDIUM", "HARD"].map((diff) => (
+              {/* Topic Category Pills */}
+              <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 border-t border-zinc-800/60 no-scrollbar">
+                <span className="text-[10px] font-bold text-zinc-500 uppercase flex items-center gap-1 shrink-0 mr-1">
+                  <Filter className="w-3 h-3" /> Topics:
+                </span>
+                {PROBLEM_CATEGORIES.map((cat) => (
                   <button
-                    key={diff}
-                    onClick={() => setSelectedDifficulty(diff)}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      selectedDifficulty === diff
-                        ? "bg-violet-600 text-white shadow-sm"
-                        : "text-zinc-400 hover:text-white"
+                    key={cat}
+                    onClick={() => {
+                      setSelectedCategory(cat);
+                      setCurrentPage(1);
+                    }}
+                    className={`px-3 py-1 rounded-lg text-xs font-semibold shrink-0 transition-all ${
+                      selectedCategory === cat
+                        ? "bg-violet-500/20 text-violet-300 border border-violet-500/40"
+                        : "bg-zinc-950/60 border border-zinc-800 text-zinc-400 hover:text-zinc-200"
                     }`}
                   >
-                    {diff}
+                    {cat}
                   </button>
                 ))}
               </div>
@@ -151,63 +194,98 @@ export default function CodingArenaPage() {
               </div>
 
               <div className="divide-y divide-zinc-800/60">
-                {filteredProblems.map((prob) => {
-                  const isSolved = solvedProblemIds.includes(prob.id);
-                  return (
-                    <div
-                      key={prob.id}
-                      className="grid grid-cols-12 p-4 items-center hover:bg-zinc-900/80 transition-colors"
-                    >
-                      <div className="col-span-1">
-                        {isSolved ? (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                        ) : (
-                          <span className="w-2 h-2 rounded-full bg-zinc-700 block" />
-                        )}
-                      </div>
+                {paginatedProblems.length > 0 ? (
+                  paginatedProblems.map((prob) => {
+                    const isSolved = solvedProblemIds.includes(prob.id);
+                    return (
+                      <div
+                        key={prob.id}
+                        className="grid grid-cols-12 p-4 items-center hover:bg-zinc-900/80 transition-colors"
+                      >
+                        <div className="col-span-1">
+                          {isSolved ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                          ) : (
+                            <span className="w-2 h-2 rounded-full bg-zinc-700 block" />
+                          )}
+                        </div>
 
-                      <div className="col-span-5">
-                        <h3 className="text-sm font-bold text-white hover:text-violet-300 transition-colors">
-                          {prob.title}
-                        </h3>
-                        <span className="text-[11px] text-zinc-400">Acceptance: {prob.acceptanceRate}</span>
-                      </div>
+                        <div className="col-span-5">
+                          <h3 className="text-sm font-bold text-white hover:text-violet-300 transition-colors">
+                            {prob.title}
+                          </h3>
+                          <span className="text-[11px] text-zinc-400">Acceptance: {prob.acceptanceRate}</span>
+                        </div>
 
-                      <div className="col-span-3">
-                        <span className="px-2.5 py-1 rounded-md bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-300">
-                          {prob.category}
-                        </span>
-                      </div>
+                        <div className="col-span-3">
+                          <span className="px-2.5 py-1 rounded-md bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-300">
+                            {prob.category}
+                          </span>
+                        </div>
 
-                      <div className="col-span-1">
-                        <span
-                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                            prob.difficulty === "EASY"
-                              ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                              : prob.difficulty === "MEDIUM"
-                              ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                              : "bg-rose-500/20 text-rose-300 border border-rose-500/30"
-                          }`}
-                        >
-                          {prob.difficulty}
-                        </span>
-                      </div>
+                        <div className="col-span-1">
+                          <span
+                            className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                              prob.difficulty === "EASY"
+                                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                                : prob.difficulty === "MEDIUM"
+                                ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                                : "bg-rose-500/20 text-rose-300 border border-rose-500/30"
+                            }`}
+                          >
+                            {prob.difficulty}
+                          </span>
+                        </div>
 
-                      <div className="col-span-2 text-right">
-                        <button
-                          onClick={() => {
-                            setActiveProblem(prob);
-                            setActiveTab("description");
-                          }}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs shadow-md shadow-violet-500/10 transition-all hover:scale-105"
-                        >
-                          <span>Solve</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </button>
+                        <div className="col-span-2 text-right">
+                          <button
+                            onClick={() => {
+                              setActiveProblem(prob);
+                              setActiveTab("description");
+                            }}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs shadow-md shadow-violet-500/10 transition-all hover:scale-105"
+                          >
+                            <span>Solve</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                ) : (
+                  <div className="p-8 text-center text-zinc-500 text-xs font-mono">
+                    No problems found matching your filters. Try clearing search or category filter.
+                  </div>
+                )}
+              </div>
+
+              {/* Pagination Controls Footer */}
+              <div className="p-4 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 bg-zinc-950/60">
+                <div className="text-xs text-zinc-400 font-mono">
+                  Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1}–{Math.min(currentPage * ITEMS_PER_PAGE, filteredProblems.length)} of {filteredProblems.length} LeetCode Problems
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1"
+                  >
+                    <ChevronLeft className="w-3.5 h-3.5" /> Prev
+                  </button>
+
+                  <span className="text-xs font-bold text-violet-300 font-mono px-2">
+                    Page {currentPage} of {totalPages}
+                  </span>
+
+                  <button
+                    disabled={currentPage >= totalPages}
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1"
+                  >
+                    Next <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
