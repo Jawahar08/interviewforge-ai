@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 
 import { InterviewSetupForm } from "@/features/interview/components/InterviewSetupForm";
+import { CompanyKitSelector } from "@/features/interview/components/CompanyKitSelector";
 
 export default function InterviewPage() {
   return (
@@ -78,6 +79,10 @@ export default function InterviewPage() {
         </header>
 
         <InterviewSetupForm />
+
+        <div className="mt-12">
+          <CompanyKitSelector />
+        </div>
       </div>
     </main>
   );

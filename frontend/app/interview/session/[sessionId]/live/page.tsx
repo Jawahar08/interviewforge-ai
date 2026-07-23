@@ -24,18 +24,21 @@ import { useSessionQuestions } from
 import { answerApi } from
   "@/features/interview/api/answer.api";
 
-import type { AnswerResponse } from
-  "@/features/interview/types/answer.types";
+import type { AnswerResponse } from "@/features/interview/types/answer.types";
 import { resultApi } from "@/features/result/api/result.api";
-import { sessionApi } from
-  "@/features/interview/api/interview-session.api";
+import { sessionApi } from "@/features/interview/api/interview-session.api";
+import { VoiceRecorder } from "@/features/interview/components/VoiceRecorder";
+import { CodeSandbox } from "@/features/interview/components/CodeSandbox";
+import { SystemDesignCanvas } from "@/features/interview/components/SystemDesignCanvas";
+import { Network } from "lucide-react";
+
 export default function LiveInterviewPage() {
   const params = useParams<{ sessionId: string }>();
   const router = useRouter();
-
   const sessionId = params.sessionId;
 
- const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [inputMode, setInputMode] = useState<"text" | "voice" | "code" | "system-design">("text");
 
 const [
   isSubmittingAnswer,
@@ -443,41 +446,99 @@ const handleContinueAfterEvaluation = useCallback(async () => {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-7">
-            <div className="flex items-center justify-between gap-4">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
               <div>
-                <h2 className="text-lg font-semibold">
-                  Your answer
+                <h2 className="text-lg font-semibold text-white">
+                  Candidate Response Workspace
                 </h2>
-
-                <p className="mt-1 text-sm text-slate-500">
-                  Explain your reasoning clearly and
-                  structure your response.
+                <p className="text-xs text-slate-400">
+                  Select your preferred response mode or practice live coding / system design.
                 </p>
               </div>
 
-              <button
-                type="button"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-slate-400 transition hover:border-violet-500/30 hover:text-violet-300"
-                aria-label="Use microphone"
-              >
-                <Mic className="h-5 w-5" />
-              </button>
+              {/* Mode Selector Tabs */}
+              <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-black/40 border border-white/10">
+                <button
+                  type="button"
+                  onClick={() => setInputMode("text")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                    inputMode === "text"
+                      ? "bg-violet-600 text-white shadow-sm"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  📝 Text Answer
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setInputMode("voice")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
+                    inputMode === "voice"
+                      ? "bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Mic className="w-3.5 h-3.5" />
+                  <span>Voice AI</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setInputMode("code")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
+                    inputMode === "code"
+                      ? "bg-emerald-600 text-white shadow-sm"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Code2 className="w-3.5 h-3.5" />
+                  <span>Code Sandbox</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setInputMode("system-design")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
+                    inputMode === "system-design"
+                      ? "bg-indigo-600 text-white shadow-sm"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Network className="w-3.5 h-3.5" />
+                  <span>System Design</span>
+                </button>
+              </div>
             </div>
 
-            <textarea
-  value={answer}
-  disabled={
-    isSubmittingAnswer ||
-    evaluation !== null ||
-    timer.isExpired
-}
-              onChange={(event) =>
-                setAnswer(event.target.value)
-              }
-              placeholder="Type your interview answer here..."
-              className="mt-6 min-h-64 w-full resize-none rounded-2xl border border-white/10 bg-[#080b18] p-5 text-sm leading-7 text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-violet-500/50"
-            />
+            {/* Input Mode Content */}
+            {inputMode === "text" && (
+              <textarea
+                value={answer}
+                disabled={isSubmittingAnswer || evaluation !== null || timer.isExpired}
+                onChange={(event) => setAnswer(event.target.value)}
+                placeholder="Type your structured interview answer here (STAR format recommended)..."
+                className="min-h-64 w-full resize-none rounded-2xl border border-white/10 bg-[#080b18] p-5 text-sm leading-7 text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-violet-500/50"
+              />
+            )}
+
+            {inputMode === "voice" && (
+              <VoiceRecorder
+                onTranscriptChange={(text) => setAnswer(text)}
+              />
+            )}
+
+            {inputMode === "code" && (
+              <CodeSandbox
+                initialCode={answer.startsWith("//") ? answer : undefined}
+                onCodeChange={(codeText) => setAnswer(codeText)}
+              />
+            )}
+
+            {inputMode === "system-design" && (
+              <SystemDesignCanvas />
+            )}
             {isSubmittingAnswer && (
 <div className="mt-4 rounded-xl border border-violet-500/20 bg-violet-500/10 p-4 text-center">
 
