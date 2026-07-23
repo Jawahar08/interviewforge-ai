@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   BarChart3,
   BrainCircuit,
+  Code2,
   FileSearch,
   History,
   LayoutDashboard,
@@ -26,6 +27,11 @@ const navigationItems = [
     label: "Mock Interview",
     href: "/interview",
     icon: MessageSquareText,
+  },
+  {
+    label: "Coding Arena",
+    href: "/coding",
+    icon: Code2,
   },
   {
     label: "Interview History",

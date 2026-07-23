@@ -453,16 +453,16 @@ const handleContinueAfterEvaluation = useCallback(async () => {
                   Candidate Response Workspace
                 </h2>
                 <p className="text-xs text-slate-400">
-                  Select your preferred response mode or practice live coding / system design.
+                  Type your structured response or use Voice AI to speak naturally.
                 </p>
               </div>
 
               {/* Mode Selector Tabs */}
-              <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-black/40 border border-white/10">
+              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-black/40 border border-white/10">
                 <button
                   type="button"
                   onClick={() => setInputMode("text")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     inputMode === "text"
                       ? "bg-violet-600 text-white shadow-sm"
                       : "text-slate-400 hover:text-white"
@@ -474,40 +474,14 @@ const handleContinueAfterEvaluation = useCallback(async () => {
                 <button
                   type="button"
                   onClick={() => setInputMode("voice")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                     inputMode === "voice"
                       ? "bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
                   <Mic className="w-3.5 h-3.5" />
-                  <span>Voice AI</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setInputMode("code")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
-                    inputMode === "code"
-                      ? "bg-emerald-600 text-white shadow-sm"
-                      : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  <Code2 className="w-3.5 h-3.5" />
-                  <span>Code Sandbox</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setInputMode("system-design")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
-                    inputMode === "system-design"
-                      ? "bg-indigo-600 text-white shadow-sm"
-                      : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  <Network className="w-3.5 h-3.5" />
-                  <span>System Design</span>
+                  <span>Voice AI Mode</span>
                 </button>
               </div>
             </div>
@@ -527,17 +501,6 @@ const handleContinueAfterEvaluation = useCallback(async () => {
               <VoiceRecorder
                 onTranscriptChange={(text) => setAnswer(text)}
               />
-            )}
-
-            {inputMode === "code" && (
-              <CodeSandbox
-                initialCode={answer.startsWith("//") ? answer : undefined}
-                onCodeChange={(codeText) => setAnswer(codeText)}
-              />
-            )}
-
-            {inputMode === "system-design" && (
-              <SystemDesignCanvas />
             )}
             {isSubmittingAnswer && (
 <div className="mt-4 rounded-xl border border-violet-500/20 bg-violet-500/10 p-4 text-center">
