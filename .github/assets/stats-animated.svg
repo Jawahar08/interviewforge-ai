@@ -1,81 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200" width="900" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100" width="1200" height="100">
   <defs>
-    <linearGradient id="sbg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a0a1a"/>
-      <stop offset="100%" style="stop-color:#0f172a"/>
+    <linearGradient id="statsGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7b2ff7">
+        <animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#64ffda;#7b2ff7" dur="6s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="25%" stop-color="#00d2ff">
+        <animate attributeName="stop-color" values="#00d2ff;#64ffda;#ff6b6b;#00d2ff" dur="6s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" stop-color="#64ffda">
+        <animate attributeName="stop-color" values="#64ffda;#ff6b6b;#ffd93d;#64ffda" dur="6s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="75%" stop-color="#ff6b6b">
+        <animate attributeName="stop-color" values="#ff6b6b;#ffd93d;#7b2ff7;#ff6b6b" dur="6s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#ffd93d">
+        <animate attributeName="stop-color" values="#ffd93d;#7b2ff7;#00d2ff;#ffd93d" dur="6s" repeatCount="indefinite"/>
+      </stop>
     </linearGradient>
-    <filter id="sg">
-      <feGaussianBlur stdDeviation="2"/>
-      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+    <filter id="statGlow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <style>
-    @keyframes countUp { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
-    @keyframes shimmer { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
-    .stat-card { animation: countUp 0.8s ease-out forwards; }
-    .s1 { animation-delay: 0s; }
-    .s2 { animation-delay: 0.15s; }
-    .s3 { animation-delay: 0.3s; }
-    .s4 { animation-delay: 0.45s; }
-    .s5 { animation-delay: 0.6s; }
-    .stat-glow { animation: shimmer 3s ease-in-out infinite; }
-    .sg1 { animation-delay: 0s; }
-    .sg2 { animation-delay: 0.6s; }
-    .sg3 { animation-delay: 1.2s; }
-    .sg4 { animation-delay: 1.8s; }
-    .sg5 { animation-delay: 2.4s; }
-  </style>
+  <rect width="1200" height="100" fill="#050816" rx="12"/>
+  <rect x="2" y="2" width="1196" height="96" fill="none" rx="10" stroke="url(#statsGrad)" stroke-width="1" opacity="0.4"/>
 
-  <rect width="900" height="200" fill="url(#sbg)" rx="12"/>
-
-  <!-- Card 1 -->
-  <g class="stat-card s1">
-    <rect x="30" y="30" width="150" height="140" rx="12" fill="#0f172a" stroke="#00d2ff" stroke-width="1.5" opacity="0.9">
-      <animate attributeName="stroke-opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite"/>
-    </rect>
-    <text x="105" y="95" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="42" fill="#00d2ff" font-weight="800" filter="url(#sg)" class="stat-glow sg1">30+</text>
-    <text x="105" y="130" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0" font-weight="500" letter-spacing="1">CAREER ROLES</text>
-    <text x="105" y="62" text-anchor="middle" font-size="22">💼</text>
+  <!-- Stat 1: Domains -->
+  <g transform="translate(100, 50)">
+    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#00d2ff" filter="url(#statGlow)">30+</text>
+    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">CAREER DOMAINS</text>
   </g>
-
-  <!-- Card 2 -->
-  <g class="stat-card s2">
-    <rect x="200" y="30" width="150" height="140" rx="12" fill="#0f172a" stroke="#7b2ff7" stroke-width="1.5" opacity="0.9">
-      <animate attributeName="stroke-opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite" begin="0.5s"/>
-    </rect>
-    <text x="275" y="95" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="42" fill="#7b2ff7" font-weight="800" filter="url(#sg)" class="stat-glow sg2">6</text>
-    <text x="275" y="130" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0" font-weight="500" letter-spacing="1">INTERVIEW TYPES</text>
-    <text x="275" y="62" text-anchor="middle" font-size="22">🎭</text>
+  <!-- Stat 2: Interview Types -->
+  <g transform="translate(280, 50)">
+    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#7b2ff7" filter="url(#statGlow)">6</text>
+    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">INTERVIEW TYPES</text>
   </g>
-
-  <!-- Card 3 -->
-  <g class="stat-card s3">
-    <rect x="370" y="30" width="160" height="140" rx="12" fill="#0f172a" stroke="#ffd93d" stroke-width="1.5" opacity="0.9">
-      <animate attributeName="stroke-opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite" begin="1s"/>
-    </rect>
-    <text x="450" y="95" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="42" fill="#ffd93d" font-weight="800" filter="url(#sg)" class="stat-glow sg3">12</text>
-    <text x="450" y="130" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0" font-weight="500" letter-spacing="1">TARGET COMPANIES</text>
-    <text x="450" y="62" text-anchor="middle" font-size="22">🏢</text>
+  <!-- Stat 3: LeetCode Problems -->
+  <g transform="translate(460, 50)">
+    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#ffd93d" filter="url(#statGlow)">500+</text>
+    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">LEETCODE PROBLEMS</text>
   </g>
-
-  <!-- Card 4 -->
-  <g class="stat-card s4">
-    <rect x="550" y="30" width="150" height="140" rx="12" fill="#0f172a" stroke="#64ffda" stroke-width="1.5" opacity="0.9">
-      <animate attributeName="stroke-opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite" begin="1.5s"/>
-    </rect>
-    <text x="625" y="95" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="42" fill="#64ffda" font-weight="800" filter="url(#sg)" class="stat-glow sg4">24</text>
-    <text x="625" y="130" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0" font-weight="500" letter-spacing="1">API DOMAINS</text>
-    <text x="625" y="62" text-anchor="middle" font-size="22">⚙️</text>
+  <!-- Stat 4: Companies -->
+  <g transform="translate(640, 50)">
+    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#ff6b6b" filter="url(#statGlow)">12</text>
+    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">FAANG COMPANIES</text>
   </g>
-
-  <!-- Card 5 -->
-  <g class="stat-card s5">
-    <rect x="720" y="30" width="150" height="140" rx="12" fill="#0f172a" stroke="#ff6b6b" stroke-width="1.5" opacity="0.9">
-      <animate attributeName="stroke-opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite" begin="2s"/>
-    </rect>
-    <text x="795" y="95" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="42" fill="#ff6b6b" font-weight="800" filter="url(#sg)" class="stat-glow sg5">∞</text>
-    <text x="795" y="130" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0" font-weight="500" letter-spacing="1">AI QUESTIONS</text>
-    <text x="795" y="62" text-anchor="middle" font-size="22">🧠</text>
+  <!-- Stat 5: Voice AI -->
+  <g transform="translate(820, 50)">
+    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#64ffda" filter="url(#statGlow)">AI</text>
+    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">VOICE INTERVIEW</text>
+  </g>
+  <!-- Stat 6: AI Engine -->
+  <g transform="translate(1020, 50)">
+    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#a78bfa" filter="url(#statGlow)">Gemini</text>
+    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">2.5 FLASH ENGINE</text>
   </g>
 </svg>

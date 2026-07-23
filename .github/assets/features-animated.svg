@@ -1,162 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 160" width="900" height="160">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 140" width="1200" height="140">
   <defs>
-    <linearGradient id="fbg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a0a1a"/>
-      <stop offset="100%" style="stop-color:#0f172a"/>
+    <linearGradient id="featGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7b2ff7"><animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#64ffda;#ff6b6b;#7b2ff7" dur="10s" repeatCount="indefinite"/></stop>
+      <stop offset="50%" stop-color="#00d2ff"><animate attributeName="stop-color" values="#00d2ff;#64ffda;#ff6b6b;#ffd93d;#00d2ff" dur="10s" repeatCount="indefinite"/></stop>
+      <stop offset="100%" stop-color="#64ffda"><animate attributeName="stop-color" values="#64ffda;#ff6b6b;#ffd93d;#7b2ff7;#64ffda" dur="10s" repeatCount="indefinite"/></stop>
     </linearGradient>
-    <filter id="fg">
-      <feGaussianBlur stdDeviation="1.5"/>
-      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <linearGradient id="wave-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#0a0a1a"/>
-      <stop offset="20%" style="stop-color:#7b2ff7;stop-opacity:0.5">
-        <animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#7b2ff7" dur="5s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="50%" style="stop-color:#00d2ff;stop-opacity:0.3">
-        <animate attributeName="stop-color" values="#00d2ff;#64ffda;#00d2ff" dur="5s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="80%" style="stop-color:#64ffda;stop-opacity:0.5">
-        <animate attributeName="stop-color" values="#64ffda;#7b2ff7;#64ffda" dur="5s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="100%" style="stop-color:#0a0a1a"/>
-    </linearGradient>
+    <filter id="fGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <style>
-    @keyframes wave1 { 0%,100% { d: path('M0,140 Q150,120 300,130 T600,125 T900,140 L900,160 L0,160 Z'); } 50% { d: path('M0,135 Q150,145 300,125 T600,140 T900,130 L900,160 L0,160 Z'); } }
-    @keyframes wave2 { 0%,100% { d: path('M0,145 Q200,130 400,140 T700,135 T900,145 L900,160 L0,160 Z'); } 50% { d: path('M0,140 Q200,150 400,130 T700,145 T900,135 L900,160 L0,160 Z'); } }
-    @keyframes floatUp { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-    @keyframes glowBorder { 0%,100% { stroke-opacity: 0.4; } 50% { stroke-opacity: 1; } }
-    .feat-float { animation: floatUp 4s ease-in-out infinite; }
-    .ff1 { animation-delay: 0s; }
-    .ff2 { animation-delay: 0.4s; }
-    .ff3 { animation-delay: 0.8s; }
-    .ff4 { animation-delay: 1.2s; }
-    .ff5 { animation-delay: 1.6s; }
-    .ff6 { animation-delay: 2.0s; }
-    .ff7 { animation-delay: 2.4s; }
-    .ff8 { animation-delay: 2.8s; }
-  </style>
+  <rect width="1200" height="140" fill="#050816" rx="12"/>
 
-  <rect width="900" height="160" fill="url(#fbg)" rx="12"/>
-
-  <!-- Animated wave footer -->
-  <path d="M0,140 Q150,120 300,130 T600,125 T900,140 L900,160 L0,160 Z" fill="url(#wave-grad)" opacity="0.15">
-    <animate attributeName="d" values="M0,140 Q150,120 300,130 T600,125 T900,140 L900,160 L0,160 Z;M0,135 Q150,145 300,125 T600,140 T900,130 L900,160 L0,160 Z;M0,140 Q150,120 300,130 T600,125 T900,140 L900,160 L0,160 Z" dur="6s" repeatCount="indefinite"/>
-  </path>
-  <path d="M0,145 Q200,130 400,140 T700,135 T900,145 L900,160 L0,160 Z" fill="url(#wave-grad)" opacity="0.1">
-    <animate attributeName="d" values="M0,145 Q200,130 400,140 T700,135 T900,145 L900,160 L0,160 Z;M0,140 Q200,150 400,130 T700,145 T900,135 L900,160 L0,160 Z;M0,145 Q200,130 400,140 T700,135 T900,145 L900,160 L0,160 Z" dur="8s" repeatCount="indefinite"/>
-  </path>
-
-  <!-- Feature grid: 8 animated feature boxes -->
-  <g class="feat-float ff1">
-    <rect x="22" y="18" width="95" height="60" rx="10" fill="#0f172a" stroke="#00d2ff" stroke-width="1">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+  <!-- Feature cards -->
+  <g transform="translate(10, 15)">
+    <!-- Card 1: AI Interview -->
+    <rect x="0" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#7b2ff7" stroke-width="1" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
     </rect>
-    <text x="70" y="40" text-anchor="middle" font-size="16">🔐</text>
-    <text x="70" y="60" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#00d2ff" font-weight="600">AUTH</text>
+    <text x="74" y="40" text-anchor="middle" font-size="24">🎙️</text>
+    <text x="74" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#a78bfa" font-weight="700">AI Interview</text>
+    <text x="74" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">30+ Roles · 6 Types</text>
+    <text x="74" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Real-time Scoring</text>
+
+    <!-- Card 2: ATS Resume -->
+    <rect x="158" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#00d2ff" stroke-width="1" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="3.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="232" y="40" text-anchor="middle" font-size="24">📄</text>
+    <text x="232" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#67e8f9" font-weight="700">ATS Resume</text>
+    <text x="232" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">PDF Upload · Score</text>
+    <text x="232" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Skill Gap Analysis</text>
+
+    <!-- Card 3: Voice AI -->
+    <rect x="316" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#ff6b6b" stroke-width="1" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <text x="390" y="40" text-anchor="middle" font-size="24">🎤</text>
+    <text x="390" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#fca5a5" font-weight="700">Voice AI Mock</text>
+    <text x="390" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Speech-to-Text</text>
+    <text x="390" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Confidence Score</text>
+
+    <!-- Card 4: LeetCode Arena -->
+    <rect x="474" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#ffd93d" stroke-width="1" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="3.2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="548" y="40" text-anchor="middle" font-size="24">💻</text>
+    <text x="548" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#fde68a" font-weight="700">500+ LeetCode</text>
+    <text x="548" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">4 Languages</text>
+    <text x="548" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Live Code Sandbox</text>
+
+    <!-- Card 5: System Design -->
+    <rect x="632" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#64ffda" stroke-width="1" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="4.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="706" y="40" text-anchor="middle" font-size="24">🏗️</text>
+    <text x="706" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#6ee7b7" font-weight="700">System Design</text>
+    <text x="706" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Architecture Canvas</text>
+    <text x="706" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">AI Review</text>
+
+    <!-- Card 6: Career Roadmap -->
+    <rect x="790" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#a78bfa" stroke-width="1" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="3.8s" repeatCount="indefinite"/>
+    </rect>
+    <text x="864" y="40" text-anchor="middle" font-size="24">🗺️</text>
+    <text x="864" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#c4b5fd" font-weight="700">Career Roadmap</text>
+    <text x="864" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Weekly Plans</text>
+    <text x="864" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Progress Tracking</text>
+
+    <!-- Card 7: FAANG Prep -->
+    <rect x="948" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#ffd93d" stroke-width="1" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1022" y="40" text-anchor="middle" font-size="24">💎</text>
+    <text x="1022" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#fde68a" font-weight="700">FAANG Prep</text>
+    <text x="1022" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">12 Companies</text>
+    <text x="1022" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Premium Tier</text>
   </g>
 
-  <g class="feat-float ff2">
-    <rect x="130" y="18" width="95" height="60" rx="10" fill="#0f172a" stroke="#7b2ff7" stroke-width="1">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="0.4s"/>
-    </rect>
-    <text x="178" y="40" text-anchor="middle" font-size="16">🎙️</text>
-    <text x="178" y="60" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#7b2ff7" font-weight="600">INTERVIEW</text>
-  </g>
-
-  <g class="feat-float ff3">
-    <rect x="238" y="18" width="95" height="60" rx="10" fill="#0f172a" stroke="#64ffda" stroke-width="1">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="0.8s"/>
-    </rect>
-    <text x="286" y="40" text-anchor="middle" font-size="16">🧠</text>
-    <text x="286" y="60" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#64ffda" font-weight="600">AI ENGINE</text>
-  </g>
-
-  <g class="feat-float ff4">
-    <rect x="346" y="18" width="95" height="60" rx="10" fill="#0f172a" stroke="#ffd93d" stroke-width="1">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="1.2s"/>
-    </rect>
-    <text x="394" y="40" text-anchor="middle" font-size="16">📄</text>
-    <text x="394" y="60" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ffd93d" font-weight="600">RESUME ATS</text>
-  </g>
-
-  <g class="feat-float ff5">
-    <rect x="454" y="18" width="95" height="60" rx="10" fill="#0f172a" stroke="#ff6b6b" stroke-width="1">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="1.6s"/>
-    </rect>
-    <text x="502" y="40" text-anchor="middle" font-size="16">🗺️</text>
-    <text x="502" y="60" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ff6b6b" font-weight="600">ROADMAP</text>
-  </g>
-
-  <g class="feat-float ff6">
-    <rect x="562" y="18" width="95" height="60" rx="10" fill="#0f172a" stroke="#00d2ff" stroke-width="1">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="2s"/>
-    </rect>
-    <text x="610" y="40" text-anchor="middle" font-size="16">📊</text>
-    <text x="610" y="60" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#00d2ff" font-weight="600">DASHBOARD</text>
-  </g>
-
-  <g class="feat-float ff7">
-    <rect x="670" y="18" width="95" height="60" rx="10" fill="#0f172a" stroke="#7b2ff7" stroke-width="1">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="2.4s"/>
-    </rect>
-    <text x="718" y="40" text-anchor="middle" font-size="16">💎</text>
-    <text x="718" y="60" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#7b2ff7" font-weight="600">PREMIUM</text>
-  </g>
-
-  <g class="feat-float ff8">
-    <rect x="778" y="18" width="95" height="60" rx="10" fill="#0f172a" stroke="#64ffda" stroke-width="1">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="2.8s"/>
-    </rect>
-    <text x="826" y="40" text-anchor="middle" font-size="16">⚙️</text>
-    <text x="826" y="60" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#64ffda" font-weight="600">SETTINGS</text>
-  </g>
-
-  <!-- Bottom row: pipeline flow -->
-  <g transform="translate(0, 90)">
-    <!-- Flow arrows -->
-    <text x="22" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#8892b0">user</text>
-    <line x1="52" y1="26" x2="82" y2="26" stroke="#00d2ff" stroke-width="1" marker-end="none">
-      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
-    </line>
-    <text x="62" y="22" font-size="10" fill="#00d2ff">→</text>
-
-    <text x="82" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#00d2ff">auth</text>
-    <text x="118" y="22" font-size="10" fill="#7b2ff7">→</text>
-
-    <text x="135" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#7b2ff7">configure</text>
-    <text x="203" y="22" font-size="10" fill="#64ffda">→</text>
-
-    <text x="218" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64ffda">company?</text>
-    <text x="290" y="22" font-size="10" fill="#ffd93d">→</text>
-
-    <text x="305" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ffd93d">interview</text>
-    <text x="375" y="22" font-size="10" fill="#ff6b6b">→</text>
-
-    <text x="390" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ff6b6b">gemini_ai</text>
-    <text x="465" y="22" font-size="10" fill="#00d2ff">→</text>
-
-    <text x="478" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#00d2ff">evaluate</text>
-    <text x="545" y="22" font-size="10" fill="#7b2ff7">→</text>
-
-    <text x="558" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#7b2ff7">score</text>
-    <text x="598" y="22" font-size="10" fill="#64ffda">→</text>
-
-    <text x="612" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64ffda">report</text>
-    <text x="660" y="22" font-size="10" fill="#ffd93d">→</text>
-
-    <text x="675" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ffd93d">roadmap</text>
-    <text x="738" y="22" font-size="10" fill="#ff6b6b">→</text>
-
-    <text x="750" y="30" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ff6b6b" font-weight="700">hired! 🚀</text>
-
-    <!-- Animated progress bar under the pipeline -->
-    <rect x="22" y="44" width="850" height="3" rx="1.5" fill="#1e293b"/>
-    <rect x="22" y="44" width="0" height="3" rx="1.5" fill="#00d2ff">
-      <animate attributeName="width" values="0;850" dur="4s" repeatCount="indefinite"/>
-      <animate attributeName="fill" values="#00d2ff;#7b2ff7;#64ffda;#ffd93d;#ff6b6b;#00d2ff" dur="4s" repeatCount="indefinite"/>
-    </rect>
-  </g>
+  <!-- Connecting glow line -->
+  <line x1="20" y1="132" x2="1180" y2="132" stroke="url(#featGrad)" stroke-width="2" opacity="0.5">
+    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+  </line>
 </svg>

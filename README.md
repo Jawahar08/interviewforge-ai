@@ -1,12 +1,12 @@
 <!-- ╔══════════════════════════════════════════════════════════════════════════╗ -->
-<!-- ║            ⚡ INTERVIEWFORGE AI — THE ULTIMATE README                  ║ -->
+<!-- ║       ⚡ INTERVIEWFORGE AI — THE ULTIMATE README v3.0                  ║ -->
 <!-- ╚══════════════════════════════════════════════════════════════════════════╝ -->
 
 <a name="top"></a>
 
 <div align="center">
 
-<!-- ─────────── ANIMATED HERO BANNER (Custom SVG with aurora, particles, terminal) ─────────── -->
+<!-- ─────────── ANIMATED HERO BANNER ─────────── -->
 
 <a href="#-quick-start">
   <img src=".github/assets/hero-animated.svg" alt="InterviewForge AI — Next-Gen AI Interview Simulation Platform" width="100%" />
@@ -25,20 +25,22 @@
 ![Next.js](https://img.shields.io/badge/Next.js-16-000?style=flat-square&logo=next.js&logoColor=white)
 ![Gemini](https://img.shields.io/badge/Gemini_2.5-Flash-4285F4?style=flat-square&logo=google&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
 
 <br />
 
-<!-- ─────────── ANIMATED STATS CARDS (Custom SVG with neon glow) ─────────── -->
+<!-- ─────────── ANIMATED STATS ─────────── -->
 
 <img src=".github/assets/stats-animated.svg" alt="Platform Stats" width="100%" />
 
 <br />
 
-> **InterviewForge AI** is a production-grade, full-stack platform that simulates realistic AI-powered interviews across **30+ career domains**, evaluates answers with multi-dimensional scoring, provides ATS resume intelligence, generates personalized career roadmaps, and offers **company-targeted premium prep for FAANG & top-tier companies** — all driven by **Google Gemini 2.5 Flash**.
+> **InterviewForge AI** is a production-grade, full-stack AI platform that simulates realistic interviews across **30+ career domains**, evaluates answers with multi-dimensional scoring, provides **ATS resume intelligence**, offers a **500+ LeetCode Coding Arena** with live code sandbox, features **Voice AI mock interviews** with confidence metrics, includes an **interactive System Design Canvas**, generates personalized career roadmaps, and delivers **company-targeted premium prep for FAANG & top-tier companies** — all powered by **Google Gemini 2.5 Flash**.
 
 <br />
 
-<!-- ─────────── ANIMATED FEATURES STRIP (Custom SVG with floating cards + pipeline) ─────────── -->
+<!-- ─────────── ANIMATED FEATURES STRIP ─────────── -->
 
 <img src=".github/assets/features-animated.svg" alt="Feature Overview" width="100%" />
 
@@ -48,10 +50,11 @@
 
 <a href="#-the-problem"><img src="https://img.shields.io/badge/💡_Problem-ff6b6b?style=for-the-badge" /></a>
 <a href="#-features-at-a-glance"><img src="https://img.shields.io/badge/✨_Features-7b2ff7?style=for-the-badge" /></a>
+<a href="#-500-leetcode-coding-arena"><img src="https://img.shields.io/badge/💻_LeetCode-ffd93d?style=for-the-badge" /></a>
+<a href="#-voice-ai-mock-interviewer"><img src="https://img.shields.io/badge/🎤_Voice_AI-ff6b6b?style=for-the-badge" /></a>
 <a href="#-premium-company-prep"><img src="https://img.shields.io/badge/💎_Premium-ffd93d?style=for-the-badge" /></a>
 <a href="#%EF%B8%8F-system-architecture"><img src="https://img.shields.io/badge/🏗️_Architecture-00d2ff?style=for-the-badge" /></a>
 <a href="#-ai-pipeline-deep-dive"><img src="https://img.shields.io/badge/🧠_AI_Pipeline-64ffda?style=for-the-badge" /></a>
-<a href="#-cicd-pipeline"><img src="https://img.shields.io/badge/🔄_CI/CD-ff6b6b?style=for-the-badge" /></a>
 <a href="#-tech-stack"><img src="https://img.shields.io/badge/🛠️_Stack-7b2ff7?style=for-the-badge" /></a>
 <a href="#-quick-start"><img src="https://img.shields.io/badge/🚀_Start-00d2ff?style=for-the-badge" /></a>
 <a href="#-api-cheatsheet"><img src="https://img.shields.io/badge/📡_API-ffd93d?style=for-the-badge" /></a>
@@ -60,7 +63,7 @@
 
 <br />
 
-<!-- ═══════════════════════════ ANIMATED GRADIENT DIVIDER ═══════════════════════════ -->
+<!-- ═══════════════════════════ GRADIENT DIVIDER ═══════════════════════════ -->
 <img src=".github/assets/divider-animated.svg" width="100%" />
 
 <br />
@@ -72,7 +75,8 @@ Monday:    "I have a Google interview next week. Where do I even start?"
 Tuesday:   "I practiced 200 random LeetCode problems. None were relevant."
 Wednesday: "My resume got auto-rejected by the ATS. Again."
 Thursday:  "I bombed the behavioral round. I didn't know STAR format existed."
-Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
+Friday:    "I froze during the system design round. Couldn't draw anything."
+Saturday:  ✅ You deployed InterviewForge on Monday. You aced every round.
 ```
 
 <table>
@@ -88,6 +92,9 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 - 📉 No weakness detection or skill-gap analysis
 - 🤷 No career roadmap or progression guidance
 - 🏢 No company-specific preparation available
+- 💻 No live coding sandbox or LeetCode practice
+- 🎤 No voice-based mock interview simulation
+- 🏗️ No system design canvas or architecture tools
 - 🧠 No AI — just blind memorization
 ```
 
@@ -104,6 +111,9 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 + 🗺️ AI-powered personalized career roadmap
 + 📄 ATS resume intelligence with skill-gap analysis
 + 🏢 FAANG company-targeted premium prep (Google, Meta, Amazon...)
++ 💻 500+ LeetCode problems with live code sandbox (4 languages)
++ 🎤 Voice AI mock interview with confidence metrics
++ 🏗️ Interactive System Design Canvas with AI review
 + 💎 Premium tier with instant mock upgrade flow
 ```
 
@@ -127,11 +137,14 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 ║   🔐 Secure       ║   🎙️ Interview    ║   🧠 AI Engine    ║   📄 Resume       ║
 ║   Auth System     ║   Simulator       ║   (Gemini 2.5)    ║   Intelligence    ║
 ╠═══════════════════╬═══════════════════╬═══════════════════╬═══════════════════╣
-║   📊 Dashboard    ║   📜 Session       ║   🗺️ Career      ║   💎 Premium      ║
-║   Analytics       ║   History         ║   Roadmap         ║   Company Prep    ║
+║   💻 LeetCode     ║   🎤 Voice AI     ║   🏗️ System       ║   🗺️ Career      ║
+║   500+ Problems   ║   Mock Interview  ║   Design Canvas   ║   Roadmap         ║
 ╠═══════════════════╬═══════════════════╬═══════════════════╬═══════════════════╣
-║   👤 Profile      ║   ⚙️ Settings     ║   🏢 12 Companies ║   📈 Results &    ║
-║   Manager         ║   AI Config       ║   FAANG + More    ║   Score Tracking  ║
+║   📊 Dashboard    ║   📜 Session       ║   💎 Premium      ║   📈 Results &    ║
+║   Analytics       ║   History         ║   Company Prep    ║   Score Tracking  ║
+╠═══════════════════╬═══════════════════╬═══════════════════╬═══════════════════╣
+║   👤 Profile      ║   ⚙️ Settings     ║   🏢 12 Companies ║   🔄 CI/CD        ║
+║   Manager         ║   AI Config       ║   FAANG + More    ║   Pipelines       ║
 ╚═══════════════════╩═══════════════════╩═══════════════════╩═══════════════════╝
 ```
 
@@ -201,6 +214,49 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 <tr>
 <td width="50%" valign="top">
 
+### 💻 500+ LeetCode Coding Arena
+> Practice 500+ top LeetCode problems with live AI code sandbox
+
+- ✅ **500+ curated LeetCode problems** across **18 categories**
+- ✅ **4 language support** — JavaScript, Python 3, Java 21, C++ 20
+- ✅ **Real practice mode** — clean method stubs (no prefilled solutions)
+- ✅ **Live code execution** with console output
+- ✅ **Test case verification** — output compared against expected results
+- ✅ **Auto-solved marking** — tick only on matching expected output
+- ✅ **AI Code Audit** — Big-O time & space complexity analysis
+- ✅ Category filter pills + search + pagination (25/page)
+
+</td>
+<td width="50%" valign="top">
+
+### 🎤 Voice AI Mock Interviewer
+> Real-time speech analysis with confidence scoring
+
+- ✅ **Browser Web Speech API** — live voice transcription
+- ✅ **Live waveform visualization** — animated audio meter
+- ✅ **Speech Pace Gauge** — Words Per Minute (WPM) tracking
+- ✅ **Filler Word Counter** — detects "um", "uh", "like", "you know"
+- ✅ **Voice Confidence Score** — 0–100% rating based on filler frequency + speech pacing
+- ✅ **Real-time transcript display** — live speech-to-text output
+- ✅ Integrated into live interview workspace
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### 🏗️ System Design Canvas
+> Interactive architecture design workspace
+
+- ✅ **Drag-and-drop architecture components** — Load Balancers, Microservices, Databases, Caching, Message Queues
+- ✅ **Visual system design builder** — design architectures visually
+- ✅ **AI Architecture Review** — get AI feedback on your design
+- ✅ **Integrated into live interview workspace** — switch modes during interview
+- ✅ Multi-mode workspace: 📝 Text, 🎤 Voice AI, 💻 Code, 🏗️ Design
+
+</td>
+<td width="50%" valign="top">
+
 ### 🗺️ AI Career Roadmap
 > Personalized learning timeline with task tracking
 
@@ -213,6 +269,8 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 - ✅ Reset & regenerate capability
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 📊 Dashboard & Analytics
@@ -225,6 +283,19 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 - ✅ Resume upload history
 - ✅ Quick-action navigation cards
 - ✅ Responsive glassmorphism UI with micro-animations
+
+</td>
+<td width="50%" valign="top">
+
+### 👤 Profile & Settings
+> Complete account management
+
+- ✅ Profile management — name, role, password updates
+- ✅ AI configuration settings (model, temperature)
+- ✅ Notification preferences
+- ✅ Danger zone — clear interview history, delete resumes
+- ✅ Premium upgrade flow with mock payment
+- ✅ `isPremium` flag across auth + profile
 
 </td>
 </tr>
@@ -264,6 +335,112 @@ Friday:    ✅ You deployed InterviewForge on Monday. You aced every round.
 | 🔀 **Mixed / Comprehensive** | Balanced blend of all interview styles |
 
 </div>
+
+<br />
+
+### 💻 LeetCode Arena — 18 Problem Categories
+
+<div align="center">
+
+| # | Category | Problem Count | Difficulty Mix |
+|:-:|:---------|:-------------:|:---------------|
+| 1 | 📦 **Arrays & Hashing** | 30+ | Easy · Medium · Hard |
+| 2 | 👆 **Two Pointers** | 25+ | Easy · Medium · Hard |
+| 3 | 🪟 **Sliding Window** | 16+ | Easy · Medium · Hard |
+| 4 | 📚 **Stack** | 18+ | Easy · Medium · Hard |
+| 5 | 🔍 **Binary Search** | 15+ | Easy · Medium · Hard |
+| 6 | 🔗 **Linked List** | 20+ | Easy · Medium · Hard |
+| 7 | 🌳 **Trees** | 17+ | Easy · Medium · Hard |
+| 8 | 🔤 **Tries** | 11+ | Medium · Hard |
+| 9 | ⛰️ **Heap / Priority Queue** | 11+ | Easy · Medium · Hard |
+| 10 | 🔙 **Backtracking** | 14+ | Medium · Hard |
+| 11 | 🕸️ **Graphs** | 14+ | Medium · Hard |
+| 12 | 📈 **1D Dynamic Programming** | 13+ | Easy · Medium · Hard |
+| 13 | 📊 **2D Dynamic Programming** | 12+ | Medium · Hard |
+| 14 | 🤑 **Greedy** | 10+ | Easy · Medium · Hard |
+| 15 | 🔢 **Bit Manipulation** | 10+ | Easy · Medium |
+| 16 | 📐 **Math & Geometry** | 11+ | Easy · Medium · Hard |
+| 17 | 🏗️ **System Design** | 11+ | Medium · Hard |
+
+</div>
+
+<br />
+
+<!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
+<img src=".github/assets/divider-animated.svg" width="100%" />
+
+<br />
+
+## 🎤 Voice AI Mock Interviewer
+
+> **Real-time speech analysis** — practice answering questions out loud with AI analyzing your delivery, detecting filler words, and scoring your confidence.
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#ff6b6b', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
+
+flowchart LR
+    A["🎤 Start Recording\nWeb Speech API"] --> B["📡 Live Transcription\nReal-time STT"]
+    B --> C["📊 Speech Analytics\nWPM · Fillers"]
+    C --> D["🌟 Confidence Score\n0-100% Rating"]
+    D --> E["📋 Full Transcript\n+ Metrics Report"]
+
+    style A fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
+    style B fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
+    style C fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
+    style D fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
+    style E fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
+```
+
+### Voice AI Metrics
+
+| Metric | What It Measures | How It Helps |
+|:------:|:-----------------|:-------------|
+| ⚡ **Words Per Minute (WPM)** | Speech pace & delivery speed | Ideal range: 120-160 WPM for interviews |
+| ⚠️ **Filler Word Counter** | "um", "uh", "like", "you know", "basically" | Identifies nervous verbal habits |
+| 🌟 **Voice Confidence Score** | Combined score from pace + filler frequency | 0-100% overall confidence rating |
+| 📊 **Live Waveform** | Audio amplitude visualization | Visual feedback during recording |
+
+<br />
+
+## 💻 500+ LeetCode Coding Arena
+
+> **Practice 500+ top LeetCode problems** in a premium coding workspace with live code execution, test case validation, and AI complexity analysis — just like the real thing, but with AI coaching.
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#ffd93d', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
+
+flowchart LR
+    A["📋 Browse 500+\nProblems"] --> B["🏷️ Filter by\nTopic · Difficulty"]
+    B --> C["💻 Open Problem\nClean Practice Stub"]
+    C --> D["✍️ Write Solution\nJS · Python · Java · C++"]
+    D --> E["▶️ Run Code\nLive Execution"]
+    E --> F{"✓ Output Matches\nExpected?"}
+    F -->|"✅ Yes"| G["🏆 ACCEPTED\nMarked Solved"]
+    F -->|"❌ No"| H["✗ WRONG ANSWER\nTry Again"]
+    G --> I["🧠 AI Code Audit\nO(N) Complexity"]
+
+    style A fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
+    style C fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
+    style E fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
+    style G fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
+    style H fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
+    style I fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
+```
+
+### Coding Arena Features
+
+```diff
++ 💻 500+ hand-curated top LeetCode problems across 18 DSA categories
++ 🏷️ Topic filter pills — instantly filter by Arrays, Trees, DP, Graphs, etc.
++ 🔍 Live search — find any problem by name, number, or keyword
++ 📄 Pagination — 25 problems per page with clean navigation
++ ✍️ Clean practice stubs — no prefilled solutions (real practice mode!)
++ ▶️ Live code execution — actual output in console panel
++ ✅ Test case verification — output compared against expected results
++ 🏆 Auto-solved marking — green tick ONLY when output matches expected
++ 🧠 AI Code Audit — Big-O time & space complexity analysis
++ 🌐 4 Languages — JavaScript (Node.js), Python 3, Java 21, C++ 20
+```
 
 <br />
 
@@ -330,6 +507,8 @@ flowchart LR
 + Career roadmap generation                 + Cultural fit & loop-style questions
 + Dashboard analytics                       + Unlimited premium sessions
 + Interview history                         + Priority question generation
++ 500+ LeetCode coding arena               + Advanced code complexity analysis
++ Voice AI mock interview                   + Premium interview analytics
 ```
 
 <br />
@@ -354,9 +533,10 @@ flowchart TD
         FE --> INT_UI["🎙️ Interview Engine\nCompany Selector"]
         FE --> RES_UI["📄 Resume Workspace\nPDF Upload + ATS"]
         FE --> ROAD_UI["🗺️ Roadmap Builder\nWeekly Plans"]
-        FE --> HIST_UI["📜 History Viewer\nSession Timeline"]
-        FE --> PROF_UI["👤 Profile\nName · Role · Password"]
-        FE --> SET_UI["⚙️ Settings\nAI Config · Danger Zone"]
+        FE --> CODE_UI["💻 LeetCode Arena\n500+ Problems"]
+        FE --> VOICE_UI["🎤 Voice AI\nSpeech Analysis"]
+        FE --> DESIGN_UI["🏗️ System Design\nArchitecture Canvas"]
+        FE --> HIST_UI["📜 History · Profile · Settings"]
     end
 
     subgraph API["🛡️ API TIER — Spring Boot 3 + Java 23"]
@@ -370,7 +550,6 @@ flowchart TD
         SEC --> RES_SVC["📄 Resume"]
         SEC --> ROAD_SVC["🗺️ Roadmap"]
         SEC --> DASH_SVC["📊 Dashboard"]
-        SEC --> HIST_SVC["📜 History"]
         SEC --> PROF_SVC["👤 Profile\n+ Premium Upgrade"]
         SEC --> RESULT_SVC["📈 Result"]
     end
@@ -392,8 +571,6 @@ flowchart TD
     RES_UI --> GW
     ROAD_UI --> GW
     HIST_UI --> GW
-    PROF_UI --> GW
-    SET_UI --> GW
 
     AUTH_SVC --> DB
     INT_SVC --> DB
@@ -423,21 +600,74 @@ flowchart LR
     B --> C["⚙️ Configure\nRole · Type\nDifficulty"]
     C --> C2["🏢 Select\nCompany\n(Premium)"]
     C2 --> D["🎙️ Live Interview\n5 AI Questions"]
-    D --> E["🧠 AI Evaluation\nScoring per Answer"]
+    D --> D2["🎤 Voice AI\nOR Text"]
+    D2 --> E["🧠 AI Evaluation\nScoring per Answer"]
     E --> F["📈 Performance\nReport"]
     F --> G["🗺️ Career\nRoadmap"]
     G --> B
     B --> H["📄 Resume\nATS Analysis"]
+    B --> I["💻 LeetCode\n500+ Problems"]
 
     style A fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
     style B fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
     style C fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
     style C2 fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
     style D fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
+    style D2 fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
     style E fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
     style F fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
     style G fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
     style H fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
+    style I fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
+```
+
+<br />
+
+### 📦 Component Architecture Map
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#00d2ff', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
+
+flowchart TD
+    subgraph PAGES["📄 App Router Pages"]
+        LP["🏠 Landing"] 
+        AUTH["🔐 Auth\nLogin · Register"]
+        DASH["📊 Dashboard"]
+        INT["🎙️ Interview Setup"]
+        LIVE["🎬 Live Session"]
+        RES["📈 Result"]
+        RESUME["📄 Resume"]
+        ROAD["🗺️ Roadmap"]
+        CODE["💻 Coding Arena"]
+        PROF["👤 Profile"]
+        SET["⚙️ Settings"]
+        HIST["📜 History"]
+    end
+
+    subgraph COMPONENTS["🧩 Feature Components"]
+        RS["RoleSelector\n30+ roles"]
+        ITS["InterviewTypeSelector\n6 types"]
+        DS["DifficultySelector\n3 tiers"]
+        CKS["CompanyKitSelector\n12 companies"]
+        VR["VoiceRecorder\nSpeech-to-Text"]
+        CS["CodeSandbox\n4 languages"]
+        SDC["SystemDesignCanvas\nArchitecture"]
+    end
+
+    subgraph STORES["🗃️ State Management"]
+        ZA["Zustand Auth Store\nJWT · isPremium"]
+        ZI["Zustand Interview Store\nSession state"]
+    end
+
+    INT --> RS & ITS & DS & CKS
+    LIVE --> VR & CS & SDC
+    CODE --> CS
+    AUTH --> ZA
+    INT --> ZI
+
+    style PAGES fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
+    style COMPONENTS fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
+    style STORES fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
 ```
 
 <br />
@@ -575,7 +805,7 @@ flowchart TD
 %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#64ffda', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
 
 flowchart LR
-    A["💬 User Answer\nText Input"] --> B["📝 Build Eval Prompt\nQuestion + Answer + Role Context"]
+    A["💬 User Answer\nText or Voice"] --> B["📝 Build Eval Prompt\nQuestion + Answer + Role Context"]
     B --> C["🧠 Gemini 2.5\nMulti-Dimensional Scoring"]
     C --> D["📊 Parse Score\n0-10 Scale"]
     D --> E["📋 Extract Breakdown\nStrengths · Weaknesses · Suggestions"]
@@ -603,6 +833,26 @@ flowchart LR
     style A fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
     style C fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
     style G fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
+```
+
+### LeetCode Code Execution Pipeline
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#ffd93d', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
+
+flowchart LR
+    A["✍️ User Writes Code\nJS · Python · Java · C++"] --> B["▶️ Run Code\nClient-side Execution"]
+    B --> C["📤 Capture Output\nconsole.log / print"]
+    C --> D{"🔍 Compare Output\nvs Expected"}
+    D -->|"Match"| E["✅ ACCEPTED\nauto-mark solved"]
+    D -->|"Mismatch"| F["❌ WRONG ANSWER\nshow diff"]
+    E --> G["🧠 AI Code Audit\nTime · Space Complexity"]
+
+    style A fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
+    style B fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
+    style E fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
+    style F fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
+    style G fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
 ```
 
 <br />
@@ -656,108 +906,13 @@ sequenceDiagram
     D-->>A: Confirmed
     A-->>F: Question[] (typed response)
 
-    C->>F: Submit answer
+    C->>F: Submit answer (text or voice transcript)
     F->>A: POST /api/v1/answers/submit
     A->>P: Build evaluation prompt
     P->>G: Evaluate answer (multi-dimensional)
     G-->>V: Scoring response
     V->>D: Persist evaluation
     A-->>F: { score, strengths, weaknesses, suggestions }
-```
-
-</details>
-
-<br />
-
-<details>
-<summary><b>🔐 Authentication Flow — Detailed (click to expand)</b></summary>
-<br />
-
-```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'actorBkg': '#0f172a', 'actorBorder': '#00d2ff', 'actorTextColor': '#e2e8f0', 'signalColor': '#7b2ff7', 'signalTextColor': '#e2e8f0', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
-
-sequenceDiagram
-    participant C as 👤 Candidate
-    participant F as ⚡ Next.js
-    participant B as 🛡️ Spring Boot
-    participant S as 🔒 Spring Security
-    participant D as 🗄️ PostgreSQL
-
-    rect rgb(15, 23, 42)
-        Note over C,D: Registration Flow
-        C->>F: Fill registration form
-        F->>F: Zod schema validation
-        F->>B: POST /api/v1/auth/register
-        B->>B: Validate DTO (Jakarta)
-        B->>B: Hash password (BCrypt)
-        B->>D: INSERT user (isPremium=false)
-        D-->>B: Created
-        B-->>F: { token, user, isPremium }
-        F->>F: Zustand auth store update
-        F->>F: Redirect → /dashboard
-    end
-
-    rect rgb(15, 23, 42)
-        Note over C,D: Login Flow
-        C->>F: Submit credentials
-        F->>B: POST /api/v1/auth/login
-        B->>D: SELECT user by email
-        D-->>B: User record
-        B->>B: BCrypt.matches() ✅
-        B->>S: Generate JWT (HMAC-SHA256)
-        S-->>B: Signed token
-        B-->>F: { token, user, isPremium }
-        F->>F: Update Zustand + redirect
-    end
-
-    rect rgb(15, 23, 42)
-        Note over C,D: Protected API Requests
-        C->>F: Navigate to protected page
-        F->>F: ProtectedRoute guard check
-        F->>B: GET /api/v1/dashboard (Authorization: Bearer ...)
-        B->>S: JwtAuthenticationFilter
-        S->>S: Validate signature + expiry
-        S-->>B: SecurityContext populated
-        B->>D: Query user data
-        D-->>B: Results
-        B-->>F: Typed ApiResponse envelope
-    end
-```
-
-</details>
-
-<br />
-
-<details>
-<summary><b>🎙️ Interview Engine — Full Lifecycle (click to expand)</b></summary>
-<br />
-
-```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#00d2ff', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
-
-flowchart TD
-    A["⚙️ Configure Interview\nRole · Type · Difficulty"] --> A2{"🏢 Company\nSelected?"}
-    A2 -->|"Yes (Premium)"| A3["💎 Premium Validation\nCheck isPremium"]
-    A2 -->|"No"| B
-    A3 --> B["📋 Pre-Session Review\nConfirm Settings"]
-    B --> C["🎙️ Start Live Session\nSession ID Generated"]
-    C --> D["❓ AI Question Display\nGenerated by Gemini\n(+ Company Context)"]
-    D --> E["💬 Capture Answer\nText Input"]
-    E --> F{"🧠 AI Evaluation\nScore + Feedback"}
-    F --> G{"More\nQuestions?"}
-    G -->|Yes| D
-    G -->|No| H["📊 Session Complete\nAggregate Scores"]
-    H --> I["📈 Performance Report\nStrengths · Weaknesses"]
-    I --> J["📜 Saved to History"]
-    J --> K["🗺️ Generate Career Roadmap"]
-
-    style A fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
-    style A2 fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
-    style A3 fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
-    style D fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
-    style F fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
-    style I fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
-    style K fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
 ```
 
 </details>
@@ -836,10 +991,12 @@ flowchart LR
 | 🐻 **Zustand** | Lightweight client state management (persisted) | `latest` |
 | 📡 **Axios** | Typed HTTP client with JWT interceptors | `latest` |
 | ✨ **Radix UI** | Accessible primitive components (Dialog, Tabs, etc.) | `latest` |
+| 🎬 **Framer Motion** | Smooth animations & micro-interactions | `latest` |
 | 🔔 **Sonner** | Toast notification system | `latest` |
 | ✨ **Lucide React** | Beautiful icon library | `latest` |
 | 📝 **Zod** | Runtime schema validation | `latest` |
 | 📋 **React Hook Form** | Performant form management | `latest` |
+| 🎤 **Web Speech API** | Browser-native voice recognition for Voice AI | `native` |
 
 </details>
 
@@ -869,7 +1026,7 @@ flowchart LR
 | Technology | Role |
 |:----------:|------|
 | <img src="https://skillicons.dev/icons?i=postgres" width="24" /> **PostgreSQL** | Primary relational database (10+ tables) |
-| ✨ **Google Gemini 2.5 Flash** | AI question generation, answer evaluation, resume analysis, roadmap generation, company-targeted prep |
+| ✨ **Google Gemini 2.5 Flash** | AI question generation, answer evaluation, resume analysis, roadmap generation, company-targeted prep, code complexity audit |
 | 📑 **Apache PDFBox** | PDF text extraction for resume analysis |
 | <img src="https://skillicons.dev/icons?i=docker" width="24" /> **Docker** | Containerization |
 | <img src="https://skillicons.dev/icons?i=githubactions" width="24" /> **GitHub Actions** | CI/CD pipelines (Frontend + Backend) |
@@ -903,31 +1060,38 @@ frontend/
 │   │   ├── layout.tsx               # Sidebar + header layout
 │   │   ├── dashboard/page.tsx       # Analytics dashboard
 │   │   ├── history/page.tsx         # Interview history
-│   │   ├── profile/page.tsx         # Profile management (name, role, password)
-│   │   └── settings/page.tsx        # AI config, notifications, danger zone
+│   │   ├── profile/page.tsx         # Profile management
+│   │   └── settings/page.tsx        # AI config, danger zone
 │   │
 │   ├── 🎙️ interview/
 │   │   ├── page.tsx                 # Interview setup (role/type/difficulty/company)
 │   │   └── session/[sessionId]/
 │   │       ├── page.tsx             # Pre-session review
-│   │       ├── live/page.tsx        # Live interview workspace
+│   │       ├── live/page.tsx        # Live interview workspace (Text + Voice + Code + Design)
 │   │       └── result/page.tsx      # Performance report
 │   │
+│   ├── 💻 coding/page.tsx           # 🆕 LeetCode 500+ Coding Arena
 │   ├── 📄 resume/page.tsx           # Resume upload & ATS analysis
 │   └── 🗺️ roadmap/page.tsx         # AI career roadmap builder
 │
 ├── 📂 features/                     # Feature-sliced modules
 │   ├── 🔐 auth/                     # Auth hooks, API, store, types
+│   ├── 💻 coding/                   # 🆕 500+ LeetCode problems data, types
+│   │   └── data/
+│   │       └── problems.data.ts     # 500+ curated problems across 18 categories
 │   ├── 📊 dashboard/                # Dashboard API, hooks, types
 │   ├── 📜 history/                  # History API, components, types
 │   ├── 🎙️ interview/               # Interview API, components, schemas, store, types
 │   │   └── components/
-│   │       └── InterviewSetupForm   # Company selector + upgrade modal
+│   │       ├── InterviewSetupForm   # Company selector + upgrade modal
+│   │       ├── CodeSandbox          # 🆕 Multi-language code sandbox (JS, Python, Java, C++)
+│   │       ├── VoiceRecorder        # 🆕 Voice AI with speech-to-text + confidence
+│   │       └── SystemDesignCanvas   # 🆕 Architecture design canvas
 │   ├── 👤 profile/                  # Profile form, hooks, API, types
 │   ├── 📈 result/                   # Result API, components, types
 │   ├── 📄 resume/                   # Resume API, hooks, types
 │   ├── 🗺️ roadmap/                 # Roadmap API, components, types
-│   └── ⚙️ settings/                # Settings form, hooks, types (AI config + danger zone)
+│   └── ⚙️ settings/                # Settings form, hooks, types
 │
 ├── 📂 shared/                       # Shared/reusable code
 │   ├── components/                  # Auth guards, sidebar, header, UI primitives
@@ -985,7 +1149,7 @@ backend/src/main/java/com/interviewforge/
 ├── 👤 profile/                       # User profile domain
 │   ├── controller/                  # ProfileController (GET, PUT, DELETE, POST /upgrade)
 │   ├── dto/                         # ProfileUpdateRequest, UserProfileResponse (+isPremium)
-│   └── service/                     # ProfileService (+upgradeToPremium, clearInterviews, clearResumes)
+│   └── service/                     # ProfileService (+upgradeToPremium, clearInterviews)
 │
 ├── 💼 company/                       # Company readiness domain
 ├── 🎯 jobmatch/                      # Job matching domain
@@ -1171,6 +1335,7 @@ cd backend && mvn clean compile       # Backend compile check
 | Endpoint | URL |
 |:---------|:----|
 | 🖥️ Dashboard | [`localhost:3000`](http://localhost:3000) |
+| 💻 LeetCode Arena | [`localhost:3000/coding`](http://localhost:3000/coding) |
 | ⚙️ API | [`localhost:8080/api/v1`](http://localhost:8080/api/v1) |
 | 📄 Swagger | [`localhost:8080/swagger-ui/index.html`](http://localhost:8080/swagger-ui/index.html) |
 
@@ -1186,7 +1351,7 @@ cd backend && mvn clean compile       # Backend compile check
 ## 🗺️ Development Roadmap
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'cScale0': '#00d2ff', 'cScale1': '#7b2ff7', 'cScale2': '#64ffda', 'cScale3': '#ff6b6b', 'cScale4': '#ffd93d', 'cScale5': '#00d2ff', 'cScale6': '#7b2ff7', 'cScale7': '#ff6b6b', 'cScaleLabel0': '#0a0a1a', 'cScaleLabel1': '#0a0a1a', 'cScaleLabel2': '#0a0a1a', 'cScaleLabel3': '#0a0a1a', 'cScaleLabel4': '#0a0a1a', 'cScaleLabel5': '#0a0a1a', 'cScaleLabel6': '#0a0a1a', 'cScaleLabel7': '#0a0a1a', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': { 'cScale0': '#00d2ff', 'cScale1': '#7b2ff7', 'cScale2': '#64ffda', 'cScale3': '#ff6b6b', 'cScale4': '#ffd93d', 'cScale5': '#00d2ff', 'cScale6': '#7b2ff7', 'cScale7': '#ff6b6b', 'cScale8': '#64ffda', 'cScale9': '#ffd93d', 'cScaleLabel0': '#0a0a1a', 'cScaleLabel1': '#0a0a1a', 'cScaleLabel2': '#0a0a1a', 'cScaleLabel3': '#0a0a1a', 'cScaleLabel4': '#0a0a1a', 'cScaleLabel5': '#0a0a1a', 'cScaleLabel6': '#0a0a1a', 'cScaleLabel7': '#0a0a1a', 'cScaleLabel8': '#0a0a1a', 'cScaleLabel9': '#0a0a1a', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
 
 timeline
     title InterviewForge AI — Development Timeline
@@ -1196,55 +1361,51 @@ timeline
                             : Next.js 16 frontend scaffolding
                             : Spring Boot backend scaffolding
                             : PostgreSQL integration
-                            : CI/CD pipelines (GitHub Actions)
+                            : CI/CD pipelines
 
     section Phase 2 ✅
         Authentication : User registration + validation
-                       : Login with BCrypt
-                       : JWT token auth
+                       : Login with BCrypt + JWT
                        : Spring Security integration
                        : Protected routing + Zustand
 
     section Phase 3 ✅
         Interview Engine : Multi-domain role selector (30+ roles)
-                         : 6 interview types
+                         : 6 interview types + 3 difficulty tiers
                          : Session lifecycle management
                          : Live interview workspace
-                         : Question navigation + progress
 
     section Phase 4 ✅
         AI Runtime : Gemini 2.5 Flash integration
                    : Context-aware prompt engineering
-                   : Role-specific question generation
                    : Structured JSON output parsing
                    : Retry logic + error resilience
 
     section Phase 5 ✅
-        Evaluation + Results : Multi-dimensional answer scoring
-                             : Strengths/weaknesses analysis
-                             : Session score aggregation
-                             : Performance reports
-                             : Interview history tracking
+        Evaluation : Multi-dimensional answer scoring
+                   : Session score aggregation
+                   : Performance reports
+                   : Interview history tracking
 
     section Phase 6 ✅
-        Career Intelligence : Resume PDF upload + extraction
-                            : ATS compatibility scoring
+        Career Intelligence : Resume PDF upload + ATS scoring
                             : AI career roadmap generation
                             : Interactive weekly task checklist
                             : Dashboard analytics
 
     section Phase 7 ✅
-        Profile + Settings : Profile management (name, role, password)
-                           : Settings page (AI config, notifications, danger zone)
-                           : Database reset operations
-                           : Premium user tier
-
-    section Phase 8 ✅
-        Premium Company Prep : Company-targeted mock interviews
-                             : 12 company options (FAANG+)
+        Premium Company Prep : 12 company options (FAANG+)
                              : Premium upgrade flow + modal
                              : Company-aware AI prompt injection
-                             : isPremium across auth + profile
+
+    section Phase 8 ✅
+        Voice AI + Coding Arena : Voice AI mock with Web Speech API
+                                : Filler word detection + WPM gauge
+                                : Voice confidence score (0-100%)
+                                : 500+ LeetCode problems (18 categories)
+                                : Code sandbox (JS, Python, Java, C++)
+                                : Test case verification + auto-solved marking
+                                : System Design Canvas + AI review
 
     section Phase 9 🔵
         Scale + Enterprise : Redis caching layer
@@ -1373,8 +1534,7 @@ Java backend engineering, secure APIs, AI integration, and scalable SaaS.
 
 <br /><br />
 
-<!-- ─────────── ANIMATED FOOTER (Custom SVG with waves + particles) ─────────── -->
+<!-- ─────────── ANIMATED FOOTER ─────────── -->
 <img src=".github/assets/footer-animated.svg" alt="Practice · Analyze · Improve · Get Hired" width="100%" />
 
 </div>
-
