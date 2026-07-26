@@ -1,0 +1,327 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="1200" height="680">
+  <defs>
+    <!-- Dark Gradients -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="100%" stop-color="#080c1b"/>
+    </linearGradient>
+
+    <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="50%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+
+    <linearGradient id="accentTextGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0b1021" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <!-- Glow & Shadow Filters -->
+    <filter id="btnGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="680" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- ==================== HEADER BAR ==================== -->
+  <g transform="translate(0, 0)">
+    <rect width="1200" height="54" fill="#090d1e" border-bottom="1px solid #1e293b"/>
+    <line x1="0" y1="54" x2="1200" y2="54" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- App Logo -->
+    <g transform="translate(20, 15)">
+      <rect x="0" y="0" width="24" height="24" rx="6" fill="url(#purpleGrad)"/>
+      <polygon points="12,5 6,18 11,18 9,23 18,11 13,11" fill="#fff" transform="scale(0.8) translate(3,2)"/>
+      <text x="32" y="14" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#f8fafc" font-weight="800">InterviewForge</text>
+      <text x="32" y="24" font-family="'Inter', system-ui, sans-serif" font-size="8" fill="#a78bfa" font-weight="700" letter-spacing="1">AI</text>
+    </g>
+
+    <!-- Search Input Bar -->
+    <g transform="translate(220, 11)">
+      <rect x="0" y="0" width="240" height="32" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="12" y="20" font-family="sans-serif" font-size="12" fill="#64748b">🔍</text>
+      <text x="32" y="20" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#64748b">Search InterviewForge...</text>
+    </g>
+
+    <!-- Right Controls -->
+    <g transform="translate(1000, 13)">
+      <!-- Currency selector -->
+      <rect x="0" y="0" width="70" height="28" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="10" y="18" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#94a3b8" font-weight="600">🌐 USD ($)</text>
+
+      <!-- Notification Bell -->
+      <circle cx="92" cy="14" r="14" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="87" y="18" font-family="sans-serif" font-size="10" fill="#94a3b8">🔔</text>
+
+      <!-- Profile Badge -->
+      <g transform="translate(118, 0)">
+        <rect x="0" y="0" width="70" height="28" rx="14" fill="#1e1b4b" stroke="#6366f1" stroke-width="1"/>
+        <circle cx="14" cy="14" r="10" fill="#6366f1"/>
+        <text x="14" y="18" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#fff" font-weight="700">B</text>
+        <text x="28" y="18" font-family="'Inter', sans-serif" font-size="9" fill="#c4b5fd" font-weight="600">bharathi...</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== SIDEBAR ==================== -->
+  <g transform="translate(0, 54)">
+    <rect width="180" height="626" fill="#070a17"/>
+    <line x1="180" y1="0" x2="180" y2="626" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- WORKSPACE Header -->
+    <text x="16" y="24" font-family="'Inter', system-ui, sans-serif" font-size="8" fill="#475569" font-weight="800" letter-spacing="1.5">WORKSPACE</text>
+
+    <!-- Nav Items -->
+    <!-- Active: Dashboard -->
+    <g transform="translate(10, 34)">
+      <rect width="160" height="34" rx="8" fill="#4c1d95" opacity="0.6"/>
+      <rect width="160" height="34" rx="8" fill="none" stroke="#7c3aed" stroke-width="1"/>
+      <text x="14" y="21" font-family="sans-serif" font-size="12" fill="#c4b5fd">📊</text>
+      <text x="34" y="21" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#fff" font-weight="700">Dashboard</text>
+    </g>
+
+    <!-- Mock Interview -->
+    <g transform="translate(10, 74)">
+      <text x="14" y="21" font-family="sans-serif" font-size="12" fill="#64748b">🎙️</text>
+      <text x="34" y="21" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="500">Mock Interview</text>
+    </g>
+
+    <!-- Coding Arena -->
+    <g transform="translate(10, 114)">
+      <text x="14" y="21" font-family="sans-serif" font-size="12" fill="#64748b">💻</text>
+      <text x="34" y="21" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="500">Coding Arena</text>
+    </g>
+
+    <!-- Interview History -->
+    <g transform="translate(10, 154)">
+      <text x="14" y="21" font-family="sans-serif" font-size="12" fill="#64748b">📜</text>
+      <text x="34" y="21" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="500">Interview History</text>
+    </g>
+
+    <!-- Resume AI -->
+    <g transform="translate(10, 194)">
+      <text x="14" y="21" font-family="sans-serif" font-size="12" fill="#64748b">📄</text>
+      <text x="34" y="21" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="500">Resume AI</text>
+    </g>
+
+    <!-- Roadmap -->
+    <g transform="translate(10, 234)">
+      <text x="14" y="21" font-family="sans-serif" font-size="12" fill="#64748b">🗺️</text>
+      <text x="34" y="21" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="500">Roadmap</text>
+    </g>
+
+    <!-- ACCOUNT Header -->
+    <text x="16" y="295" font-family="'Inter', system-ui, sans-serif" font-size="8" fill="#475569" font-weight="800" letter-spacing="1.5">ACCOUNT</text>
+
+    <!-- Profile -->
+    <g transform="translate(10, 308)">
+      <text x="14" y="21" font-family="sans-serif" font-size="12" fill="#64748b">👤</text>
+      <text x="34" y="21" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="500">Profile</text>
+    </g>
+
+    <!-- Settings -->
+    <g transform="translate(10, 348)">
+      <text x="14" y="21" font-family="sans-serif" font-size="12" fill="#64748b">⚙️</text>
+      <text x="34" y="21" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="500">Settings</text>
+    </g>
+
+    <!-- Bottom Sidebar Card -->
+    <g transform="translate(10, 540)">
+      <rect width="160" height="65" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="10" y="20" font-family="sans-serif" font-size="10" fill="#a78bfa">💡 Keep improving</text>
+      <text x="10" y="36" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">Every completed interview</text>
+      <text x="10" y="48" font-family="'Inter', sans-serif" font-size="8" fill="#64748b">helps build a clearer picture.</text>
+    </g>
+  </g>
+
+  <!-- ==================== MAIN CONTENT WORKSPACE ==================== -->
+  <g transform="translate(196, 70)">
+
+    <!-- 1. HERO BANNER -->
+    <g transform="translate(0, 0)">
+      <rect width="984" height="135" rx="12" fill="url(#heroGrad)" stroke="#312e81" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+      <!-- Tag pill -->
+      <rect x="24" y="18" width="135" height="20" rx="10" fill="#1e1b4b" stroke="#4c1d95" stroke-width="1"/>
+      <text x="32" y="32" font-family="'Inter', sans-serif" font-size="9.5" fill="#c4b5fd" font-weight="600">✨ Your preparation workspace</text>
+
+      <!-- Headline -->
+      <text x="24" y="65" font-family="'Inter', system-ui, sans-serif" font-size="22" font-weight="900" fill="#f8fafc">
+        Ready to sharpen your <tspan fill="url(#accentTextGrad)">interview performance?</tspan>
+      </text>
+
+      <!-- Subtitle -->
+      <text x="24" y="88" font-family="'Inter', system-ui, sans-serif" font-size="10.5" fill="#94a3b8">
+        Practice deliberately, review multi-dimensional AI feedback, upload resumes to scan ATS scores, and map out a structured path toward job readiness.
+      </text>
+
+      <!-- Action Button -->
+      <g transform="translate(840, 48)" filter="url(#btnGlow)">
+        <rect width="120" height="38" rx="8" fill="url(#purpleGrad)"/>
+        <text x="20" y="23" font-family="'Inter', sans-serif" font-size="11" fill="#ffffff" font-weight="700">Start Interview →</text>
+      </g>
+    </g>
+
+    <!-- 2. AI CAREER ASSISTANT INSIGHTS BANNER -->
+    <g transform="translate(0, 148)">
+      <rect width="984" height="52" rx="10" fill="#0b0f19" stroke="#1e1b4b" stroke-width="1"/>
+      <rect x="14" y="14" width="24" height="24" rx="6" fill="#1e1b4b"/>
+      <text x="26" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#a78bfa">⚡</text>
+
+      <text x="46" y="24" font-family="'Inter', system-ui, sans-serif" font-size="8" fill="#a78bfa" font-weight="800" letter-spacing="1">AI CAREER ASSISTANT INSIGHTS</text>
+      <text x="46" y="38" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#cbd5e1">
+        Your latest resume optimization report suggests focusing on Cloud Platforms (AWS, Azure, GCP), Containerization &amp; Orchestration (Docker, Kubernetes), CI/CD Tools to increase readiness.
+      </text>
+    </g>
+
+    <!-- 3. METRICS CARDS ROW (4 CARDS) -->
+    <g transform="translate(0, 214)">
+      <!-- Metric 1: Interviews Completed -->
+      <g transform="translate(0, 0)">
+        <rect width="234" height="96" rx="10" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+        <rect x="16" y="14" width="28" height="28" rx="6" fill="#1e1b4b"/>
+        <text x="30" y="32" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#c4b5fd">💬</text>
+        <text x="185" y="22" font-family="'Inter', sans-serif" font-size="8" fill="#475569" font-weight="800" letter-spacing="1">METRICS</text>
+
+        <text x="16" y="66" font-family="'Inter', sans-serif" font-size="22" font-weight="900" fill="#f8fafc">6</text>
+        <text x="16" y="80" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8" font-weight="700">Interviews Completed</text>
+      </g>
+
+      <!-- Metric 2: Average Score -->
+      <g transform="translate(250, 0)">
+        <rect width="234" height="96" rx="10" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+        <rect x="16" y="14" width="28" height="28" rx="6" fill="#1e1b4b"/>
+        <text x="30" y="32" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#c4b5fd">📊</text>
+        <text x="185" y="22" font-family="'Inter', sans-serif" font-size="8" fill="#475569" font-weight="800" letter-spacing="1">METRICS</text>
+
+        <text x="16" y="66" font-family="'Inter', sans-serif" font-size="22" font-weight="900" fill="#a78bfa">--</text>
+        <text x="16" y="80" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8" font-weight="700">Average Score</text>
+      </g>
+
+      <!-- Metric 3: Practice Questions -->
+      <g transform="translate(500, 0)">
+        <rect width="234" height="96" rx="10" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+        <rect x="16" y="14" width="28" height="28" rx="6" fill="#1e1b4b"/>
+        <text x="30" y="32" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#c4b5fd">⏱️</text>
+        <text x="185" y="22" font-family="'Inter', sans-serif" font-size="8" fill="#475569" font-weight="800" letter-spacing="1">METRICS</text>
+
+        <text x="16" y="66" font-family="'Inter', sans-serif" font-size="22" font-weight="900" fill="#f8fafc">35</text>
+        <text x="16" y="80" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8" font-weight="700">Practice Questions</text>
+      </g>
+
+      <!-- Metric 4: Latest ATS Score -->
+      <g transform="translate(750, 0)">
+        <rect width="234" height="96" rx="10" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+        <rect x="16" y="14" width="28" height="28" rx="6" fill="#1e1b4b"/>
+        <text x="30" y="32" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#c4b5fd">📈</text>
+        <text x="185" y="22" font-family="'Inter', sans-serif" font-size="8" fill="#475569" font-weight="800" letter-spacing="1">METRICS</text>
+
+        <text x="16" y="66" font-family="'Inter', sans-serif" font-size="22" font-weight="900" fill="#34d399">69%</text>
+        <text x="16" y="80" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8" font-weight="700">Latest ATS Score</text>
+      </g>
+    </g>
+
+    <!-- 4. BOTTOM TWO COLUMNS (RECENT INTERVIEWS & QUICK ACTIONS) -->
+    <g transform="translate(0, 324)">
+
+      <!-- LEFT: Recent Interviews Card -->
+      <g transform="translate(0, 0)">
+        <rect width="580" height="266" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+
+        <!-- Header -->
+        <text x="20" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#f8fafc">Recent Interviews</text>
+        <text x="20" y="42" font-family="'Inter', sans-serif" font-size="9" fill="#64748b">Your latest practice sessions. Click on any record to view details.</text>
+
+        <text x="500" y="28" font-family="'Inter', sans-serif" font-size="10" fill="#c4b5fd" font-weight="600">View History Log →</text>
+
+        <!-- Inner Box -->
+        <g transform="translate(20, 60)">
+          <rect width="540" height="186" rx="10" fill="#090d1a" stroke="#1e293b" stroke-width="1"/>
+
+          <!-- Icon -->
+          <circle cx="270" cy="55" r="20" fill="#1e1b4b"/>
+          <text x="270" y="60" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#a78bfa">📈</text>
+
+          <text x="270" y="96" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#f8fafc" font-weight="800">Performance Records Available</text>
+          <text x="270" y="114" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#64748b">You have successfully completed mock interview sessions. Dive into your</text>
+          <text x="270" y="126" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#64748b">performance history to inspect feedback questions and improvement roadmaps.</text>
+
+          <g transform="translate(220, 142)">
+            <rect width="100" height="28" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+            <text x="50" y="18" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#e2e8f0" font-weight="700">Explore Reports</text>
+          </g>
+        </g>
+      </g>
+
+      <!-- RIGHT: Quick Actions Card -->
+      <g transform="translate(600, 0)">
+        <rect width="384" height="266" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+
+        <text x="20" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#f8fafc">Quick Actions</text>
+        <text x="20" y="42" font-family="'Inter', sans-serif" font-size="9" fill="#64748b">Continue your preparation workflows.</text>
+
+        <!-- Action 1: HR Resume Round -->
+        <g transform="translate(20, 56)">
+          <rect width="344" height="44" rx="8" fill="#090d1a" stroke="#1e293b" stroke-width="1"/>
+          <rect x="10" y="8" width="28" height="28" rx="6" fill="#1e1b4b"/>
+          <text x="24" y="26" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#c4b5fd">👤</text>
+
+          <text x="46" y="22" font-family="'Inter', sans-serif" font-size="10.5" fill="#f8fafc" font-weight="700">HR Resume Round</text>
+          <text x="46" y="34" font-family="'Inter', sans-serif" font-size="8.5" fill="#64748b">Practice HR questions derived from your resume.</text>
+          <text x="325" y="26" font-family="sans-serif" font-size="10" fill="#475569">→</text>
+        </g>
+
+        <!-- Action 2: Technical Mock -->
+        <g transform="translate(20, 106)">
+          <rect width="344" height="44" rx="8" fill="#090d1a" stroke="#1e293b" stroke-width="1"/>
+          <rect x="10" y="8" width="28" height="28" rx="6" fill="#1e1b4b"/>
+          <text x="24" y="26" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#c4b5fd">🎙️</text>
+
+          <text x="46" y="22" font-family="'Inter', sans-serif" font-size="10.5" fill="#f8fafc" font-weight="700">Start Technical Mock</text>
+          <text x="46" y="34" font-family="'Inter', sans-serif" font-size="8.5" fill="#64748b">Practice with adaptive AI-generated questions.</text>
+          <text x="325" y="26" font-family="sans-serif" font-size="10" fill="#475569">→</text>
+        </g>
+
+        <!-- Action 3: Analyze Resume AI -->
+        <g transform="translate(20, 156)">
+          <rect width="344" height="44" rx="8" fill="#090d1a" stroke="#1e293b" stroke-width="1"/>
+          <rect x="10" y="8" width="28" height="28" rx="6" fill="#1e1b4b"/>
+          <text x="24" y="26" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#c4b5fd">📄</text>
+
+          <text x="46" y="22" font-family="'Inter', sans-serif" font-size="10.5" fill="#f8fafc" font-weight="700">Analyze Resume AI</text>
+          <text x="46" y="34" font-family="'Inter', sans-serif" font-size="8.5" fill="#64748b">Discover strengths, gaps, and interview risks.</text>
+          <text x="325" y="26" font-family="sans-serif" font-size="10" fill="#475569">→</text>
+        </g>
+
+        <!-- Action 4: View Career Roadmap -->
+        <g transform="translate(20, 206)">
+          <rect width="344" height="44" rx="8" fill="#090d1a" stroke="#1e293b" stroke-width="1"/>
+          <rect x="10" y="8" width="28" height="28" rx="6" fill="#1e1b4b"/>
+          <text x="24" y="26" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#c4b5fd">🗺️</text>
+
+          <text x="46" y="22" font-family="'Inter', sans-serif" font-size="10.5" fill="#f8fafc" font-weight="700">View Career Roadmap</text>
+          <text x="46" y="34" font-family="'Inter', sans-serif" font-size="8.5" fill="#64748b">Follow your personalized preparation plan.</text>
+          <text x="325" y="26" font-family="sans-serif" font-size="10" fill="#475569">→</text>
+        </g>
+      </g>
+    </g>
+
+  </g>
+</svg>

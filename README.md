@@ -48,6 +48,14 @@
 
 <br />
 
+<!-- ─────────── LIVE DASHBOARD DEMO ─────────── -->
+
+<a href="#-quick-start">
+  <img src=".github/assets/dashboard-demo.svg" alt="InterviewForge AI Dashboard Workspace" width="100%" />
+</a>
+
+<br />
+
 <!-- ─────────── NAVIGATION PILLS ─────────── -->
 
 <a href="#-the-problem"><img src="https://img.shields.io/badge/💡_Problem-ff6b6b?style=for-the-badge" /></a>
