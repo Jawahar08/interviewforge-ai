@@ -211,7 +211,55 @@ Rules:
                 .build()
         );
 
+        try {
+            List<Question> csvDataset = loadDatasetQuestions(interview, numberOfQuestions);
+            if (!csvDataset.isEmpty()) {
+                System.out.println("Loaded " + csvDataset.size() + " questions from Kaggle interview dataset!");
+                return questionRepository.saveAll(csvDataset);
+            }
+        } catch (Exception err) {
+            System.err.println("Dataset fallback error: " + err.getMessage());
+        }
+
         return questionRepository.saveAll(fallbackQuestions);
+    }
+
+    private List<Question> loadDatasetQuestions(Interview interview, int count) {
+        List<Question> list = new java.util.ArrayList<>();
+        try {
+            var resource = new org.springframework.core.io.ClassPathResource("db/data/full_interview_questions_dataset.csv");
+            if (resource.exists()) {
+                try (var reader = new java.io.BufferedReader(new java.io.InputStreamReader(resource.getInputStream()))) {
+                    String line;
+                    boolean isHeader = true;
+                    while ((line = reader.readLine()) != null) {
+                        if (isHeader) { isHeader = false; continue; }
+                        String[] parts = line.split(",");
+                        if (parts.length >= 4) {
+                            String qText = parts[0].trim();
+                            String category = parts[2].trim();
+                            String diff = parts[3].trim().toUpperCase();
+                            if (!qText.isEmpty() && qText.length() > 5) {
+                                list.add(Question.builder()
+                                        .interview(interview)
+                                        .questionText(qText)
+                                        .category(category)
+                                        .difficulty(diff)
+                                        .createdAt(LocalDateTime.now())
+                                        .build());
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error reading Kaggle dataset CSV: " + e.getMessage());
+        }
+        if (!list.isEmpty()) {
+            java.util.Collections.shuffle(list);
+            return list.stream().limit(count).toList();
+        }
+        return List.of();
     }
     
 }

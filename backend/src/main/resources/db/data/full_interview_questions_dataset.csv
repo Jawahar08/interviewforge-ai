@@ -1,0 +1,661 @@
+question,role,category,difficulty
+Explain the difference between list and tuple.,Software Engineer,Technical,medium
+Explain the difference between list and array.,Software Engineer,Technical,medium
+Explain the difference between list and hashmap.,Software Engineer,Technical,medium
+Explain the difference between list and recursion.,Software Engineer,Technical,easy
+Explain the difference between list and inheritance.,Software Engineer,Technical,hard
+Explain the difference between list and encapsulation.,Software Engineer,Technical,hard
+Explain the difference between list and polymorphism.,Software Engineer,Technical,easy
+Explain the difference between list and pointers.,Software Engineer,Technical,medium
+Explain the difference between list and REST API.,Software Engineer,Technical,hard
+Explain the difference between list and SQL injection.,Software Engineer,Technical,easy
+Explain the difference between list and multithreading.,Software Engineer,Technical,medium
+Explain the difference between list and deadlock.,Software Engineer,Technical,hard
+Explain the difference between list and garbage collection.,Software Engineer,Technical,hard
+Explain the difference between list and Big O notation.,Software Engineer,Technical,easy
+Explain the difference between list and stack.,Software Engineer,Technical,medium
+Explain the difference between list and queue.,Software Engineer,Technical,medium
+Explain the difference between list and dictionary.,Software Engineer,Technical,hard
+Explain the difference between list and lambda function.,Software Engineer,Technical,hard
+Explain the difference between list and virtual memory.,Software Engineer,Technical,medium
+Explain the difference between list and exception handling.,Software Engineer,Technical,easy
+Explain the difference between list and binary search.,Software Engineer,Technical,medium
+Explain the difference between list and linked list.,Software Engineer,Technical,hard
+Explain the difference between list and merge sort.,Software Engineer,Technical,easy
+Explain the difference between list and interface.,Software Engineer,Technical,hard
+Explain the difference between tuple and array.,Software Engineer,Technical,hard
+Explain the difference between tuple and hashmap.,Software Engineer,Technical,medium
+Explain the difference between tuple and recursion.,Software Engineer,Technical,hard
+Explain the difference between tuple and inheritance.,Software Engineer,Technical,easy
+Explain the difference between tuple and encapsulation.,Software Engineer,Technical,easy
+Explain the difference between tuple and polymorphism.,Software Engineer,Technical,easy
+Explain the difference between tuple and pointers.,Software Engineer,Technical,easy
+Explain the difference between tuple and REST API.,Software Engineer,Technical,hard
+Explain the difference between tuple and SQL injection.,Software Engineer,Technical,hard
+Explain the difference between tuple and multithreading.,Software Engineer,Technical,hard
+Explain the difference between tuple and deadlock.,Software Engineer,Technical,easy
+Explain the difference between tuple and garbage collection.,Software Engineer,Technical,hard
+Explain the difference between tuple and Big O notation.,Software Engineer,Technical,medium
+Explain the difference between tuple and stack.,Software Engineer,Technical,easy
+Explain the difference between tuple and queue.,Software Engineer,Technical,medium
+Explain the difference between tuple and dictionary.,Software Engineer,Technical,hard
+Explain the difference between tuple and lambda function.,Software Engineer,Technical,hard
+Explain the difference between tuple and virtual memory.,Software Engineer,Technical,hard
+Explain the difference between tuple and exception handling.,Software Engineer,Technical,hard
+Explain the difference between tuple and binary search.,Software Engineer,Technical,hard
+Explain the difference between tuple and linked list.,Software Engineer,Technical,medium
+Explain the difference between tuple and merge sort.,Software Engineer,Technical,medium
+Explain the difference between tuple and interface.,Software Engineer,Technical,hard
+Explain the difference between array and hashmap.,Software Engineer,Technical,hard
+Explain the difference between array and recursion.,Software Engineer,Technical,medium
+Explain the difference between array and inheritance.,Software Engineer,Technical,easy
+Explain the difference between array and encapsulation.,Software Engineer,Technical,medium
+Explain the difference between array and polymorphism.,Software Engineer,Technical,hard
+Explain the difference between array and pointers.,Software Engineer,Technical,easy
+Explain the difference between array and REST API.,Software Engineer,Technical,medium
+Explain the difference between array and SQL injection.,Software Engineer,Technical,hard
+Explain the difference between array and multithreading.,Software Engineer,Technical,hard
+Explain the difference between array and deadlock.,Software Engineer,Technical,medium
+Explain the difference between array and garbage collection.,Software Engineer,Technical,easy
+Explain the difference between array and Big O notation.,Software Engineer,Technical,easy
+Explain the difference between array and stack.,Software Engineer,Technical,easy
+Explain the difference between array and queue.,Software Engineer,Technical,medium
+Explain the difference between array and dictionary.,Software Engineer,Technical,hard
+Explain the difference between array and lambda function.,Software Engineer,Technical,medium
+Explain the difference between array and virtual memory.,Software Engineer,Technical,hard
+Explain the difference between array and exception handling.,Software Engineer,Technical,hard
+Explain the difference between array and binary search.,Software Engineer,Technical,medium
+Explain the difference between array and linked list.,Software Engineer,Technical,medium
+Explain the difference between array and merge sort.,Software Engineer,Technical,easy
+Explain the difference between array and interface.,Software Engineer,Technical,hard
+Explain the difference between hashmap and recursion.,Software Engineer,Technical,hard
+Explain the difference between hashmap and inheritance.,Software Engineer,Technical,medium
+Explain the difference between hashmap and encapsulation.,Software Engineer,Technical,medium
+Explain the difference between hashmap and polymorphism.,Software Engineer,Technical,hard
+Explain the difference between hashmap and pointers.,Software Engineer,Technical,hard
+Explain the difference between hashmap and REST API.,Software Engineer,Technical,medium
+Explain the difference between hashmap and SQL injection.,Software Engineer,Technical,hard
+Explain the difference between hashmap and multithreading.,Software Engineer,Technical,hard
+Explain the difference between hashmap and deadlock.,Software Engineer,Technical,medium
+Explain the difference between hashmap and garbage collection.,Software Engineer,Technical,medium
+Explain the difference between hashmap and Big O notation.,Software Engineer,Technical,hard
+Explain the difference between hashmap and stack.,Software Engineer,Technical,easy
+Explain the difference between hashmap and queue.,Software Engineer,Technical,hard
+Explain the difference between hashmap and dictionary.,Software Engineer,Technical,hard
+Explain the difference between hashmap and lambda function.,Software Engineer,Technical,medium
+Explain the difference between hashmap and virtual memory.,Software Engineer,Technical,medium
+Explain the difference between hashmap and exception handling.,Software Engineer,Technical,medium
+Explain the difference between hashmap and binary search.,Software Engineer,Technical,medium
+Explain the difference between hashmap and linked list.,Software Engineer,Technical,hard
+Explain the difference between hashmap and merge sort.,Software Engineer,Technical,hard
+Explain the difference between hashmap and interface.,Software Engineer,Technical,hard
+Explain the difference between recursion and inheritance.,Software Engineer,Technical,hard
+Explain the difference between recursion and encapsulation.,Software Engineer,Technical,medium
+Explain the difference between recursion and polymorphism.,Software Engineer,Technical,easy
+Explain the difference between recursion and pointers.,Software Engineer,Technical,hard
+Explain the difference between recursion and REST API.,Software Engineer,Technical,medium
+Explain the difference between recursion and SQL injection.,Software Engineer,Technical,easy
+Explain the difference between recursion and multithreading.,Software Engineer,Technical,easy
+Explain the difference between recursion and deadlock.,Software Engineer,Technical,hard
+Explain the difference between recursion and garbage collection.,Software Engineer,Technical,easy
+Explain the difference between recursion and Big O notation.,Software Engineer,Technical,easy
+Explain the difference between recursion and stack.,Software Engineer,Technical,medium
+Explain the difference between recursion and queue.,Software Engineer,Technical,medium
+Explain the difference between recursion and dictionary.,Software Engineer,Technical,easy
+Explain the difference between recursion and lambda function.,Software Engineer,Technical,medium
+Explain the difference between recursion and virtual memory.,Software Engineer,Technical,hard
+Explain the difference between recursion and exception handling.,Software Engineer,Technical,medium
+Explain the difference between recursion and binary search.,Software Engineer,Technical,easy
+Explain the difference between recursion and linked list.,Software Engineer,Technical,medium
+Explain the difference between recursion and merge sort.,Software Engineer,Technical,easy
+Explain the difference between recursion and interface.,Software Engineer,Technical,easy
+Explain the difference between inheritance and encapsulation.,Software Engineer,Technical,medium
+Explain the difference between inheritance and polymorphism.,Software Engineer,Technical,easy
+Explain the difference between inheritance and pointers.,Software Engineer,Technical,medium
+Explain the difference between inheritance and REST API.,Software Engineer,Technical,medium
+Explain the difference between inheritance and SQL injection.,Software Engineer,Technical,medium
+Explain the difference between inheritance and multithreading.,Software Engineer,Technical,medium
+Explain the difference between inheritance and deadlock.,Software Engineer,Technical,easy
+Explain the difference between inheritance and garbage collection.,Software Engineer,Technical,hard
+Explain the difference between inheritance and Big O notation.,Software Engineer,Technical,hard
+Explain the difference between inheritance and stack.,Software Engineer,Technical,medium
+Explain the difference between inheritance and queue.,Software Engineer,Technical,easy
+Explain the difference between inheritance and dictionary.,Software Engineer,Technical,easy
+Explain the difference between inheritance and lambda function.,Software Engineer,Technical,medium
+Explain the difference between inheritance and virtual memory.,Software Engineer,Technical,easy
+Explain the difference between inheritance and exception handling.,Software Engineer,Technical,hard
+Explain the difference between inheritance and binary search.,Software Engineer,Technical,easy
+Explain the difference between inheritance and linked list.,Software Engineer,Technical,easy
+Explain the difference between inheritance and merge sort.,Software Engineer,Technical,easy
+Explain the difference between inheritance and interface.,Software Engineer,Technical,easy
+Explain the difference between encapsulation and polymorphism.,Software Engineer,Technical,hard
+Explain the difference between encapsulation and pointers.,Software Engineer,Technical,easy
+Explain the difference between encapsulation and REST API.,Software Engineer,Technical,medium
+Explain the difference between encapsulation and SQL injection.,Software Engineer,Technical,easy
+Explain the difference between encapsulation and multithreading.,Software Engineer,Technical,medium
+Explain the difference between encapsulation and deadlock.,Software Engineer,Technical,easy
+Explain the difference between encapsulation and garbage collection.,Software Engineer,Technical,hard
+Explain the difference between encapsulation and Big O notation.,Software Engineer,Technical,easy
+Explain the difference between encapsulation and stack.,Software Engineer,Technical,hard
+Explain the difference between encapsulation and queue.,Software Engineer,Technical,hard
+Explain the difference between encapsulation and dictionary.,Software Engineer,Technical,easy
+Explain the difference between encapsulation and lambda function.,Software Engineer,Technical,hard
+Explain the difference between encapsulation and virtual memory.,Software Engineer,Technical,hard
+Explain the difference between encapsulation and exception handling.,Software Engineer,Technical,medium
+Explain the difference between encapsulation and binary search.,Software Engineer,Technical,hard
+Explain the difference between encapsulation and linked list.,Software Engineer,Technical,easy
+Explain the difference between encapsulation and merge sort.,Software Engineer,Technical,easy
+Explain the difference between encapsulation and interface.,Software Engineer,Technical,medium
+Explain the difference between polymorphism and pointers.,Software Engineer,Technical,easy
+Explain the difference between polymorphism and REST API.,Software Engineer,Technical,hard
+Explain the difference between polymorphism and SQL injection.,Software Engineer,Technical,easy
+Explain the difference between polymorphism and multithreading.,Software Engineer,Technical,hard
+Explain the difference between polymorphism and deadlock.,Software Engineer,Technical,medium
+Explain the difference between polymorphism and garbage collection.,Software Engineer,Technical,hard
+Explain the difference between polymorphism and Big O notation.,Software Engineer,Technical,hard
+Explain the difference between polymorphism and stack.,Software Engineer,Technical,easy
+Explain the difference between polymorphism and queue.,Software Engineer,Technical,hard
+Explain the difference between polymorphism and dictionary.,Software Engineer,Technical,medium
+Explain the difference between polymorphism and lambda function.,Software Engineer,Technical,medium
+Explain the difference between polymorphism and virtual memory.,Software Engineer,Technical,hard
+Explain the difference between polymorphism and exception handling.,Software Engineer,Technical,medium
+Explain the difference between polymorphism and binary search.,Software Engineer,Technical,easy
+Explain the difference between polymorphism and linked list.,Software Engineer,Technical,easy
+Explain the difference between polymorphism and merge sort.,Software Engineer,Technical,medium
+Explain the difference between polymorphism and interface.,Software Engineer,Technical,medium
+Explain the difference between pointers and REST API.,Software Engineer,Technical,medium
+Explain the difference between pointers and SQL injection.,Software Engineer,Technical,hard
+Explain the difference between pointers and multithreading.,Software Engineer,Technical,hard
+Explain the difference between pointers and deadlock.,Software Engineer,Technical,hard
+Explain the difference between pointers and garbage collection.,Software Engineer,Technical,medium
+Explain the difference between pointers and Big O notation.,Software Engineer,Technical,easy
+Explain the difference between pointers and stack.,Software Engineer,Technical,medium
+Explain the difference between pointers and queue.,Software Engineer,Technical,medium
+Explain the difference between pointers and dictionary.,Software Engineer,Technical,hard
+Explain the difference between pointers and lambda function.,Software Engineer,Technical,hard
+Explain the difference between pointers and virtual memory.,Software Engineer,Technical,medium
+Explain the difference between pointers and exception handling.,Software Engineer,Technical,medium
+Explain the difference between pointers and binary search.,Software Engineer,Technical,easy
+Explain the difference between pointers and linked list.,Software Engineer,Technical,medium
+Explain the difference between pointers and merge sort.,Software Engineer,Technical,easy
+Explain the difference between pointers and interface.,Software Engineer,Technical,easy
+Explain the difference between REST API and SQL injection.,Software Engineer,Technical,easy
+Explain the difference between REST API and multithreading.,Software Engineer,Technical,medium
+Explain the difference between REST API and deadlock.,Software Engineer,Technical,medium
+Explain the difference between REST API and garbage collection.,Software Engineer,Technical,easy
+Explain the difference between REST API and Big O notation.,Software Engineer,Technical,easy
+Explain the difference between REST API and stack.,Software Engineer,Technical,hard
+Explain the difference between REST API and queue.,Software Engineer,Technical,hard
+Explain the difference between REST API and dictionary.,Software Engineer,Technical,hard
+Explain the difference between REST API and lambda function.,Software Engineer,Technical,easy
+Explain the difference between REST API and virtual memory.,Software Engineer,Technical,medium
+Explain the difference between REST API and exception handling.,Software Engineer,Technical,medium
+Explain the difference between REST API and binary search.,Software Engineer,Technical,medium
+Explain the difference between REST API and linked list.,Software Engineer,Technical,hard
+Explain the difference between REST API and merge sort.,Software Engineer,Technical,easy
+Explain the difference between REST API and interface.,Software Engineer,Technical,easy
+Explain the difference between SQL injection and multithreading.,Software Engineer,Technical,hard
+Explain the difference between SQL injection and deadlock.,Software Engineer,Technical,hard
+Explain the difference between SQL injection and garbage collection.,Software Engineer,Technical,hard
+Explain the difference between SQL injection and Big O notation.,Software Engineer,Technical,easy
+Explain the difference between SQL injection and stack.,Software Engineer,Technical,medium
+Explain the difference between SQL injection and queue.,Software Engineer,Technical,hard
+Explain the difference between SQL injection and dictionary.,Software Engineer,Technical,easy
+Explain the difference between SQL injection and lambda function.,Software Engineer,Technical,hard
+Explain the difference between SQL injection and virtual memory.,Software Engineer,Technical,easy
+Explain the difference between SQL injection and exception handling.,Software Engineer,Technical,easy
+Explain the difference between SQL injection and binary search.,Software Engineer,Technical,medium
+Explain the difference between SQL injection and linked list.,Software Engineer,Technical,easy
+Explain the difference between SQL injection and merge sort.,Software Engineer,Technical,easy
+Explain the difference between SQL injection and interface.,Software Engineer,Technical,easy
+Explain the difference between multithreading and deadlock.,Software Engineer,Technical,easy
+Explain the difference between multithreading and garbage collection.,Software Engineer,Technical,medium
+Explain the difference between multithreading and Big O notation.,Software Engineer,Technical,medium
+Explain the difference between multithreading and stack.,Software Engineer,Technical,easy
+Explain the difference between multithreading and queue.,Software Engineer,Technical,easy
+Explain the difference between multithreading and dictionary.,Software Engineer,Technical,hard
+Explain the difference between multithreading and lambda function.,Software Engineer,Technical,medium
+Explain the difference between multithreading and virtual memory.,Software Engineer,Technical,medium
+Explain the difference between multithreading and exception handling.,Software Engineer,Technical,hard
+Explain the difference between multithreading and binary search.,Software Engineer,Technical,easy
+Explain the difference between multithreading and linked list.,Software Engineer,Technical,medium
+Explain the difference between multithreading and merge sort.,Software Engineer,Technical,easy
+Explain the difference between multithreading and interface.,Software Engineer,Technical,easy
+Explain the difference between deadlock and garbage collection.,Software Engineer,Technical,medium
+Explain the difference between deadlock and Big O notation.,Software Engineer,Technical,medium
+Explain the difference between deadlock and stack.,Software Engineer,Technical,medium
+Explain the difference between deadlock and queue.,Software Engineer,Technical,medium
+Explain the difference between deadlock and dictionary.,Software Engineer,Technical,easy
+Explain the difference between deadlock and lambda function.,Software Engineer,Technical,hard
+Explain the difference between deadlock and virtual memory.,Software Engineer,Technical,easy
+Explain the difference between deadlock and exception handling.,Software Engineer,Technical,easy
+Explain the difference between deadlock and binary search.,Software Engineer,Technical,hard
+Explain the difference between deadlock and linked list.,Software Engineer,Technical,hard
+Explain the difference between deadlock and merge sort.,Software Engineer,Technical,easy
+Explain the difference between deadlock and interface.,Software Engineer,Technical,hard
+Explain the difference between garbage collection and Big O notation.,Software Engineer,Technical,hard
+Explain the difference between garbage collection and stack.,Software Engineer,Technical,easy
+Explain the difference between garbage collection and queue.,Software Engineer,Technical,hard
+Explain the difference between garbage collection and dictionary.,Software Engineer,Technical,easy
+Explain the difference between garbage collection and lambda function.,Software Engineer,Technical,easy
+Explain the difference between garbage collection and virtual memory.,Software Engineer,Technical,hard
+Explain the difference between garbage collection and exception handling.,Software Engineer,Technical,medium
+Explain the difference between garbage collection and binary search.,Software Engineer,Technical,medium
+Explain the difference between garbage collection and linked list.,Software Engineer,Technical,easy
+Explain the difference between garbage collection and merge sort.,Software Engineer,Technical,hard
+Explain the difference between garbage collection and interface.,Software Engineer,Technical,medium
+Explain the difference between Big O notation and stack.,Software Engineer,Technical,hard
+Explain the difference between Big O notation and queue.,Software Engineer,Technical,medium
+Explain the difference between Big O notation and dictionary.,Software Engineer,Technical,easy
+Explain the difference between Big O notation and lambda function.,Software Engineer,Technical,medium
+Explain the difference between Big O notation and virtual memory.,Software Engineer,Technical,medium
+Explain the difference between Big O notation and exception handling.,Software Engineer,Technical,easy
+Explain the difference between Big O notation and binary search.,Software Engineer,Technical,hard
+Explain the difference between Big O notation and linked list.,Software Engineer,Technical,hard
+Explain the difference between Big O notation and merge sort.,Software Engineer,Technical,medium
+Explain the difference between Big O notation and interface.,Software Engineer,Technical,easy
+Explain the difference between stack and queue.,Software Engineer,Technical,medium
+Explain the difference between stack and dictionary.,Software Engineer,Technical,medium
+Explain the difference between stack and lambda function.,Software Engineer,Technical,hard
+Explain the difference between stack and virtual memory.,Software Engineer,Technical,hard
+Explain the difference between stack and exception handling.,Software Engineer,Technical,easy
+Explain the difference between stack and binary search.,Software Engineer,Technical,hard
+Explain the difference between stack and linked list.,Software Engineer,Technical,medium
+Explain the difference between stack and merge sort.,Software Engineer,Technical,easy
+Explain the difference between stack and interface.,Software Engineer,Technical,hard
+Explain the difference between queue and dictionary.,Software Engineer,Technical,easy
+Explain the difference between queue and lambda function.,Software Engineer,Technical,hard
+Explain the difference between queue and virtual memory.,Software Engineer,Technical,medium
+Explain the difference between queue and exception handling.,Software Engineer,Technical,medium
+Explain the difference between queue and binary search.,Software Engineer,Technical,easy
+Explain the difference between queue and linked list.,Software Engineer,Technical,medium
+Explain the difference between queue and merge sort.,Software Engineer,Technical,easy
+Explain the difference between queue and interface.,Software Engineer,Technical,easy
+Explain the difference between dictionary and lambda function.,Software Engineer,Technical,hard
+Explain the difference between dictionary and virtual memory.,Software Engineer,Technical,easy
+Explain the difference between dictionary and exception handling.,Software Engineer,Technical,medium
+Explain the difference between dictionary and binary search.,Software Engineer,Technical,easy
+Explain the difference between dictionary and linked list.,Software Engineer,Technical,easy
+Explain the difference between dictionary and merge sort.,Software Engineer,Technical,medium
+Explain the difference between dictionary and interface.,Software Engineer,Technical,medium
+Explain the difference between lambda function and virtual memory.,Software Engineer,Technical,easy
+Explain the difference between lambda function and exception handling.,Software Engineer,Technical,medium
+Explain the difference between lambda function and binary search.,Software Engineer,Technical,easy
+Explain the difference between lambda function and linked list.,Software Engineer,Technical,hard
+Explain the difference between lambda function and merge sort.,Software Engineer,Technical,easy
+Explain the difference between lambda function and interface.,Software Engineer,Technical,hard
+Explain the difference between virtual memory and exception handling.,Software Engineer,Technical,easy
+Explain the difference between virtual memory and binary search.,Software Engineer,Technical,hard
+Explain the difference between virtual memory and linked list.,Software Engineer,Technical,easy
+Explain the difference between virtual memory and merge sort.,Software Engineer,Technical,medium
+Explain the difference between virtual memory and interface.,Software Engineer,Technical,easy
+Explain the difference between exception handling and binary search.,Software Engineer,Technical,hard
+Explain the difference between exception handling and linked list.,Software Engineer,Technical,medium
+Explain the difference between exception handling and merge sort.,Software Engineer,Technical,easy
+Explain the difference between exception handling and interface.,Software Engineer,Technical,hard
+Explain the difference between binary search and linked list.,Software Engineer,Technical,medium
+Explain the difference between binary search and merge sort.,Software Engineer,Technical,easy
+Explain the difference between binary search and interface.,Software Engineer,Technical,hard
+Explain the difference between linked list and merge sort.,Software Engineer,Technical,easy
+Explain the difference between linked list and interface.,Software Engineer,Technical,medium
+Explain the difference between merge sort and interface.,Software Engineer,Technical,medium
+What is list and how is it used?,Software Engineer,Technical,hard
+What is tuple and how is it used?,Software Engineer,Technical,easy
+What is array and how is it used?,Software Engineer,Technical,medium
+What is hashmap and how is it used?,Software Engineer,Technical,hard
+What is recursion and how is it used?,Software Engineer,Technical,medium
+What is inheritance and how is it used?,Software Engineer,Technical,medium
+What is encapsulation and how is it used?,Software Engineer,Technical,medium
+What is polymorphism and how is it used?,Software Engineer,Technical,hard
+What is pointers and how is it used?,Software Engineer,Technical,medium
+What is REST API and how is it used?,Software Engineer,Technical,hard
+What is SQL injection and how is it used?,Software Engineer,Technical,hard
+What is multithreading and how is it used?,Software Engineer,Technical,hard
+What is deadlock and how is it used?,Software Engineer,Technical,hard
+What is garbage collection and how is it used?,Software Engineer,Technical,easy
+What is Big O notation and how is it used?,Software Engineer,Technical,hard
+What is stack and how is it used?,Software Engineer,Technical,easy
+What is queue and how is it used?,Software Engineer,Technical,medium
+What is dictionary and how is it used?,Software Engineer,Technical,hard
+What is lambda function and how is it used?,Software Engineer,Technical,easy
+What is virtual memory and how is it used?,Software Engineer,Technical,medium
+What is exception handling and how is it used?,Software Engineer,Technical,medium
+What is binary search and how is it used?,Software Engineer,Technical,easy
+What is linked list and how is it used?,Software Engineer,Technical,medium
+What is merge sort and how is it used?,Software Engineer,Technical,easy
+What is interface and how is it used?,Software Engineer,Technical,medium
+How does list work internally?,Software Engineer,Technical,hard
+How does tuple work internally?,Software Engineer,Technical,medium
+How does array work internally?,Software Engineer,Technical,hard
+How does hashmap work internally?,Software Engineer,Technical,easy
+How does recursion work internally?,Software Engineer,Technical,hard
+How does inheritance work internally?,Software Engineer,Technical,medium
+How does encapsulation work internally?,Software Engineer,Technical,medium
+How does polymorphism work internally?,Software Engineer,Technical,hard
+How does pointers work internally?,Software Engineer,Technical,hard
+How does REST API work internally?,Software Engineer,Technical,hard
+How does SQL injection work internally?,Software Engineer,Technical,medium
+How does multithreading work internally?,Software Engineer,Technical,medium
+How does deadlock work internally?,Software Engineer,Technical,easy
+How does garbage collection work internally?,Software Engineer,Technical,medium
+How does Big O notation work internally?,Software Engineer,Technical,medium
+How does stack work internally?,Software Engineer,Technical,medium
+How does queue work internally?,Software Engineer,Technical,medium
+How does dictionary work internally?,Software Engineer,Technical,medium
+How does lambda function work internally?,Software Engineer,Technical,easy
+How does virtual memory work internally?,Software Engineer,Technical,medium
+How does exception handling work internally?,Software Engineer,Technical,medium
+How does binary search work internally?,Software Engineer,Technical,medium
+How does linked list work internally?,Software Engineer,Technical,medium
+How does merge sort work internally?,Software Engineer,Technical,hard
+How does interface work internally?,Software Engineer,Technical,medium
+Why is list important in programming?,Software Engineer,Technical,medium
+Why is tuple important in programming?,Software Engineer,Technical,medium
+Why is array important in programming?,Software Engineer,Technical,hard
+Why is hashmap important in programming?,Software Engineer,Technical,hard
+Why is recursion important in programming?,Software Engineer,Technical,hard
+Why is inheritance important in programming?,Software Engineer,Technical,hard
+Why is encapsulation important in programming?,Software Engineer,Technical,easy
+Why is polymorphism important in programming?,Software Engineer,Technical,medium
+Why is pointers important in programming?,Software Engineer,Technical,easy
+Why is REST API important in programming?,Software Engineer,Technical,easy
+Why is SQL injection important in programming?,Software Engineer,Technical,hard
+Why is multithreading important in programming?,Software Engineer,Technical,easy
+Why is deadlock important in programming?,Software Engineer,Technical,easy
+Why is garbage collection important in programming?,Software Engineer,Technical,hard
+Why is Big O notation important in programming?,Software Engineer,Technical,medium
+Why is stack important in programming?,Software Engineer,Technical,easy
+Why is queue important in programming?,Software Engineer,Technical,hard
+Why is dictionary important in programming?,Software Engineer,Technical,hard
+Why is lambda function important in programming?,Software Engineer,Technical,hard
+Why is virtual memory important in programming?,Software Engineer,Technical,medium
+Why is exception handling important in programming?,Software Engineer,Technical,medium
+Why is binary search important in programming?,Software Engineer,Technical,medium
+Why is linked list important in programming?,Software Engineer,Technical,easy
+Why is merge sort important in programming?,Software Engineer,Technical,medium
+Why is interface important in programming?,Software Engineer,Technical,easy
+When would you use list over tuple?,Software Engineer,Technical,hard
+When would you use list over array?,Software Engineer,Technical,easy
+When would you use list over hashmap?,Software Engineer,Technical,easy
+When would you use list over recursion?,Software Engineer,Technical,hard
+When would you use list over inheritance?,Software Engineer,Technical,hard
+When would you use list over encapsulation?,Software Engineer,Technical,medium
+When would you use list over polymorphism?,Software Engineer,Technical,medium
+When would you use list over pointers?,Software Engineer,Technical,hard
+When would you use list over REST API?,Software Engineer,Technical,hard
+When would you use list over SQL injection?,Software Engineer,Technical,hard
+When would you use list over multithreading?,Software Engineer,Technical,medium
+When would you use list over deadlock?,Software Engineer,Technical,hard
+When would you use list over garbage collection?,Software Engineer,Technical,hard
+When would you use list over Big O notation?,Software Engineer,Technical,easy
+When would you use list over stack?,Software Engineer,Technical,hard
+When would you use list over queue?,Software Engineer,Technical,easy
+When would you use list over dictionary?,Software Engineer,Technical,medium
+When would you use list over lambda function?,Software Engineer,Technical,easy
+When would you use list over virtual memory?,Software Engineer,Technical,easy
+When would you use list over exception handling?,Software Engineer,Technical,medium
+When would you use list over binary search?,Software Engineer,Technical,hard
+When would you use list over linked list?,Software Engineer,Technical,hard
+When would you use list over merge sort?,Software Engineer,Technical,medium
+When would you use list over interface?,Software Engineer,Technical,easy
+When would you use tuple over array?,Software Engineer,Technical,hard
+When would you use tuple over hashmap?,Software Engineer,Technical,easy
+When would you use tuple over recursion?,Software Engineer,Technical,hard
+When would you use tuple over inheritance?,Software Engineer,Technical,hard
+When would you use tuple over encapsulation?,Software Engineer,Technical,hard
+When would you use tuple over polymorphism?,Software Engineer,Technical,hard
+When would you use tuple over pointers?,Software Engineer,Technical,easy
+When would you use tuple over REST API?,Software Engineer,Technical,medium
+When would you use tuple over SQL injection?,Software Engineer,Technical,medium
+When would you use tuple over multithreading?,Software Engineer,Technical,medium
+When would you use tuple over deadlock?,Software Engineer,Technical,hard
+When would you use tuple over garbage collection?,Software Engineer,Technical,easy
+When would you use tuple over Big O notation?,Software Engineer,Technical,hard
+When would you use tuple over stack?,Software Engineer,Technical,medium
+When would you use tuple over queue?,Software Engineer,Technical,easy
+When would you use tuple over dictionary?,Software Engineer,Technical,hard
+When would you use tuple over lambda function?,Software Engineer,Technical,medium
+When would you use tuple over virtual memory?,Software Engineer,Technical,hard
+When would you use tuple over exception handling?,Software Engineer,Technical,medium
+When would you use tuple over binary search?,Software Engineer,Technical,medium
+When would you use tuple over linked list?,Software Engineer,Technical,easy
+When would you use tuple over merge sort?,Software Engineer,Technical,easy
+When would you use tuple over interface?,Software Engineer,Technical,easy
+When would you use array over hashmap?,Software Engineer,Technical,medium
+When would you use array over recursion?,Software Engineer,Technical,medium
+When would you use array over inheritance?,Software Engineer,Technical,hard
+When would you use array over encapsulation?,Software Engineer,Technical,medium
+When would you use array over polymorphism?,Software Engineer,Technical,hard
+When would you use array over pointers?,Software Engineer,Technical,easy
+When would you use array over REST API?,Software Engineer,Technical,hard
+When would you use array over SQL injection?,Software Engineer,Technical,easy
+When would you use array over multithreading?,Software Engineer,Technical,hard
+When would you use array over deadlock?,Software Engineer,Technical,medium
+When would you use array over garbage collection?,Software Engineer,Technical,medium
+When would you use array over Big O notation?,Software Engineer,Technical,easy
+When would you use array over stack?,Software Engineer,Technical,medium
+When would you use array over queue?,Software Engineer,Technical,easy
+When would you use array over dictionary?,Software Engineer,Technical,medium
+When would you use array over lambda function?,Software Engineer,Technical,hard
+When would you use array over virtual memory?,Software Engineer,Technical,hard
+When would you use array over exception handling?,Software Engineer,Technical,easy
+When would you use array over binary search?,Software Engineer,Technical,medium
+When would you use array over linked list?,Software Engineer,Technical,medium
+When would you use array over merge sort?,Software Engineer,Technical,hard
+When would you use array over interface?,Software Engineer,Technical,easy
+When would you use hashmap over recursion?,Software Engineer,Technical,hard
+When would you use hashmap over inheritance?,Software Engineer,Technical,hard
+When would you use hashmap over encapsulation?,Software Engineer,Technical,easy
+When would you use hashmap over polymorphism?,Software Engineer,Technical,hard
+When would you use hashmap over pointers?,Software Engineer,Technical,medium
+When would you use hashmap over REST API?,Software Engineer,Technical,hard
+When would you use hashmap over SQL injection?,Software Engineer,Technical,hard
+When would you use hashmap over multithreading?,Software Engineer,Technical,medium
+When would you use hashmap over deadlock?,Software Engineer,Technical,medium
+When would you use hashmap over garbage collection?,Software Engineer,Technical,easy
+When would you use hashmap over Big O notation?,Software Engineer,Technical,medium
+When would you use hashmap over stack?,Software Engineer,Technical,medium
+When would you use hashmap over queue?,Software Engineer,Technical,hard
+When would you use hashmap over dictionary?,Software Engineer,Technical,easy
+When would you use hashmap over lambda function?,Software Engineer,Technical,hard
+When would you use hashmap over virtual memory?,Software Engineer,Technical,easy
+When would you use hashmap over exception handling?,Software Engineer,Technical,hard
+When would you use hashmap over binary search?,Software Engineer,Technical,medium
+When would you use hashmap over linked list?,Software Engineer,Technical,medium
+When would you use hashmap over merge sort?,Software Engineer,Technical,medium
+When would you use hashmap over interface?,Software Engineer,Technical,medium
+When would you use recursion over inheritance?,Software Engineer,Technical,medium
+When would you use recursion over encapsulation?,Software Engineer,Technical,medium
+When would you use recursion over polymorphism?,Software Engineer,Technical,hard
+When would you use recursion over pointers?,Software Engineer,Technical,medium
+When would you use recursion over REST API?,Software Engineer,Technical,medium
+When would you use recursion over SQL injection?,Software Engineer,Technical,hard
+When would you use recursion over multithreading?,Software Engineer,Technical,hard
+When would you use recursion over deadlock?,Software Engineer,Technical,hard
+When would you use recursion over garbage collection?,Software Engineer,Technical,hard
+When would you use recursion over Big O notation?,Software Engineer,Technical,easy
+When would you use recursion over stack?,Software Engineer,Technical,medium
+When would you use recursion over queue?,Software Engineer,Technical,hard
+When would you use recursion over dictionary?,Software Engineer,Technical,medium
+When would you use recursion over lambda function?,Software Engineer,Technical,easy
+When would you use recursion over virtual memory?,Software Engineer,Technical,medium
+When would you use recursion over exception handling?,Software Engineer,Technical,medium
+When would you use recursion over binary search?,Software Engineer,Technical,easy
+When would you use recursion over linked list?,Software Engineer,Technical,hard
+When would you use recursion over merge sort?,Software Engineer,Technical,medium
+When would you use recursion over interface?,Software Engineer,Technical,hard
+When would you use inheritance over encapsulation?,Software Engineer,Technical,medium
+When would you use inheritance over polymorphism?,Software Engineer,Technical,medium
+When would you use inheritance over pointers?,Software Engineer,Technical,hard
+When would you use inheritance over REST API?,Software Engineer,Technical,hard
+When would you use inheritance over SQL injection?,Software Engineer,Technical,hard
+When would you use inheritance over multithreading?,Software Engineer,Technical,easy
+When would you use inheritance over deadlock?,Software Engineer,Technical,medium
+When would you use inheritance over garbage collection?,Software Engineer,Technical,medium
+When would you use inheritance over Big O notation?,Software Engineer,Technical,easy
+When would you use inheritance over stack?,Software Engineer,Technical,hard
+When would you use inheritance over queue?,Software Engineer,Technical,easy
+When would you use inheritance over dictionary?,Software Engineer,Technical,easy
+When would you use inheritance over lambda function?,Software Engineer,Technical,medium
+When would you use inheritance over virtual memory?,Software Engineer,Technical,easy
+When would you use inheritance over exception handling?,Software Engineer,Technical,hard
+When would you use inheritance over binary search?,Software Engineer,Technical,medium
+When would you use inheritance over linked list?,Software Engineer,Technical,easy
+When would you use inheritance over merge sort?,Software Engineer,Technical,medium
+When would you use inheritance over interface?,Software Engineer,Technical,easy
+When would you use encapsulation over polymorphism?,Software Engineer,Technical,medium
+When would you use encapsulation over pointers?,Software Engineer,Technical,hard
+When would you use encapsulation over REST API?,Software Engineer,Technical,hard
+When would you use encapsulation over SQL injection?,Software Engineer,Technical,medium
+When would you use encapsulation over multithreading?,Software Engineer,Technical,hard
+When would you use encapsulation over deadlock?,Software Engineer,Technical,medium
+When would you use encapsulation over garbage collection?,Software Engineer,Technical,hard
+When would you use encapsulation over Big O notation?,Software Engineer,Technical,medium
+When would you use encapsulation over stack?,Software Engineer,Technical,hard
+When would you use encapsulation over queue?,Software Engineer,Technical,medium
+When would you use encapsulation over dictionary?,Software Engineer,Technical,hard
+When would you use encapsulation over lambda function?,Software Engineer,Technical,medium
+When would you use encapsulation over virtual memory?,Software Engineer,Technical,easy
+When would you use encapsulation over exception handling?,Software Engineer,Technical,hard
+When would you use encapsulation over binary search?,Software Engineer,Technical,easy
+When would you use encapsulation over linked list?,Software Engineer,Technical,medium
+When would you use encapsulation over merge sort?,Software Engineer,Technical,medium
+When would you use encapsulation over interface?,Software Engineer,Technical,medium
+When would you use polymorphism over pointers?,Software Engineer,Technical,easy
+When would you use polymorphism over REST API?,Software Engineer,Technical,hard
+When would you use polymorphism over SQL injection?,Software Engineer,Technical,easy
+When would you use polymorphism over multithreading?,Software Engineer,Technical,medium
+When would you use polymorphism over deadlock?,Software Engineer,Technical,hard
+When would you use polymorphism over garbage collection?,Software Engineer,Technical,medium
+When would you use polymorphism over Big O notation?,Software Engineer,Technical,hard
+When would you use polymorphism over stack?,Software Engineer,Technical,easy
+When would you use polymorphism over queue?,Software Engineer,Technical,easy
+When would you use polymorphism over dictionary?,Software Engineer,Technical,medium
+When would you use polymorphism over lambda function?,Software Engineer,Technical,easy
+When would you use polymorphism over virtual memory?,Software Engineer,Technical,hard
+When would you use polymorphism over exception handling?,Software Engineer,Technical,medium
+When would you use polymorphism over binary search?,Software Engineer,Technical,medium
+When would you use polymorphism over linked list?,Software Engineer,Technical,easy
+When would you use polymorphism over merge sort?,Software Engineer,Technical,medium
+When would you use polymorphism over interface?,Software Engineer,Technical,hard
+When would you use pointers over REST API?,Software Engineer,Technical,hard
+When would you use pointers over SQL injection?,Software Engineer,Technical,hard
+When would you use pointers over multithreading?,Software Engineer,Technical,easy
+When would you use pointers over deadlock?,Software Engineer,Technical,medium
+When would you use pointers over garbage collection?,Software Engineer,Technical,hard
+When would you use pointers over Big O notation?,Software Engineer,Technical,hard
+When would you use pointers over stack?,Software Engineer,Technical,easy
+When would you use pointers over queue?,Software Engineer,Technical,easy
+When would you use pointers over dictionary?,Software Engineer,Technical,hard
+When would you use pointers over lambda function?,Software Engineer,Technical,easy
+When would you use pointers over virtual memory?,Software Engineer,Technical,easy
+When would you use pointers over exception handling?,Software Engineer,Technical,hard
+When would you use pointers over binary search?,Software Engineer,Technical,hard
+When would you use pointers over linked list?,Software Engineer,Technical,medium
+When would you use pointers over merge sort?,Software Engineer,Technical,hard
+When would you use pointers over interface?,Software Engineer,Technical,hard
+When would you use REST API over SQL injection?,Software Engineer,Technical,hard
+When would you use REST API over multithreading?,Software Engineer,Technical,easy
+When would you use REST API over deadlock?,Software Engineer,Technical,medium
+When would you use REST API over garbage collection?,Software Engineer,Technical,medium
+When would you use REST API over Big O notation?,Software Engineer,Technical,easy
+When would you use REST API over stack?,Software Engineer,Technical,easy
+When would you use REST API over queue?,Software Engineer,Technical,medium
+When would you use REST API over dictionary?,Software Engineer,Technical,easy
+When would you use REST API over lambda function?,Software Engineer,Technical,medium
+When would you use REST API over virtual memory?,Software Engineer,Technical,easy
+When would you use REST API over exception handling?,Software Engineer,Technical,easy
+When would you use REST API over binary search?,Software Engineer,Technical,medium
+When would you use REST API over linked list?,Software Engineer,Technical,easy
+When would you use REST API over merge sort?,Software Engineer,Technical,hard
+When would you use REST API over interface?,Software Engineer,Technical,hard
+When would you use SQL injection over multithreading?,Software Engineer,Technical,easy
+When would you use SQL injection over deadlock?,Software Engineer,Technical,easy
+When would you use SQL injection over garbage collection?,Software Engineer,Technical,hard
+When would you use SQL injection over Big O notation?,Software Engineer,Technical,easy
+When would you use SQL injection over stack?,Software Engineer,Technical,medium
+When would you use SQL injection over queue?,Software Engineer,Technical,hard
+When would you use SQL injection over dictionary?,Software Engineer,Technical,easy
+When would you use SQL injection over lambda function?,Software Engineer,Technical,medium
+When would you use SQL injection over virtual memory?,Software Engineer,Technical,easy
+When would you use SQL injection over exception handling?,Software Engineer,Technical,hard
+When would you use SQL injection over binary search?,Software Engineer,Technical,hard
+When would you use SQL injection over linked list?,Software Engineer,Technical,easy
+When would you use SQL injection over merge sort?,Software Engineer,Technical,medium
+When would you use SQL injection over interface?,Software Engineer,Technical,easy
+When would you use multithreading over deadlock?,Software Engineer,Technical,easy
+When would you use multithreading over garbage collection?,Software Engineer,Technical,medium
+When would you use multithreading over Big O notation?,Software Engineer,Technical,medium
+When would you use multithreading over stack?,Software Engineer,Technical,hard
+When would you use multithreading over queue?,Software Engineer,Technical,medium
+When would you use multithreading over dictionary?,Software Engineer,Technical,easy
+When would you use multithreading over lambda function?,Software Engineer,Technical,easy
+When would you use multithreading over virtual memory?,Software Engineer,Technical,hard
+When would you use multithreading over exception handling?,Software Engineer,Technical,hard
+When would you use multithreading over binary search?,Software Engineer,Technical,medium
+When would you use multithreading over linked list?,Software Engineer,Technical,easy
+When would you use multithreading over merge sort?,Software Engineer,Technical,easy
+When would you use multithreading over interface?,Software Engineer,Technical,easy
+When would you use deadlock over garbage collection?,Software Engineer,Technical,medium
+When would you use deadlock over Big O notation?,Software Engineer,Technical,easy
+When would you use deadlock over stack?,Software Engineer,Technical,medium
+Describe a time you had to resolve a conflict.,HR,Behavioral,easy
+Describe a time you had to lead a team.,HR,Behavioral,medium
+Describe a time you had to meet a deadline.,HR,Behavioral,easy
+Describe a time you had to handle criticism.,HR,Behavioral,medium
+Describe a time you had to adapt to change.,HR,Behavioral,easy
+Describe a time you had to make a tough decision.,HR,Behavioral,medium
+Describe a time you had to work under pressure.,HR,Behavioral,easy
+Describe a time you had to manage multiple tasks.,HR,Behavioral,hard
+Describe a time you had to fail at something.,HR,Behavioral,medium
+Describe a time you had to learn a new skill quickly.,HR,Behavioral,easy
+How do you typically handle situations where you need to resolve a conflict?,HR,Behavioral,easy
+How do you typically handle situations where you need to lead a team?,HR,Behavioral,medium
+How do you typically handle situations where you need to meet a deadline?,HR,Behavioral,hard
+How do you typically handle situations where you need to handle criticism?,HR,Behavioral,hard
+How do you typically handle situations where you need to adapt to change?,HR,Behavioral,easy
+How do you typically handle situations where you need to make a tough decision?,HR,Behavioral,hard
+How do you typically handle situations where you need to work under pressure?,HR,Behavioral,medium
+How do you typically handle situations where you need to manage multiple tasks?,HR,Behavioral,medium
+How do you typically handle situations where you need to fail at something?,HR,Behavioral,easy
+How do you typically handle situations where you need to learn a new skill quickly?,HR,Behavioral,easy
+Give an example of a situation where you resolve a conflict.,HR,Behavioral,medium
+Give an example of a situation where you lead a team.,HR,Behavioral,medium
+Give an example of a situation where you meet a deadline.,HR,Behavioral,medium
+Give an example of a situation where you handle criticism.,HR,Behavioral,hard
+Give an example of a situation where you adapt to change.,HR,Behavioral,easy
+Give an example of a situation where you make a tough decision.,HR,Behavioral,medium
+Give an example of a situation where you work under pressure.,HR,Behavioral,medium
+Give an example of a situation where you manage multiple tasks.,HR,Behavioral,medium
+Give an example of a situation where you fail at something.,HR,Behavioral,hard
+Give an example of a situation where you learn a new skill quickly.,HR,Behavioral,medium
+What steps do you take to resolve a conflict?,HR,Behavioral,hard
+What steps do you take to lead a team?,HR,Behavioral,medium
+What steps do you take to meet a deadline?,HR,Behavioral,hard
+What steps do you take to handle criticism?,HR,Behavioral,hard
+What steps do you take to adapt to change?,HR,Behavioral,medium
+What steps do you take to make a tough decision?,HR,Behavioral,medium
+What steps do you take to work under pressure?,HR,Behavioral,hard
+What steps do you take to manage multiple tasks?,HR,Behavioral,easy
+What steps do you take to fail at something?,HR,Behavioral,medium
+What steps do you take to learn a new skill quickly?,HR,Behavioral,easy
+Tell me about a time when you failed to resolve a conflict.,HR,Behavioral,hard
+Tell me about a time when you failed to lead a team.,HR,Behavioral,easy
+Tell me about a time when you failed to meet a deadline.,HR,Behavioral,easy
+Tell me about a time when you failed to handle criticism.,HR,Behavioral,hard
+Tell me about a time when you failed to adapt to change.,HR,Behavioral,medium
+Tell me about a time when you failed to make a tough decision.,HR,Behavioral,easy
+Tell me about a time when you failed to work under pressure.,HR,Behavioral,easy
+Tell me about a time when you failed to manage multiple tasks.,HR,Behavioral,medium
+Tell me about a time when you failed to fail at something.,HR,Behavioral,easy
+Tell me about a time when you failed to learn a new skill quickly.,HR,Behavioral,hard
+How do you prioritize tasks when you need to resolve a conflict?,HR,Behavioral,medium
+How do you prioritize tasks when you need to lead a team?,HR,Behavioral,easy
+How do you prioritize tasks when you need to meet a deadline?,HR,Behavioral,hard
+How do you prioritize tasks when you need to handle criticism?,HR,Behavioral,medium
+How do you prioritize tasks when you need to adapt to change?,HR,Behavioral,medium
+How do you prioritize tasks when you need to make a tough decision?,HR,Behavioral,easy
+How do you prioritize tasks when you need to work under pressure?,HR,Behavioral,easy
+How do you prioritize tasks when you need to manage multiple tasks?,HR,Behavioral,easy
+How do you prioritize tasks when you need to fail at something?,HR,Behavioral,hard
+How do you prioritize tasks when you need to learn a new skill quickly?,HR,Behavioral,hard

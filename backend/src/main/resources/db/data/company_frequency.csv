@@ -1,0 +1,101 @@
+company,topic,frequency
+Google,Enumeration,283
+Google,Randomized,197
+Google,Radix Sort,289
+Google,Reservoir Sampling,197
+Google,Breadth-First Search,233
+Google,Matrix,214
+Google,Shell,74
+Google,String,163
+Google,Sweep Line,22
+Google,Binary Search,26
+Amazon,Graph Theory,24
+Amazon,Binary Tree,77
+Amazon,Greedy,285
+Amazon,Stack,295
+Amazon,Dynamic Programming,268
+Amazon,,189
+Amazon,Simulation,288
+Amazon,Breadth-First Search,52
+Amazon,Probability and Statistics,173
+Amazon,Tree,37
+Apple,Binary Search Tree,152
+Apple,Biconnected Component,253
+Apple,Sweep Line,225
+Apple,Heap (Priority Queue),182
+Apple,Two Pointers,28
+Apple,Sorting,184
+Apple,Ordered Set,28
+Apple,Dynamic Programming,133
+Apple,Matrix,150
+Apple,Counting Sort,201
+Meta,Binary Indexed Tree,131
+Meta,Radix Sort,271
+Meta,Array,295
+Meta,Doubly-Linked List,47
+Meta,Memoization,89
+Meta,Hash Table,57
+Meta,Probability and Statistics,265
+Meta,Concurrency,40
+Meta,Math,144
+Meta,Trie,285
+Microsoft,Array,169
+Microsoft,Depth-First Search,262
+Microsoft,Recursion,115
+Microsoft,Graph Theory,37
+Microsoft,Radix Sort,28
+Microsoft,Two Pointers,145
+Microsoft,Iterator,85
+Microsoft,Backtracking,40
+Microsoft,Monotonic Queue,128
+Microsoft,Dynamic Programming,44
+Netflix,Matrix,172
+Netflix,Dynamic Programming,60
+Netflix,Counting,163
+Netflix,Segment Tree,227
+Netflix,Depth-First Search,246
+Netflix,Binary Indexed Tree,219
+Netflix,Memoization,54
+Netflix,Doubly-Linked List,48
+Netflix,Stack,277
+Netflix,Shortest Path,219
+Adobe,Rolling Hash,146
+Adobe,Array,278
+Adobe,Linked List,241
+Adobe,Stack,195
+Adobe,,87
+Adobe,Sweep Line,228
+Adobe,Probability and Statistics,295
+Adobe,Suffix Array,251
+Adobe,Topological Sort,171
+Adobe,Binary Search,201
+Uber,Divide and Conquer,56
+Uber,Data Stream,262
+Uber,Graph Theory,21
+Uber,Rolling Hash,124
+Uber,Bitmask,214
+Uber,Stack,156
+Uber,Union-Find,21
+Uber,Number Theory,227
+Uber,Rejection Sampling,96
+Uber,Binary Indexed Tree,71
+Airbnb,Enumeration,253
+Airbnb,Divide and Conquer,191
+Airbnb,Recursion,160
+Airbnb,Radix Sort,175
+Airbnb,Randomized,52
+Airbnb,Sweep Line,143
+Airbnb,Tree,47
+Airbnb,Shortest Path,39
+Airbnb,Binary Search,195
+Airbnb,Heap (Priority Queue),116
+Tesla,Matrix,44
+Tesla,String Matching,198
+Tesla,Quickselect,280
+Tesla,Graph Theory,170
+Tesla,Sort,129
+Tesla,Backtracking,223
+Tesla,Math,127
+Tesla,Ordered Set,268
+Tesla,Hash Table,160
+Tesla,Combinatorics,49
