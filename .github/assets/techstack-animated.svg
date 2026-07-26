@@ -1,135 +1,110 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" width="1200" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 180" width="1200" height="180">
   <defs>
     <linearGradient id="tsGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#7b2ff7"><animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#7b2ff7" dur="6s" repeatCount="indefinite"/></stop>
-      <stop offset="50%" stop-color="#00d2ff"><animate attributeName="stop-color" values="#00d2ff;#64ffda;#00d2ff" dur="6s" repeatCount="indefinite"/></stop>
+      <stop offset="0%" stop-color="#7b2ff7"><animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#64ffda;#7b2ff7" dur="6s" repeatCount="indefinite"/></stop>
+      <stop offset="50%" stop-color="#00d2ff"><animate attributeName="stop-color" values="#00d2ff;#64ffda;#ff6b6b;#00d2ff" dur="6s" repeatCount="indefinite"/></stop>
       <stop offset="100%" stop-color="#64ffda"><animate attributeName="stop-color" values="#64ffda;#7b2ff7;#64ffda" dur="6s" repeatCount="indefinite"/></stop>
     </linearGradient>
-    <filter id="techGlow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="techGlowStrong"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-
-    <!-- Orbit path -->
-    <path id="orbit1" d="M 600,100 m -450,0 a 450,50 0 1,0 900,0 a 450,50 0 1,0 -900,0" fill="none"/>
-    <path id="orbit2" d="M 600,100 m -350,0 a 350,35 0 1,0 700,0 a 350,35 0 1,0 -700,0" fill="none"/>
+    <filter id="tsGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <rect width="1200" height="200" fill="#030712" rx="12"/>
+  <!-- Deep dark container -->
+  <rect width="1200" height="180" fill="#030712" rx="14"/>
+  <rect x="1" y="1" width="1198" height="178" fill="none" rx="14" stroke="url(#tsGrad)" stroke-width="1.2" opacity="0.35"/>
 
-  <!-- Orbital rings -->
-  <ellipse cx="600" cy="100" rx="450" ry="50" fill="none" stroke="#1e293b" stroke-width="0.8" stroke-dasharray="4 8" opacity="0.4">
-    <animate attributeName="stroke-dashoffset" values="0;-24" dur="3s" repeatCount="indefinite"/>
-  </ellipse>
-  <ellipse cx="600" cy="100" rx="350" ry="35" fill="none" stroke="#1e293b" stroke-width="0.8" stroke-dasharray="4 8" opacity="0.3">
-    <animate attributeName="stroke-dashoffset" values="0;24" dur="4s" repeatCount="indefinite"/>
-  </ellipse>
+  <!-- Row 1: Core Technologies (5 Columns) -->
+  <g transform="translate(16, 16)">
+    <!-- 1. Next.js 16 -->
+    <g transform="translate(0, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#ffffff" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#000" stroke="#fff" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#fff" font-weight="900">N</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#ffffff" font-weight="800">Next.js 16</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">App Router · Turbopack</text>
+    </g>
 
-  <!-- Center "hub" -->
-  <circle cx="600" cy="100" r="30" fill="#0a0f1e" stroke="url(#tsGrad)" stroke-width="2" filter="url(#techGlow)">
-    <animate attributeName="r" values="28;32;28" dur="3s" repeatCount="indefinite"/>
-  </circle>
-  <text x="600" y="96" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" fill="#e2e8f0" font-weight="800">TECH</text>
-  <text x="600" y="110" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" fill="#e2e8f0" font-weight="800">STACK</text>
+    <!-- 2. Java 23 -->
+    <g transform="translate(236, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#ED8B00" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#1e150a" stroke="#ED8B00" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#ED8B00" font-weight="900">☕</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#ED8B00" font-weight="800">Java 23</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">Modern OpenJDK Runtime</text>
+    </g>
 
-  <!-- Orbiting tech nodes - outer ring -->
-  <!-- Next.js -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="0 600 100" to="360 600 100" dur="30s" repeatCount="indefinite"/>
-    <g transform="translate(600, 50)">
-      <circle r="22" fill="#0a0f1e" stroke="#000" stroke-width="1.5"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8" fill="#fff" font-weight="bold">Next.js</text>
+    <!-- 3. Spring Boot 3 -->
+    <g transform="translate(472, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#6db33f" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#0d1f0d" stroke="#6db33f" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#6db33f" font-weight="900">🌱</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#6db33f" font-weight="800">Spring Boot 3</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">REST API Framework</text>
     </g>
-  </g>
-  <!-- Spring Boot -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="51 600 100" to="411 600 100" dur="30s" repeatCount="indefinite"/>
-    <g transform="translate(600, 50)">
-      <circle r="22" fill="#0a0f1e" stroke="#6db33f" stroke-width="1.5"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="7" fill="#6db33f" font-weight="bold">Spring</text>
+
+    <!-- 4. PostgreSQL 15 -->
+    <g transform="translate(708, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#4169E1" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#0d1428" stroke="#4169E1" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#4169E1" font-weight="900">🐘</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#4169E1" font-weight="800">PostgreSQL 15</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">Relational Database</text>
     </g>
-  </g>
-  <!-- PostgreSQL -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="102 600 100" to="462 600 100" dur="30s" repeatCount="indefinite"/>
-    <g transform="translate(600, 50)">
-      <circle r="22" fill="#0a0f1e" stroke="#4169E1" stroke-width="1.5"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="6" fill="#4169E1" font-weight="bold">Postgres</text>
-    </g>
-  </g>
-  <!-- Gemini -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="154 600 100" to="514 600 100" dur="30s" repeatCount="indefinite"/>
-    <g transform="translate(600, 50)">
-      <circle r="22" fill="#0a0f1e" stroke="#4285F4" stroke-width="1.5"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="7" fill="#4285F4" font-weight="bold">Gemini</text>
-    </g>
-  </g>
-  <!-- React -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="205 600 100" to="565 600 100" dur="30s" repeatCount="indefinite"/>
-    <g transform="translate(600, 50)">
-      <circle r="22" fill="#0a0f1e" stroke="#61DAFB" stroke-width="1.5"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8" fill="#61DAFB" font-weight="bold">React</text>
-    </g>
-  </g>
-  <!-- TypeScript -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="257 600 100" to="617 600 100" dur="30s" repeatCount="indefinite"/>
-    <g transform="translate(600, 50)">
-      <circle r="22" fill="#0a0f1e" stroke="#3178C6" stroke-width="1.5"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="9" fill="#3178C6" font-weight="bold">TS</text>
-    </g>
-  </g>
-  <!-- Java -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="308 600 100" to="668 600 100" dur="30s" repeatCount="indefinite"/>
-    <g transform="translate(600, 50)">
-      <circle r="22" fill="#0a0f1e" stroke="#ED8B00" stroke-width="1.5"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="7" fill="#ED8B00" font-weight="bold">Java 23</text>
+
+    <!-- 5. Gemini 2.5 Flash -->
+    <g transform="translate(944, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#4285F4" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#0c182b" stroke="#4285F4" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#4285F4" font-weight="900">✨</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#4285F4" font-weight="800">Gemini 2.5 AI</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">Google AI Engine</text>
     </g>
   </g>
 
-  <!-- Inner ring nodes -->
-  <!-- Docker -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="0 600 100" to="-360 600 100" dur="25s" repeatCount="indefinite"/>
-    <g transform="translate(600, 65)">
-      <circle r="16" fill="#0a0f1e" stroke="#2496ED" stroke-width="1"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="6" fill="#2496ED" font-weight="bold">Docker</text>
+  <!-- Row 2: Secondary Libraries & Stack (5 Columns) -->
+  <g transform="translate(16, 96)">
+    <!-- 6. React 19 -->
+    <g transform="translate(0, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#61DAFB" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#0a1d24" stroke="#61DAFB" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#61DAFB" font-weight="900">⚛️</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#61DAFB" font-weight="800">React 19</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">UI Component Engine</text>
     </g>
-  </g>
-  <!-- Tailwind -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="72 600 100" to="-288 600 100" dur="25s" repeatCount="indefinite"/>
-    <g transform="translate(600, 65)">
-      <circle r="16" fill="#0a0f1e" stroke="#06B6D4" stroke-width="1"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="5.5" fill="#06B6D4" font-weight="bold">Tailwind</text>
-    </g>
-  </g>
-  <!-- Zustand -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="144 600 100" to="-216 600 100" dur="25s" repeatCount="indefinite"/>
-    <g transform="translate(600, 65)">
-      <circle r="16" fill="#0a0f1e" stroke="#F59E0B" stroke-width="1"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="5.5" fill="#F59E0B" font-weight="bold">Zustand</text>
-    </g>
-  </g>
-  <!-- JWT -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="216 600 100" to="-144 600 100" dur="25s" repeatCount="indefinite"/>
-    <g transform="translate(600, 65)">
-      <circle r="16" fill="#0a0f1e" stroke="#D63AFF" stroke-width="1"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="7" fill="#D63AFF" font-weight="bold">JWT</text>
-    </g>
-  </g>
-  <!-- Flyway -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="288 600 100" to="-72 600 100" dur="25s" repeatCount="indefinite"/>
-    <g transform="translate(600, 65)">
-      <circle r="16" fill="#0a0f1e" stroke="#CC0200" stroke-width="1"/>
-      <text y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="5.5" fill="#CC0200" font-weight="bold">Flyway</text>
-    </g>
-  </g>
 
-  <!-- Border -->
-  <rect x="1" y="1" width="1198" height="198" fill="none" rx="12" stroke="url(#tsGrad)" stroke-width="1" opacity="0.2"/>
+    <!-- 7. TypeScript 5 -->
+    <g transform="translate(236, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#3178C6" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#0a1828" stroke="#3178C6" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" fill="#3178C6" font-weight="900">TS</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#3178C6" font-weight="800">TypeScript 5</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">Type-Safe Codebase</text>
+    </g>
+
+    <!-- 8. Tailwind CSS -->
+    <g transform="translate(472, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#06B6D4" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#071c21" stroke="#06B6D4" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#06B6D4" font-weight="900">🎨</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#06B6D4" font-weight="800">Tailwind CSS</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">Utility-First Styling</text>
+    </g>
+
+    <!-- 9. Docker Container -->
+    <g transform="translate(708, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#2496ED" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#091b29" stroke="#2496ED" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#2496ED" font-weight="900">🐳</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#2496ED" font-weight="800">Docker</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">Container Deployment</text>
+    </g>
+
+    <!-- 10. Spring Security & JWT -->
+    <g transform="translate(944, 0)">
+      <rect width="224" height="66" rx="10" fill="#0a0f1e" stroke="#7b2ff7" stroke-width="1" opacity="0.9"/>
+      <circle cx="28" cy="33" r="14" fill="#170c29" stroke="#7b2ff7" stroke-width="1"/>
+      <text x="28" y="38" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#7b2ff7" font-weight="900">🔒</text>
+      <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="13" fill="#a78bfa" font-weight="800">Spring Security</text>
+      <text x="52" y="46" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#64748b">JWT Stateless Auth</text>
+    </g>
+  </g>
 </svg>

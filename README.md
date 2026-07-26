@@ -1583,21 +1583,6 @@ Java backend engineering, secure APIs, AI integration, and scalable SaaS.
 
 <a href="https://github.com/Jawahar08"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
 
-<br /><br />
-
-<!-- ─────────── GITHUB STATS ─────────── -->
-
-<img src="https://github-readme-stats.vercel.app/api?username=Jawahar08&show_icons=true&theme=radical&hide_border=true&bg_color=030712&title_color=00d2ff&icon_color=7b2ff7&text_color=ccd6f6" width="49%" />
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=Jawahar08&theme=radical&hide_border=true&background=030712&ring=00d2ff&fire=ff6b6b&currStreakLabel=64ffda" width="49%" />
-
-<br /><br />
-
-<!-- ─────────── REPO ACTIVITY GRAPH ─────────── -->
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=Jawahar08&theme=react-dark&bg_color=030712&color=00d2ff&line=7b2ff7&point=ffd93d&area=true&hide_border=true" width="98%" />
-
-<br /><br />
-
 <a href="#top"><img src="https://img.shields.io/badge/⬆_Back_to_Top-0f172a?style=for-the-badge" alt="Back to Top" /></a>
 
 <br /><br />
