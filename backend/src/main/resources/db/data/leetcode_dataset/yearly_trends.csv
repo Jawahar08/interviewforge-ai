@@ -1,0 +1,81 @@
+year,topic,problem_count
+2016,Binary Search Tree,85
+2016,Enumeration,394
+2016,Array,388
+2016,Divide and Conquer,393
+2016,Shell,413
+2016,Sorting,185
+2016,Monotonic Queue,448
+2016,Memoization,217
+2017,Two Pointers,481
+2017,Binary Indexed Tree,406
+2017,Breadth-First Search,159
+2017,Graph Theory,136
+2017,Enumeration,486
+2017,Suffix Array,301
+2017,Tree,490
+2017,Greedy,125
+2018,Sort,430
+2018,Iterator,376
+2018,Concurrency,405
+2018,Divide and Conquer,477
+2018,Geometry,225
+2018,Array,114
+2018,Math,427
+2018,Eulerian Circuit,72
+2019,Design,381
+2019,Binary Tree,175
+2019,Minimum Spanning Tree,101
+2019,Reservoir Sampling,425
+2019,Suffix Array,225
+2019,Quickselect,349
+2019,Randomized,178
+2019,Concurrency,361
+2020,Divide and Conquer,407
+2020,String,371
+2020,Rolling Hash,361
+2020,Shortest Path,180
+2020,Biconnected Component,155
+2020,Prefix Sum,492
+2020,Queue,115
+2020,Binary Tree,214
+2021,Probability and Statistics,432
+2021,Tree,157
+2021,Reservoir Sampling,152
+2021,Minimum Spanning Tree,358
+2021,Topological Sort,406
+2021,String,124
+2021,Binary Tree,330
+2021,Radix Sort,87
+2022,Randomized,308
+2022,Quickselect,194
+2022,Dynamic Programming,354
+2022,Probability and Statistics,133
+2022,Memoization,454
+2022,Rolling Hash,137
+2022,Greedy,415
+2022,Prefix Sum,414
+2023,Graph Theory,489
+2023,Design,296
+2023,Hash Function,318
+2023,Game Theory,199
+2023,Randomized,209
+2023,Counting Sort,279
+2023,Segment Tree,214
+2023,,274
+2024,Interactive,184
+2024,Breadth-First Search,463
+2024,Two Pointers,428
+2024,Union-Find,212
+2024,Heap (Priority Queue),155
+2024,Biconnected Component,104
+2024,Merge Sort,132
+2024,Doubly-Linked List,174
+2025,Ordered Set,430
+2025,Queue,105
+2025,Breadth-First Search,360
+2025,Randomized,454
+2025,Topological Sort,118
+2025,Recursion,72
+2025,Array,116
+2025,Binary Indexed Tree,168
