@@ -48,6 +48,7 @@ const {
   defaultValues: {
     email: "",
     password: "",
+    acceptedTerms: false,
   },
 });
 
@@ -306,6 +307,44 @@ const onSubmit = async (values: LoginFormData) => {
                   {serverError}
                 </div>
               )}
+
+              {/* Terms & Conditions Checkbox */}
+              <div className="space-y-1.5 pt-1">
+                <div className="flex items-start gap-3">
+                  <input
+                    id="login-acceptedTerms"
+                    type="checkbox"
+                    {...register("acceptedTerms")}
+                    className="mt-1 h-4 w-4 rounded border-white/20 bg-white/5 text-violet-600 focus:ring-violet-500 focus:ring-offset-slate-900 cursor-pointer"
+                  />
+                  <Label
+                    htmlFor="login-acceptedTerms"
+                    className="text-xs leading-relaxed text-slate-300 font-normal cursor-pointer select-none"
+                  >
+                    I agree to InterviewForge AI&apos;s{" "}
+                    <Link
+                      href="/terms"
+                      target="_blank"
+                      className="font-medium text-violet-400 underline underline-offset-2 hover:text-violet-300"
+                    >
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/privacy"
+                      target="_blank"
+                      className="font-medium text-violet-400 underline underline-offset-2 hover:text-violet-300"
+                    >
+                      Privacy Policy
+                    </Link>
+                  </Label>
+                </div>
+                {errors.acceptedTerms && (
+                  <p className="text-xs text-red-400 font-medium pl-7">
+                    {errors.acceptedTerms.message}
+                  </p>
+                )}
+              </div>
 
               {/* Submit */}
               <Button

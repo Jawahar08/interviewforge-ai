@@ -51,6 +51,7 @@ const setAuth = useAuthStore((state) => state.setAuth);
       email: "",
       password: "",
       confirmPassword: "",
+      acceptedTerms: false,
     },
   });
 
@@ -377,6 +378,44 @@ const setAuth = useAuthStore((state) => state.setAuth);
                 </div>
               )}
 
+              {/* Terms & Conditions Checkbox */}
+              <div className="space-y-1.5 pt-1">
+                <div className="flex items-start gap-3">
+                  <input
+                    id="register-acceptedTerms"
+                    type="checkbox"
+                    {...register("acceptedTerms")}
+                    className="mt-1 h-4 w-4 rounded border-white/20 bg-white/5 text-violet-600 focus:ring-violet-500 focus:ring-offset-slate-900 cursor-pointer"
+                  />
+                  <Label
+                    htmlFor="register-acceptedTerms"
+                    className="text-xs leading-relaxed text-slate-300 font-normal cursor-pointer select-none"
+                  >
+                    I agree to InterviewForge AI&apos;s{" "}
+                    <Link
+                      href="/terms"
+                      target="_blank"
+                      className="font-medium text-violet-400 underline underline-offset-2 transition hover:text-violet-300"
+                    >
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/privacy"
+                      target="_blank"
+                      className="font-medium text-violet-400 underline underline-offset-2 transition hover:text-violet-300"
+                    >
+                      Privacy Policy
+                    </Link>
+                  </Label>
+                </div>
+                {errors.acceptedTerms && (
+                  <p className="text-xs text-red-400 font-medium pl-7">
+                    {errors.acceptedTerms.message}
+                  </p>
+                )}
+              </div>
+
               {/* Submit */}
               <Button
                 type="submit"
@@ -395,24 +434,6 @@ const setAuth = useAuthStore((state) => state.setAuth);
                   </>
                 )}
               </Button>
-
-              <p className="mt-3 text-center text-xs leading-5 text-slate-500">
-                By creating an account, you agree to InterviewForge AI&apos;s{" "}
-                <Link
-                  href="/terms"
-                  className="font-medium text-violet-400 underline underline-offset-2 transition hover:text-violet-300"
-                >
-                  Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link
-                  href="/privacy"
-                  className="font-medium text-violet-400 underline underline-offset-2 transition hover:text-violet-300"
-                >
-                  Privacy Policy
-                </Link>
-                . All interview activity data is securely encrypted.
-              </p>
             </form>
 
             <div className="my-7 flex items-center gap-4">

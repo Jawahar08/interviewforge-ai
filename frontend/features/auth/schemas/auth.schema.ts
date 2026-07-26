@@ -11,6 +11,12 @@ export const loginSchema = z.object({
     .string()
     .min(1, "Password is required")
     .min(8, "Password must contain at least 8 characters"),
+
+  acceptedTerms: z
+    .boolean()
+    .refine((val) => val === true, {
+      message: "You must accept the Terms of Service & Privacy Policy",
+    }),
 });
 
 export const registerSchema = z
@@ -46,6 +52,12 @@ export const registerSchema = z
     confirmPassword: z
       .string()
       .min(1, "Please confirm your password"),
+
+    acceptedTerms: z
+      .boolean()
+      .refine((val) => val === true, {
+        message: "You must accept the Terms of Service & Privacy Policy",
+      }),
   })
   .refine(
     (data) => data.password === data.confirmPassword,
