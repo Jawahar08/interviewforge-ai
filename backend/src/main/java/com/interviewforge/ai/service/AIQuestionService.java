@@ -97,50 +97,86 @@ Rules:
                 focus,
                 interview.getDifficulty());
 
-        String response = geminiService.generateContent(prompt);
+        try {
+            String response = geminiService.generateContent(prompt);
+            System.out.println("========== GEMINI RESPONSE ==========");
+            System.out.println(response);
+            System.out.println("====================================");
 
-response = response
-        .replace("```json", "")
-        .replace("```", "")
-        .trim();
+            if (response != null) {
+                response = response
+                        .replace("```json", "")
+                        .replace("```", "")
+                        .trim();
 
-System.out.println("========== GEMINI RESPONSE ==========");
-System.out.println(response);
-System.out.println("Length: " + response.length());
-System.out.println("====================================");
+                int startIdx = response.indexOf("[");
+                int endIdx = response.lastIndexOf("]");
 
-if (!response.startsWith("[")) {
-    throw new RuntimeException("Invalid Gemini response:\n" + response);
-}
+                if (startIdx != -1 && endIdx != -1 && endIdx > startIdx) {
+                    String jsonArrayStr = response.substring(startIdx, endIdx + 1);
+                    List<Question> questions = Arrays.asList(
+                            objectMapper.readValue(
+                                    jsonArrayStr,
+                                    Question[].class));
 
-try {
-            response = response
-                    .replace("```json", "")
-                    .replace("```", "")
-                    .trim();
-                    if (!response.trim().endsWith("]")) {
-    throw new RuntimeException(
-        "Gemini returned incomplete JSON:\n" + response
-    );
-}
-            List<Question> questions = Arrays.asList(
-                    objectMapper.readValue(
-                            response,
-                            Question[].class));
+                    questions.forEach(question -> {
+                        question.setId(null);
+                        question.setInterview(interview);
+                        question.setCreatedAt(LocalDateTime.now());
+                    });
 
-            questions.forEach(question -> {
-                question.setId(null);
-                question.setInterview(interview);
-                question.setCreatedAt(LocalDateTime.now());
-            });
-
-            return questionRepository.saveAll(questions);
-
+                    return questionRepository.saveAll(questions);
+                }
+            }
         } catch (Exception e) {
-            throw new RuntimeException(
-                    "Failed to parse Gemini response: " + e.getMessage());
+            System.err.println("Gemini question generation error: " + e.getMessage() + ". Using fallback questions.");
         }
-        
+
+        // Fallback guaranteed questions if AI call is slow or fails
+        String roleName = interview.getRole() != null ? interview.getRole() : "Software Engineer";
+        String companyName = interview.getCompany() != null && !interview.getCompany().isEmpty() 
+            ? interview.getCompany() 
+            : "Target Company";
+
+        List<Question> fallbackQuestions = List.of(
+            Question.builder()
+                .interview(interview)
+                .questionText("Walk me through a complex " + roleName + " project you led recently. What technical challenges did you face and how did you resolve them?")
+                .category("Technical Depth")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("How do you approach system design and scalability when engineering solutions for " + companyName + "?")
+                .category("System Design")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("Describe a situation where you had a technical disagreement with a teammate. How did you handle it?")
+                .category("Behavioral")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("What testing and code quality practices do you enforce in your day-to-day workflow?")
+                .category("Best Practices")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("Where do you see the biggest engineering bottlenecks in your current domain, and how would you optimize them?")
+                .category("Problem Solving")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build()
+        );
+
+        return questionRepository.saveAll(fallbackQuestions);
     }
     
 }

@@ -83,6 +83,17 @@ export function useSessionQuestions(
             .getSessionQuestions(sessionId);
 
         setSessionQuestions(response);
+
+        if (!response.questions || response.questions.length === 0) {
+          setTimeout(async () => {
+            try {
+              const retryResp = await sessionQuestionApi.getSessionQuestions(sessionId);
+              setSessionQuestions(retryResp);
+            } catch (err) {
+              console.error("Auto retry session questions failed:", err);
+            }
+          }, 1200);
+        }
       } catch (caughtError: unknown) {
         console.error(
           "Failed to load session questions:",
