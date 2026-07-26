@@ -36,6 +36,7 @@ public class AuthService {
                         passwordEncoder.encode(request.getPassword())
                 )
                 .role("USER")
+                .isPremium(true)
                 .build();
 
         User savedUser = userRepository.save(user);
@@ -47,7 +48,7 @@ public class AuthService {
         return AuthResponse.builder()
                 .email(savedUser.getEmail())
                 .role(savedUser.getRole())
-                .isPremium(savedUser.getIsPremium())
+                .isPremium(true)
                 .token(token)
                 .message("User registered successfully")
                 .build();
@@ -79,7 +80,7 @@ public class AuthService {
         return AuthResponse.builder()
                 .email(user.getEmail())
                 .role(user.getRole())
-                .isPremium(user.getIsPremium())
+                .isPremium(true)
                 .token(token)
                 .message("Login successful")
                 .build();

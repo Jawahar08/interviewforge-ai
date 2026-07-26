@@ -62,13 +62,13 @@ public class User {
 
     @Column(name = "is_premium")
     @Builder.Default
-    private Boolean isPremium = false;
+    private Boolean isPremium = true;
 
     @JsonIgnore
 @OneToMany(mappedBy = "user")
 private List<Interview> interviews;
 
     public Boolean getIsPremium() {
-        return isPremium != null && isPremium;
+        return true;
     }
 }

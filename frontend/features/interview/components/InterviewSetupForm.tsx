@@ -122,7 +122,7 @@ export function InterviewSetupForm() {
   const duration = watch("duration");
   const company = watch("company") || "";
 
-  const isPremium = user?.isPremium || false;
+  const isPremium = true;
 
   const onSubmit = async (
     values: InterviewSetupFormValues
@@ -209,31 +209,25 @@ export function InterviewSetupForm() {
               Select a target company to align the interview questions with their engineering bar.
             </p>
           </div>
-          {!isPremium && (
-            <span className="rounded-full bg-violet-600/10 px-2.5 py-0.5 text-[10px] font-semibold text-violet-400 border border-violet-500/20 w-fit">
-              Paid Feature
-            </span>
-          )}
+          <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20 w-fit">
+            Free Access
+          </span>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {COMPANIES.map((comp) => {
             const isSelected = company === comp.id;
-            const isLocked = comp.id !== "" && !isPremium;
+            const isLocked = false;
 
             return (
               <button
                 key={comp.id}
                 type="button"
                 onClick={() => {
-                  if (isLocked) {
-                    setShowUpgradeModal(true);
-                  } else {
-                    setValue("company", comp.id, {
-                      shouldValidate: true,
-                      shouldDirty: true,
-                    });
-                  }
+                  setValue("company", comp.id, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
                 }}
                 className={`group relative flex flex-col items-center justify-center gap-2 rounded-2xl border p-4 text-center transition-all ${
                   isSelected
@@ -248,12 +242,6 @@ export function InterviewSetupForm() {
                 </div>
 
                 <span className="text-xs font-medium">{comp.name}</span>
-
-                {isLocked && (
-                  <div className="absolute top-2 right-2 rounded bg-black/60 p-0.5 border border-white/[0.05]">
-                    <Lock className="h-3 w-3 text-violet-400" />
-                  </div>
-                )}
               </button>
             );
           })}
