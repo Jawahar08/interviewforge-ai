@@ -2,6 +2,7 @@ services:
   - type: web
     name: interviewforge-backend
     env: docker
+    plan: free
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     envVars:
