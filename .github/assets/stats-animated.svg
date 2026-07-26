@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100" width="1200" height="100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" width="1200" height="120">
   <defs>
-    <linearGradient id="statsGrad" x1="0" y1="0" x2="1" y2="0">
+    <linearGradient id="sGrad" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#7b2ff7">
         <animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#64ffda;#7b2ff7" dur="6s" repeatCount="indefinite"/>
       </stop>
@@ -17,40 +17,90 @@
         <animate attributeName="stop-color" values="#ffd93d;#7b2ff7;#00d2ff;#ffd93d" dur="6s" repeatCount="indefinite"/>
       </stop>
     </linearGradient>
-    <filter id="statGlow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="sGlow"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="sGlowStrong"><feGaussianBlur stdDeviation="3.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <rect width="1200" height="100" fill="#050816" rx="12"/>
-  <rect x="2" y="2" width="1196" height="96" fill="none" rx="10" stroke="url(#statsGrad)" stroke-width="1" opacity="0.4"/>
+  <rect width="1200" height="120" fill="#030712" rx="12"/>
 
-  <!-- Stat 1: Domains -->
-  <g transform="translate(100, 50)">
-    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#00d2ff" filter="url(#statGlow)">30+</text>
-    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">CAREER DOMAINS</text>
+  <!-- Subtle background aurora -->
+  <ellipse cx="300" cy="60" rx="200" ry="80" fill="#7b2ff7" opacity="0.04">
+    <animate attributeName="cx" values="300;500;300" dur="10s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="900" cy="60" rx="200" ry="80" fill="#00d2ff" opacity="0.03">
+    <animate attributeName="cx" values="900;700;900" dur="12s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Animated border -->
+  <rect x="2" y="2" width="1196" height="116" fill="none" rx="10" stroke="url(#sGrad)" stroke-width="1" opacity="0.35"/>
+
+  <!-- Stat 1: Career Domains -->
+  <g transform="translate(86, 58)">
+    <text text-anchor="middle" y="-12" font-family="'Segoe UI', system-ui, sans-serif" font-size="32" font-weight="900" fill="#00d2ff" filter="url(#sGlowStrong)">
+      30+
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </text>
+    <text text-anchor="middle" y="14" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#475569" font-weight="700" letter-spacing="2.5">CAREER DOMAINS</text>
   </g>
+  <!-- Vertical separator -->
+  <line x1="172" y1="25" x2="172" y2="95" stroke="#1e293b" stroke-width="1"/>
+
   <!-- Stat 2: Interview Types -->
-  <g transform="translate(280, 50)">
-    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#7b2ff7" filter="url(#statGlow)">6</text>
-    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">INTERVIEW TYPES</text>
+  <g transform="translate(258, 58)">
+    <text text-anchor="middle" y="-12" font-family="'Segoe UI', system-ui, sans-serif" font-size="32" font-weight="900" fill="#7b2ff7" filter="url(#sGlowStrong)">
+      6
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2.3s" repeatCount="indefinite"/>
+    </text>
+    <text text-anchor="middle" y="14" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#475569" font-weight="700" letter-spacing="2.5">INTERVIEW TYPES</text>
   </g>
+  <line x1="344" y1="25" x2="344" y2="95" stroke="#1e293b" stroke-width="1"/>
+
   <!-- Stat 3: LeetCode Problems -->
-  <g transform="translate(460, 50)">
-    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#ffd93d" filter="url(#statGlow)">500+</text>
-    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">LEETCODE PROBLEMS</text>
+  <g transform="translate(430, 58)">
+    <text text-anchor="middle" y="-12" font-family="'Segoe UI', system-ui, sans-serif" font-size="32" font-weight="900" fill="#ffd93d" filter="url(#sGlowStrong)">
+      500+
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="1.8s" repeatCount="indefinite"/>
+    </text>
+    <text text-anchor="middle" y="14" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#475569" font-weight="700" letter-spacing="2.5">LEETCODE PROBLEMS</text>
   </g>
+  <line x1="516" y1="25" x2="516" y2="95" stroke="#1e293b" stroke-width="1"/>
+
   <!-- Stat 4: Companies -->
-  <g transform="translate(640, 50)">
-    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#ff6b6b" filter="url(#statGlow)">12</text>
-    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">FAANG COMPANIES</text>
+  <g transform="translate(602, 58)">
+    <text text-anchor="middle" y="-12" font-family="'Segoe UI', system-ui, sans-serif" font-size="32" font-weight="900" fill="#ff6b6b" filter="url(#sGlowStrong)">
+      12
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2.5s" repeatCount="indefinite"/>
+    </text>
+    <text text-anchor="middle" y="14" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#475569" font-weight="700" letter-spacing="2.5">FAANG COMPANIES</text>
   </g>
+  <line x1="688" y1="25" x2="688" y2="95" stroke="#1e293b" stroke-width="1"/>
+
   <!-- Stat 5: Voice AI -->
-  <g transform="translate(820, 50)">
-    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#64ffda" filter="url(#statGlow)">AI</text>
-    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">VOICE INTERVIEW</text>
+  <g transform="translate(774, 58)">
+    <text text-anchor="middle" y="-12" font-family="'Segoe UI', system-ui, sans-serif" font-size="32" font-weight="900" fill="#64ffda" filter="url(#sGlowStrong)">
+      AI
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2.1s" repeatCount="indefinite"/>
+    </text>
+    <text text-anchor="middle" y="14" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#475569" font-weight="700" letter-spacing="2.5">VOICE INTERVIEW</text>
   </g>
-  <!-- Stat 6: AI Engine -->
-  <g transform="translate(1020, 50)">
-    <text text-anchor="middle" y="-8" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#a78bfa" filter="url(#statGlow)">Gemini</text>
-    <text text-anchor="middle" y="16" font-family="'Inter', system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="600" letter-spacing="2">2.5 FLASH ENGINE</text>
+  <line x1="860" y1="25" x2="860" y2="95" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Stat 6: MCQ Bank -->
+  <g transform="translate(946, 58)">
+    <text text-anchor="middle" y="-12" font-family="'Segoe UI', system-ui, sans-serif" font-size="32" font-weight="900" fill="#a78bfa" filter="url(#sGlowStrong)">
+      1K+
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="1.9s" repeatCount="indefinite"/>
+    </text>
+    <text text-anchor="middle" y="14" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#475569" font-weight="700" letter-spacing="2.5">MCQ QUESTIONS</text>
+  </g>
+  <line x1="1032" y1="25" x2="1032" y2="95" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Stat 7: AI Engine -->
+  <g transform="translate(1118, 58)">
+    <text text-anchor="middle" y="-12" font-family="'Segoe UI', system-ui, sans-serif" font-size="30" font-weight="900" fill="#10b981" filter="url(#sGlowStrong)">
+      Free
+      <animate attributeName="fill" values="#10b981;#34d399;#10b981" dur="2s" repeatCount="indefinite"/>
+    </text>
+    <text text-anchor="middle" y="14" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#475569" font-weight="700" letter-spacing="2.5">ALL FEATURES</text>
   </g>
 </svg>

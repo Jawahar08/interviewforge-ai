@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════════════════════════╗ -->
-<!-- ║       ⚡ INTERVIEWFORGE AI — THE ULTIMATE README v3.0                  ║ -->
-<!-- ╚══════════════════════════════════════════════════════════════════════════╝ -->
+<!-- ╔══════════════════════════════════════════════════════════════════════════════════╗ -->
+<!-- ║        ⚡ INTERVIEWFORGE AI — THE ULTIMATE README v4.0 — 100% FREE EDITION   ║ -->
+<!-- ╚══════════════════════════════════════════════════════════════════════════════════╝ -->
 
 <a name="top"></a>
 
@@ -19,6 +19,7 @@
 [![Frontend CI](https://github.com/Jawahar08/interviewforge-ai/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/Jawahar08/interviewforge-ai/actions/workflows/frontend-ci.yml)
 [![Backend CI](https://github.com/Jawahar08/interviewforge-ai/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/Jawahar08/interviewforge-ai/actions/workflows/backend-ci.yml)
 ![License](https://img.shields.io/badge/License-MIT-00d2ff?style=flat-square&logo=opensourceinitiative&logoColor=white)
+![100% Free](https://img.shields.io/badge/💎_All_Features-FREE-10b981?style=flat-square&logo=opensourceinitiative&logoColor=white)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-7b2ff7?style=flat-square&logo=git&logoColor=white)
 ![Stars](https://img.shields.io/github/stars/Jawahar08/interviewforge-ai?style=flat-square&color=ffd93d&logo=github)
 ![Java](https://img.shields.io/badge/Java-23-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
@@ -27,6 +28,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)
 
 <br />
 
@@ -36,7 +38,7 @@
 
 <br />
 
-> **InterviewForge AI** is a production-grade, full-stack AI platform that simulates realistic interviews across **30+ career domains**, evaluates answers with multi-dimensional scoring, provides **ATS resume intelligence**, offers a **500+ LeetCode Coding Arena** with live code sandbox, features **Voice AI mock interviews** with confidence metrics, includes an **interactive System Design Canvas**, generates personalized career roadmaps, and delivers **company-targeted premium prep for FAANG & top-tier companies** — all powered by **Google Gemini 2.5 Flash**.
+> **InterviewForge AI** is a production-grade, full-stack AI platform that simulates realistic interviews across **30+ career domains**, evaluates answers with multi-dimensional scoring, provides **ATS resume intelligence**, offers a **500+ LeetCode Coding Arena** with live code sandbox, features **Voice AI mock interviews** with confidence metrics, includes an **interactive System Design Canvas**, generates personalized career roadmaps, and delivers **company-targeted prep for FAANG & 12+ top-tier companies** — all powered by **Google Gemini 2.5 Flash** and **100% free for everyone**.
 
 <br />
 
@@ -52,12 +54,13 @@
 <a href="#-features-at-a-glance"><img src="https://img.shields.io/badge/✨_Features-7b2ff7?style=for-the-badge" /></a>
 <a href="#-500-leetcode-coding-arena"><img src="https://img.shields.io/badge/💻_LeetCode-ffd93d?style=for-the-badge" /></a>
 <a href="#-voice-ai-mock-interviewer"><img src="https://img.shields.io/badge/🎤_Voice_AI-ff6b6b?style=for-the-badge" /></a>
-<a href="#-premium-company-prep"><img src="https://img.shields.io/badge/💎_Premium-ffd93d?style=for-the-badge" /></a>
+<a href="#-company-targeted-interview-prep"><img src="https://img.shields.io/badge/🏢_FAANG_Prep-10b981?style=for-the-badge" /></a>
 <a href="#%EF%B8%8F-system-architecture"><img src="https://img.shields.io/badge/🏗️_Architecture-00d2ff?style=for-the-badge" /></a>
 <a href="#-ai-pipeline-deep-dive"><img src="https://img.shields.io/badge/🧠_AI_Pipeline-64ffda?style=for-the-badge" /></a>
 <a href="#-tech-stack"><img src="https://img.shields.io/badge/🛠️_Stack-7b2ff7?style=for-the-badge" /></a>
 <a href="#-quick-start"><img src="https://img.shields.io/badge/🚀_Start-00d2ff?style=for-the-badge" /></a>
 <a href="#-api-cheatsheet"><img src="https://img.shields.io/badge/📡_API-ffd93d?style=for-the-badge" /></a>
+<a href="#-deployment"><img src="https://img.shields.io/badge/🌐_Deploy-10b981?style=for-the-badge" /></a>
 
 </div>
 
@@ -95,6 +98,7 @@ Saturday:  ✅ You deployed InterviewForge on Monday. You aced every round.
 - 💻 No live coding sandbox or LeetCode practice
 - 🎤 No voice-based mock interview simulation
 - 🏗️ No system design canvas or architecture tools
+- 💰 Paid tools that lock features behind paywalls
 - 🧠 No AI — just blind memorization
 ```
 
@@ -110,11 +114,12 @@ Saturday:  ✅ You deployed InterviewForge on Monday. You aced every round.
 + 🎯 Weakness-to-strength detection pipeline
 + 🗺️ AI-powered personalized career roadmap
 + 📄 ATS resume intelligence with skill-gap analysis
-+ 🏢 FAANG company-targeted premium prep (Google, Meta, Amazon...)
++ 🏢 FAANG company-targeted prep (Google, Meta, Amazon...)
 + 💻 500+ LeetCode problems with live code sandbox (4 languages)
 + 🎤 Voice AI mock interview with confidence metrics
 + 🏗️ Interactive System Design Canvas with AI review
-+ 💎 Premium tier with instant mock upgrade flow
++ 💎 100% FREE — EVERY feature unlocked for ALL users
++ 🤖 Powered by Google Gemini 2.5 Flash AI
 ```
 
 </td>
@@ -140,11 +145,11 @@ Saturday:  ✅ You deployed InterviewForge on Monday. You aced every round.
 ║   💻 LeetCode     ║   🎤 Voice AI     ║   🏗️ System       ║   🗺️ Career      ║
 ║   500+ Problems   ║   Mock Interview  ║   Design Canvas   ║   Roadmap         ║
 ╠═══════════════════╬═══════════════════╬═══════════════════╬═══════════════════╣
-║   📊 Dashboard    ║   📜 Session       ║   💎 Premium      ║   📈 Results &    ║
+║   📊 Dashboard    ║   📜 Session       ║   🏢 12 FAANG     ║   📈 Results &    ║
 ║   Analytics       ║   History         ║   Company Prep    ║   Score Tracking  ║
 ╠═══════════════════╬═══════════════════╬═══════════════════╬═══════════════════╣
-║   👤 Profile      ║   ⚙️ Settings     ║   🏢 12 Companies ║   🔄 CI/CD        ║
-║   Manager         ║   AI Config       ║   FAANG + More    ║   Pipelines       ║
+║   👤 Profile      ║   ⚙️ Settings     ║   🔄 CI/CD        ║   💎 100% FREE    ║
+║   Manager         ║   AI Config       ║   Pipelines       ║   No Paywalls     ║
 ╚═══════════════════╩═══════════════════╩═══════════════════╩═══════════════════╝
 ```
 
@@ -294,8 +299,8 @@ Saturday:  ✅ You deployed InterviewForge on Monday. You aced every round.
 - ✅ AI configuration settings (model, temperature)
 - ✅ Notification preferences
 - ✅ Danger zone — clear interview history, delete resumes
-- ✅ Premium upgrade flow with mock payment
-- ✅ `isPremium` flag across auth + profile
+- ✅ All features unlocked for all users
+- ✅ Clean, premium-feeling interface
 
 </td>
 </tr>
@@ -449,22 +454,22 @@ flowchart LR
 
 <br />
 
-## 💎 Premium Company Prep
+## 🏢 Company-Targeted Interview Prep
 
-> **Company-Targeted Mock Interview Preparation** — a paid feature that tailors AI-generated interview questions to the specific hiring bar, technical standards, cultural values, and interview loop style of top-tier companies.
+> **Company-Targeted Mock Interview Preparation** — AI-generated interview questions tailored to the specific hiring bar, technical standards, cultural values, and interview loop style of top-tier companies. **100% FREE for all users.**
 
 <div align="center">
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                  🏢  SUPPORTED COMPANIES                         │
-│                                                                  │
-│   🚀 General    G  Google     AM Amazon     M  Meta              │
-│   MS Microsoft  🍎 Apple      N  Netflix    S  Stripe            │
-│   U  Uber       Z  Zoho       T  TCS        I  Infosys           │
-│                                                                  │
-│   🔒 Locked for free users  ·  💎 Unlocked for Premium members   │
-└──────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│                  🏢  SUPPORTED COMPANIES — ALL FREE                  │
+│                                                                      │
+│   🚀 General    G  Google     AM Amazon     M  Meta                  │
+│   MS Microsoft  🍎 Apple      N  Netflix    S  Stripe                │
+│   U  Uber       Z  Zoho       T  TCS        I  Infosys              │
+│                                                                      │
+│   🎉 ALL COMPANIES UNLOCKED FOR FREE  ·  No paywall. No limits.     │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 </div>
@@ -472,43 +477,37 @@ flowchart LR
 ### How It Works
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#ffd93d', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#10b981', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
 
 flowchart LR
-    A["🔒 Free User\nClicks Google"] --> B{"💎 Premium\nCheck"}
-    B -->|"❌ Not Premium"| C["🪟 Upgrade Modal\n$19/mo Pro Plan"]
-    C --> D["💳 Mock Payment\nPOST /profile/upgrade"]
-    D --> E["✅ isPremium = true\nZustand + DB Updated"]
-    E --> F["🔓 All Companies\nUnlocked"]
-    B -->|"✅ Premium"| F
-    F --> G["🧠 Gemini Prompt\n+ Company Context"]
-    G --> H["🎙️ Company-Tailored\nInterview Session"]
+    A["👤 User Selects\nGoogle"] --> B["🏢 Company Context\nInjected"]
+    B --> C["🧠 Gemini Prompt\n+ Hiring Bar\n+ Culture Values\n+ Loop Style"]
+    C --> D["🎙️ Company-Tailored\nInterview Session"]
+    D --> E["📊 AI Evaluation\nCompany Standards"]
+    E --> F["📈 Performance\nReport"]
 
-    style A fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
+    style A fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
     style B fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
     style C fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
-    style D fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
-    style E fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
-    style F fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
-    style G fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
-    style H fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
+    style D fill:#0f172a,stroke:#10b981,stroke-width:2px,color:#10b981
+    style E fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
+    style F fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
 ```
 
-### Premium vs Free
+### What's Included — ALL FREE
 
 ```diff
-+ ✅ FREE TIER                               💎 PREMIUM TIER ($19/mo)
-+ ──────────────────────────                 ──────────────────────────
-+ General role-based interview prep          Everything in Free, plus:
-+ 30+ career domains                        + Google, Meta, Amazon, Apple prep
-+ 6 interview types                         + Microsoft, Netflix, Stripe prep
-+ AI evaluation & scoring                   + Uber, Zoho, TCS, Infosys prep
-+ Resume ATS analysis                       + Company-tailored AI prompt context
-+ Career roadmap generation                 + Cultural fit & loop-style questions
-+ Dashboard analytics                       + Unlimited premium sessions
-+ Interview history                         + Priority question generation
-+ 500+ LeetCode coding arena               + Advanced code complexity analysis
-+ Voice AI mock interview                   + Premium interview analytics
++ ✅ AI Interview Simulator — 30+ roles, 6 types, 3 difficulties
++ ✅ Voice AI Mock Interview — real-time speech analysis + confidence scoring
++ ✅ 500+ LeetCode Coding Arena — 4 languages, live execution, AI code audit
++ ✅ System Design Canvas — drag-and-drop architecture builder + AI review
++ ✅ Resume ATS Intelligence — PDF upload, 0-100 scoring, skill gap analysis
++ ✅ Career Roadmap Generator — weekly plans, task tracking, readiness score
++ ✅ Dashboard Analytics — performance trends, score history, interview stats
++ ✅ 12 Company-Targeted Prep — Google, Meta, Amazon, Apple, Netflix + more
++ ✅ Multi-dimensional AI Scoring — technical, clarity, depth, communication
++ ✅ Interview History & Tracking — full session archive with replay
++ ✅ No signup fees · No paywalls · No premium tier · No limits
 ```
 
 <br />
@@ -550,7 +549,7 @@ flowchart TD
         SEC --> RES_SVC["📄 Resume"]
         SEC --> ROAD_SVC["🗺️ Roadmap"]
         SEC --> DASH_SVC["📊 Dashboard"]
-        SEC --> PROF_SVC["👤 Profile\n+ Premium Upgrade"]
+        SEC --> PROF_SVC["👤 Profile"]
         SEC --> RESULT_SVC["📈 Result"]
     end
 
@@ -590,6 +589,11 @@ flowchart TD
 
 <br />
 
+<!-- ─────────── WAVE SEPARATOR ─────────── -->
+<img src=".github/assets/wave-animated.svg" width="100%" />
+
+<br />
+
 ### 🔄 Core Product Flow
 
 ```mermaid
@@ -598,8 +602,8 @@ flowchart TD
 flowchart LR
     A["🔐 Register\nLogin"] --> B["📊 Dashboard"]
     B --> C["⚙️ Configure\nRole · Type\nDifficulty"]
-    C --> C2["🏢 Select\nCompany\n(Premium)"]
-    C2 --> D["🎙️ Live Interview\n5 AI Questions"]
+    C --> C2["🏢 Select\nCompany\n(FREE)"]
+    C2 --> D["🎙️ Live Interview\nAI Questions"]
     D --> D2["🎤 Voice AI\nOR Text"]
     D2 --> E["🧠 AI Evaluation\nScoring per Answer"]
     E --> F["📈 Performance\nReport"]
@@ -611,7 +615,7 @@ flowchart LR
     style A fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
     style B fill:#0f172a,stroke:#64ffda,stroke-width:2px,color:#64ffda
     style C fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
-    style C2 fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
+    style C2 fill:#0f172a,stroke:#10b981,stroke-width:2px,color:#10b981
     style D fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
     style D2 fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
     style E fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
@@ -655,7 +659,7 @@ flowchart TD
     end
 
     subgraph STORES["🗃️ State Management"]
-        ZA["Zustand Auth Store\nJWT · isPremium"]
+        ZA["Zustand Auth Store\nJWT · User State"]
         ZI["Zustand Interview Store\nSession state"]
     end
 
@@ -788,7 +792,7 @@ flowchart TD
     E --> F
     F --> G["🧹 Response Cleaner\nStrip markdown · Trim"]
     G --> H{"✅ Valid\nJSON?"}
-    H -->|"Yes"| I["📦 Deserialize\nQuestion[] Array"]
+    H -->|"Yes"| I["📦 Deserialize\nQuestion Array"]
     H -->|"No"| J["🔴 RuntimeException\nInvalid response"]
     I --> K["💾 Persist to DB\nQuestionRepository.saveAll"]
     K --> L["📤 Return to Client\nTyped Question List"]
@@ -877,19 +881,18 @@ sequenceDiagram
     C->>F: Submit credentials
     F->>A: POST /api/v1/auth/login
     A->>D: Lookup user by email
-    D-->>A: User record (incl. isPremium)
+    D-->>A: User record
     A->>A: BCrypt password verification ✅
     A->>S: Generate signed JWT 🔑
     S-->>A: Token
-    A-->>F: { token, user, isPremium }
+    A-->>F: { token, user }
     F->>F: Store in Zustand + redirect
 
-    Note over C,D: ── Company-Targeted Interview Flow ──
+    Note over C,D: ── Company-Targeted Interview Flow (FREE) ──
 
     C->>F: Select Google + Configure interview
     F->>A: POST /api/v1/interviews (JWT + company=Google)
     A->>S: Validate JWT
-    A->>A: Check isPremium for company prep
     A->>D: Create interview (with company field)
     A-->>F: { interviewId }
 
@@ -899,7 +902,7 @@ sequenceDiagram
 
     F->>A: GET /api/v1/sessions/{id}/questions
     A->>P: Build role-aware prompt + company context
-    P->>G: Generate 5 company-tailored questions (JSON)
+    P->>G: Generate company-tailored questions (JSON)
     G-->>V: Raw AI response
     V->>V: Parse + validate structure
     V->>D: Persist questions
@@ -1070,23 +1073,23 @@ frontend/
 │   │       ├── live/page.tsx        # Live interview workspace (Text + Voice + Code + Design)
 │   │       └── result/page.tsx      # Performance report
 │   │
-│   ├── 💻 coding/page.tsx           # 🆕 LeetCode 500+ Coding Arena
+│   ├── 💻 coding/page.tsx           # LeetCode 500+ Coding Arena
 │   ├── 📄 resume/page.tsx           # Resume upload & ATS analysis
 │   └── 🗺️ roadmap/page.tsx         # AI career roadmap builder
 │
 ├── 📂 features/                     # Feature-sliced modules
 │   ├── 🔐 auth/                     # Auth hooks, API, store, types
-│   ├── 💻 coding/                   # 🆕 500+ LeetCode problems data, types
+│   ├── 💻 coding/                   # 500+ LeetCode problems data, types
 │   │   └── data/
 │   │       └── problems.data.ts     # 500+ curated problems across 18 categories
 │   ├── 📊 dashboard/                # Dashboard API, hooks, types
 │   ├── 📜 history/                  # History API, components, types
 │   ├── 🎙️ interview/               # Interview API, components, schemas, store, types
 │   │   └── components/
-│   │       ├── InterviewSetupForm   # Company selector + upgrade modal
-│   │       ├── CodeSandbox          # 🆕 Multi-language code sandbox (JS, Python, Java, C++)
-│   │       ├── VoiceRecorder        # 🆕 Voice AI with speech-to-text + confidence
-│   │       └── SystemDesignCanvas   # 🆕 Architecture design canvas
+│   │       ├── InterviewSetupForm   # Company selector + config
+│   │       ├── CodeSandbox          # Multi-language code sandbox (JS, Python, Java, C++)
+│   │       ├── VoiceRecorder        # Voice AI with speech-to-text + confidence
+│   │       └── SystemDesignCanvas   # Architecture design canvas
 │   ├── 👤 profile/                  # Profile form, hooks, API, types
 │   ├── 📈 result/                   # Result API, components, types
 │   ├── 📄 resume/                   # Resume API, hooks, types
@@ -1114,8 +1117,8 @@ backend/src/main/java/com/interviewforge/
 │
 ├── 🔐 auth/                         # Authentication domain
 │   ├── controller/                  # AuthController (login, register)
-│   ├── dto/                         # LoginRequest, RegisterRequest, AuthResponse (+isPremium)
-│   ├── entity/                      # User (UUID id, isPremium, targetRole)
+│   ├── dto/                         # LoginRequest, RegisterRequest, AuthResponse
+│   ├── entity/                      # User (UUID id, targetRole)
 │   ├── repository/                  # UserRepository
 │   └── service/                     # AuthService (BCrypt, JWT generation)
 │
@@ -1129,7 +1132,7 @@ backend/src/main/java/com/interviewforge/
 │   ├── dto/                         # CreateInterviewRequest (+company field)
 │   ├── entity/                      # Interview (title, role, difficulty, company)
 │   ├── repository/                  # InterviewRepository
-│   └── service/                     # InterviewService (+premium validation)
+│   └── service/                     # InterviewService
 │
 ├── 📋 session/                       # Session management domain
 ├── ❓ question/                      # Question domain
@@ -1147,9 +1150,9 @@ backend/src/main/java/com/interviewforge/
 ├── 📉 statistics/                    # Statistics aggregation
 │
 ├── 👤 profile/                       # User profile domain
-│   ├── controller/                  # ProfileController (GET, PUT, DELETE, POST /upgrade)
-│   ├── dto/                         # ProfileUpdateRequest, UserProfileResponse (+isPremium)
-│   └── service/                     # ProfileService (+upgradeToPremium, clearInterviews)
+│   ├── controller/                  # ProfileController (GET, PUT, DELETE)
+│   ├── dto/                         # ProfileUpdateRequest, UserProfileResponse
+│   └── service/                     # ProfileService (+clearInterviews)
 │
 ├── 💼 company/                       # Company readiness domain
 ├── 🎯 jobmatch/                      # Job matching domain
@@ -1196,7 +1199,6 @@ Base URL: `http://localhost:8080/api/v1` &nbsp;·&nbsp; Swagger: `http://localho
   "data": {
     "email": "jane@example.com",
     "role": "USER",
-    "isPremium": false,
     "token": "eyJhbGciOiJIUzI1NiIs...",
     "message": "Login successful"
   }
@@ -1246,13 +1248,12 @@ Base URL: `http://localhost:8080/api/v1` &nbsp;·&nbsp; Swagger: `http://localho
 </details>
 
 <details>
-<summary><b>👤 Profile & Premium</b></summary>
+<summary><b>👤 Profile</b></summary>
 
 | Method | Endpoint | Description | Auth |
 |:------:|----------|-------------|:----:|
 | `GET` | `/profile` | Get user profile | 🔐 |
 | `PUT` | `/profile` | Update profile (name, role, password) | 🔐 |
-| `POST` | `/profile/upgrade` | Upgrade to Premium | 🔐 |
 | `DELETE` | `/profile/interviews` | Clear all interview history | 🔐 |
 | `DELETE` | `/profile/resumes` | Clear all resume data | 🔐 |
 </details>
@@ -1325,7 +1326,16 @@ npm run dev
 # 🟢 App → http://localhost:3000
 ```
 
-### 4️⃣ Validate
+### 4️⃣ Docker (One Command)
+
+```bash
+docker-compose up -d --build
+# 🟢 Frontend → http://localhost:3000
+# 🟢 Backend  → http://localhost:8080
+# 🟢 Database → localhost:5432
+```
+
+### 5️⃣ Validate
 
 ```bash
 cd frontend && npx tsc --noEmit     # Frontend type-check
@@ -1348,10 +1358,58 @@ cd backend && mvn clean compile       # Backend compile check
 
 <br />
 
+## 🌐 Deployment
+
+### Free Deployment Architecture
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#10b981', 'lineColor': '#7b2ff7', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
+
+flowchart LR
+    subgraph FRONTEND["🖥️ Vercel (Free)"]
+        V["Next.js 16\nAuto-deployed"]
+    end
+
+    subgraph BACKEND["⚙️ Render (Free)"]
+        R["Spring Boot\nDocker Container"]
+    end
+
+    subgraph DATABASE["🗄️ Neon (Free)"]
+        N["PostgreSQL\n0.5GB Storage"]
+    end
+
+    subgraph AI["🧠 Google AI"]
+        G["Gemini 2.5 Flash\nFree Tier API"]
+    end
+
+    V -->|"REST API"| R
+    R -->|"JDBC"| N
+    R -->|"HTTP"| G
+
+    style FRONTEND fill:#0f172a,stroke:#00d2ff,stroke-width:2px,color:#00d2ff
+    style BACKEND fill:#0f172a,stroke:#7b2ff7,stroke-width:2px,color:#7b2ff7
+    style DATABASE fill:#0f172a,stroke:#ffd93d,stroke-width:2px,color:#ffd93d
+    style AI fill:#0f172a,stroke:#ff6b6b,stroke-width:2px,color:#ff6b6b
+```
+
+| Service | Provider | Free Tier | Config File |
+|:-------:|:--------:|:---------:|:-----------:|
+| 🖥️ Frontend | **Vercel** | Unlimited | `frontend/vercel.json` |
+| ⚙️ Backend | **Render** | 750h/month | `render.yaml` |
+| 🗄️ Database | **Neon** | 0.5GB | — |
+| 🧠 AI | **Google AI** | Free tier | `.env` |
+
+<br />
+
+<!-- ═══════════════════════════ GRADIENT SEPARATOR ═══════════════════════════ -->
+<img src=".github/assets/divider-animated.svg" width="100%" />
+
+<br />
+
 ## 🗺️ Development Roadmap
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'cScale0': '#00d2ff', 'cScale1': '#7b2ff7', 'cScale2': '#64ffda', 'cScale3': '#ff6b6b', 'cScale4': '#ffd93d', 'cScale5': '#00d2ff', 'cScale6': '#7b2ff7', 'cScale7': '#ff6b6b', 'cScale8': '#64ffda', 'cScale9': '#ffd93d', 'cScaleLabel0': '#0a0a1a', 'cScaleLabel1': '#0a0a1a', 'cScaleLabel2': '#0a0a1a', 'cScaleLabel3': '#0a0a1a', 'cScaleLabel4': '#0a0a1a', 'cScaleLabel5': '#0a0a1a', 'cScaleLabel6': '#0a0a1a', 'cScaleLabel7': '#0a0a1a', 'cScaleLabel8': '#0a0a1a', 'cScaleLabel9': '#0a0a1a', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': { 'cScale0': '#00d2ff', 'cScale1': '#7b2ff7', 'cScale2': '#64ffda', 'cScale3': '#ff6b6b', 'cScale4': '#ffd93d', 'cScale5': '#00d2ff', 'cScale6': '#7b2ff7', 'cScale7': '#ff6b6b', 'cScale8': '#64ffda', 'cScale9': '#10b981', 'cScaleLabel0': '#0a0a1a', 'cScaleLabel1': '#0a0a1a', 'cScaleLabel2': '#0a0a1a', 'cScaleLabel3': '#0a0a1a', 'cScaleLabel4': '#0a0a1a', 'cScaleLabel5': '#0a0a1a', 'cScaleLabel6': '#0a0a1a', 'cScaleLabel7': '#0a0a1a', 'cScaleLabel8': '#0a0a1a', 'cScaleLabel9': '#0a0a1a', 'fontFamily': 'JetBrains Mono, monospace'}}}%%
 
 timeline
     title InterviewForge AI — Development Timeline
@@ -1394,9 +1452,9 @@ timeline
                             : Dashboard analytics
 
     section Phase 7 ✅
-        Premium Company Prep : 12 company options (FAANG+)
-                             : Premium upgrade flow + modal
-                             : Company-aware AI prompt injection
+        Company Prep : 12 company options (FAANG+)
+                     : Company-aware AI prompt injection
+                     : All companies FREE for everyone
 
     section Phase 8 ✅
         Voice AI + Coding Arena : Voice AI mock with Web Speech API
@@ -1407,12 +1465,18 @@ timeline
                                 : Test case verification + auto-solved marking
                                 : System Design Canvas + AI review
 
-    section Phase 9 🔵
-        Scale + Enterprise : Redis caching layer
-                           : Rate limiting
-                           : Docker Compose deployment
-                           : Stripe payment integration
-                           : Recruiter analytics portal
+    section Phase 9 ✅
+        100% Free Launch : All features unlocked for everyone
+                         : No premium tiers or paywalls
+                         : Free cloud deployment (Vercel + Render + Neon)
+                         : Kaggle MCQ question bank import
+
+    section Phase 10 🔵
+        Scale + Community : Redis caching layer
+                          : Rate limiting
+                          : Community contributions
+                          : Mobile-responsive optimization
+                          : Additional language support
 ```
 
 <br />
@@ -1433,7 +1497,6 @@ timeline
 - ✅ DTO validation (Jakarta Bean Validation + Zod)
 - 🚨 Centralized GlobalExceptionHandler
 - 🌐 CORS configuration with allowed origins
-- 💎 Premium feature gating (server-validated)
 
 </td>
 <td width="50%" valign="top">
@@ -1441,7 +1504,6 @@ timeline
 ### 🔵 Planned
 
 - ⏱️ Rate limiting & request throttling
-- 💳 Stripe payment integration (real payments)
 - 🔄 API key rotation strategy
 - 📝 Security audit logging
 - 🛡️ OWASP compliance hardening
@@ -1525,8 +1587,14 @@ Java backend engineering, secure APIs, AI integration, and scalable SaaS.
 
 <!-- ─────────── GITHUB STATS ─────────── -->
 
-<img src="https://github-readme-stats.vercel.app/api?username=Jawahar08&show_icons=true&theme=radical&hide_border=true&bg_color=0a0a1a&title_color=00d2ff&icon_color=7b2ff7&text_color=ccd6f6" width="49%" />
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=Jawahar08&theme=radical&hide_border=true&background=0a0a1a&ring=00d2ff&fire=ff6b6b&currStreakLabel=64ffda" width="49%" />
+<img src="https://github-readme-stats.vercel.app/api?username=Jawahar08&show_icons=true&theme=radical&hide_border=true&bg_color=030712&title_color=00d2ff&icon_color=7b2ff7&text_color=ccd6f6" width="49%" />
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=Jawahar08&theme=radical&hide_border=true&background=030712&ring=00d2ff&fire=ff6b6b&currStreakLabel=64ffda" width="49%" />
+
+<br /><br />
+
+<!-- ─────────── REPO ACTIVITY GRAPH ─────────── -->
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=Jawahar08&theme=react-dark&bg_color=030712&color=00d2ff&line=7b2ff7&point=ffd93d&area=true&hide_border=true" width="98%" />
 
 <br /><br />
 

@@ -1,66 +1,128 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 140" width="1200" height="140">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 160" width="1200" height="160">
   <defs>
-    <linearGradient id="featGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#7b2ff7"/>
-      <stop offset="50%" stop-color="#00d2ff"/>
-      <stop offset="100%" stop-color="#64ffda"/>
+    <linearGradient id="fGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7b2ff7"/><stop offset="50%" stop-color="#00d2ff"/><stop offset="100%" stop-color="#64ffda"/>
     </linearGradient>
+    <filter id="cardGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <rect width="1200" height="140" fill="#050816" rx="12"/>
+  <rect width="1200" height="160" fill="#030712" rx="12"/>
 
-  <!-- Feature cards -->
-  <g transform="translate(10, 15)">
+  <!-- Aurora background -->
+  <ellipse cx="600" cy="80" rx="500" ry="100" fill="#7b2ff7" opacity="0.03">
+    <animate attributeName="rx" values="500;600;500" dur="8s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Feature cards with pulse animation -->
+  <g transform="translate(10, 18)">
     <!-- Card 1: AI Interview -->
-    <rect x="0" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#7b2ff7" stroke-width="1"/>
-    <circle cx="74" cy="35" r="8" fill="#7b2ff7"/>
-    <text x="74" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#a78bfa" font-weight="bold">AI Interview</text>
-    <text x="74" y="77" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">30+ Roles · 6 Types</text>
-    <text x="74" y="94" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Real-time Scoring</text>
+    <g>
+      <rect x="0" y="0" width="160" height="120" rx="12" fill="#0a0f1e" stroke="#7b2ff7" stroke-width="1.5" opacity="0.9">
+        <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="80" cy="30" r="10" fill="none" stroke="#7b2ff7" stroke-width="1.5" opacity="0.5">
+        <animate attributeName="r" values="10;14;10" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <text x="80" y="35" text-anchor="middle" font-family="sans-serif" font-size="16">🎙️</text>
+      <text x="80" y="62" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#a78bfa" font-weight="bold">AI Interview</text>
+      <text x="80" y="80" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">30+ Roles · 6 Types</text>
+      <text x="80" y="96" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">Real-time AI Scoring</text>
+    </g>
 
     <!-- Card 2: ATS Resume -->
-    <rect x="158" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#00d2ff" stroke-width="1"/>
-    <circle cx="232" cy="35" r="8" fill="#00d2ff"/>
-    <text x="232" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#67e8f9" font-weight="bold">ATS Resume</text>
-    <text x="232" y="77" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">PDF Upload · Score</text>
-    <text x="232" y="94" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Skill Gap Analysis</text>
+    <g>
+      <rect x="170" y="0" width="160" height="120" rx="12" fill="#0a0f1e" stroke="#00d2ff" stroke-width="1.5" opacity="0.9">
+        <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="250" cy="30" r="10" fill="none" stroke="#00d2ff" stroke-width="1.5" opacity="0.5">
+        <animate attributeName="r" values="10;14;10" dur="3.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3.2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="250" y="35" text-anchor="middle" font-family="sans-serif" font-size="16">📄</text>
+      <text x="250" y="62" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#67e8f9" font-weight="bold">ATS Resume</text>
+      <text x="250" y="80" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">PDF Upload · Score</text>
+      <text x="250" y="96" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">Skill Gap Analysis</text>
+    </g>
 
     <!-- Card 3: Voice AI -->
-    <rect x="316" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#ff6b6b" stroke-width="1"/>
-    <circle cx="390" cy="35" r="8" fill="#ff6b6b"/>
-    <text x="390" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#fca5a5" font-weight="bold">Voice AI Mock</text>
-    <text x="390" y="77" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Speech-to-Text</text>
-    <text x="390" y="94" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Confidence Score</text>
+    <g>
+      <rect x="340" y="0" width="160" height="120" rx="12" fill="#0a0f1e" stroke="#ff6b6b" stroke-width="1.5" opacity="0.9">
+        <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2.8s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="420" cy="30" r="10" fill="none" stroke="#ff6b6b" stroke-width="1.5" opacity="0.5">
+        <animate attributeName="r" values="10;14;10" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <text x="420" y="35" text-anchor="middle" font-family="sans-serif" font-size="16">🎤</text>
+      <text x="420" y="62" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#fca5a5" font-weight="bold">Voice AI Mock</text>
+      <text x="420" y="80" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">Speech-to-Text</text>
+      <text x="420" y="96" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">Confidence Score</text>
+    </g>
 
     <!-- Card 4: LeetCode Arena -->
-    <rect x="474" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#ffd93d" stroke-width="1"/>
-    <circle cx="548" cy="35" r="8" fill="#ffd93d"/>
-    <text x="548" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#fde68a" font-weight="bold">500+ LeetCode</text>
-    <text x="548" y="77" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">4 Languages</text>
-    <text x="548" y="94" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Live Code Sandbox</text>
+    <g>
+      <rect x="510" y="0" width="160" height="120" rx="12" fill="#0a0f1e" stroke="#ffd93d" stroke-width="1.5" opacity="0.9">
+        <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.5s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="590" cy="30" r="10" fill="none" stroke="#ffd93d" stroke-width="1.5" opacity="0.5">
+        <animate attributeName="r" values="10;14;10" dur="3.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+      <text x="590" y="35" text-anchor="middle" font-family="sans-serif" font-size="16">💻</text>
+      <text x="590" y="62" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#fde68a" font-weight="bold">500+ LeetCode</text>
+      <text x="590" y="80" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">4 Languages</text>
+      <text x="590" y="96" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">Live Code Sandbox</text>
+    </g>
 
     <!-- Card 5: System Design -->
-    <rect x="632" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#64ffda" stroke-width="1"/>
-    <circle cx="706" cy="35" r="8" fill="#64ffda"/>
-    <text x="706" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6ee7b7" font-weight="bold">System Design</text>
-    <text x="706" y="77" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Architecture Canvas</text>
-    <text x="706" y="94" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">AI Review</text>
+    <g>
+      <rect x="680" y="0" width="160" height="120" rx="12" fill="#0a0f1e" stroke="#64ffda" stroke-width="1.5" opacity="0.9">
+        <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="760" cy="30" r="10" fill="none" stroke="#64ffda" stroke-width="1.5" opacity="0.5">
+        <animate attributeName="r" values="10;14;10" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <text x="760" y="35" text-anchor="middle" font-family="sans-serif" font-size="16">🏗️</text>
+      <text x="760" y="62" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#6ee7b7" font-weight="bold">System Design</text>
+      <text x="760" y="80" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">Architecture Canvas</text>
+      <text x="760" y="96" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">AI Review</text>
+    </g>
 
     <!-- Card 6: Career Roadmap -->
-    <rect x="790" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
-    <circle cx="864" cy="35" r="8" fill="#a78bfa"/>
-    <text x="864" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#c4b5fd" font-weight="bold">Career Roadmap</text>
-    <text x="864" y="77" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Weekly Plans</text>
-    <text x="864" y="94" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Progress Tracking</text>
+    <g>
+      <rect x="850" y="0" width="160" height="120" rx="12" fill="#0a0f1e" stroke="#a78bfa" stroke-width="1.5" opacity="0.9">
+        <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.3s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="930" cy="30" r="10" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0.5">
+        <animate attributeName="r" values="10;14;10" dur="3.3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3.3s" repeatCount="indefinite"/>
+      </circle>
+      <text x="930" y="35" text-anchor="middle" font-family="sans-serif" font-size="16">🗺️</text>
+      <text x="930" y="62" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#c4b5fd" font-weight="bold">Career Roadmap</text>
+      <text x="930" y="80" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">Weekly Plans</text>
+      <text x="930" y="96" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">Progress Tracking</text>
+    </g>
 
     <!-- Card 7: FAANG Prep -->
-    <rect x="948" y="0" width="148" height="110" rx="10" fill="#0f172a" stroke="#ffd93d" stroke-width="1"/>
-    <circle cx="1022" cy="35" r="8" fill="#ffd93d"/>
-    <text x="1022" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#fde68a" font-weight="bold">FAANG Prep</text>
-    <text x="1022" y="77" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">12 Companies</text>
-    <text x="1022" y="94" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Premium Tier</text>
+    <g>
+      <rect x="1020" y="0" width="160" height="120" rx="12" fill="#0a0f1e" stroke="#10b981" stroke-width="1.5" opacity="0.9">
+        <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2.6s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="1100" cy="30" r="10" fill="none" stroke="#10b981" stroke-width="1.5" opacity="0.5">
+        <animate attributeName="r" values="10;14;10" dur="2.6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2.6s" repeatCount="indefinite"/>
+      </circle>
+      <text x="1100" y="35" text-anchor="middle" font-family="sans-serif" font-size="16">🏢</text>
+      <text x="1100" y="62" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#6ee7b7" font-weight="bold">FAANG Prep</text>
+      <text x="1100" y="80" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#64748b">12 Companies</text>
+      <text x="1100" y="96" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="8.5" fill="#34d399" font-weight="bold">100% FREE</text>
+    </g>
   </g>
 
-  <!-- Connecting line -->
-  <line x1="20" y1="132" x2="1180" y2="132" stroke="url(#featGrad)" stroke-width="2" opacity="0.5"/>
+  <!-- Bottom connecting line -->
+  <line x1="20" y1="148" x2="1180" y2="148" stroke="url(#fGrad)" stroke-width="2" opacity="0.4">
+    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
+  </line>
 </svg>

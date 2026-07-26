@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" width="1200" height="40">
+  <defs>
+    <linearGradient id="wGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7b2ff7"><animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#64ffda;#ff6b6b;#ffd93d;#7b2ff7" dur="8s" repeatCount="indefinite"/></stop>
+      <stop offset="50%" stop-color="#00d2ff"><animate attributeName="stop-color" values="#00d2ff;#64ffda;#ff6b6b;#ffd93d;#7b2ff7;#00d2ff" dur="8s" repeatCount="indefinite"/></stop>
+      <stop offset="100%" stop-color="#64ffda"><animate attributeName="stop-color" values="#64ffda;#ff6b6b;#ffd93d;#7b2ff7;#00d2ff;#64ffda" dur="8s" repeatCount="indefinite"/></stop>
+    </linearGradient>
+  </defs>
+  <path d="M0,20 C50,5 100,35 150,20 C200,5 250,35 300,20 C350,5 400,35 450,20 C500,5 550,35 600,20 C650,5 700,35 750,20 C800,5 850,35 900,20 C950,5 1000,35 1050,20 C1100,5 1150,35 1200,20" fill="none" stroke="url(#wGrad)" stroke-width="2" opacity="0.5">
+    <animate attributeName="d" values="M0,20 C50,5 100,35 150,20 C200,5 250,35 300,20 C350,5 400,35 450,20 C500,5 550,35 600,20 C650,5 700,35 750,20 C800,5 850,35 900,20 C950,5 1000,35 1050,20 C1100,5 1150,35 1200,20;M0,20 C50,35 100,5 150,20 C200,35 250,5 300,20 C350,35 400,5 450,20 C500,35 550,5 600,20 C650,35 700,5 750,20 C800,35 850,5 900,20 C950,35 1000,5 1050,20 C1100,35 1150,5 1200,20;M0,20 C50,5 100,35 150,20 C200,5 250,35 300,20 C350,5 400,35 450,20 C500,5 550,35 600,20 C650,5 700,35 750,20 C800,5 850,35 900,20 C950,5 1000,35 1050,20 C1100,5 1150,35 1200,20" dur="4s" repeatCount="indefinite"/>
+  </path>
+</svg>

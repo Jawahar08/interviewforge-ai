@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450">
   <defs>
-    <!-- Aurora gradient -->
+    <!-- Aurora gradient with cycling colors -->
     <linearGradient id="aurora" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#7b2ff7">
         <animate attributeName="stop-color" values="#7b2ff7;#00d2ff;#64ffda;#ff6b6b;#ffd93d;#7b2ff7" dur="8s" repeatCount="indefinite"/>
@@ -13,105 +13,182 @@
       </stop>
     </linearGradient>
 
-    <!-- Glow filter -->
+    <!-- Horizontal aurora sweep -->
+    <linearGradient id="auroraH" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7b2ff7" stop-opacity="0.15">
+        <animate attributeName="stop-color" values="#7b2ff7;#ff6b6b;#ffd93d;#7b2ff7" dur="10s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#00d2ff" stop-opacity="0.05">
+        <animate attributeName="stop-color" values="#00d2ff;#64ffda;#7b2ff7;#00d2ff" dur="10s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <!-- Glow filters -->
     <filter id="glow">
       <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
       <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <filter id="softGlow">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feGaussianBlur stdDeviation="12" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
 
     <!-- Particle gradient -->
     <radialGradient id="particle" cx="50%" cy="50%">
-      <stop offset="0%" stop-color="#fff" stop-opacity="0.8"/>
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.9"/>
       <stop offset="100%" stop-color="#7b2ff7" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Neural node gradient -->
+    <radialGradient id="nodeGrad" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#64ffda" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00d2ff" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <!-- Dark background -->
-  <rect width="1200" height="400" fill="#050816" rx="16"/>
+  <!-- Deep space background -->
+  <rect width="1200" height="450" fill="#030712" rx="16"/>
 
-  <!-- Animated aurora blobs -->
-  <ellipse cx="200" cy="200" rx="300" ry="150" fill="#7b2ff7" opacity="0.06" filter="url(#softGlow)">
-    <animate attributeName="cx" values="200;400;200" dur="12s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.06;0.12;0.06" dur="6s" repeatCount="indefinite"/>
-  </ellipse>
-  <ellipse cx="900" cy="180" rx="250" ry="120" fill="#00d2ff" opacity="0.06" filter="url(#softGlow)">
-    <animate attributeName="cx" values="900;700;900" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.06;0.1;0.06" dur="5s" repeatCount="indefinite"/>
-  </ellipse>
-  <ellipse cx="600" cy="350" rx="200" ry="100" fill="#64ffda" opacity="0.04" filter="url(#softGlow)">
-    <animate attributeName="cy" values="350;300;350" dur="8s" repeatCount="indefinite"/>
-  </ellipse>
-
-  <!-- Floating particles -->
-  <circle cx="100" cy="80" r="2" fill="url(#particle)"><animate attributeName="cy" values="80;40;80" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/></circle>
-  <circle cx="300" cy="60" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="60;20;60" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0.8;0.2" dur="5s" repeatCount="indefinite"/></circle>
-  <circle cx="500" cy="50" r="2" fill="url(#particle)"><animate attributeName="cy" values="50;10;50" dur="3.5s" repeatCount="indefinite"/></circle>
-  <circle cx="700" cy="70" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="70;30;70" dur="4.5s" repeatCount="indefinite"/></circle>
-  <circle cx="900" cy="55" r="2.5" fill="url(#particle)"><animate attributeName="cy" values="55;15;55" dur="6s" repeatCount="indefinite"/></circle>
-  <circle cx="1100" cy="45" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="45;5;45" dur="3s" repeatCount="indefinite"/></circle>
-
-  <!-- Grid lines (subtle) -->
-  <g stroke="#1e293b" stroke-width="0.5" opacity="0.3">
-    <line x1="0" y1="100" x2="1200" y2="100"/><line x1="0" y1="200" x2="1200" y2="200"/><line x1="0" y1="300" x2="1200" y2="300"/>
-    <line x1="200" y1="0" x2="200" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/><line x1="800" y1="0" x2="800" y2="400"/><line x1="1000" y1="0" x2="1000" y2="400"/>
+  <!-- Subtle grid -->
+  <g stroke="#0f172a" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="75" x2="1200" y2="75"/><line x1="0" y1="150" x2="1200" y2="150"/>
+    <line x1="0" y1="225" x2="1200" y2="225"/><line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="375" x2="1200" y2="375"/>
+    <line x1="150" y1="0" x2="150" y2="450"/><line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="450" y1="0" x2="450" y2="450"/><line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="750" y1="0" x2="750" y2="450"/><line x1="900" y1="0" x2="900" y2="450"/>
+    <line x1="1050" y1="0" x2="1050" y2="450"/>
   </g>
 
-  <!-- Lightning Symbol -->
-  <g transform="translate(585, 80)" filter="url(#glow)">
-    <polygon points="15,0 0,22 13,22 8,40 28,15 15,15" fill="#ffd93d"/>
+  <!-- Aurora blobs -->
+  <ellipse cx="200" cy="150" rx="350" ry="200" fill="#7b2ff7" opacity="0.07" filter="url(#softGlow)">
+    <animate attributeName="cx" values="200;450;200" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.07;0.14;0.07" dur="7s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="950" cy="200" rx="300" ry="180" fill="#00d2ff" opacity="0.06" filter="url(#softGlow)">
+    <animate attributeName="cx" values="950;700;950" dur="12s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.06;0.12;0.06" dur="6s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="600" cy="380" rx="250" ry="120" fill="#64ffda" opacity="0.04" filter="url(#softGlow)">
+    <animate attributeName="cy" values="380;320;380" dur="9s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="400" cy="100" rx="200" ry="100" fill="#ff6b6b" opacity="0.03" filter="url(#softGlow)">
+    <animate attributeName="cx" values="400;600;400" dur="16s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Neural network connection lines -->
+  <g stroke="#7b2ff7" stroke-width="0.5" opacity="0.15">
+    <line x1="120" y1="80" x2="320" y2="60"><animate attributeName="opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite"/></line>
+    <line x1="320" y1="60" x2="500" y2="45"><animate attributeName="opacity" values="0.1;0.25;0.1" dur="4s" repeatCount="indefinite"/></line>
+    <line x1="700" y1="55" x2="920" y2="70"><animate attributeName="opacity" values="0.1;0.3;0.1" dur="3.5s" repeatCount="indefinite"/></line>
+    <line x1="920" y1="70" x2="1100" y2="50"><animate attributeName="opacity" values="0.15;0.35;0.15" dur="5s" repeatCount="indefinite"/></line>
+    <line x1="100" y1="390" x2="300" y2="400"><animate attributeName="opacity" values="0.1;0.25;0.1" dur="4.5s" repeatCount="indefinite"/></line>
+    <line x1="850" y1="395" x2="1080" y2="410"><animate attributeName="opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite"/></line>
+  </g>
+
+  <!-- Floating particles -->
+  <circle cx="80" cy="90" r="2.5" fill="url(#particle)"><animate attributeName="cy" values="90;40;90" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/></circle>
+  <circle cx="250" cy="60" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="60;15;60" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0.8;0.2" dur="5s" repeatCount="indefinite"/></circle>
+  <circle cx="450" cy="40" r="2" fill="url(#particle)"><animate attributeName="cy" values="40;5;40" dur="3.5s" repeatCount="indefinite"/></circle>
+  <circle cx="650" cy="55" r="1.8" fill="url(#particle)"><animate attributeName="cy" values="55;20;55" dur="4.5s" repeatCount="indefinite"/></circle>
+  <circle cx="850" cy="45" r="2.5" fill="url(#particle)"><animate attributeName="cy" values="45;10;45" dur="6s" repeatCount="indefinite"/></circle>
+  <circle cx="1050" cy="35" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="35;5;35" dur="3s" repeatCount="indefinite"/></circle>
+  <circle cx="180" cy="420" r="2" fill="url(#particle)"><animate attributeName="cy" values="420;385;420" dur="5.5s" repeatCount="indefinite"/></circle>
+  <circle cx="750" cy="430" r="1.5" fill="url(#particle)"><animate attributeName="cy" values="430;400;430" dur="4s" repeatCount="indefinite"/></circle>
+  <circle cx="1120" cy="415" r="2" fill="url(#particle)"><animate attributeName="cy" values="415;380;415" dur="3.5s" repeatCount="indefinite"/></circle>
+
+  <!-- Pulsing neural nodes -->
+  <circle cx="120" cy="80" r="3" fill="#7b2ff7" filter="url(#glow)"><animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+  <circle cx="320" cy="60" r="2.5" fill="#00d2ff" filter="url(#glow)"><animate attributeName="r" values="2.5;4.5;2.5" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.5s" repeatCount="indefinite"/></circle>
+  <circle cx="500" cy="45" r="2" fill="#64ffda" filter="url(#glow)"><animate attributeName="r" values="2;4;2" dur="3s" repeatCount="indefinite"/></circle>
+  <circle cx="700" cy="55" r="3" fill="#ffd93d" filter="url(#glow)"><animate attributeName="r" values="3;5;3" dur="2.2s" repeatCount="indefinite"/></circle>
+  <circle cx="920" cy="70" r="2.5" fill="#ff6b6b" filter="url(#glow)"><animate attributeName="r" values="2.5;4;2.5" dur="2.8s" repeatCount="indefinite"/></circle>
+  <circle cx="1100" cy="50" r="2" fill="#a78bfa" filter="url(#glow)"><animate attributeName="r" values="2;3.5;2" dur="3.5s" repeatCount="indefinite"/></circle>
+
+  <!-- Lightning bolt icon -->
+  <g transform="translate(580, 65)" filter="url(#strongGlow)">
+    <polygon points="20,0 0,28 16,28 10,50 35,18 19,18" fill="#ffd93d">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+    </polygon>
   </g>
 
   <!-- Main Title -->
-  <text x="600" y="180" text-anchor="middle" font-family="sans-serif" font-size="50" font-weight="900" fill="url(#aurora)" filter="url(#glow)" letter-spacing="-1.5">
+  <text x="600" y="175" text-anchor="middle" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="56" font-weight="900" fill="url(#aurora)" filter="url(#strongGlow)" letter-spacing="-2">
     InterviewForge AI
   </text>
 
   <!-- Subtitle -->
-  <text x="600" y="220" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#94a3b8" font-weight="bold" letter-spacing="3">
+  <text x="600" y="215" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="15" fill="#94a3b8" font-weight="700" letter-spacing="4">
     NEXT-GEN AI INTERVIEW SIMULATION PLATFORM
   </text>
 
+  <!-- "100% FREE" badge -->
+  <g transform="translate(600, 250)">
+    <rect x="-65" y="-15" width="130" height="30" rx="15" fill="#064e3b" stroke="#10b981" stroke-width="1.5" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="0" y="5" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="13" fill="#34d399" font-weight="900" letter-spacing="2">
+      100% FREE
+      <animate attributeName="fill" values="#34d399;#6ee7b7;#34d399" dur="2s" repeatCount="indefinite"/>
+    </text>
+  </g>
+
   <!-- Feature pills row -->
-  <g transform="translate(600, 275)">
+  <g transform="translate(600, 305)">
     <!-- AI Interviews -->
-    <rect x="-520" y="-14" width="130" height="28" rx="14" fill="#7b2ff7" opacity="0.2" stroke="#7b2ff7" stroke-width="1"/>
-    <text x="-455" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#a78bfa" font-weight="bold">AI Interviews</text>
+    <rect x="-520" y="-15" width="136" height="30" rx="15" fill="#7b2ff7" opacity="0.15" stroke="#7b2ff7" stroke-width="1"/>
+    <text x="-452" y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#a78bfa" font-weight="bold">🎙️ AI Interviews</text>
 
     <!-- ATS Resume -->
-    <rect x="-370" y="-14" width="120" height="28" rx="14" fill="#00d2ff" opacity="0.2" stroke="#00d2ff" stroke-width="1"/>
-    <text x="-310" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#67e8f9" font-weight="bold">ATS Resume</text>
+    <rect x="-368" y="-15" width="126" height="30" rx="15" fill="#00d2ff" opacity="0.15" stroke="#00d2ff" stroke-width="1"/>
+    <text x="-305" y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#67e8f9" font-weight="bold">📄 ATS Resume</text>
 
     <!-- Voice AI -->
-    <rect x="-230" y="-14" width="105" height="28" rx="14" fill="#ff6b6b" opacity="0.2" stroke="#ff6b6b" stroke-width="1"/>
-    <text x="-178" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#fca5a5" font-weight="bold">Voice AI</text>
+    <rect x="-226" y="-15" width="110" height="30" rx="15" fill="#ff6b6b" opacity="0.15" stroke="#ff6b6b" stroke-width="1"/>
+    <text x="-171" y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#fca5a5" font-weight="bold">🎤 Voice AI</text>
 
     <!-- 500+ LeetCode -->
-    <rect x="-105" y="-14" width="130" height="28" rx="14" fill="#ffd93d" opacity="0.2" stroke="#ffd93d" stroke-width="1"/>
-    <text x="-40" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#fde68a" font-weight="bold">500+ LeetCode</text>
+    <rect x="-100" y="-15" width="136" height="30" rx="15" fill="#ffd93d" opacity="0.15" stroke="#ffd93d" stroke-width="1"/>
+    <text x="-32" y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#fde68a" font-weight="bold">💻 500+ LeetCode</text>
 
     <!-- System Design -->
-    <rect x="45" y="-14" width="140" height="28" rx="14" fill="#64ffda" opacity="0.2" stroke="#64ffda" stroke-width="1"/>
-    <text x="115" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#6ee7b7" font-weight="bold">System Design</text>
+    <rect x="52" y="-15" width="136" height="30" rx="15" fill="#64ffda" opacity="0.15" stroke="#64ffda" stroke-width="1"/>
+    <text x="120" y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#6ee7b7" font-weight="bold">🏗️ System Design</text>
 
     <!-- Career Roadmap -->
-    <rect x="205" y="-14" width="140" height="28" rx="14" fill="#7b2ff7" opacity="0.2" stroke="#7b2ff7" stroke-width="1"/>
-    <text x="275" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#a78bfa" font-weight="bold">Career Roadmap</text>
+    <rect x="204" y="-15" width="142" height="30" rx="15" fill="#a78bfa" opacity="0.15" stroke="#a78bfa" stroke-width="1"/>
+    <text x="275" y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#c4b5fd" font-weight="bold">🗺️ Career Roadmap</text>
 
     <!-- FAANG Prep -->
-    <rect x="365" y="-14" width="130" height="28" rx="14" fill="#ff6b6b" opacity="0.2" stroke="#ff6b6b" stroke-width="1"/>
-    <text x="430" y="5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#fca5a5" font-weight="bold">FAANG Prep</text>
+    <rect x="362" y="-15" width="126" height="30" rx="15" fill="#ff6b6b" opacity="0.15" stroke="#ff6b6b" stroke-width="1"/>
+    <text x="425" y="4" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#fca5a5" font-weight="bold">🏢 FAANG Prep</text>
   </g>
 
   <!-- Terminal prompt animation -->
-  <g transform="translate(600, 340)">
-    <rect x="-250" y="-14" width="500" height="32" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
-    <text x="-235" y="6" font-family="monospace" font-size="13" fill="#64ffda">$</text>
-    <text x="-220" y="6" font-family="monospace" font-size="13" fill="#94a3b8">
-      npx interviewforge start --ai gemini --mode pro
+  <g transform="translate(600, 375)">
+    <rect x="-320" y="-18" width="640" height="38" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+    <!-- Prompt symbol -->
+    <text x="-303" y="6" font-family="'Cascadia Code', 'JetBrains Mono', monospace" font-size="14" fill="#64ffda" font-weight="bold">❯</text>
+    <!-- Command text -->
+    <text x="-283" y="6" font-family="'Cascadia Code', 'JetBrains Mono', monospace" font-size="13" fill="#94a3b8">
+      npx interviewforge start --ai gemini --mode free
     </text>
+    <!-- Blinking cursor -->
+    <rect x="207" y="-6" width="9" height="18" fill="#64ffda" rx="1">
+      <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+    </rect>
   </g>
+
+  <!-- Scanning line effect -->
+  <rect x="0" y="0" width="1200" height="2" fill="url(#auroraH)" opacity="0.3" rx="1">
+    <animate attributeName="y" values="-2;452" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.3;0" dur="4s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Border glow -->
+  <rect x="1" y="1" width="1198" height="448" fill="none" rx="16" stroke="url(#aurora)" stroke-width="1.5" opacity="0.25"/>
 </svg>
