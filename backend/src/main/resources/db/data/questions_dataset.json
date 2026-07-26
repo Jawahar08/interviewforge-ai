@@ -1,0 +1,62 @@
+[
+  {
+    "questionText": "How would you design a rate limiter for a high-traffic microservices API handling 100k requests/sec?",
+    "category": "System Design",
+    "difficulty": "HARD",
+    "answer": "Use a distributed Token Bucket or Sliding Window Log algorithm implemented with Redis cluster and Lua scripts for atomic token consumption."
+  },
+  {
+    "questionText": "Explain the difference between optimistic and pessimistic locking in database transactions with real-world use cases.",
+    "category": "Database Architecture",
+    "difficulty": "MEDIUM",
+    "answer": "Optimistic locking uses version columns suited for high-read/low-write conflicts. Pessimistic locking acquires SELECT FOR UPDATE database locks suited for financial transactions."
+  },
+  {
+    "questionText": "What is the time and space complexity of quicksort in average vs worst-case scenarios, and how can pivot selection prevent worst-case?",
+    "category": "Algorithms",
+    "difficulty": "MEDIUM",
+    "answer": "Average O(N log N) time, O(log N) space. Worst case O(N^2) occurs on sorted arrays. Randomized pivot or median-of-three selection avoids O(N^2)."
+  },
+  {
+    "questionText": "How does React 19 Server Components (RSC) differ from traditional Server-Side Rendering (SSR)?",
+    "category": "Frontend Frameworks",
+    "difficulty": "MEDIUM",
+    "answer": "SSR renders HTML on the server and sends JavaScript for client hydration. RSC executes components on the server only, sending zero JavaScript bundle overhead to the browser."
+  },
+  {
+    "questionText": "Describe how Google Spanner achieves global consistency and external consistency across distributed regions.",
+    "category": "Distributed Systems",
+    "difficulty": "HARD",
+    "answer": "Spanner uses TrueTime API with GPS receivers and atomic clocks to bound clock uncertainty and implement Multi-Version Concurrency Control (MVCC)."
+  },
+  {
+    "questionText": "Explain Garbage Collection algorithms in Java (G1GC vs ZGC) and how ZGC achieves sub-millisecond pause times.",
+    "category": "Java Core",
+    "difficulty": "HARD",
+    "answer": "ZGC uses colored pointers and load barriers to perform concurrent mark and compact phases without stopping application threads."
+  },
+  {
+    "questionText": "How would you implement a sliding window maximum algorithm in O(N) time complexity?",
+    "category": "Data Structures",
+    "difficulty": "HARD",
+    "answer": "Use a monotonically decreasing Deque storing array indices to maintain the maximum element in O(1) amortized time per element."
+  },
+  {
+    "questionText": "What are Kafka consumer groups, partitions, and how is rebalancing handled during node failures?",
+    "category": "Messaging & Kafka",
+    "difficulty": "MEDIUM",
+    "answer": "Kafka assigns topic partitions across consumers in a group. During failure, the group coordinator initiates a cooperative sticky rebalance protocol."
+  },
+  {
+    "questionText": "Describe a scenario where you resolved a tricky memory leak or performance bottleneck in production.",
+    "category": "Behavioral & Debugging",
+    "difficulty": "MEDIUM",
+    "answer": "Analyzed heap dumps using Eclipse Memory Analyzer (MAT), identified unclosed database connection pools and un-dereferenced static listeners."
+  },
+  {
+    "questionText": "How does PostgreSQL implement Multi-Version Concurrency Control (MVCC) using xmin and xmax tuples?",
+    "category": "Databases",
+    "difficulty": "HARD",
+    "answer": "PostgreSQL attaches xmin (creation transaction ID) and xmax (deletion transaction ID) to row headers to allow concurrent non-blocking reads and writes."
+  }
+]
