@@ -395,6 +395,24 @@ const setAuth = useAuthStore((state) => state.setAuth);
                   </>
                 )}
               </Button>
+
+              <p className="mt-3 text-center text-xs leading-5 text-slate-500">
+                By creating an account, you agree to InterviewForge AI&apos;s{" "}
+                <Link
+                  href="/terms"
+                  className="font-medium text-violet-400 underline underline-offset-2 transition hover:text-violet-300"
+                >
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/privacy"
+                  className="font-medium text-violet-400 underline underline-offset-2 transition hover:text-violet-300"
+                >
+                  Privacy Policy
+                </Link>
+                . All interview activity data is securely encrypted.
+              </p>
             </form>
 
             <div className="my-7 flex items-center gap-4">
