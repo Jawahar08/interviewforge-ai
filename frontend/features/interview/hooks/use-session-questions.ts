@@ -83,13 +83,14 @@ export function useSessionQuestions(
             .getSessionQuestions(sessionId);
 
         let attempts = 0;
-        while ((!response.questions || response.questions.length === 0) && attempts < 5) {
+        // Poll up to 10 times (15 seconds max) while Gemini AI generates questions on backend
+        while ((!response.questions || response.questions.length === 0) && attempts < 10) {
           attempts++;
           await new Promise((res) => setTimeout(res, 1500));
           try {
             response = await sessionQuestionApi.getSessionQuestions(sessionId);
           } catch {
-            // Continue polling if transient network error
+            // Continue polling if transient network delay
           }
         }
 

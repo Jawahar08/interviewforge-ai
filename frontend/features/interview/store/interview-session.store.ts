@@ -43,7 +43,7 @@ const initialState = {
   questions: [],
   currentQuestionIndex: 0,
 
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
