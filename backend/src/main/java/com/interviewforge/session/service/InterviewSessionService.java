@@ -22,7 +22,7 @@ import com.interviewforge.session.repository.InterviewSessionRepository;
 @Service
 public class InterviewSessionService {
 
-    private static final int DEFAULT_QUESTION_COUNT = 5;
+    private static final int DEFAULT_QUESTION_COUNT = 10;
 
     private final InterviewSessionRepository sessionRepository;
     private final InterviewRepository interviewRepository;

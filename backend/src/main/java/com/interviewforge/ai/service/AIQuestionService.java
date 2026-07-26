@@ -173,6 +173,41 @@ Rules:
                 .category("Problem Solving")
                 .difficulty(interview.getDifficulty())
                 .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("How do you ensure data integrity and security when building API services?")
+                .category("Security & Reliability")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("Explain a scenario where you had to debug a production incident under tight time pressure.")
+                .category("Incident Response")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("How do you manage technical debt while delivering new product features on schedule?")
+                .category("Agile & Delivery")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("What caching strategies or database optimization techniques do you use for high-throughput applications?")
+                .category("Performance")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
+                .build(),
+            Question.builder()
+                .interview(interview)
+                .questionText("How do you evaluate new technologies before adopting them into a production stack?")
+                .category("Architecture")
+                .difficulty(interview.getDifficulty())
+                .createdAt(LocalDateTime.now())
                 .build()
         );
 
