@@ -37,23 +37,17 @@ export default function LoginPage() {
 
 const setAuth = useAuthStore((state) => state.setAuth);
 
-const [serverError, setServerError] = useState<string | null>(null);
-
-const {
-  register,
-  handleSubmit,
-  formState: { errors, isSubmitting },
-} = useForm<LoginFormData>({
-  resolver: zodResolver(loginSchema),
-  defaultValues: {
-    email: "",
-    password: "",
-  },
-});
+const [isSlowLoading, setIsSlowLoading] = useState(false);
 
 const onSubmit = async (values: LoginFormData) => {
+  let slowTimer: NodeJS.Timeout | null = null;
   try {
     setServerError(null);
+    setIsSlowLoading(false);
+
+    slowTimer = setTimeout(() => {
+      setIsSlowLoading(true);
+    }, 2500);
 
     const response = await authApi.login({
       email: values.email.trim().toLowerCase(),
@@ -92,6 +86,9 @@ const onSubmit = async (values: LoginFormData) => {
     }
 
     setServerError("Unable to sign in. Please try again.");
+  } finally {
+    if (slowTimer) clearTimeout(slowTimer);
+    setIsSlowLoading(false);
   }
 };
   return (
@@ -316,6 +313,13 @@ const onSubmit = async (values: LoginFormData) => {
                   </>
                 )}
               </Button>
+
+              {isSlowLoading && (
+                <div className="rounded-xl border border-violet-500/30 bg-violet-500/10 p-3 text-center text-xs text-violet-300">
+                  <p className="font-medium">Waking up backend server...</p>
+                  <p className="mt-0.5 text-slate-400">If the server was idle, startup takes a few moments.</p>
+                </div>
+              )}
             </form>
 
             <div className="my-8 flex items-center gap-4">
