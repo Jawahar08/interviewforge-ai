@@ -78,22 +78,22 @@ export function useSessionQuestions(
         setLoading(true);
         setError(null);
 
-        const response =
+        let response =
           await sessionQuestionApi
             .getSessionQuestions(sessionId);
 
-        setSessionQuestions(response);
-
-        if (!response.questions || response.questions.length === 0) {
-          setTimeout(async () => {
-            try {
-              const retryResp = await sessionQuestionApi.getSessionQuestions(sessionId);
-              setSessionQuestions(retryResp);
-            } catch (err) {
-              console.error("Auto retry session questions failed:", err);
-            }
-          }, 1200);
+        let attempts = 0;
+        while ((!response.questions || response.questions.length === 0) && attempts < 5) {
+          attempts++;
+          await new Promise((res) => setTimeout(res, 1500));
+          try {
+            response = await sessionQuestionApi.getSessionQuestions(sessionId);
+          } catch {
+            // Continue polling if transient network error
+          }
         }
+
+        setSessionQuestions(response);
       } catch (caughtError: unknown) {
         console.error(
           "Failed to load session questions:",

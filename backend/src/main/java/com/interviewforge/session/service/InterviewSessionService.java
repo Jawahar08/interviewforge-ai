@@ -57,6 +57,13 @@ public class InterviewSessionService {
         InterviewSession savedSession =
                 sessionRepository.save(session);
 
+        // Pre-generate / ensure questions exist immediately so they are ready when session starts
+        List<Question> existingQuestions =
+                questionRepository.findByInterviewIdOrderByIdAsc(interviewId);
+        if (existingQuestions.isEmpty()) {
+            aiQuestionService.generateQuestions(interviewId, DEFAULT_QUESTION_COUNT);
+        }
+
         return mapToResponse(savedSession);
     }
 
