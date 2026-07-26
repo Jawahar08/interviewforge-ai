@@ -35,9 +35,21 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-const setAuth = useAuthStore((state) => state.setAuth);
-
+  const setAuth = useAuthStore((state) => state.setAuth);
+  const [serverError, setServerError] = useState<string | null>(null);
 const [isSlowLoading, setIsSlowLoading] = useState(false);
+
+const {
+  register,
+  handleSubmit,
+  formState: { errors, isSubmitting },
+} = useForm<LoginFormData>({
+  resolver: zodResolver(loginSchema),
+  defaultValues: {
+    email: "",
+    password: "",
+  },
+});
 
 const onSubmit = async (values: LoginFormData) => {
   let slowTimer: NodeJS.Timeout | null = null;
