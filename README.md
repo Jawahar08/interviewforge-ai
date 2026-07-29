@@ -177,6 +177,7 @@ Saturday:  ✅ You deployed InterviewForge on Monday. You aced every round.
 - ✅ Protected API routes + frontend `ProtectedRoute` guards
 - ✅ Centralized auth state via Zustand (persisted)
 - ✅ Server-side Gemini API key protection
+- ✅ Hybrid BYOK (Bring Your Own Key) Gemini API support
 
 </td>
 <td width="50%" valign="top">
@@ -305,6 +306,7 @@ Saturday:  ✅ You deployed InterviewForge on Monday. You aced every round.
 
 - ✅ Profile management — name, role, password updates
 - ✅ AI configuration settings (model, temperature)
+- ✅ Hybrid BYOK (Bring Your Own Key) Gemini API setup in Settings & Profile
 - ✅ Notification preferences
 - ✅ Danger zone — clear interview history, delete resumes
 - ✅ All features unlocked for all users
