@@ -9,9 +9,9 @@ services:
       - key: PORT
         value: 8080
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://ep-bitter-surf-axsngwm9.c-4.us-east-2.aws.neon.tech:5432/neondb?sslmode=require
+        sync: false
       - key: SPRING_DATASOURCE_USERNAME
-        value: neondb_owner
+        sync: false
       - key: SPRING_DATASOURCE_PASSWORD
         sync: false
       - key: JWT_SECRET
