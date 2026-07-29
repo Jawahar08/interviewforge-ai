@@ -24,14 +24,15 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     public AuthResponse register(RegisterRequest request) {
+        String cleanEmail = request.getEmail() != null ? request.getEmail().trim().toLowerCase() : "";
 
-       if (userRepository.existsByEmail(request.getEmail())) {
-    throw new EmailAlreadyExistsException(request.getEmail());
-}
+        if (userRepository.existsByEmailIgnoreCase(cleanEmail)) {
+            throw new EmailAlreadyExistsException(cleanEmail);
+        }
 
         User user = User.builder()
-                .fullName(request.getName())
-                .email(request.getEmail())
+                .fullName(request.getName() != null ? request.getName().trim() : "")
+                .email(cleanEmail)
                 .passwordHash(
                         passwordEncoder.encode(request.getPassword())
                 )
@@ -55,11 +56,12 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest request) {
+        String cleanEmail = request.getEmail() != null ? request.getEmail().trim().toLowerCase() : "";
 
-        User user = userRepository.findByEmail(request.getEmail())
+        User user = userRepository.findByEmailIgnoreCase(cleanEmail)
                 .orElseThrow(
                         () -> new UserNotFoundByEmailException(
-                                request.getEmail()
+                                cleanEmail
                         )
                 );
 
