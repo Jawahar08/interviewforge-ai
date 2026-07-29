@@ -8,6 +8,8 @@ services:
     envVars:
       - key: PORT
         value: 8080
+      - key: JAVA_OPTS
+        value: "-Xmx256m -Xms128m -Xss512k -XX:MaxMetaspaceSize=128m -XX:+ExitOnOutOfMemoryError"
       - key: SPRING_DATASOURCE_URL
         sync: false
       - key: SPRING_DATASOURCE_USERNAME

@@ -10,4 +10,5 @@ FROM eclipse-temurin:23-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENV JAVA_OPTS="-Xmx256m -Xms128m -Xss512k -XX:MaxMetaspaceSize=128m -XX:+UseStringDeduplication -XX:+ExitOnOutOfMemoryError"
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
