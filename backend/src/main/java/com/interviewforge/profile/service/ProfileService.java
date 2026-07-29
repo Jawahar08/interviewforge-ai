@@ -41,6 +41,9 @@ public class ProfileService {
 
         user.setFullName(request.getFullName());
         user.setTargetRole(request.getTargetRole());
+        if (request.getCustomGeminiApiKey() != null) {
+            user.setCustomGeminiApiKey(request.getCustomGeminiApiKey().trim());
+        }
 
         if (request.getCurrentPassword() != null && !request.getCurrentPassword().isEmpty()
                 && request.getNewPassword() != null && !request.getNewPassword().isEmpty()) {
@@ -90,12 +93,14 @@ public class ProfileService {
     }
 
     private UserProfileResponse toResponse(User user) {
+        boolean hasCustomKey = user.getCustomGeminiApiKey() != null && !user.getCustomGeminiApiKey().isBlank();
         return new UserProfileResponse(
                 user.getId(),
                 user.getFullName(),
                 user.getEmail(),
                 user.getTargetRole(),
-                user.getIsPremium()
+                user.getIsPremium(),
+                hasCustomKey
         );
     }
 }

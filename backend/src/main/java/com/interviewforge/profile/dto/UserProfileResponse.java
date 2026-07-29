@@ -9,19 +9,22 @@ public class UserProfileResponse {
     private String email;
     private String targetRole;
     private Boolean isPremium;
+    private Boolean hasCustomGeminiApiKey;
 
     public UserProfileResponse(
             UUID userId,
             String name,
             String email,
             String targetRole,
-            Boolean isPremium) {
+            Boolean isPremium,
+            Boolean hasCustomGeminiApiKey) {
 
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.targetRole = targetRole;
         this.isPremium = isPremium;
+        this.hasCustomGeminiApiKey = hasCustomGeminiApiKey;
     }
 
     public UUID getUserId() {
@@ -42,5 +45,9 @@ public class UserProfileResponse {
 
     public Boolean getIsPremium() {
         return isPremium;
+    }
+
+    public Boolean getHasCustomGeminiApiKey() {
+        return hasCustomGeminiApiKey;
     }
 }

@@ -21,24 +21,41 @@ public class GeminiService {
     private String apiKey;
 
     private final RestTemplate restTemplate;
+    private final com.interviewforge.auth.repository.UserRepository userRepository;
 
     public GeminiService(
-            RestTemplate restTemplate
+            RestTemplate restTemplate,
+            com.interviewforge.auth.repository.UserRepository userRepository
     ) {
         this.restTemplate = restTemplate;
+        this.userRepository = userRepository;
     }
 
     @PostConstruct
     public void verifyConfiguration() {
         if (apiKey == null || apiKey.isBlank()) {
-            throw new IllegalStateException(
-                    "Gemini API key is not configured"
-            );
+            System.out.println("Default server Gemini API key is blank; falling back to BYOK or mock mode.");
+        } else {
+            System.out.println("Gemini API key configuration detected");
         }
+    }
 
-        System.out.println(
-                "Gemini API key configuration detected"
-        );
+    private String getActiveApiKey() {
+        try {
+            var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
+                String email = auth.getName();
+                var userOpt = userRepository.findByEmail(email);
+                if (userOpt.isPresent()) {
+                    String customKey = userOpt.get().getCustomGeminiApiKey();
+                    if (customKey != null && !customKey.isBlank()) {
+                        return customKey;
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return apiKey;
     }
 
     public String generateContent(
@@ -50,7 +67,9 @@ public class GeminiService {
             );
         }
 
-        if ("mock-dev-key".equals(apiKey) || apiKey == null || apiKey.isBlank() || apiKey.contains("mock")) {
+        String effectiveApiKey = getActiveApiKey();
+
+        if ("mock-dev-key".equals(effectiveApiKey) || effectiveApiKey == null || effectiveApiKey.isBlank() || effectiveApiKey.contains("mock")) {
             if (prompt.contains("Senior HR Manager") || prompt.contains("generate 5 targeted HR questions")) {
                 return getMockHrQuestionsJson();
             }
@@ -234,7 +253,7 @@ public class GeminiService {
                 + "v1beta/models/"
                 + "gemini-2.5-flash:"
                 + "generateContent?key="
-                + apiKey;
+                + effectiveApiKey;
 
         HttpHeaders headers =
                 new HttpHeaders();

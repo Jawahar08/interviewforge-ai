@@ -3,11 +3,13 @@ export interface UserProfile {
   name: string;
   email: string;
   targetRole: string | null;
+  hasCustomGeminiApiKey?: boolean;
 }
 
 export interface ProfileUpdateInput {
   fullName: string;
   targetRole?: string;
+  customGeminiApiKey?: string;
   currentPassword?: string;
   newPassword?: string;
 }
