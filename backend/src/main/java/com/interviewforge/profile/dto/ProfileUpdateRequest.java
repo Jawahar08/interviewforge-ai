@@ -12,6 +12,7 @@ public class ProfileUpdateRequest {
     private String fullName;
 
     private String targetRole;
+    private String customGeminiApiKey;
 
     private String currentPassword;
     private String newPassword;

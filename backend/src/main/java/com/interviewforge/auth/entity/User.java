@@ -61,6 +61,9 @@ public class User {
     @Column(name = "target_role")
     private String targetRole;
 
+    @Column(name = "custom_gemini_api_key")
+    private String customGeminiApiKey;
+
     @Column(name = "is_premium")
     @Builder.Default
     private Boolean isPremium = true;
