@@ -21,7 +21,10 @@ import {
 } from "lucide-react";
 
 import { useSettings } from "../hooks/use-settings";
+import { useProfile } from "@/features/profile/hooks/use-profile";
 import { Button } from "@/shared/components/ui/button";
+import { Input } from "@/shared/components/ui/input";
+import { Key, Save, ShieldCheck } from "lucide-react";
 
 export function SettingsForm() {
   const {
@@ -33,6 +36,10 @@ export function SettingsForm() {
     clearHistory,
     clearResumes,
   } = useSettings();
+
+  const { profile, updateProfile } = useProfile();
+  const [customApiKey, setCustomApiKey] = useState("");
+  const [savingKey, setSavingKey] = useState(false);
 
   const [activeTab, setActiveTab] = useState<"ai" | "notifications" | "danger">("ai");
 
@@ -238,6 +245,97 @@ export function SettingsForm() {
                       Preset: {preset.label}
                     </button>
                   ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Custom Gemini API Key (BYOK) */}
+            <div className="rounded-3xl border border-white/[0.08] bg-[#0c101d]/90 p-6 sm:p-8 backdrop-blur-2xl shadow-2xl shadow-black/50 space-y-6">
+              <div className="flex items-start justify-between border-b border-white/[0.06] pb-5">
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-white flex items-center gap-2.5">
+                    <Key className="h-5 w-5 text-violet-400" />
+                    Bring Your Own Gemini API Key (BYOK)
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    Optionally supply your personal free Gemini API key to bypass shared system rate limits.
+                  </p>
+                </div>
+                {profile?.hasCustomGeminiApiKey ? (
+                  <span className="rounded-full bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 text-xs font-bold text-emerald-400 flex items-center gap-1.5 shrink-0">
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    Custom Key Active
+                  </span>
+                ) : (
+                  <span className="rounded-full bg-violet-500/10 border border-violet-500/30 px-3 py-1 text-xs font-bold text-violet-300 flex items-center gap-1.5 shrink-0">
+                    <ShieldCheck className="h-3.5 w-3.5" />
+                    System Shared AI Active
+                  </span>
+                )}
+              </div>
+
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-xs font-semibold text-slate-300">Custom Gemini API Key</label>
+                  <div className="relative">
+                    <Key className="absolute left-3.5 top-3 h-4 w-4 text-slate-500" />
+                    <Input
+                      type="password"
+                      value={customApiKey}
+                      onChange={(e) => setCustomApiKey(e.target.value)}
+                      placeholder="AIzaSy... (Paste your Google Gemini API Key here)"
+                      className="pl-10 h-11 border-white/[0.08] bg-white/[0.02] text-white placeholder-slate-600 rounded-xl focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 transition-all text-sm font-mono"
+                    />
+                  </div>
+                  <p className="text-[11px] text-slate-400 leading-relaxed pt-1">
+                    Get a free API key at{" "}
+                    <a
+                      href="https://aistudio.google.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-violet-400 underline font-semibold hover:text-violet-300"
+                    >
+                      Google AI Studio (aistudio.google.com)
+                    </a>
+                    . Leave blank to use shared server AI quota.
+                  </p>
+                </div>
+
+                <div className="flex justify-end pt-2">
+                  <Button
+                    type="button"
+                    disabled={savingKey || !customApiKey.trim()}
+                    onClick={async () => {
+                      try {
+                        setSavingKey(true);
+                        if (profile) {
+                          await updateProfile({
+                            fullName: profile.name,
+                            targetRole: profile.targetRole || "",
+                            customGeminiApiKey: customApiKey.trim(),
+                          });
+                          setCustomApiKey("");
+                        }
+                      } catch (err) {
+                        console.error("Failed to save custom API key:", err);
+                      } finally {
+                        setSavingKey(false);
+                      }
+                    }}
+                    className="h-10 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-5 text-xs font-bold text-white shadow-lg shadow-violet-500/25 transition hover:from-violet-500 hover:to-indigo-500"
+                  >
+                    {savingKey ? (
+                      <>
+                        <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
+                        Saving Key...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="mr-2 h-3.5 w-3.5" />
+                        Save Gemini Key
+                      </>
+                    )}
+                  </Button>
                 </div>
               </div>
             </div>
