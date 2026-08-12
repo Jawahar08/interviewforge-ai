@@ -20,3 +20,7 @@ services:
         generateValue: true
       - key: GEMINI_API_KEY
         sync: false
+      - key: SPRING_MAIL_USERNAME
+        sync: false
+      - key: SPRING_MAIL_PASSWORD
+        sync: false
