@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, Suspense } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useResume } from "@/features/resume/hooks/use-resume";
 import { HrRoundSection } from "@/features/resume/components/HrRoundSection";
@@ -16,6 +17,7 @@ import {
   Award,
   Plus,
   ArrowRight,
+  ArrowLeft,
   Shield,
   Clock,
   UserCheck,
@@ -150,14 +152,24 @@ function ResumePageContent() {
       {/* Premium Header */}
       <div className="border-b border-zinc-900 bg-zinc-950/40 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 text-violet-400 text-sm font-semibold tracking-wider uppercase mb-1">
-              <Sparkles className="w-4 h-4 animate-pulse" />
-              <span>Resume Intelligence Workspace</span>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <Link
+              href="/dashboard"
+              className="inline-flex w-fit items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-slate-400 transition hover:border-violet-500/30 hover:bg-white/[0.06] hover:text-white"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              <span>Back to Dashboard</span>
+            </Link>
+
+            <div>
+              <div className="flex items-center gap-2 text-violet-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                <Sparkles className="w-4 h-4 animate-pulse" />
+                <span>Resume Intelligence Workspace</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent">
+                ATS Score & Resume Optimizer
+              </h1>
             </div>
-            <h1 className="text-3xl font-extrabold bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent">
-              ATS Score & Resume Optimizer
-            </h1>
           </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-400">
