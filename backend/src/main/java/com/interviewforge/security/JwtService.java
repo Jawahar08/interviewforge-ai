@@ -42,4 +42,31 @@ public class JwtService {
 
         return claims.getSubject();
     }
+
+    public String generatePasswordResetToken(String email) {
+        return Jwts.builder()
+                .subject(email)
+                .claim("purpose", "PASSWORD_RESET")
+                .issuedAt(new Date())
+                .expiration(
+                        new Date(System.currentTimeMillis() + 1000 * 60 * 30) // 30 minutes
+                )
+                .signWith(getSigningKey())
+                .compact();
+    }
+
+    public String validatePasswordResetToken(String token) {
+        Claims claims = Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        String purpose = claims.get("purpose", String.class);
+        if (!"PASSWORD_RESET".equals(purpose)) {
+            throw new IllegalArgumentException("Invalid token type for password reset");
+        }
+
+        return claims.getSubject();
+    }
 }

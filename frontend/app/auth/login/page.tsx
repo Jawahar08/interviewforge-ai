@@ -253,12 +253,12 @@ const onSubmit = async (values: LoginFormData) => {
       Password
     </Label>
 
-    <button
-      type="button"
+    <Link
+      href="/auth/forgot-password"
       className="text-sm text-violet-400 transition hover:text-violet-300"
     >
       Forgot password?
-    </button>
+    </Link>
   </div>
 
   <div className="relative">

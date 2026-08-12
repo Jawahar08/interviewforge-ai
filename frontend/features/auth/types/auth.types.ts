@@ -22,3 +22,19 @@ export interface ApiResponse<T> {
   message: string;
   data: T;
 }
+
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ForgotPasswordResponse {
+  email: string;
+  resetToken: string;
+  message: string;
+}
+
+export interface ResetPasswordRequest {
+  email: string;
+  resetToken?: string;
+  newPassword: string;
+}
