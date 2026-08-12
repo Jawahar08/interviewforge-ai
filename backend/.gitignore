@@ -34,3 +34,10 @@ build/
 
 # Local portable JDK
 .jdk/
+
+.env
+.env.*
+start-backend.bat
+start-backend.ps1
+application-local.properties
+

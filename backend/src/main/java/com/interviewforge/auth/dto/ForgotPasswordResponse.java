@@ -15,6 +15,5 @@ public class ForgotPasswordResponse {
 
     private String email;
     private String resetToken;
-    private String otp;
     private String message;
 }

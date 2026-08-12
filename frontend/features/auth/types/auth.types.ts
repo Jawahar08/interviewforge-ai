@@ -30,7 +30,6 @@ export interface ForgotPasswordRequest {
 export interface ForgotPasswordResponse {
   email: string;
   resetToken?: string;
-  otp?: string;
   message: string;
 }
 
