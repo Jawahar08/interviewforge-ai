@@ -99,8 +99,6 @@ export default function ForgotPasswordPage() {
   const hasLowerCase = /[a-z]/.test(watchPassword);
   const hasNumber = /[0-9]/.test(watchPassword);
 
-  const [devOtp, setDevOtp] = useState<string | null>(null);
-
   const onRequestSubmit = async (values: ForgotPasswordFormData) => {
     try {
       setServerError(null);
@@ -109,9 +107,6 @@ export default function ForgotPasswordPage() {
       const response = await authApi.forgotPassword({ email: cleanEmail });
 
       setUserEmail(response.email || cleanEmail);
-      if (response.otp) {
-        setDevOtp(response.otp);
-      }
       setResendCountdown(60);
       setOtpDigits(["", "", "", "", "", ""]);
       setStep("VERIFY_OTP");
@@ -233,10 +228,7 @@ export default function ForgotPasswordPage() {
       setServerError(null);
       setServerSuccess(null);
 
-      const response = await authApi.forgotPassword({ email: userEmail });
-      if (response.otp) {
-        setDevOtp(response.otp);
-      }
+      await authApi.forgotPassword({ email: userEmail });
       setResendCountdown(60);
       setOtpDigits(["", "", "", "", "", ""]);
       setServerSuccess("A new 6-digit code has been sent to your email.");
@@ -552,24 +544,6 @@ export default function ForgotPasswordPage() {
                         className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300"
                       >
                         {serverSuccess}
-                      </div>
-                    )}
-
-                    {devOtp && (
-                      <div className="rounded-xl border border-violet-500/30 bg-violet-500/10 p-3 text-xs text-violet-300 flex items-center justify-between">
-                        <span>
-                          Code: <strong className="font-mono text-sm text-white tracking-widest">{devOtp}</strong>
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const digits = devOtp.split("").slice(0, 6);
-                            setOtpDigits(digits);
-                          }}
-                          className="text-violet-400 hover:text-violet-200 underline font-medium cursor-pointer"
-                        >
-                          Auto-fill
-                        </button>
                       </div>
                     )}
 

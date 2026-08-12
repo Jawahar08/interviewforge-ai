@@ -137,7 +137,6 @@ public class AuthService {
 
         return ForgotPasswordResponse.builder()
                 .email(user.getEmail())
-                .otp(otp)
                 .message("A 6-digit verification code has been sent to your email.")
                 .build();
     }
