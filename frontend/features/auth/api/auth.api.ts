@@ -8,6 +8,7 @@ import type {
   LoginRequest,
   RegisterRequest,
   ResetPasswordRequest,
+  VerifyOtpRequest,
 } from "@/features/auth/types/auth.types";
 
 export const authApi = {
@@ -38,6 +39,17 @@ export const authApi = {
   ): Promise<ForgotPasswordResponse> => {
     const response = await apiClient.post<ApiResponse<ForgotPasswordResponse>>(
       "/auth/forgot-password",
+      request
+    );
+
+    return response.data.data;
+  },
+
+  verifyOtp: async (
+    request: VerifyOtpRequest
+  ): Promise<ForgotPasswordResponse> => {
+    const response = await apiClient.post<ApiResponse<ForgotPasswordResponse>>(
+      "/auth/verify-otp",
       request
     );
 

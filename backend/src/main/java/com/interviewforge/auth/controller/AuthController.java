@@ -11,6 +11,7 @@ import com.interviewforge.auth.dto.ForgotPasswordResponse;
 import com.interviewforge.auth.dto.LoginRequest;
 import com.interviewforge.auth.dto.RegisterRequest;
 import com.interviewforge.auth.dto.ResetPasswordRequest;
+import com.interviewforge.auth.dto.VerifyOtpRequest;
 import com.interviewforge.auth.service.AuthService;
 import com.interviewforge.common.dto.ApiResponse;
 
@@ -55,7 +56,17 @@ public class AuthController {
     ) {
         return ApiResponse.success(
                 authService.forgotPassword(request),
-                "Password reset token generated successfully"
+                "OTP verification code sent to email"
+        );
+    }
+
+    @PostMapping("/verify-otp")
+    public ApiResponse<ForgotPasswordResponse> verifyOtp(
+            @Valid @RequestBody VerifyOtpRequest request
+    ) {
+        return ApiResponse.success(
+                authService.verifyOtp(request),
+                "OTP verified successfully"
         );
     }
 
