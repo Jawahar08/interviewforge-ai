@@ -95,6 +95,7 @@ public class AuthService {
         String cleanEmail = request.getEmail() != null ? request.getEmail().trim().toLowerCase() : "";
 
         User user = userRepository.findByEmailIgnoreCase(cleanEmail)
+                .or(() -> userRepository.findByEmail(cleanEmail))
                 .orElseThrow(
                         () -> new UserNotFoundByEmailException(
                                 cleanEmail
@@ -121,6 +122,7 @@ public class AuthService {
         }
 
         User user = userRepository.findByEmailIgnoreCase(cleanEmail)
+                .or(() -> userRepository.findByEmail(cleanEmail))
                 .orElseThrow(
                         () -> new UserNotFoundByEmailException(
                                 cleanEmail
