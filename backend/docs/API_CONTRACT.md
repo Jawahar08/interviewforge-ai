@@ -88,6 +88,60 @@ POST /auth/login
 
 ---
 
+## Forgot Password
+
+POST /auth/forgot-password
+
+### Request
+
+```json
+{
+  "email": "jawahar@gmail.com"
+}
+```
+
+### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Password reset token generated successfully",
+  "data": {
+    "email": "jawahar@gmail.com",
+    "resetToken": "JWT_RESET_TOKEN",
+    "message": "Password reset token generated successfully"
+  }
+}
+```
+
+---
+
+## Reset Password
+
+POST /auth/reset-password
+
+### Request
+
+```json
+{
+  "email": "jawahar@gmail.com",
+  "resetToken": "JWT_RESET_TOKEN",
+  "newPassword": "NewPassword@123"
+}
+```
+
+### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Password reset successfully",
+  "data": null
+}
+```
+
+---
+
 # User Profile Module
 
 ## Get Current User

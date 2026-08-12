@@ -4,8 +4,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.interviewforge.auth.dto.AuthResponse;
+import com.interviewforge.auth.dto.ForgotPasswordRequest;
+import com.interviewforge.auth.dto.ForgotPasswordResponse;
 import com.interviewforge.auth.dto.LoginRequest;
 import com.interviewforge.auth.dto.RegisterRequest;
+import com.interviewforge.auth.dto.ResetPasswordRequest;
 import com.interviewforge.auth.entity.User;
 import com.interviewforge.auth.repository.UserRepository;
 import com.interviewforge.common.exception.EmailAlreadyExistsException;
@@ -86,5 +89,48 @@ public class AuthService {
                 .token(token)
                 .message("Login successful")
                 .build();
+    }
+
+    public ForgotPasswordResponse forgotPassword(ForgotPasswordRequest request) {
+        String cleanEmail = request.getEmail() != null ? request.getEmail().trim().toLowerCase() : "";
+
+        User user = userRepository.findByEmailIgnoreCase(cleanEmail)
+                .orElseThrow(
+                        () -> new UserNotFoundByEmailException(
+                                cleanEmail
+                        )
+                );
+
+        String resetToken = jwtService.generatePasswordResetToken(user.getEmail());
+
+        return ForgotPasswordResponse.builder()
+                .email(user.getEmail())
+                .resetToken(resetToken)
+                .message("Password reset token generated successfully")
+                .build();
+    }
+
+    public void resetPassword(ResetPasswordRequest request) {
+        String cleanEmail = request.getEmail() != null ? request.getEmail().trim().toLowerCase() : "";
+
+        if (request.getResetToken() != null && !request.getResetToken().isBlank()) {
+            String tokenEmail = jwtService.validatePasswordResetToken(request.getResetToken());
+            if (!cleanEmail.equalsIgnoreCase(tokenEmail)) {
+                throw new IllegalArgumentException("Token email does not match the requested email");
+            }
+        }
+
+        User user = userRepository.findByEmailIgnoreCase(cleanEmail)
+                .orElseThrow(
+                        () -> new UserNotFoundByEmailException(
+                                cleanEmail
+                        )
+                );
+
+        user.setPasswordHash(
+                passwordEncoder.encode(request.getNewPassword())
+        );
+
+        userRepository.save(user);
     }
 }
