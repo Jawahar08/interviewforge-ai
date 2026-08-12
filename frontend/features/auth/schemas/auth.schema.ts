@@ -108,5 +108,15 @@ export const resetPasswordSchema = z
     }
   );
 
+export const verifyOtpSchema = z.object({
+  otp: z
+    .string()
+    .trim()
+    .min(6, "Verification code must be 6 digits")
+    .max(6, "Verification code must be 6 digits")
+    .regex(/^[0-9]+$/, "Verification code must contain only numbers"),
+});
+
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
+export type VerifyOtpFormData = z.infer<typeof verifyOtpSchema>;
 export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;

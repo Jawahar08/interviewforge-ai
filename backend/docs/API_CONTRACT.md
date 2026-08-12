@@ -105,11 +105,39 @@ POST /auth/forgot-password
 ```json
 {
   "success": true,
-  "message": "Password reset token generated successfully",
+  "message": "A 6-digit verification code has been sent to your email.",
+  "data": {
+    "email": "jawahar@gmail.com",
+    "message": "A 6-digit verification code has been sent to your email."
+  }
+}
+```
+
+---
+
+## Verify OTP
+
+POST /auth/verify-otp
+
+### Request
+
+```json
+{
+  "email": "jawahar@gmail.com",
+  "otp": "481920"
+}
+```
+
+### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Verification code verified successfully.",
   "data": {
     "email": "jawahar@gmail.com",
     "resetToken": "JWT_RESET_TOKEN",
-    "message": "Password reset token generated successfully"
+    "message": "Verification code verified successfully."
   }
 }
 ```
