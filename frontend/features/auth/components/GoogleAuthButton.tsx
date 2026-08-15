@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 import { authApi } from "@/features/auth/api/auth.api";
@@ -13,44 +13,6 @@ interface GoogleAuthButtonProps {
   className?: string;
 }
 
-declare global {
-  interface Window {
-    google?: {
-      accounts: {
-        id: {
-          initialize: (config: {
-            client_id: string;
-            callback: (response: { credential: string }) => void;
-            auto_select?: boolean;
-            cancel_on_tap_outside?: boolean;
-          }) => void;
-          prompt: (notification?: (notification: unknown) => void) => void;
-          renderButton: (
-            parent: HTMLElement,
-            options: {
-              type?: string;
-              theme?: string;
-              size?: string;
-              text?: string;
-              shape?: string;
-              width?: string | number;
-            }
-          ) => void;
-        };
-        oauth2: {
-          initTokenClient: (config: {
-            client_id: string;
-            scope: string;
-            callback: (tokenResponse: { access_token?: string; error?: string }) => void;
-          }) => {
-            requestAccessToken: () => void;
-          };
-        };
-      };
-    };
-  }
-}
-
 export function GoogleAuthButton({
   mode = "login",
   onError,
@@ -60,104 +22,88 @@ export function GoogleAuthButton({
   const router = useRouter();
   const setAuth = useAuthStore((state) => state.setAuth);
 
-  const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "";
+  const googleClientId =
+    process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
+    "1023733054817-fhk7mshvskjlnks2o25j1a6lsq9d3r2j.apps.googleusercontent.com";
 
-  useEffect(() => {
-    // Load Google Identity Services script if not already present
-    if (typeof window === "undefined") return;
-
-    if (!document.getElementById("google-gsi-script")) {
-      const script = document.createElement("script");
-      script.id = "google-gsi-script";
-      script.src = "https://accounts.google.com/gsi/client";
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
-    }
-  }, []);
-
-  const handleGoogleSuccess = async (credential: string) => {
-    try {
-      setIsLoading(true);
-      const response = await authApi.googleLogin({ token: credential });
-
-      if (!response.token) {
-        throw new Error("Authentication token was not returned");
-      }
-
+  const handleAuthSuccess = useCallback(
+    (authData: { email: string; role: string; isPremium?: boolean; token: string }) => {
       setAuth(
         {
-          email: response.email,
-          role: response.role,
-          isPremium: response.isPremium,
+          email: authData.email,
+          role: authData.role,
+          isPremium: authData.isPremium,
         },
-        response.token
+        authData.token
       );
-
       router.push("/dashboard");
-    } catch (error: unknown) {
-      console.error("Google authentication failed:", error);
-      let message = "Google authentication failed. Please try again.";
-      if (axios.isAxiosError(error)) {
-        message = error.response?.data?.message ?? message;
-      } else if (error instanceof Error) {
-        message = error.message;
+    },
+    [router, setAuth]
+  );
+
+  useEffect(() => {
+    // Listen for OAuth message from callback popup window
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) return;
+
+      if (event.data?.type === "GOOGLE_AUTH_SUCCESS" && event.data?.data) {
+        setIsLoading(false);
+        handleAuthSuccess(event.data.data);
+      } else if (event.data?.type === "GOOGLE_AUTH_ERROR") {
+        setIsLoading(false);
+        onError?.(event.data.message || "Google authentication failed.");
       }
-      onError?.(message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [handleAuthSuccess, onError]);
 
   const handleClick = () => {
-    if (!googleClientId) {
-      // If client ID is not configured yet, notify or simulate dev fallback
-      const promptEmail = prompt(
-        "Google Client ID is not configured in NEXT_PUBLIC_GOOGLE_CLIENT_ID.\n\nEnter your Google email to test Google Sign-In:"
-      );
-      if (!promptEmail) return;
-
+    try {
       setIsLoading(true);
-      authApi
-        .googleLogin({
-          email: promptEmail.trim().toLowerCase(),
-          name: promptEmail.split("@")[0],
-          token: "mock-google-token-" + Date.now(),
-        })
-        .then((response) => {
-          setAuth(
-            {
-              email: response.email,
-              role: response.role,
-              isPremium: response.isPremium,
-            },
-            response.token
-          );
-          router.push("/dashboard");
-        })
-        .catch((err) => {
-          console.error("Google dev sign-in error:", err);
-          onError?.(err?.response?.data?.message || "Google authentication failed.");
-        })
-        .finally(() => setIsLoading(false));
-      return;
-    }
 
-    if (window.google?.accounts?.id) {
-      window.google.accounts.id.initialize({
-        client_id: googleClientId,
-        callback: (res) => {
-          if (res?.credential) {
-            handleGoogleSuccess(res.credential);
-          }
-        },
-      });
+      const redirectUri = `${window.location.origin}/auth/callback/google`;
+      const scope = encodeURIComponent("openid email profile");
+      const nonce = Math.random().toString(36).substring(2);
+      const state = Math.random().toString(36).substring(2);
 
-      window.google.accounts.id.prompt((notification: unknown) => {
-        console.log("Google GIS prompt notification:", notification);
-      });
-    } else {
-      onError?.("Google authentication service is loading. Please try again in a moment.");
+      // Google OAuth 2.0 Authorization Endpoint
+      const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
+        googleClientId
+      )}&redirect_uri=${encodeURIComponent(
+        redirectUri
+      )}&response_type=token%20id_token&scope=${scope}&nonce=${nonce}&state=${state}&prompt=select_account`;
+
+      // Open Google Login in a centered popup window
+      const width = 520;
+      const height = 650;
+      const left = window.screenX + Math.max(0, (window.outerWidth - width) / 2);
+      const top = window.screenY + Math.max(0, (window.outerHeight - height) / 2);
+
+      const popup = window.open(
+        googleOAuthUrl,
+        "google_oauth_popup",
+        `width=${width},height=${height},left=${left},top=${top},status=no,toolbar=no,menubar=no,location=no`
+      );
+
+      if (!popup || popup.closed || typeof popup.closed === "undefined") {
+        // If popup was blocked by browser, redirect the whole page to Google OAuth
+        window.location.href = googleOAuthUrl;
+        return;
+      }
+
+      // Check periodically if popup was closed by user
+      const popupCheckInterval = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(popupCheckInterval);
+          setIsLoading(false);
+        }
+      }, 1000);
+    } catch (err: unknown) {
+      console.error("Error opening Google Auth:", err);
+      setIsLoading(false);
+      onError?.("Unable to launch Google authentication.");
     }
   };
 
