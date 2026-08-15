@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.interviewforge.auth.dto.AuthResponse;
 import com.interviewforge.auth.dto.ForgotPasswordRequest;
 import com.interviewforge.auth.dto.ForgotPasswordResponse;
+import com.interviewforge.auth.dto.GoogleAuthRequest;
 import com.interviewforge.auth.dto.LoginRequest;
 import com.interviewforge.auth.dto.RegisterRequest;
 import com.interviewforge.auth.dto.ResetPasswordRequest;
@@ -24,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Tag(
     name = "Authentication",
-    description = "User registration and login APIs"
+    description = "User registration, login, and OAuth APIs"
 )
 public class AuthController {
 
@@ -47,6 +48,16 @@ public class AuthController {
         return ApiResponse.success(
                 authService.login(request),
                 "User logged in successfully"
+        );
+    }
+
+    @PostMapping("/google")
+    public ApiResponse<AuthResponse> googleAuth(
+            @RequestBody GoogleAuthRequest request
+    ) {
+        return ApiResponse.success(
+                authService.googleAuth(request),
+                "Google authentication successful"
         );
     }
 

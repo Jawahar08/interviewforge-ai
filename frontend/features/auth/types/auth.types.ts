@@ -9,6 +9,13 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface GoogleAuthRequest {
+  token?: string;
+  email?: string;
+  name?: string;
+  picture?: string;
+}
+
 export interface AuthResponse {
   email: string;
   role: string;

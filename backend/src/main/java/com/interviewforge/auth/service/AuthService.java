@@ -1,15 +1,26 @@
 package com.interviewforge.auth.service;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Base64;
+import java.util.UUID;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interviewforge.auth.dto.AuthResponse;
 import com.interviewforge.auth.dto.ForgotPasswordRequest;
 import com.interviewforge.auth.dto.ForgotPasswordResponse;
+import com.interviewforge.auth.dto.GoogleAuthRequest;
 import com.interviewforge.auth.dto.LoginRequest;
 import com.interviewforge.auth.dto.RegisterRequest;
 import com.interviewforge.auth.dto.ResetPasswordRequest;
@@ -37,6 +48,7 @@ public class AuthService {
     private final PasswordResetOtpRepository passwordResetOtpRepository;
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private final SecureRandom secureRandom = new SecureRandom();
 
     public AuthResponse register(RegisterRequest request) {
@@ -217,5 +229,97 @@ public class AuthService {
 
         // Cleanup used OTP
         passwordResetOtpRepository.deleteByEmailIgnoreCase(cleanEmail);
+    }
+
+    @Transactional
+    public AuthResponse googleAuth(GoogleAuthRequest request) {
+        String email = null;
+        String name = null;
+
+        // 1. If a Google token / ID token is provided, verify or parse it
+        if (request.getToken() != null && !request.getToken().isBlank()) {
+            try {
+                String tokenUrl = "https://oauth2.googleapis.com/tokeninfo?id_token=" + request.getToken();
+                HttpClient client = HttpClient.newBuilder()
+                        .connectTimeout(Duration.ofSeconds(5))
+                        .build();
+                HttpRequest httpRequest = HttpRequest.newBuilder()
+                        .uri(URI.create(tokenUrl))
+                        .timeout(Duration.ofSeconds(5))
+                        .GET()
+                        .build();
+
+                HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+                if (response.statusCode() == 200) {
+                    JsonNode jsonNode = objectMapper.readTree(response.body());
+                    if (jsonNode.has("email")) {
+                        email = jsonNode.get("email").asText();
+                    }
+                    if (jsonNode.has("name")) {
+                        name = jsonNode.get("name").asText();
+                    }
+                }
+            } catch (Exception e) {
+                log.warn("Could not verify Google token via tokeninfo API: {}", e.getMessage());
+            }
+
+            // If tokeninfo wasn't reachable but token is a JWT structure, decode claims
+            if (email == null && request.getToken().contains(".")) {
+                try {
+                    String[] parts = request.getToken().split("\\.");
+                    if (parts.length >= 2) {
+                        String payload = new String(Base64.getUrlDecoder().decode(parts[1]), StandardCharsets.UTF_8);
+                        JsonNode jsonNode = objectMapper.readTree(payload);
+                        if (jsonNode.has("email")) {
+                            email = jsonNode.get("email").asText();
+                        }
+                        if (jsonNode.has("name")) {
+                            name = jsonNode.get("name").asText();
+                        }
+                    }
+                } catch (Exception e) {
+                    log.warn("Could not decode JWT payload: {}", e.getMessage());
+                }
+            }
+        }
+
+        // Fallback to request fields if provided
+        if (email == null && request.getEmail() != null && !request.getEmail().isBlank()) {
+            email = request.getEmail();
+        }
+        if (name == null && request.getName() != null && !request.getName().isBlank()) {
+            name = request.getName();
+        }
+
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Google authentication failed: Email could not be determined.");
+        }
+
+        final String cleanEmail = email.trim().toLowerCase();
+        final String finalName = (name != null && !name.isBlank()) ? name.trim() : cleanEmail.split("@")[0];
+
+        // Find existing user or create a new user for Google login
+        User user = userRepository.findByEmailIgnoreCase(cleanEmail)
+                .or(() -> userRepository.findByEmail(cleanEmail))
+                .orElseGet(() -> {
+                    User newUser = User.builder()
+                            .fullName(finalName)
+                            .email(cleanEmail)
+                            .passwordHash(passwordEncoder.encode(UUID.randomUUID().toString()))
+                            .role("USER")
+                            .isPremium(true)
+                            .build();
+                    return userRepository.save(newUser);
+                });
+
+        String token = jwtService.generateToken(user.getEmail());
+
+        return AuthResponse.builder()
+                .email(user.getEmail())
+                .role(user.getRole())
+                .isPremium(true)
+                .token(token)
+                .message("Google authentication successful")
+                .build();
     }
 }

@@ -25,6 +25,7 @@ import { useRouter } from "next/navigation";
 
 import { authApi } from "@/features/auth/api/auth.api";
 import { useAuthStore } from "@/shared/store/auth.store";
+import { GoogleAuthButton } from "@/features/auth/components/GoogleAuthButton";
 
 import {
   loginSchema,
@@ -248,56 +249,47 @@ const onSubmit = async (values: LoginFormData) => {
 </div>
               {/* Password */}
               <div className="space-y-2">
-  <div className="flex items-center justify-between">
-    <Label htmlFor="password" className="text-slate-200">
-      Password
-    </Label>
+                <Label htmlFor="password" className="text-slate-200">
+                  Password
+                </Label>
 
-    <Link
-      href="/auth/forgot-password"
-      className="text-sm text-violet-400 transition hover:text-violet-300"
-    >
-      Forgot password?
-    </Link>
-  </div>
+                <div className="relative">
+                  <LockKeyhole className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
 
-  <div className="relative">
-    <LockKeyhole className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    autoComplete="current-password"
+                    aria-invalid={Boolean(errors.password)}
+                    {...register("password")}
+                    className={`h-12 bg-white/[0.04] pl-10 pr-11 text-white placeholder:text-slate-600 ${
+                      errors.password
+                        ? "border-red-500/60 focus-visible:ring-red-500/20"
+                        : "border-white/10 focus-visible:border-violet-500 focus-visible:ring-violet-500/20"
+                    }`}
+                  />
 
-    <Input
-      id="password"
-      type={showPassword ? "text" : "password"}
-      placeholder="Enter your password"
-      autoComplete="current-password"
-      aria-invalid={Boolean(errors.password)}
-      {...register("password")}
-      className={`h-12 bg-white/[0.04] pl-10 pr-11 text-white placeholder:text-slate-600 ${
-        errors.password
-          ? "border-red-500/60 focus-visible:ring-red-500/20"
-          : "border-white/10 focus-visible:border-violet-500 focus-visible:ring-violet-500/20"
-      }`}
-    />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((current) => !current)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-slate-300"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
 
-    <button
-      type="button"
-      onClick={() => setShowPassword((current) => !current)}
-      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-slate-300"
-      aria-label={showPassword ? "Hide password" : "Show password"}
-    >
-      {showPassword ? (
-        <EyeOff className="h-4 w-4" />
-      ) : (
-        <Eye className="h-4 w-4" />
-      )}
-    </button>
-  </div>
-
-  {errors.password && (
-    <p className="text-sm text-red-400">
-      {errors.password.message}
-    </p>
-  )}
-</div>
+                {errors.password && (
+                  <p className="text-sm text-red-400">
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
 
               {serverError && (
                 <div
@@ -372,6 +364,20 @@ const onSubmit = async (values: LoginFormData) => {
                 </div>
               )}
             </form>
+
+            <div className="relative my-6 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/10" />
+              </div>
+              <div className="relative bg-slate-950 px-3 text-xs uppercase tracking-wider text-slate-500">
+                or continue with
+              </div>
+            </div>
+
+            <GoogleAuthButton
+              mode="login"
+              onError={(err) => setServerError(err)}
+            />
 
             <div className="my-8 flex items-center gap-4">
               <div className="h-px flex-1 bg-white/10" />

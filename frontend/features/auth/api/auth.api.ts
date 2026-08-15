@@ -5,6 +5,7 @@ import type {
   AuthResponse,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
+  GoogleAuthRequest,
   LoginRequest,
   RegisterRequest,
   ResetPasswordRequest,
@@ -28,6 +29,17 @@ export const authApi = {
   ): Promise<AuthResponse> => {
     const response = await apiClient.post<ApiResponse<AuthResponse>>(
       "/auth/login",
+      request
+    );
+
+    return response.data.data;
+  },
+
+  googleLogin: async (
+    request: GoogleAuthRequest
+  ): Promise<AuthResponse> => {
+    const response = await apiClient.post<ApiResponse<AuthResponse>>(
+      "/auth/google",
       request
     );
 
