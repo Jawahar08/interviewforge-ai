@@ -263,7 +263,36 @@ public class AuthService {
                 log.warn("Could not verify Google token via tokeninfo API: {}", e.getMessage());
             }
 
-            // If tokeninfo wasn't reachable but token is a JWT structure, decode claims
+            // 2. If tokeninfo didn't resolve (e.g. it was an OAuth access token), try userinfo API
+            if (email == null) {
+                try {
+                    String userInfoUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
+                    HttpClient client = HttpClient.newBuilder()
+                            .connectTimeout(Duration.ofSeconds(5))
+                            .build();
+                    HttpRequest userRequest = HttpRequest.newBuilder()
+                            .uri(URI.create(userInfoUrl))
+                            .header("Authorization", "Bearer " + request.getToken())
+                            .timeout(Duration.ofSeconds(5))
+                            .GET()
+                            .build();
+
+                    HttpResponse<String> userResponse = client.send(userRequest, HttpResponse.BodyHandlers.ofString());
+                    if (userResponse.statusCode() == 200) {
+                        JsonNode jsonNode = objectMapper.readTree(userResponse.body());
+                        if (jsonNode.has("email")) {
+                            email = jsonNode.get("email").asText();
+                        }
+                        if (jsonNode.has("name")) {
+                            name = jsonNode.get("name").asText();
+                        }
+                    }
+                } catch (Exception e) {
+                    log.warn("Could not fetch Google profile via userinfo API: {}", e.getMessage());
+                }
+            }
+
+            // 3. If token is a JWT structure, decode claims
             if (email == null && request.getToken().contains(".")) {
                 try {
                     String[] parts = request.getToken().split("\\.");
