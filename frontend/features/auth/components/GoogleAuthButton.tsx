@@ -24,7 +24,7 @@ export function GoogleAuthButton({
 
   const googleClientId =
     process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
-    "1023733054817-fhk7mshvskjlnks2o25j1a6lsq9d3r2j.apps.googleusercontent.com";
+    "618459798259-ogbsm574p5lgc8r9flrelma7b89cjg5v.apps.googleusercontent.com";
 
   const handleAuthSuccess = useCallback(
     (authData: { email: string; role: string; isPremium?: boolean; token: string }) => {
