@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authApi } from "@/features/auth/api/auth.api";
+import { GoogleAuthButton } from "@/features/auth/components/GoogleAuthButton";
 import axios from "axios";
 
 import {
@@ -435,6 +436,20 @@ const setAuth = useAuthStore((state) => state.setAuth);
                 )}
               </Button>
             </form>
+
+            <div className="relative my-6 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/10" />
+              </div>
+              <div className="relative bg-slate-950 px-3 text-xs uppercase tracking-wider text-slate-500">
+                or continue with
+              </div>
+            </div>
+
+            <GoogleAuthButton
+              mode="register"
+              onError={(err) => setServerError(err)}
+            />
 
             <div className="my-7 flex items-center gap-4">
               <div className="h-px flex-1 bg-white/10" />
